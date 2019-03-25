@@ -143,7 +143,7 @@ func TestUpdateSubnet(t *testing.T) {
 		GatewayIP:      &gatewayIP,
 		HostRoutes:     &hostRoutes,
 		Name:           &name,
-		NTPServers:     ntpServers,
+		NTPServers:     &ntpServers,
 		Tags:           &tags,
 	}
 
