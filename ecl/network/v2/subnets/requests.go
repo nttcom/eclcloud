@@ -160,7 +160,7 @@ type UpdateOpts struct {
 	Description *string `json:"description,omitempty"`
 
 	// NTPServers are List of ntp servers.
-	NTPServers []string `json:"ntp_servers,omitempty"`
+	NTPServers *[]string `json:"ntp_servers,omitempty"`
 
 	// Tags are tags
 	Tags *map[string]string `json:"tags,omitempty"`
