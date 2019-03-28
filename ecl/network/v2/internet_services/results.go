@@ -19,28 +19,16 @@ func (r commonResult) ExtractInto(v interface{}) error {
 	return r.Result.ExtractIntoStructPtr(v, "internet_service")
 }
 
-/*type CreateResult struct {
-	commonResult
-}*/
-
 type GetResult struct {
 	commonResult
 }
 
-/*type UpdateResult struct {
-	commonResult
-}*/
-
-/*type DeleteResult struct {
-	eclcloud.ErrResult
-}*/
-
 type InternetService struct {
-	Description			    string `json:"description"`
-	ID					    string `json:"id"`
+	Description             string `json:"description"`
+	ID                      string `json:"id"`
 	MinimalSubmaskLength    int    `json:"minimal_submask_length"`
-	Name				    string `json:"name"`
-	Zone				    string `json:"zone"`
+	Name                    string `json:"name"`
+	Zone                    string `json:"zone"`
 }
 
 type InternetServicePage struct {
