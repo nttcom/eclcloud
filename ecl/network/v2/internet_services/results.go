@@ -24,11 +24,11 @@ type GetResult struct {
 }
 
 type InternetService struct {
-	Description             string `json:"description"`
-	ID                      string `json:"id"`
-	MinimalSubmaskLength    int    `json:"minimal_submask_length"`
-	Name                    string `json:"name"`
-	Zone                    string `json:"zone"`
+	Description          string `json:"description"`
+	ID                   string `json:"id"`
+	MinimalSubmaskLength int    `json:"minimal_submask_length"`
+	Name                 string `json:"name"`
+	Zone                 string `json:"zone"`
 }
 
 type InternetServicePage struct {

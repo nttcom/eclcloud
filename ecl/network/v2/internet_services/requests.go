@@ -10,11 +10,11 @@ type ListOptsBuilder interface {
 }
 
 type ListOpts struct {
-	Description             string `q:"description"`
-	ID                      string `q:"id"`
-	MinimalSubmaskLength    int    `q:"minimal_submask_length"`
-	Name                    string `q:"name"`
-	Zone                    string `q:"zone"`
+	Description          string `q:"description"`
+	ID                   string `q:"id"`
+	MinimalSubmaskLength int    `q:"minimal_submask_length"`
+	Name                 string `q:"name"`
+	Zone                 string `q:"zone"`
 }
 
 func (opts ListOpts) ToInternetServiceListQuery() (string, error) {
@@ -35,7 +35,6 @@ func List(c *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager {
 		return InternetServicePage{pagination.LinkedPageBase{PageResult: r}}
 	})
 }
-
 
 func Get(c *eclcloud.ServiceClient, internetServiceID string) (r GetResult) {
 	_, r.Err = c.Get(getURL(c, internetServiceID), &r.Body, nil)
