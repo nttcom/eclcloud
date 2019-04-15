@@ -5,16 +5,11 @@ import (
 	"reflect"
 
 	"github.com/nttcom/eclcloud"
-	// tokens2 "github.com/nttcom/eclcloud/ecl/identity/v2/tokens"
 	tokens3 "github.com/nttcom/eclcloud/ecl/identity/v3/tokens"
 	"github.com/nttcom/eclcloud/ecl/utils"
 )
 
 const (
-	// v2 represents Keystone v2.
-	// It should never increase beyond 2.0.
-	// v2 = "v2.0"
-
 	// v3 represents Keystone v3.
 	// The version can be anything from v3 to v3.x.
 	v3 = "v3"
@@ -88,7 +83,6 @@ func AuthenticatedClient(options eclcloud.AuthOptions) (*eclcloud.ProviderClient
 // supported at the provided endpoint.
 func Authenticate(client *eclcloud.ProviderClient, options eclcloud.AuthOptions) error {
 	versions := []*utils.Version{
-		// {ID: v2, Priority: 20, Suffix: "/v2.0/"},
 		{ID: v3, Priority: 30, Suffix: "/v3/"},
 	}
 
@@ -98,8 +92,6 @@ func Authenticate(client *eclcloud.ProviderClient, options eclcloud.AuthOptions)
 	}
 
 	switch chosen.ID {
-	// case v2:
-	// 	return v2auth(client, endpoint, options, eclcloud.EndpointOpts{})
 	case v3:
 		return v3auth(client, endpoint, &options, eclcloud.EndpointOpts{})
 	default:
@@ -107,69 +99,6 @@ func Authenticate(client *eclcloud.ProviderClient, options eclcloud.AuthOptions)
 		return fmt.Errorf("Unrecognized identity version: %s", chosen.ID)
 	}
 }
-
-// // AuthenticateV2 explicitly authenticates against the identity v2 endpoint.
-// func AuthenticateV2(client *eclcloud.ProviderClient, options eclcloud.AuthOptions, eo eclcloud.EndpointOpts) error {
-// 	return v2auth(client, "", options, eo)
-// }
-
-// func v2auth(client *eclcloud.ProviderClient, endpoint string, options eclcloud.AuthOptions, eo eclcloud.EndpointOpts) error {
-// 	v2Client, err := NewIdentityV2(client, eo)
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	if endpoint != "" {
-// 		v2Client.Endpoint = endpoint
-// 	}
-
-// 	v2Opts := tokens2.AuthOptions{
-// 		IdentityEndpoint: options.IdentityEndpoint,
-// 		Username:         options.Username,
-// 		Password:         options.Password,
-// 		TenantID:         options.TenantID,
-// 		TenantName:       options.TenantName,
-// 		AllowReauth:      options.AllowReauth,
-// 		TokenID:          options.TokenID,
-// 	}
-
-// 	result := tokens2.Create(v2Client, v2Opts)
-
-// 	token, err := result.ExtractToken()
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	catalog, err := result.ExtractServiceCatalog()
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	if options.AllowReauth {
-// 		// here we're creating a throw-away client (tac). it's a copy of the user's provider client, but
-// 		// with the token and reauth func zeroed out. combined with setting `AllowReauth` to `false`,
-// 		// this should retry authentication only once
-// 		tac := *client
-// 		tac.ReauthFunc = nil
-// 		tac.TokenID = ""
-// 		tao := options
-// 		tao.AllowReauth = false
-// 		client.ReauthFunc = func() error {
-// 			err := v2auth(&tac, endpoint, tao, eo)
-// 			if err != nil {
-// 				return err
-// 			}
-// 			client.TokenID = tac.TokenID
-// 			return nil
-// 		}
-// 	}
-// 	client.TokenID = token.ID
-// 	client.EndpointLocator = func(opts eclcloud.EndpointOpts) (string, error) {
-// 		return V2EndpointURL(catalog, opts)
-// 	}
-
-// 	return nil
-// }
 
 // AuthenticateV3 explicitly authenticates against the identity v3 service.
 func AuthenticateV3(client *eclcloud.ProviderClient, options tokens3.AuthOptionsBuilder, eo eclcloud.EndpointOpts) error {
@@ -236,27 +165,6 @@ func v3auth(client *eclcloud.ProviderClient, endpoint string, opts tokens3.AuthO
 
 	return nil
 }
-
-// // NewIdentityV2 creates a ServiceClient that may be used to interact with the
-// // v2 identity service.
-// func NewIdentityV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
-// 	endpoint := client.IdentityBase + "v2.0/"
-// 	clientType := "identity"
-// 	var err error
-// 	if !reflect.DeepEqual(eo, eclcloud.EndpointOpts{}) {
-// 		eo.ApplyDefaults(clientType)
-// 		endpoint, err = client.EndpointLocator(eo)
-// 		if err != nil {
-// 			return nil, err
-// 		}
-// 	}
-
-// 	return &eclcloud.ServiceClient{
-// 		ProviderClient: client,
-// 		Endpoint:       endpoint,
-// 		Type:           clientType,
-// 	}, nil
-// }
 
 // NewIdentityV3 creates a ServiceClient that may be used to access the v3
 // identity service.
@@ -335,17 +243,8 @@ func NewNetworkV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*e
 	return sc, err
 }
 
-// NewBlockStorageV1 creates a ServiceClient that may be used to access the v1
-// block storage service.
-// func NewBlockStorageV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
-// 	return initClientOpts(client, eo, "volume")
-// }
-
 // NewComputeVolumeV2 creates a ServiceClient that may be used to access the v2
 // block storage service.
-// func NewBlockStorageV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
-// 	return initClientOpts(client, eo, "volumev2")
-// }
 func NewComputeVolumeV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
 	return initClientOpts(client, eo, "volumev2")
 }
@@ -367,22 +266,6 @@ func NewSSSV1Forced(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts, s
 func NewStorageV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
 	return initClientOpts(client, eo, "storage")
 }
-
-// NewBlockStorageV3 creates a ServiceClient that may be used to access the v3 block storage service.
-// func NewBlockStorageV3(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
-// 	return initClientOpts(client, eo, "volumev3")
-// }
-
-// NewSharedFileSystemV2 creates a ServiceClient that may be used to access the v2 shared file system service.
-// func NewSharedFileSystemV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
-// 	return initClientOpts(client, eo, "sharev2")
-// }
-
-// NewCDNV1 creates a ServiceClient that may be used to access the Enterprise Cloud v1
-// CDN service.
-// func NewCDNV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
-// 	return initClientOpts(client, eo, "cdn")
-// }
 
 // NewOrchestrationV1 creates a ServiceClient that may be used to access the v1
 // orchestration service.
