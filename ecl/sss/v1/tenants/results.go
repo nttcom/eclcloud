@@ -52,7 +52,7 @@ type Tenant struct {
 	StartTime time.Time `json:"-"`
 }
 
-// UnmarshalJSON creates JSON format of virtual storage
+// UnmarshalJSON creates JSON format of tenant
 func (r *Tenant) UnmarshalJSON(b []byte) error {
 	type tmp Tenant
 	var s struct {
