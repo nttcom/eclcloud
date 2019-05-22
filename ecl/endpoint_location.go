@@ -23,9 +23,6 @@ func V3EndpointURL(catalog *tokens3.ServiceCatalog, opts eclcloud.EndpointOpts) 
 		if (entry.Type == opts.Type) && (opts.Name == "" || entry.Name == opts.Name) {
 			for _, endpoint := range entry.Endpoints {
 				if opts.Availability != eclcloud.AvailabilityPublic {
-					// if opts.Availability != eclcloud.AvailabilityAdmin &&
-					// 	opts.Availability != eclcloud.AvailabilityPublic &&
-					// 	opts.Availability != eclcloud.AvailabilityInternal {
 					err := &ErrInvalidAvailabilityProvided{}
 					err.Argument = "Availability"
 					err.Value = opts.Availability
