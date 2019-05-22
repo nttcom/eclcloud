@@ -3,7 +3,6 @@ package ecl
 import (
 	"fmt"
 	"github.com/nttcom/eclcloud"
-	// tokens2 "github.com/nttcom/eclcloud/ecl/identity/v2/tokens"
 	tokens3 "github.com/nttcom/eclcloud/ecl/identity/v3/tokens"
 )
 
@@ -22,17 +21,6 @@ type ErrInvalidAvailabilityProvided struct{ eclcloud.ErrInvalidInput }
 func (e ErrInvalidAvailabilityProvided) Error() string {
 	return fmt.Sprintf("Unexpected availability in endpoint query: %s", e.Value)
 }
-
-// ErrMultipleMatchingEndpointsV2 is the error when more than one endpoint
-// for the given options is found in the v2 catalog
-// type ErrMultipleMatchingEndpointsV2 struct {
-// 	eclcloud.BaseError
-// 	Endpoints []tokens2.Endpoint
-// }
-
-// func (e ErrMultipleMatchingEndpointsV2) Error() string {
-// 	return fmt.Sprintf("Discovered %d matching endpoints: %#v", len(e.Endpoints), e.Endpoints)
-// }
 
 // ErrMultipleMatchingEndpointsV3 is the error when more than one endpoint
 // for the given options is found in the v3 catalog
