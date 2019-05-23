@@ -22,7 +22,7 @@ func (opts ListOpts) ToUserListQuery() (string, error) {
 	return q.String(), err
 }
 
-// List enumerates the Projects to which the current token has access.
+// List enumerates the Users to which the current token has access.
 func List(client *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager {
 	url := listURL(client)
 	if opts != nil {
@@ -71,7 +71,7 @@ func (opts CreateOpts) ToUserCreateMap() (map[string]interface{}, error) {
 	return eclcloud.BuildRequestBody(opts, "")
 }
 
-// Create creates a new Project.
+// Create creates a new user.
 func Create(client *eclcloud.ServiceClient, opts CreateOptsBuilder) (r CreateResult) {
 	b, err := opts.ToUserCreateMap()
 	if err != nil {
