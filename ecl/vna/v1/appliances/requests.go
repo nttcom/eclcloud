@@ -77,7 +77,7 @@ type CreateOptsInterface struct {
 	Description string               `json:"description,omitempty"`
 	NetworkID   string               `json:"network_id" required:"true"`
 	Tags        map[string]string    `json:"tags,omitempty"`
-	FixedIPs    [1]CreateOptsFixedIP `json:"fixed_ips,required"`
+	FixedIPs    [1]CreateOptsFixedIP `json:"fixed_ips" required:"true"`
 }
 
 type CreateOptsInterfaces struct {
@@ -127,6 +127,40 @@ func Create(c *eclcloud.ServiceClient, opts CreateOptsBuilder) (r CreateResult) 
 // Update request.
 type UpdateOptsBuilder interface {
 	ToApplianceUpdateMap() (map[string]interface{}, error)
+}
+
+/*
+Update for Allowed Address Pairs
+*/
+
+type UpdateAllowedAddressPairAddressInfo struct {
+	IPAddress  string  `json:"ip_address" required:"true"`
+	MACAddress string  `json:"mac_address" required:"true"`
+	Type       *string `json:"type" required:"true"`
+	VRID       int     `json:"vrid" required:"true"`
+}
+
+type UpdateAllowedAddressPairInterface struct {
+	AllowedAddressPairs *[]UpdateAllowedAddressPairAddressInfo `json:"allowed_address_pairs,omitempty"`
+}
+
+type UpdateAllowedAddressPairInterfaces struct {
+	Interface1 *UpdateAllowedAddressPairInterface `json:"interface_1,omitempty"`
+	Interface2 *UpdateAllowedAddressPairInterface `json:"interface_2,omitempty"`
+	Interface3 *UpdateAllowedAddressPairInterface `json:"interface_3,omitempty"`
+	Interface4 *UpdateAllowedAddressPairInterface `json:"interface_4,omitempty"`
+	Interface5 *UpdateAllowedAddressPairInterface `json:"interface_5,omitempty"`
+	Interface6 *UpdateAllowedAddressPairInterface `json:"interface_6,omitempty"`
+	Interface7 *UpdateAllowedAddressPairInterface `json:"interface_7,omitempty"`
+	Interface8 *UpdateAllowedAddressPairInterface `json:"interface_8,omitempty"`
+}
+
+type UpdateAllowedAddressPairOpts struct {
+	Interfaces UpdateAllowedAddressPairInterfaces `json:"interfaces,omitempty"`
+}
+
+func (opts UpdateAllowedAddressPairOpts) ToApplianceUpdateMap() (map[string]interface{}, error) {
+	return eclcloud.BuildRequestBody(opts, "virtual_network_appliance")
 }
 
 /*
