@@ -341,3 +341,115 @@ var expectedAppliancesSlice = []appliances.Appliance{
 	appliance1,
 	appliance2,
 }
+
+var getResponse = fmt.Sprintf(`
+{
+    "virtual_network_appliance": {
+        "appliance_type": "ECL::VirtualNetworkAppliance::VSRX",
+        "availability_zone": "zone1-groupb",
+        "default_gateway": "192.168.1.1",
+        "description": "appliance_1_description",
+        "id": "%s",
+        "interfaces": {
+            "interface_1": {
+                "allowed_address_pairs": [
+                    {
+                        "ip_address": "1.1.1.1",
+                        "mac_address": "aa:bb:cc:dd:ee:f1",
+                        "type": "vrrp",
+                        "vrid": 123
+                    }
+                ],
+                "description": "interface_1_description",
+                "fixed_ips": [
+                    {
+                        "ip_address": "192.168.1.51",
+                        "subnet_id": "dummySubnetID"
+                    }
+                ],
+                "name": "interface_1",
+                "network_id": "dummyNetworkID",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_2": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_3": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_4": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_5": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_6": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_7": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_8": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            }
+        },
+        "name": "appliance_1",
+        "operation_status": "COMPLETE",
+        "os_login_status": "ACTIVE",
+        "os_monitoring_status": "ACTIVE",
+        "password": "Passw0rd",
+        "tags": {
+            "k1": "v1"
+        },
+        "tenant_id": "9ee80f2a926c49f88f166af47df4e9f5",
+        "username": "root",
+        "virtual_network_appliance_plan_id": "%s",
+        "vm_status": "ACTIVE"
+    }
+}`, 
+    idAppliance1,
+    idVirtualNetworkAppliancePlan,
+)

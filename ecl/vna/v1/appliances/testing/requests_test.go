@@ -57,3 +57,23 @@ func TestListAppliances(t *testing.T) {
 		t.Errorf("Expected 1 page, got %d", count)
 	}
 }
+
+func TestGetAppliance(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	url := fmt.Sprintf("/v1.0/virtual_network_appliances/%s", idAppliance1)
+	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, getResponse)
+	})
+
+	ap, err := appliances.Get(ServiceClient(), idAppliance1).Extract()
+	th.AssertNoErr(t, err)
+	th.CheckDeepEquals(t, &appliance1, ap)
+}
