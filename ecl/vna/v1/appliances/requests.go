@@ -68,10 +68,12 @@ type CreateOptsBuilder interface {
 Parameters for Create
 */
 
+// CreateOptsFixedIP represents fixed ip information in virtual network appliance creation.
 type CreateOptsFixedIP struct {
 	IPAddress string `json:"ip_address" required:"true"`
 }
 
+// CreateOptsInterface represents each parameters in virtual network appliance creation.
 type CreateOptsInterface struct {
 	Name        string               `json:"name,omitempty"`
 	Description string               `json:"description,omitempty"`
@@ -80,6 +82,7 @@ type CreateOptsInterface struct {
 	FixedIPs    [1]CreateOptsFixedIP `json:"fixed_ips" required:"true"`
 }
 
+// CreateOptsInterfaces represents 1st interface in virtual network appliance creation.
 type CreateOptsInterfaces struct {
 	Interface1 CreateOptsInterface `json:"interface_1" required:"true"`
 }
@@ -97,7 +100,6 @@ type CreateOpts struct {
 }
 
 // ToApplianceCreateMap builds a request body from CreateOpts.
-// func (opts CreateOpts) ToApplianceCreateMap() (map[string]interface{}, error) {
 func (opts CreateOpts) ToApplianceCreateMap() (map[string]interface{}, error) {
 	return eclcloud.BuildRequestBody(opts, "virtual_network_appliance")
 }
@@ -106,11 +108,6 @@ func (opts CreateOpts) ToApplianceCreateMap() (map[string]interface{}, error) {
 // using the values provided.
 // This operation does not actually require a request body, i.e. the
 // CreateOpts struct argument can be empty.
-//
-// The tenant ID that is contained in the URI is the tenant that creates the
-// virtual network appliance.
-// An admin user, however, has the option of specifying another tenant
-// ID in the CreateOpts struct.
 func Create(c *eclcloud.ServiceClient, opts CreateOptsBuilder) (r CreateResult) {
 	b, err := opts.ToApplianceCreateMap()
 	if err != nil {
@@ -133,6 +130,8 @@ type UpdateOptsBuilder interface {
 Update for Allowed Address Pairs
 */
 
+// UpdateAllowedAddressPairAddressInfo represents options used to
+// update virtual network appliance allowed address pairs.
 type UpdateAllowedAddressPairAddressInfo struct {
 	IPAddress  string       `json:"ip_address" required:"true"`
 	MACAddress *string      `json:"mac_address" required:"true"`
@@ -140,10 +139,16 @@ type UpdateAllowedAddressPairAddressInfo struct {
 	VRID       *interface{} `json:"vrid" required:"true"`
 }
 
+// UpdateAllowedAddressPairInterface represents
+// allowed address pairs list in update options used to
+// update virtual network appliance allowed address pairs.
 type UpdateAllowedAddressPairInterface struct {
 	AllowedAddressPairs *[]UpdateAllowedAddressPairAddressInfo `json:"allowed_address_pairs,omitempty"`
 }
 
+// UpdateAllowedAddressPairInterfaces represents
+// interface list of update options used to
+// update virtual network appliance allowed address pairs.
 type UpdateAllowedAddressPairInterfaces struct {
 	Interface1 interface{} `json:"interface_1,omitempty"`
 	Interface2 interface{} `json:"interface_2,omitempty"`
@@ -155,10 +160,14 @@ type UpdateAllowedAddressPairInterfaces struct {
 	Interface8 interface{} `json:"interface_8,omitempty"`
 }
 
+// UpdateAllowedAddressPairOpts represents
+// parent element of interfaces in update options used to
+// update virtual network appliance allowed address pairs.
 type UpdateAllowedAddressPairOpts struct {
 	Interfaces interface{} `json:"interfaces,omitempty"`
 }
 
+// ToApplianceUpdateMap builds a request body from UpdateAllowedAddressPairOpts.
 func (opts UpdateAllowedAddressPairOpts) ToApplianceUpdateMap() (map[string]interface{}, error) {
 	return eclcloud.BuildRequestBody(opts, "virtual_network_appliance")
 }
@@ -167,15 +176,23 @@ func (opts UpdateAllowedAddressPairOpts) ToApplianceUpdateMap() (map[string]inte
 Update for FixedIP (includes network_id)
 */
 
+// UpdateFixedIPAddressInfo represents ip address part
+// of virtual network appliance update.
 type UpdateFixedIPAddressInfo struct {
 	IPAddress string `json:"ip_address" required:"true"`
 }
 
+// UpdateFixedIPInterface represents each interface information
+// in updating network connection and fixed ip address
+// of virtual network appliance.
 type UpdateFixedIPInterface struct {
 	NetworkID *string                     `json:"network_id,omitempty"`
 	FixedIPs  *[]UpdateFixedIPAddressInfo `json:"fixed_ips,omitempty"`
 }
 
+// UpdateFixedIPInterfaces represents
+// interface list of update options used to
+// update virtual network appliance network connection and fixed ips.
 type UpdateFixedIPInterfaces struct {
 	Interface1 interface{} `json:"interface_1,omitempty"`
 	Interface2 interface{} `json:"interface_2,omitempty"`
@@ -187,10 +204,14 @@ type UpdateFixedIPInterfaces struct {
 	Interface8 interface{} `json:"interface_8,omitempty"`
 }
 
+// UpdateFixedIPOpts represents
+// parent element of interfaces in update options used to
+// update virtual network appliance network connection and fixed ips.
 type UpdateFixedIPOpts struct {
 	Interfaces interface{} `json:"interfaces,omitempty"`
 }
 
+// ToApplianceUpdateMap builds a request body from UpdateFixedIPOpts.
 func (opts UpdateFixedIPOpts) ToApplianceUpdateMap() (map[string]interface{}, error) {
 	return eclcloud.BuildRequestBody(opts, "virtual_network_appliance")
 }
@@ -198,12 +219,17 @@ func (opts UpdateFixedIPOpts) ToApplianceUpdateMap() (map[string]interface{}, er
 /*
 Update for Metadata
 */
+
+// UpdateMetadataInterface represents options used to
+// update virtual network appliance metadata of interface.
 type UpdateMetadataInterface struct {
 	Name        *string            `json:"name,omitempty"`
 	Description *string            `json:"description,omitempty"`
 	Tags        *map[string]string `json:"tags,omitempty"`
 }
 
+// UpdateMetadataInterfaces represents
+// list of interfaces for updating virtual network appliance metadata.
 type UpdateMetadataInterfaces struct {
 	Interface1 interface{} `json:"interface_1,omitempty"`
 	Interface2 interface{} `json:"interface_2,omitempty"`
@@ -215,11 +241,15 @@ type UpdateMetadataInterfaces struct {
 	Interface8 interface{} `json:"interface_8,omitempty"`
 }
 
+// UpdateMetadataOpts represents
+// metadata of virtual network appliance itself and
+// pararent element for list of interfaces
+// which are used by virtual network appliance metadata update.
 type UpdateMetadataOpts struct {
-	Name        *string                  `json:"name,omitempty"`
-	Description *string                  `json:"description,omitempty"`
-	Tags        *map[string]string       `json:"tags,omitempty"`
-	Interfaces  interface{}              `json:"interfaces,omitempty"`
+	Name        *string            `json:"name,omitempty"`
+	Description *string            `json:"description,omitempty"`
+	Tags        *map[string]string `json:"tags,omitempty"`
+	Interfaces  interface{}        `json:"interfaces,omitempty"`
 }
 
 // ToApplianceUpdateMap builds a request body from UpdateOpts.

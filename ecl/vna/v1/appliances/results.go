@@ -46,11 +46,15 @@ type DeleteResult struct {
 	eclcloud.ErrResult
 }
 
+// FixedIPInResponse represents each element of fixed ips
+// of virtual network appliance.
 type FixedIPInResponse struct {
 	IPAddress string `json:"ip_address"`
 	SubnetID  string `json:"subnet_id"`
 }
 
+// AllowedAddressPairInResponse represents each element of
+// allowed address pair of virtual network appliance.
 type AllowedAddressPairInResponse struct {
 	IPAddress  string      `json:"ip_address"`
 	MACAddress string      `json:"mac_address"`
@@ -58,6 +62,8 @@ type AllowedAddressPairInResponse struct {
 	VRID       interface{} `json:"vrid"`
 }
 
+// InterfaceInResponse works as parent element of
+// each interface of virtual network appliance.
 type InterfaceInResponse struct {
 	Name                string                         `json:"name"`
 	Description         string                         `json:"description"`
@@ -68,6 +74,8 @@ type InterfaceInResponse struct {
 	AllowedAddressPairs []AllowedAddressPairInResponse `json:"allowed_address_pairs"`
 }
 
+// InterfacesInResponse works as list of interfaces
+// of virtual network appliance.
 type InterfacesInResponse struct {
 	Interface1 InterfaceInResponse `json:"interface_1"`
 	Interface2 InterfaceInResponse `json:"interface_2"`
