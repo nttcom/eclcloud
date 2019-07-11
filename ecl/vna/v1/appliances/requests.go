@@ -205,21 +205,21 @@ type UpdateMetadataInterface struct {
 }
 
 type UpdateMetadataInterfaces struct {
-	Interface1 *UpdateMetadataInterface `json:"interface_1,omitempty"`
-	Interface2 *UpdateMetadataInterface `json:"interface_2,omitempty"`
-	Interface3 *UpdateMetadataInterface `json:"interface_3,omitempty"`
-	Interface4 *UpdateMetadataInterface `json:"interface_4,omitempty"`
-	Interface5 *UpdateMetadataInterface `json:"interface_5,omitempty"`
-	Interface6 *UpdateMetadataInterface `json:"interface_6,omitempty"`
-	Interface7 *UpdateMetadataInterface `json:"interface_7,omitempty"`
-	Interface8 *UpdateMetadataInterface `json:"interface_8,omitempty"`
+	Interface1 interface{} `json:"interface_1,omitempty"`
+	Interface2 interface{} `json:"interface_2,omitempty"`
+	Interface3 interface{} `json:"interface_3,omitempty"`
+	Interface4 interface{} `json:"interface_4,omitempty"`
+	Interface5 interface{} `json:"interface_5,omitempty"`
+	Interface6 interface{} `json:"interface_6,omitempty"`
+	Interface7 interface{} `json:"interface_7,omitempty"`
+	Interface8 interface{} `json:"interface_8,omitempty"`
 }
 
 type UpdateMetadataOpts struct {
 	Name        *string                  `json:"name,omitempty"`
 	Description *string                  `json:"description,omitempty"`
 	Tags        *map[string]string       `json:"tags,omitempty"`
-	Interfaces  UpdateMetadataInterfaces `json:"interfaces,omitempty"`
+	Interfaces  interface{}              `json:"interfaces,omitempty"`
 }
 
 // ToApplianceUpdateMap builds a request body from UpdateOpts.

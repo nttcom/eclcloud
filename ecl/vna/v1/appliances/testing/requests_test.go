@@ -7,8 +7,8 @@ import (
 
 	"github.com/nttcom/eclcloud"
 	"github.com/nttcom/eclcloud/ecl/vna/v1/appliances"
-	"github.com/nttcom/eclcloud/testhelper/client"
 	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/testhelper/client"
 
 	th "github.com/nttcom/eclcloud/testhelper"
 )
@@ -135,4 +135,59 @@ func TestDeleteAppliance(t *testing.T) {
 
 	res := appliances.Delete(ServiceClient(), idAppliance1)
 	th.AssertNoErr(t, res.Err)
+}
+
+func TestUpdateApplianceMetadata(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	url := fmt.Sprintf("/v1.0/virtual_network_appliances/%s", idAppliance1)
+	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "PATCH")
+		th.TestHeader(t, r, "X-Auth-Token", TokenID)
+		th.TestHeader(t, r, "Content-Type", "application/json")
+		th.TestHeader(t, r, "Accept", "application/json")
+		th.TestJSONRequest(t, r, updateMetadataRequest)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, updateMetadataResponse)
+	})
+
+	name := "appliance_1-update"
+	description := "appliance_1_description-update"
+	tags := map[string]string{"k1": "v1", "k2": "v2"}
+
+	interface1Name := "interface_1"
+	interface1Description := "interface_1_description"
+	interface1Tags := map[string]string{"k1": "v1", "k2": "v2"}
+
+	updateOptsInterface1 := appliances.UpdateMetadataInterface{
+		Name:        &interface1Name,
+		Description: &interface1Description,
+		Tags:        &interface1Tags,
+	}
+	updateOpts := appliances.UpdateMetadataOpts{
+		Name:        &name,
+		Description: &description,
+		Tags:        &tags,
+		Interfaces: appliances.UpdateMetadataInterfaces{
+			Interface1: updateOptsInterface1,
+			Interface2: interface{}(nil),
+			Interface3: interface{}(nil),
+			Interface4: interface{}(nil),
+			Interface5: interface{}(nil),
+			Interface6: interface{}(nil),
+			Interface7: interface{}(nil),
+			Interface8: interface{}(nil),
+		},
+	}
+	ap, err := appliances.Update(
+		ServiceClient(), idAppliance1, updateOpts).Extract()
+	th.AssertNoErr(t, err)
+
+	th.AssertEquals(t, ap.Name, "appliance_1-update")
+	th.AssertEquals(t, ap.Description, "appliance_1_description-update")
+	th.AssertEquals(t, ap.ID, idAppliance1)
 }
