@@ -52,10 +52,10 @@ type FixedIPInResponse struct {
 }
 
 type AllowedAddressPairInResponse struct {
-	IPAddress  string `json:"ip_address"`
-	MACAddress string `json:"mac_address"`
-	Type       string `json:"type"`
-	VRID       string `json:"vrid"`
+	IPAddress  string      `json:"ip_address"`
+	MACAddress string      `json:"mac_address"`
+	Type       string      `json:"type"`
+	VRID       interface{} `json:"vrid"`
 }
 
 type InterfaceInResponse struct {

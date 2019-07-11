@@ -134,10 +134,10 @@ Update for Allowed Address Pairs
 */
 
 type UpdateAllowedAddressPairAddressInfo struct {
-	IPAddress  string  `json:"ip_address" required:"true"`
-	MACAddress string  `json:"mac_address" required:"true"`
-	Type       *string `json:"type" required:"true"`
-	VRID       int     `json:"vrid" required:"true"`
+	IPAddress  string       `json:"ip_address" required:"true"`
+	MACAddress *string      `json:"mac_address" required:"true"`
+	Type       *string      `json:"type" required:"true"`
+	VRID       *interface{} `json:"vrid" required:"true"`
 }
 
 type UpdateAllowedAddressPairInterface struct {
@@ -145,18 +145,18 @@ type UpdateAllowedAddressPairInterface struct {
 }
 
 type UpdateAllowedAddressPairInterfaces struct {
-	Interface1 *UpdateAllowedAddressPairInterface `json:"interface_1,omitempty"`
-	Interface2 *UpdateAllowedAddressPairInterface `json:"interface_2,omitempty"`
-	Interface3 *UpdateAllowedAddressPairInterface `json:"interface_3,omitempty"`
-	Interface4 *UpdateAllowedAddressPairInterface `json:"interface_4,omitempty"`
-	Interface5 *UpdateAllowedAddressPairInterface `json:"interface_5,omitempty"`
-	Interface6 *UpdateAllowedAddressPairInterface `json:"interface_6,omitempty"`
-	Interface7 *UpdateAllowedAddressPairInterface `json:"interface_7,omitempty"`
-	Interface8 *UpdateAllowedAddressPairInterface `json:"interface_8,omitempty"`
+	Interface1 interface{} `json:"interface_1,omitempty"`
+	Interface2 interface{} `json:"interface_2,omitempty"`
+	Interface3 interface{} `json:"interface_3,omitempty"`
+	Interface4 interface{} `json:"interface_4,omitempty"`
+	Interface5 interface{} `json:"interface_5,omitempty"`
+	Interface6 interface{} `json:"interface_6,omitempty"`
+	Interface7 interface{} `json:"interface_7,omitempty"`
+	Interface8 interface{} `json:"interface_8,omitempty"`
 }
 
 type UpdateAllowedAddressPairOpts struct {
-	Interfaces UpdateAllowedAddressPairInterfaces `json:"interfaces,omitempty"`
+	Interfaces interface{} `json:"interfaces,omitempty"`
 }
 
 func (opts UpdateAllowedAddressPairOpts) ToApplianceUpdateMap() (map[string]interface{}, error) {
@@ -177,18 +177,18 @@ type UpdateFixedIPInterface struct {
 }
 
 type UpdateFixedIPInterfaces struct {
-	Interface1 *UpdateFixedIPInterface `json:"interface_1,omitempty"`
-	Interface2 *UpdateFixedIPInterface `json:"interface_2,omitempty"`
-	Interface3 *UpdateFixedIPInterface `json:"interface_3,omitempty"`
-	Interface4 *UpdateFixedIPInterface `json:"interface_4,omitempty"`
-	Interface5 *UpdateFixedIPInterface `json:"interface_5,omitempty"`
-	Interface6 *UpdateFixedIPInterface `json:"interface_6,omitempty"`
-	Interface7 *UpdateFixedIPInterface `json:"interface_7,omitempty"`
-	Interface8 *UpdateFixedIPInterface `json:"interface_8,omitempty"`
+	Interface1 interface{} `json:"interface_1,omitempty"`
+	Interface2 interface{} `json:"interface_2,omitempty"`
+	Interface3 interface{} `json:"interface_3,omitempty"`
+	Interface4 interface{} `json:"interface_4,omitempty"`
+	Interface5 interface{} `json:"interface_5,omitempty"`
+	Interface6 interface{} `json:"interface_6,omitempty"`
+	Interface7 interface{} `json:"interface_7,omitempty"`
+	Interface8 interface{} `json:"interface_8,omitempty"`
 }
 
 type UpdateFixedIPOpts struct {
-	Interfaces UpdateFixedIPInterfaces `json:"interfaces,omitempty"`
+	Interfaces interface{} `json:"interfaces,omitempty"`
 }
 
 func (opts UpdateFixedIPOpts) ToApplianceUpdateMap() (map[string]interface{}, error) {
