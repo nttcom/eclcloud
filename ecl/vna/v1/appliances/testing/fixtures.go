@@ -449,7 +449,36 @@ var getResponse = fmt.Sprintf(`
         "virtual_network_appliance_plan_id": "%s",
         "vm_status": "ACTIVE"
     }
-}`, 
-    idAppliance1,
-    idVirtualNetworkAppliancePlan,
+}`,
+	idAppliance1,
+	idVirtualNetworkAppliancePlan,
 )
+
+var createRequest = fmt.Sprintf(`
+    {
+    	"virtual_network_appliance": {
+    		"name": "appliance_1",
+    		"description": "appliance_1_description",
+    		"availability_zone": "zone1-groupb",
+    		"default_gateway": "192.168.1.1",
+    		"interfaces": {
+    			"interface_1": {
+    				"name": "interface_1",
+    				"description": "interface_1_description",
+    				"fixed_ips": [{
+    					"ip_address": "192.168.1.51"
+    				}],
+    				"network_id": "dummyNetworkID"
+    			}
+    		},
+    		"tags": {
+    			"k1": "v1"
+    		},
+    		"virtual_network_appliance_plan_id": "%s"
+    	}
+    }
+`,
+	idVirtualNetworkAppliancePlan,
+)
+
+var createResponse = getResponse
