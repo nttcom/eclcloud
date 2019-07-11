@@ -7,8 +7,8 @@ import (
 
 	"github.com/nttcom/eclcloud"
 	"github.com/nttcom/eclcloud/ecl/vna/v1/appliances"
-	"github.com/nttcom/eclcloud/pagination"
 	"github.com/nttcom/eclcloud/testhelper/client"
+	"github.com/nttcom/eclcloud/pagination"
 
 	th "github.com/nttcom/eclcloud/testhelper"
 )
@@ -120,4 +120,19 @@ func TestCreateAppliance(t *testing.T) {
 
 	th.AssertEquals(t, ap.OperationStatus, "COMPLETE")
 	th.AssertDeepEquals(t, &appliance1, ap)
+}
+
+func TestDeleteAppliance(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	url := fmt.Sprintf("/v1.0/virtual_network_appliances/%s", idAppliance1)
+	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "DELETE")
+		th.TestHeader(t, r, "X-Auth-Token", TokenID)
+		w.WriteHeader(http.StatusNoContent)
+	})
+
+	res := appliances.Delete(ServiceClient(), idAppliance1)
+	th.AssertNoErr(t, res.Err)
 }
