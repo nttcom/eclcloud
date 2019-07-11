@@ -191,3 +191,61 @@ func TestUpdateApplianceMetadata(t *testing.T) {
 	th.AssertEquals(t, ap.Description, "appliance_1_description-update")
 	th.AssertEquals(t, ap.ID, idAppliance1)
 }
+
+func TestUpdateApplianceNetworkIDAndFixedIP(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	url := fmt.Sprintf("/v1.0/virtual_network_appliances/%s", idAppliance1)
+	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "PATCH")
+		th.TestHeader(t, r, "X-Auth-Token", TokenID)
+		th.TestHeader(t, r, "Content-Type", "application/json")
+		th.TestHeader(t, r, "Accept", "application/json")
+		th.TestJSONRequest(t, r, updateNetworkIDAndFixedIPRequest)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, updateNetworkIDAndFixedIPResponse)
+	})
+
+	networkID := "dummyNetworkID2"
+
+	updateAddressInfo1 := appliances.UpdateFixedIPAddressInfo{
+		IPAddress: "192.168.1.51",
+	}
+
+	updateAddressInfo2 := appliances.UpdateFixedIPAddressInfo{
+		IPAddress: "192.168.1.52",
+	}
+	updateFixedIPs := []appliances.UpdateFixedIPAddressInfo{
+		updateAddressInfo1,
+		updateAddressInfo2,
+	}
+
+	updateOptsInterface1 := appliances.UpdateFixedIPInterface{
+		NetworkID: &networkID,
+		FixedIPs:  &updateFixedIPs,
+	}
+	updateOpts := appliances.UpdateFixedIPOpts{
+		Interfaces: appliances.UpdateFixedIPInterfaces{
+			Interface1: updateOptsInterface1,
+			Interface2: interface{}(nil),
+			Interface3: interface{}(nil),
+			Interface4: interface{}(nil),
+			Interface5: interface{}(nil),
+			Interface6: interface{}(nil),
+			Interface7: interface{}(nil),
+			Interface8: interface{}(nil),
+		},
+	}
+	ap, err := appliances.Update(
+		ServiceClient(), idAppliance1, updateOpts).Extract()
+	th.AssertNoErr(t, err)
+
+	th.AssertEquals(t, ap.Interfaces.Interface1.NetworkID, "dummyNetworkID2")
+	th.AssertEquals(t, ap.Interfaces.Interface1.FixedIPs[0].IPAddress, "192.168.1.51")
+	th.AssertEquals(t, ap.Interfaces.Interface1.FixedIPs[1].IPAddress, "192.168.1.52")
+	th.AssertEquals(t, ap.ID, idAppliance1)
+}
