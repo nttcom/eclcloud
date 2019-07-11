@@ -249,3 +249,84 @@ func TestUpdateApplianceNetworkIDAndFixedIP(t *testing.T) {
 	th.AssertEquals(t, ap.Interfaces.Interface1.FixedIPs[1].IPAddress, "192.168.1.52")
 	th.AssertEquals(t, ap.ID, idAppliance1)
 }
+func TestUpdateApplianceAllowedAddressPairs(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	url := fmt.Sprintf("/v1.0/virtual_network_appliances/%s", idAppliance1)
+	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "PATCH")
+		th.TestHeader(t, r, "X-Auth-Token", TokenID)
+		th.TestHeader(t, r, "Content-Type", "application/json")
+		th.TestHeader(t, r, "Accept", "application/json")
+		th.TestJSONRequest(t, r, updateAllowedAddressPairsRequest)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, updateAllowedAddressPairsResponse)
+	})
+
+	mac1 := "aa:bb:cc:dd:ee:f1"
+	type1 := "vrrp"
+
+	var vrid1 interface{}
+	vrid1 = 123
+
+	UpdateAllowedAddressPairAddressInfo1 := appliances.UpdateAllowedAddressPairAddressInfo{
+		IPAddress:  "1.1.1.1",
+		MACAddress: &mac1,
+		Type:       &type1,
+		VRID:       &vrid1,
+	}
+
+	mac2 := "aa:bb:cc:dd:ee:f2"
+	type2 := ""
+
+	var vrid2 interface{}
+	vrid2 = interface{}(nil)
+
+	UpdateAllowedAddressPairAddressInfo2 := appliances.UpdateAllowedAddressPairAddressInfo{
+		IPAddress:  "2.2.2.2",
+		MACAddress: &mac2,
+		Type:       &type2,
+		VRID:       &vrid2,
+	}
+
+	updateAllowedAddressPairs := []appliances.UpdateAllowedAddressPairAddressInfo{
+		UpdateAllowedAddressPairAddressInfo1,
+		UpdateAllowedAddressPairAddressInfo2,
+	}
+
+	updateOptsInterface1 := appliances.UpdateAllowedAddressPairInterface{
+		AllowedAddressPairs: &updateAllowedAddressPairs,
+	}
+
+	updateOpts := appliances.UpdateAllowedAddressPairOpts{
+		Interfaces: appliances.UpdateAllowedAddressPairInterfaces{
+			Interface1: updateOptsInterface1,
+			Interface2: interface{}(nil),
+			Interface3: interface{}(nil),
+			Interface4: interface{}(nil),
+			Interface5: interface{}(nil),
+			Interface6: interface{}(nil),
+			Interface7: interface{}(nil),
+			Interface8: interface{}(nil),
+		},
+	}
+	ap, err := appliances.Update(
+		ServiceClient(), idAppliance1, updateOpts).Extract()
+	th.AssertNoErr(t, err)
+
+	th.AssertEquals(t, ap.Interfaces.Interface1.AllowedAddressPairs[0].IPAddress, "1.1.1.1")
+	th.AssertEquals(t, ap.Interfaces.Interface1.AllowedAddressPairs[0].MACAddress, "aa:bb:cc:dd:ee:f1")
+	th.AssertEquals(t, ap.Interfaces.Interface1.AllowedAddressPairs[0].Type, "vrrp")
+	th.AssertEquals(t, ap.Interfaces.Interface1.AllowedAddressPairs[0].VRID, float64(123))
+
+	th.AssertEquals(t, ap.Interfaces.Interface1.AllowedAddressPairs[1].IPAddress, "2.2.2.2")
+	th.AssertEquals(t, ap.Interfaces.Interface1.AllowedAddressPairs[1].MACAddress, "aa:bb:cc:dd:ee:f2")
+	th.AssertEquals(t, ap.Interfaces.Interface1.AllowedAddressPairs[1].Type, "")
+	th.AssertEquals(t, ap.Interfaces.Interface1.AllowedAddressPairs[1].VRID, interface{}(nil))
+
+	th.AssertEquals(t, ap.ID, idAppliance1)
+}
