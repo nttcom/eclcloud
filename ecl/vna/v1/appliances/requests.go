@@ -150,21 +150,21 @@ type UpdateAllowedAddressPairInterface struct {
 // interface list of update options used to
 // update virtual network appliance allowed address pairs.
 type UpdateAllowedAddressPairInterfaces struct {
-	Interface1 interface{} `json:"interface_1,omitempty"`
-	Interface2 interface{} `json:"interface_2,omitempty"`
-	Interface3 interface{} `json:"interface_3,omitempty"`
-	Interface4 interface{} `json:"interface_4,omitempty"`
-	Interface5 interface{} `json:"interface_5,omitempty"`
-	Interface6 interface{} `json:"interface_6,omitempty"`
-	Interface7 interface{} `json:"interface_7,omitempty"`
-	Interface8 interface{} `json:"interface_8,omitempty"`
+	Interface1 *UpdateAllowedAddressPairInterface `json:"interface_1,omitempty"`
+	Interface2 *UpdateAllowedAddressPairInterface `json:"interface_2,omitempty"`
+	Interface3 *UpdateAllowedAddressPairInterface `json:"interface_3,omitempty"`
+	Interface4 *UpdateAllowedAddressPairInterface `json:"interface_4,omitempty"`
+	Interface5 *UpdateAllowedAddressPairInterface `json:"interface_5,omitempty"`
+	Interface6 *UpdateAllowedAddressPairInterface `json:"interface_6,omitempty"`
+	Interface7 *UpdateAllowedAddressPairInterface `json:"interface_7,omitempty"`
+	Interface8 *UpdateAllowedAddressPairInterface `json:"interface_8,omitempty"`
 }
 
 // UpdateAllowedAddressPairOpts represents
 // parent element of interfaces in update options used to
 // update virtual network appliance allowed address pairs.
 type UpdateAllowedAddressPairOpts struct {
-	Interfaces interface{} `json:"interfaces,omitempty"`
+	Interfaces *UpdateAllowedAddressPairInterfaces `json:"interfaces,omitempty"`
 }
 
 // ToApplianceUpdateMap builds a request body from UpdateAllowedAddressPairOpts.
@@ -194,21 +194,21 @@ type UpdateFixedIPInterface struct {
 // interface list of update options used to
 // update virtual network appliance network connection and fixed ips.
 type UpdateFixedIPInterfaces struct {
-	Interface1 interface{} `json:"interface_1,omitempty"`
-	Interface2 interface{} `json:"interface_2,omitempty"`
-	Interface3 interface{} `json:"interface_3,omitempty"`
-	Interface4 interface{} `json:"interface_4,omitempty"`
-	Interface5 interface{} `json:"interface_5,omitempty"`
-	Interface6 interface{} `json:"interface_6,omitempty"`
-	Interface7 interface{} `json:"interface_7,omitempty"`
-	Interface8 interface{} `json:"interface_8,omitempty"`
+	Interface1 *UpdateFixedIPInterface `json:"interface_1,omitempty"`
+	Interface2 *UpdateFixedIPInterface `json:"interface_2,omitempty"`
+	Interface3 *UpdateFixedIPInterface `json:"interface_3,omitempty"`
+	Interface4 *UpdateFixedIPInterface `json:"interface_4,omitempty"`
+	Interface5 *UpdateFixedIPInterface `json:"interface_5,omitempty"`
+	Interface6 *UpdateFixedIPInterface `json:"interface_6,omitempty"`
+	Interface7 *UpdateFixedIPInterface `json:"interface_7,omitempty"`
+	Interface8 *UpdateFixedIPInterface `json:"interface_8,omitempty"`
 }
 
 // UpdateFixedIPOpts represents
 // parent element of interfaces in update options used to
 // update virtual network appliance network connection and fixed ips.
 type UpdateFixedIPOpts struct {
-	Interfaces interface{} `json:"interfaces,omitempty"`
+	Interfaces *UpdateFixedIPInterfaces `json:"interfaces,omitempty"`
 }
 
 // ToApplianceUpdateMap builds a request body from UpdateFixedIPOpts.
@@ -231,14 +231,14 @@ type UpdateMetadataInterface struct {
 // UpdateMetadataInterfaces represents
 // list of interfaces for updating virtual network appliance metadata.
 type UpdateMetadataInterfaces struct {
-	Interface1 interface{} `json:"interface_1,omitempty"`
-	Interface2 interface{} `json:"interface_2,omitempty"`
-	Interface3 interface{} `json:"interface_3,omitempty"`
-	Interface4 interface{} `json:"interface_4,omitempty"`
-	Interface5 interface{} `json:"interface_5,omitempty"`
-	Interface6 interface{} `json:"interface_6,omitempty"`
-	Interface7 interface{} `json:"interface_7,omitempty"`
-	Interface8 interface{} `json:"interface_8,omitempty"`
+	Interface1 *UpdateMetadataInterface `json:"interface_1,omitempty"`
+	Interface2 *UpdateMetadataInterface `json:"interface_2,omitempty"`
+	Interface3 *UpdateMetadataInterface `json:"interface_3,omitempty"`
+	Interface4 *UpdateMetadataInterface `json:"interface_4,omitempty"`
+	Interface5 *UpdateMetadataInterface `json:"interface_5,omitempty"`
+	Interface6 *UpdateMetadataInterface `json:"interface_6,omitempty"`
+	Interface7 *UpdateMetadataInterface `json:"interface_7,omitempty"`
+	Interface8 *UpdateMetadataInterface `json:"interface_8,omitempty"`
 }
 
 // UpdateMetadataOpts represents
@@ -246,10 +246,10 @@ type UpdateMetadataInterfaces struct {
 // pararent element for list of interfaces
 // which are used by virtual network appliance metadata update.
 type UpdateMetadataOpts struct {
-	Name        *string            `json:"name,omitempty"`
-	Description *string            `json:"description,omitempty"`
-	Tags        *map[string]string `json:"tags,omitempty"`
-	Interfaces  interface{}        `json:"interfaces,omitempty"`
+	Name        *string                   `json:"name,omitempty"`
+	Description *string                   `json:"description,omitempty"`
+	Tags        *map[string]string        `json:"tags,omitempty"`
+	Interfaces  *UpdateMetadataInterfaces `json:"interfaces,omitempty"`
 }
 
 // ToApplianceUpdateMap builds a request body from UpdateOpts.
