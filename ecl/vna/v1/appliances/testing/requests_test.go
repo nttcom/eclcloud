@@ -172,15 +172,8 @@ func TestUpdateApplianceMetadata(t *testing.T) {
 		Name:        &name,
 		Description: &description,
 		Tags:        &tags,
-		Interfaces: appliances.UpdateMetadataInterfaces{
-			Interface1: updateOptsInterface1,
-			Interface2: interface{}(nil),
-			Interface3: interface{}(nil),
-			Interface4: interface{}(nil),
-			Interface5: interface{}(nil),
-			Interface6: interface{}(nil),
-			Interface7: interface{}(nil),
-			Interface8: interface{}(nil),
+		Interfaces: &appliances.UpdateMetadataInterfaces{
+			Interface1: &updateOptsInterface1,
 		},
 	}
 	ap, err := appliances.Update(
@@ -229,15 +222,8 @@ func TestUpdateApplianceNetworkIDAndFixedIP(t *testing.T) {
 		FixedIPs:  &updateFixedIPs,
 	}
 	updateOpts := appliances.UpdateFixedIPOpts{
-		Interfaces: appliances.UpdateFixedIPInterfaces{
-			Interface1: updateOptsInterface1,
-			Interface2: interface{}(nil),
-			Interface3: interface{}(nil),
-			Interface4: interface{}(nil),
-			Interface5: interface{}(nil),
-			Interface6: interface{}(nil),
-			Interface7: interface{}(nil),
-			Interface8: interface{}(nil),
+		Interfaces: &appliances.UpdateFixedIPInterfaces{
+			Interface1: &updateOptsInterface1,
 		},
 	}
 	ap, err := appliances.Update(
@@ -303,15 +289,8 @@ func TestUpdateApplianceAllowedAddressPairs(t *testing.T) {
 	}
 
 	updateOpts := appliances.UpdateAllowedAddressPairOpts{
-		Interfaces: appliances.UpdateAllowedAddressPairInterfaces{
-			Interface1: updateOptsInterface1,
-			Interface2: interface{}(nil),
-			Interface3: interface{}(nil),
-			Interface4: interface{}(nil),
-			Interface5: interface{}(nil),
-			Interface6: interface{}(nil),
-			Interface7: interface{}(nil),
-			Interface8: interface{}(nil),
+		Interfaces: &appliances.UpdateAllowedAddressPairInterfaces{
+			Interface1: &updateOptsInterface1,
 		},
 	}
 	ap, err := appliances.Update(
