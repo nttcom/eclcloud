@@ -339,3 +339,11 @@ func NewContainerInfraV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOp
 func NewWorkflowV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
 	return initClientOpts(client, eo, "workflowv2")
 }
+
+// NewSecurityOrderV1 creates a ServiceClient that may be used to access the v1 Security
+// service.
+func NewSecurityOrderV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
+	sc, err := initClientOpts(client, eo, "mss-rfg")
+	// sc.ResourceBase = sc.Endpoint + "v2/"
+	return sc, err
+}
