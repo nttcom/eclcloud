@@ -11,10 +11,10 @@ type commonResult struct {
 
 // Extract is a function that accepts a result
 // and extracts a common function gateway resource.
-func (r commonResult) Extract() (*SingleDeviceCreatedOrder, error) {
-	var sdco SingleDeviceCreatedOrder
-	err := r.ExtractInto(&sdco)
-	return &sdco, err
+func (r commonResult) Extract() (*SingleDeviceOrder, error) {
+	var sdo SingleDeviceOrder
+	err := r.ExtractInto(&sdo)
+	return &sdo, err
 }
 
 // Extract interprets any commonResult as a Common Function Gateway, if possible.
@@ -43,7 +43,7 @@ type GetResult struct {
 // DeleteResult represents the result of a delete operation. Call its
 // ExtractErr method to determine if the request succeeded or failed.
 type DeleteResult struct {
-	eclcloud.ErrResult
+	commonResult
 }
 
 type SingleDevice struct {
@@ -51,14 +51,13 @@ type SingleDevice struct {
 	Cell []string `json:"cell"`
 }
 
-// SingleDeviceCreatedOrder represents, well, a common function gateway.
+// SingleDeviceOrder represents, well, a common function gateway.
 // SingleDevice represents an ECL SSS User.
-type SingleDeviceCreatedOrder struct {
+type SingleDeviceOrder struct {
 	ID      string `json:"soId"`
 	Code    string `json:"code"`
 	Message string `json:"message"`
-	SoID    string `json:"soId"`
-	Status  string `json:"status"`
+	Status  int    `json:"status"`
 }
 
 // SingleDevicePage is the page returned by a pager

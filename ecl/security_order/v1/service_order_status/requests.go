@@ -40,10 +40,10 @@ type GetOptsBuilder interface {
 	ToServiceOrderQuery() (string, error)
 }
 
-
 type GetOpts struct {
 	TenantID string `q:"tenant_id"`
-	Locale string `q:"locale"`
+	Locale   string `q:"locale"`
+	SoID     string `q:"soid"`
 }
 
 // ToSingleDeviceQuery formats a ListOpts into a query string.
@@ -53,7 +53,7 @@ func (opts GetOpts) ToServiceOrderQuery() (string, error) {
 }
 
 // Get retrieves details on a single user, by ID.
-func Get(client *eclcloud.ServiceClient, id string, opts GetOptsBuilder) (r GetResult) {
+func Get(client *eclcloud.ServiceClient, opts GetOptsBuilder) (r GetResult) {
 	url := getURL(client)
 	if opts != nil {
 		query, _ := opts.ToServiceOrderQuery()

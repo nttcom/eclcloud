@@ -15,7 +15,7 @@ type ListOptsBuilder interface {
 // Currently SSS User API does not support any of query parameters.
 type ListOpts struct {
 	TenantID string `q:"tenant_id"`
-	Locale string `q:"locale"`
+	Locale   string `q:"locale"`
 }
 
 // ToSingleDeviceQuery formats a ListOpts into a query string.
@@ -48,11 +48,11 @@ func Get(client *eclcloud.ServiceClient, id string) (r GetResult) {
 // CreateOptsBuilder allows extensions to add additional parameters to
 // the Create request.
 type CreateOptsBuilder interface {
-	ToUserCreateMap() (map[string]interface{}, error)
+	ToSingleDeviceCreateMap() (map[string]interface{}, error)
 }
 
-// GtHost represents parameters used to create a Single Device.
-type GtHost struct {
+// GtHostInCreate represents parameters used to create a Single Device.
+type GtHostInCreate struct {
 	OperatingMode string `json:"operatingmode" required:"true"`
 	LicenseKind   string `json:"licensekind" required:"true"`
 	AZGroup       string `json:"azgroup" required:"true"`
@@ -60,20 +60,20 @@ type GtHost struct {
 
 // CreateOpts represents parameters used to create a user.
 type CreateOpts struct {
-	SOKind   string   `json:"sokind" required:"true"`
-	TenantID string   `json:"tenant_id" required:"true"`
-	Locale   string   `json:"locale,omitempty"`
-	GtHost   []GtHost `json:"gt_host" required:"true"`
+	SOKind   string           `json:"sokind" required:"true"`
+	TenantID string           `json:"tenant_id" required:"true"`
+	Locale   string           `json:"locale,omitempty"`
+	GtHost   []GtHostInCreate `json:"gt_host" required:"true"`
 }
 
-// ToUserCreateMap formats a CreateOpts into a create request.
-func (opts CreateOpts) ToUserCreateMap() (map[string]interface{}, error) {
+// ToSingleDeviceCreateMap formats a CreateOpts into a create request.
+func (opts CreateOpts) ToSingleDeviceCreateMap() (map[string]interface{}, error) {
 	return eclcloud.BuildRequestBody(opts, "")
 }
 
 // Create creates a new user.
 func Create(client *eclcloud.ServiceClient, opts CreateOptsBuilder) (r CreateResult) {
-	b, err := opts.ToUserCreateMap()
+	b, err := opts.ToSingleDeviceCreateMap()
 	if err != nil {
 		r.Err = err
 		return
@@ -84,10 +84,41 @@ func Create(client *eclcloud.ServiceClient, opts CreateOptsBuilder) (r CreateRes
 	return
 }
 
+type DeleteOptsBuilder interface {
+	ToSingleDeviceDeleteMap() (map[string]interface{}, error)
+}
+
+// GtHostInDelete represents parameters used to create a Single Device.
+type GtHostInDelete struct {
+	HostName string `json:"hostname" required:"true"`
+}
+
+// DeleteOpts represents parameters used to create a user.
+type DeleteOpts struct {
+	SOKind   string            `json:"sokind" required:"true"`
+	TenantID string            `json:"tenant_id" required:"true"`
+	GtHost   [1]GtHostInDelete `json:"gt_host" required:"true"`
+}
+
+// ToSingleDeviceDeleteMap formats a CreateOpts into a create request.
+func (opts DeleteOpts) ToSingleDeviceDeleteMap() (map[string]interface{}, error) {
+	return eclcloud.BuildRequestBody(opts, "")
+}
+
 // Delete deletes a user.
-func Delete(client *eclcloud.ServiceClient, userID string) (r DeleteResult) {
-	_, r.Err = client.Delete(deleteURL(client), nil)
+func Delete(client *eclcloud.ServiceClient, opts DeleteOptsBuilder) (r DeleteResult) {
+	// _, r.Err = client.Delete(deleteURL(client), nil)
+	// return
+	b, err := opts.ToSingleDeviceDeleteMap()
+	if err != nil {
+		r.Err = err
+		return
+	}
+	_, r.Err = client.Post(createURL(client), &b, &r.Body, &eclcloud.RequestOpts{
+		OkCodes: []int{200},
+	})
 	return
+
 }
 
 // UpdateOptsBuilder allows extensions to add additional parameters to

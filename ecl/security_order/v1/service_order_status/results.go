@@ -30,10 +30,10 @@ type GetResult struct {
 // OrderProgress represents, well, a common function gateway.
 // SingleDevice represents an ECL SSS User.
 type OrderProgress struct {
-	Status       string `json:"status"`
+	Status       int    `json:"status"`
 	Code         string `json:"code"`
 	Message      string `json:"message"`
-	ProgressRate string `json:"progressRate"`
+	ProgressRate int    `json:"progressRate"`
 }
 
 // // OrderProgressPage is the page returned by a pager
