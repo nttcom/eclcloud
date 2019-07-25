@@ -294,6 +294,13 @@ func NewImageServiceV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts
 	return sc, err
 }
 
+// NewVNAV1 creates a ServiceClient that may be used with the v1 virtual network appliance management package.
+func NewVNAV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
+	sc, err := initClientOpts(client, eo, "virtual-network-appliance")
+	sc.ResourceBase = sc.Endpoint + "v1.0/"
+	return sc, err
+}
+
 // NewLoadBalancerV2 creates a ServiceClient that may be used to access the v2
 // load balancer service.
 func NewLoadBalancerV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
