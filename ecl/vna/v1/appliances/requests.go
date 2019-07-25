@@ -96,7 +96,7 @@ type CreateOpts struct {
 	VirtualNetworkAppliancePlanID string               `json:"virtual_network_appliance_plan_id" required:"true"`
 	TenantID                      string               `json:"tenant_id,omitempty"`
 	Tags                          map[string]string    `json:"tags,omitempty"`
-	Interfaces                    CreateOptsInterfaces `json:"interfaces,omitempty"`
+	Interfaces                    CreateOptsInterfaces `json:"interfaces" required:"true"`
 }
 
 // ToApplianceCreateMap builds a request body from CreateOpts.
