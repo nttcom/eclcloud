@@ -1,2 +1,2 @@
-// Package single_devices contains user management functionality on SSS
+// Package single_devices contains single device functionality on security.
 package single_devices

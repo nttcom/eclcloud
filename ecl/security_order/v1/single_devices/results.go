@@ -10,32 +10,32 @@ type commonResult struct {
 }
 
 // Extract is a function that accepts a result
-// and extracts a common function gateway resource.
+// and extracts a Single Device resource.
 func (r commonResult) Extract() (*SingleDeviceOrder, error) {
 	var sdo SingleDeviceOrder
 	err := r.ExtractInto(&sdo)
 	return &sdo, err
 }
 
-// Extract interprets any commonResult as a Common Function Gateway, if possible.
+// Extract interprets any commonResult as a Single Device if possible.
 func (r commonResult) ExtractInto(v interface{}) error {
 	return r.Result.ExtractIntoStructPtr(v, "")
 }
 
 // CreateResult represents the result of a create operation. Call its Extract
-// method to interpret it as a Common Function Gateway.
+// method to interpret it as a Single Device.
 type CreateResult struct {
 	commonResult
 }
 
 // GetResult represents the result of a get operation. Call its Extract
-// method to interpret it as a Common Function Gateway.
+// method to interpret it as a Single Device.
 type GetResult struct {
 	commonResult
 }
 
 // UpdateResult represents the result of an update operation. Call its Extract
-// method to interpret it as a Common Function Gateway.
+// method to interpret it as a Single Device.
 // type UpdateResult struct {
 // 	commonResult
 // }
@@ -46,13 +46,14 @@ type DeleteResult struct {
 	commonResult
 }
 
+// SingleDevice represents the result of a each element in
+// response of single device api result.
 type SingleDevice struct {
 	ID   int      `json:"id"`
 	Cell []string `json:"cell"`
 }
 
-// SingleDeviceOrder represents, well, a common function gateway.
-// SingleDevice represents an ECL SSS User.
+// SingleDeviceOrder represents a Single Device's each order.
 type SingleDeviceOrder struct {
 	ID      string `json:"soId"`
 	Code    string `json:"code"`
@@ -61,12 +62,12 @@ type SingleDeviceOrder struct {
 }
 
 // SingleDevicePage is the page returned by a pager
-// when traversing over a collection of common function gateway.
+// when traversing over a collection of Single Device.
 type SingleDevicePage struct {
 	pagination.LinkedPageBase
 }
 
-// NextPageURL is invoked when a paginated collection of common function gateway
+// NextPageURL is invoked when a paginated collection of Single Device
 //  has reached the end of a page and the pager seeks to traverse over a new one.
 // In order to do this, it needs to construct the next page's URL.
 func (r SingleDevicePage) NextPageURL() (string, error) {
@@ -88,7 +89,7 @@ func (r SingleDevicePage) IsEmpty() (bool, error) {
 
 // ExtractSingleDevices accepts a Page struct,
 // specifically a NetworkPage struct, and extracts the elements
-// into a slice of Common Function Gateway structs.
+// into a slice of Single Device structs.
 // In other words, a generic collection is mapped into a relevant slice.
 func ExtractSingleDevices(r pagination.Page) ([]SingleDevice, error) {
 	var s []SingleDevice
