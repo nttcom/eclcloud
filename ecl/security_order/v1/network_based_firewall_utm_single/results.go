@@ -36,9 +36,9 @@ type GetResult struct {
 
 // UpdateResult represents the result of an update operation. Call its Extract
 // method to interpret it as a Single Device.
-// type UpdateResult struct {
-// 	commonResult
-// }
+type UpdateResult struct {
+	commonResult
+}
 
 // DeleteResult represents the result of a delete operation. Call its
 // ExtractErr method to determine if the request succeeded or failed.

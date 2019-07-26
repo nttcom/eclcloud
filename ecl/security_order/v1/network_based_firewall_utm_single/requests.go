@@ -60,10 +60,10 @@ type GtHostInCreate struct {
 
 // CreateOpts represents parameters used to create a user.
 type CreateOpts struct {
-	SOKind   string           `json:"sokind" required:"true"`
-	TenantID string           `json:"tenant_id" required:"true"`
-	Locale   string           `json:"locale,omitempty"`
-	GtHost   []GtHostInCreate `json:"gt_host" required:"true"`
+	SOKind   string            `json:"sokind" required:"true"`
+	TenantID string            `json:"tenant_id" required:"true"`
+	Locale   string            `json:"locale,omitempty"`
+	GtHost   [1]GtHostInCreate `json:"gt_host" required:"true"`
 }
 
 // ToSingleDeviceCreateMap formats a CreateOpts into a create request.
@@ -123,43 +123,39 @@ func Delete(client *eclcloud.ServiceClient, opts DeleteOptsBuilder) (r DeleteRes
 
 // UpdateOptsBuilder allows extensions to add additional parameters to
 // the Update request.
-// type UpdateOptsBuilder interface {
-// 	ToUserUpdateMap() (map[string]interface{}, error)
-// }
+type UpdateOptsBuilder interface {
+	ToSingleDeviceUpdateMap() (map[string]interface{}, error)
+}
 
-// // UpdateOpts represents parameters to update a user.
-// type UpdateOpts struct {
-// 	// New login id of the user.
-// 	LoginID *string `json:"login_id" required:"true"`
+// GtHostInUpdate represents parameters used to create a Single Device.
+type GtHostInUpdate struct {
+	OperatingMode string `json:"operatingmode" required:"true"`
+	LicenseKind   string `json:"licensekind" required:"true"`
+	HostName      string `json:"hostname" required:"true"`
+}
 
-// 	// New email address of the user
-// 	MailAddress *string `json:"mail_address" required:"true"`
+// UpdateOpts represents parameters to update a Single Device.
+type UpdateOpts struct {
+	SOKind   string            `json:"sokind" required:"true"`
+	Locale   string            `json:"locale,omitempty"`
+	TenantID string            `json:"tenant_id" required:"true"`
+	GtHost   [1]GtHostInUpdate `json:"gt_host" required:"true"`
+}
 
-// 	// New password of the user
-// 	NewPassword *string `json:"new_password" required:"true"`
-// }
+// ToSingleDeviceUpdateMap formats a UpdateOpts into an update request.
+func (opts UpdateOpts) ToSingleDeviceUpdateMap() (map[string]interface{}, error) {
+	return eclcloud.BuildRequestBody(opts, "")
+}
 
-// // ToUserUpdateMap formats a UpdateOpts into an update request.
-// func (opts UpdateOpts) ToUserUpdateMap() (map[string]interface{}, error) {
-// 	return eclcloud.BuildRequestBody(opts, "")
-// }
-
-// // Update modifies the attributes of a user.
-// // SSS User PUT API does not have response body,
-// // so set JSONResponse option as nil.
-// func Update(client *eclcloud.ServiceClient, id string, opts UpdateOptsBuilder) (r UpdateResult) {
-// 	b, err := opts.ToUserUpdateMap()
-// 	if err != nil {
-// 		r.Err = err
-// 		return
-// 	}
-// 	_, r.Err = client.Put(
-// 		updateURL(client),
-// 		b,
-// 		nil,
-// 		&eclcloud.RequestOpts{
-// 			OkCodes: []int{204},
-// 		},
-// 	)
-// 	return
-// }
+// Update modifies the attributes of a user.
+func Update(client *eclcloud.ServiceClient, opts UpdateOptsBuilder) (r UpdateResult) {
+	b, err := opts.ToSingleDeviceUpdateMap()
+	if err != nil {
+		r.Err = err
+		return
+	}
+	_, r.Err = client.Post(updateURL(client), &b, &r.Body, &eclcloud.RequestOpts{
+		OkCodes: []int{200},
+	})
+	return
+}
