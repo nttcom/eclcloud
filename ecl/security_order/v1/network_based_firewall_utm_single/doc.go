@@ -1,2 +1,2 @@
-// Package single_devices contains single device functionality on security.
-package single_devices
+// Package network_based_firewall_utm_single contains single firewall/utm functionality on security.
+package network_based_firewall_utm_single

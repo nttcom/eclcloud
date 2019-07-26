@@ -1,4 +1,4 @@
-package single_devices
+package network_based_firewall_utm_single
 
 import "github.com/nttcom/eclcloud"
 
