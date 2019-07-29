@@ -49,7 +49,7 @@ func (r DeviceInterfacePage) IsEmpty() (bool, error) {
 }
 
 // ExtractDeviceInterfaces accepts a Page struct,
-// specifically a NetworkPage struct, and extracts the elements
+// specifically a DeviceInterfacePage struct, and extracts the elements
 // into a slice of Device Interface structs.
 // In other words, a generic collection is mapped into a relevant slice.
 func ExtractDeviceInterfaces(r pagination.Page) ([]DeviceInterface, error) {
