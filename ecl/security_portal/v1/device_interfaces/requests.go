@@ -13,7 +13,7 @@ type ListOptsBuilder interface {
 
 // ListOpts converts tenant id and token as query string
 type ListOpts struct {
-	TenantID  string `q:"tenant_id"`
+	TenantID  string `q:"tenantid"`
 	UserToken string `q:"usertoken"`
 }
 

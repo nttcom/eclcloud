@@ -16,6 +16,7 @@ type SinglePort struct {
 	IPAddress  string `json:"ip_address,omitempty"`
 	NetworkID  string `json:"network_id,omitempty"`
 	SubnetID   string `json:"subnet_id,omitempty"`
+	MTU        string `json:"mtu,omitempty"`
 	Comment    string `json:"comment,omitempty"`
 }
 
@@ -37,7 +38,7 @@ type UpdateQueryOptsBuilder interface {
 
 // UpdateQueryOpts represents query strings for updating port.
 type UpdateQueryOpts struct {
-	TenantID  string `q:"tenant_id"`
+	TenantID  string `q:"tenantid"`
 	UserToken string `q:"usertoken"`
 }
 
