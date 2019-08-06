@@ -22,7 +22,7 @@ type SinglePort struct {
 
 // UpdateOpts represents options used to update a port.
 type UpdateOpts struct {
-	Port [7]SinglePort `json:"port" required:"true"`
+	Port []SinglePort `json:"port" required:"true"`
 }
 
 // ToPortUpdateMap formats a UpdateOpts into an update request.

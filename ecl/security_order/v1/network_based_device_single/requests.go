@@ -1,4 +1,4 @@
-package network_based_firewall_utm_single
+package network_based_device_single
 
 import (
 	"github.com/nttcom/eclcloud"
@@ -12,7 +12,6 @@ type ListOptsBuilder interface {
 }
 
 // ListOpts enables filtering of a list request.
-// Currently SSS User API does not support any of query parameters.
 type ListOpts struct {
 	TenantID string `q:"tenant_id"`
 	Locale   string `q:"locale"`
@@ -24,9 +23,9 @@ func (opts ListOpts) ToSingleDeviceQuery() (string, error) {
 	return q.String(), err
 }
 
-// List enumerates the Users to which the current token has access.
-func List(client *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager {
-	url := listURL(client)
+// List enumerates the Devices to which the current token has access.
+func List(client *eclcloud.ServiceClient, deviceType string, opts ListOptsBuilder) pagination.Pager {
+	url := listURL(client, deviceType)
 	if opts != nil {
 		query, err := opts.ToSingleDeviceQuery()
 		if err != nil {
@@ -35,14 +34,8 @@ func List(client *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager
 		url += query
 	}
 	return pagination.NewPager(client, url, func(r pagination.PageResult) pagination.Page {
-		return SingleFirewallUTMPage{pagination.LinkedPageBase{PageResult: r}}
+		return SingleDevicePage{pagination.LinkedPageBase{PageResult: r}}
 	})
-}
-
-// Get retrieves details on a single user, by ID.
-func Get(client *eclcloud.ServiceClient, id string) (r GetResult) {
-	_, r.Err = client.Get(getURL(client), &r.Body, nil)
-	return
 }
 
 // CreateOptsBuilder allows extensions to add additional parameters to
@@ -51,14 +44,14 @@ type CreateOptsBuilder interface {
 	ToSingleDeviceCreateMap() (map[string]interface{}, error)
 }
 
-// GtHostInCreate represents parameters used to create a Single Firewall/UTM.
+// GtHostInCreate represents parameters used to create a Single Device.
 type GtHostInCreate struct {
 	OperatingMode string `json:"operatingmode" required:"true"`
 	LicenseKind   string `json:"licensekind" required:"true"`
 	AZGroup       string `json:"azgroup" required:"true"`
 }
 
-// CreateOpts represents parameters used to create a user.
+// CreateOpts represents parameters used to create a device.
 type CreateOpts struct {
 	SOKind   string            `json:"sokind" required:"true"`
 	TenantID string            `json:"tenant_id" required:"true"`
@@ -71,50 +64,50 @@ func (opts CreateOpts) ToSingleDeviceCreateMap() (map[string]interface{}, error)
 	return eclcloud.BuildRequestBody(opts, "")
 }
 
-// Create creates a new user.
-func Create(client *eclcloud.ServiceClient, opts CreateOptsBuilder) (r CreateResult) {
+// Create creates a new device.
+func Create(client *eclcloud.ServiceClient, deviceType string, opts CreateOptsBuilder) (r CreateResult) {
 	b, err := opts.ToSingleDeviceCreateMap()
 	if err != nil {
 		r.Err = err
 		return
 	}
-	_, r.Err = client.Post(createURL(client), &b, &r.Body, &eclcloud.RequestOpts{
+	_, r.Err = client.Post(createURL(client, deviceType), &b, &r.Body, &eclcloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 	return
 }
 
+// DeleteOptsBuilder allows extensions to add additional parameters to
+// the Delete request.
 type DeleteOptsBuilder interface {
 	ToSingleDeviceDeleteMap() (map[string]interface{}, error)
 }
 
-// GtHostInDelete represents parameters used to create a Single Firewall/UTM.
+// GtHostInDelete represents parameters used to delete a Single Device.
 type GtHostInDelete struct {
 	HostName string `json:"hostname" required:"true"`
 }
 
-// DeleteOpts represents parameters used to create a user.
+// DeleteOpts represents parameters used to delete a device.
 type DeleteOpts struct {
 	SOKind   string            `json:"sokind" required:"true"`
 	TenantID string            `json:"tenant_id" required:"true"`
 	GtHost   [1]GtHostInDelete `json:"gt_host" required:"true"`
 }
 
-// ToSingleDeviceDeleteMap formats a CreateOpts into a create request.
+// ToSingleDeviceDeleteMap formats a DeleteOpts into a delete request.
 func (opts DeleteOpts) ToSingleDeviceDeleteMap() (map[string]interface{}, error) {
 	return eclcloud.BuildRequestBody(opts, "")
 }
 
-// Delete deletes a user.
-func Delete(client *eclcloud.ServiceClient, opts DeleteOptsBuilder) (r DeleteResult) {
-	// _, r.Err = client.Delete(deleteURL(client), nil)
-	// return
+// Delete deletes a device.
+func Delete(client *eclcloud.ServiceClient, deviceType string, opts DeleteOptsBuilder) (r DeleteResult) {
 	b, err := opts.ToSingleDeviceDeleteMap()
 	if err != nil {
 		r.Err = err
 		return
 	}
-	_, r.Err = client.Post(createURL(client), &b, &r.Body, &eclcloud.RequestOpts{
+	_, r.Err = client.Post(createURL(client, deviceType), &b, &r.Body, &eclcloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 	return
@@ -127,14 +120,14 @@ type UpdateOptsBuilder interface {
 	ToSingleDeviceUpdateMap() (map[string]interface{}, error)
 }
 
-// GtHostInUpdate represents parameters used to create a Single Firewall/UTM.
+// GtHostInUpdate represents parameters used to update a Single Device.
 type GtHostInUpdate struct {
 	OperatingMode string `json:"operatingmode" required:"true"`
 	LicenseKind   string `json:"licensekind" required:"true"`
 	HostName      string `json:"hostname" required:"true"`
 }
 
-// UpdateOpts represents parameters to update a Single Firewall/UTM.
+// UpdateOpts represents parameters to update a Single Device.
 type UpdateOpts struct {
 	SOKind   string            `json:"sokind" required:"true"`
 	Locale   string            `json:"locale,omitempty"`
@@ -147,14 +140,14 @@ func (opts UpdateOpts) ToSingleDeviceUpdateMap() (map[string]interface{}, error)
 	return eclcloud.BuildRequestBody(opts, "")
 }
 
-// Update modifies the attributes of a user.
-func Update(client *eclcloud.ServiceClient, opts UpdateOptsBuilder) (r UpdateResult) {
+// Update modifies the attributes of a device.
+func Update(client *eclcloud.ServiceClient, deviceType string, opts UpdateOptsBuilder) (r UpdateResult) {
 	b, err := opts.ToSingleDeviceUpdateMap()
 	if err != nil {
 		r.Err = err
 		return
 	}
-	_, r.Err = client.Post(updateURL(client), &b, &r.Body, &eclcloud.RequestOpts{
+	_, r.Err = client.Post(updateURL(client, deviceType), &b, &r.Body, &eclcloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 	return
