@@ -10,32 +10,32 @@ type commonResult struct {
 }
 
 // Extract is a function that accepts a result
-// and extracts a Single Firewall/UTM resource.
+// and extracts a Single Device resource.
 func (r commonResult) Extract() (*SingleDeviceOrder, error) {
 	var sdo SingleDeviceOrder
 	err := r.ExtractInto(&sdo)
 	return &sdo, err
 }
 
-// Extract interprets any commonResult as a Single Firewall/UTM if possible.
+// Extract interprets any commonResult as a Single Device if possible.
 func (r commonResult) ExtractInto(v interface{}) error {
 	return r.Result.ExtractIntoStructPtr(v, "")
 }
 
 // CreateResult represents the result of a create operation. Call its Extract
-// method to interpret it as a Single Firewall/UTM.
+// method to interpret it as a Single Device.
 type CreateResult struct {
 	commonResult
 }
 
 // GetResult represents the result of a get operation. Call its Extract
-// method to interpret it as a Single Firewall/UTM.
+// method to interpret it as a Single Device.
 type GetResult struct {
 	commonResult
 }
 
 // UpdateResult represents the result of an update operation. Call its Extract
-// method to interpret it as a Single Firewall/UTM.
+// method to interpret it as a Single Device.
 type UpdateResult struct {
 	commonResult
 }
@@ -53,7 +53,7 @@ type SingleDevice struct {
 	Cell []string `json:"cell"`
 }
 
-// SingleDeviceOrder represents a Single Firewall/UTM's each order.
+// SingleDeviceOrder represents a Single Device's each order.
 type SingleDeviceOrder struct {
 	ID      string `json:"soId"`
 	Code    string `json:"code"`
@@ -62,13 +62,13 @@ type SingleDeviceOrder struct {
 }
 
 // SingleDevicePage is the page returned by a pager
-// when traversing over a collection of Single Firewall/UTM.
+// when traversing over a collection of Single Device.
 type SingleDevicePage struct {
 	pagination.LinkedPageBase
 }
 
-// NextPageURL is invoked when a paginated collection of Single Firewall/UTM
-//  has reached the end of a page and the pager seeks to traverse over a new one.
+// NextPageURL is invoked when a paginated collection of Single Device
+// has reached the end of a page and the pager seeks to traverse over a new one.
 // In order to do this, it needs to construct the next page's URL.
 func (r SingleDevicePage) NextPageURL() (string, error) {
 	var s struct {
@@ -88,8 +88,8 @@ func (r SingleDevicePage) IsEmpty() (bool, error) {
 }
 
 // ExtractSingleDevices accepts a Page struct,
-// specifically a NetworkPage struct, and extracts the elements
-// into a slice of Single Firewall/UTM structs.
+// specifically a SingleDevicePage struct, and extracts the elements
+// into a slice of Single Device structs.
 // In other words, a generic collection is mapped into a relevant slice.
 func ExtractSingleDevices(r pagination.Page) ([]SingleDevice, error) {
 	var s []SingleDevice
@@ -98,7 +98,7 @@ func ExtractSingleDevices(r pagination.Page) ([]SingleDevice, error) {
 }
 
 // ExtractSingleDevicesInto interprets the results of a single page from a List() call,
-// producing a slice of Server entities.
+// producing a slice of Device entities.
 func ExtractSingleDevicesInto(r pagination.Page, v interface{}) error {
 	return r.(SingleDevicePage).Result.ExtractIntoSlicePtr(v, "rows")
 }

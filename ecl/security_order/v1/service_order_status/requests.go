@@ -23,7 +23,7 @@ func (opts GetOpts) ToServiceOrderQuery() (string, error) {
 	return q.String(), err
 }
 
-// Get retrieves details on a single order, by ID.
+// Get retrieves details of an order, by SoId.
 func Get(client *eclcloud.ServiceClient, deviceType string, opts GetOptsBuilder) (r GetResult) {
 	url := getURL(client, deviceType)
 	if opts != nil {
