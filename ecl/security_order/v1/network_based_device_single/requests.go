@@ -1,4 +1,4 @@
-package network_based_firewall_utm_single
+package network_based_device_single
 
 import (
 	"github.com/nttcom/eclcloud"
@@ -25,8 +25,8 @@ func (opts ListOpts) ToSingleDeviceQuery() (string, error) {
 }
 
 // List enumerates the Users to which the current token has access.
-func List(client *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager {
-	url := listURL(client)
+func List(client *eclcloud.ServiceClient, deviceType string, opts ListOptsBuilder) pagination.Pager {
+	url := listURL(client, deviceType)
 	if opts != nil {
 		query, err := opts.ToSingleDeviceQuery()
 		if err != nil {
@@ -35,15 +35,15 @@ func List(client *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager
 		url += query
 	}
 	return pagination.NewPager(client, url, func(r pagination.PageResult) pagination.Page {
-		return SingleFirewallUTMPage{pagination.LinkedPageBase{PageResult: r}}
+		return SingleDevicePage{pagination.LinkedPageBase{PageResult: r}}
 	})
 }
 
-// Get retrieves details on a single user, by ID.
-func Get(client *eclcloud.ServiceClient, id string) (r GetResult) {
-	_, r.Err = client.Get(getURL(client), &r.Body, nil)
-	return
-}
+// // Get retrieves details on a single user, by ID.
+// func Get(client *eclcloud.ServiceClient, id string) (r GetResult) {
+// 	_, r.Err = client.Get(getURL(client), &r.Body, nil)
+// 	return
+// }
 
 // CreateOptsBuilder allows extensions to add additional parameters to
 // the Create request.
@@ -72,13 +72,13 @@ func (opts CreateOpts) ToSingleDeviceCreateMap() (map[string]interface{}, error)
 }
 
 // Create creates a new user.
-func Create(client *eclcloud.ServiceClient, opts CreateOptsBuilder) (r CreateResult) {
+func Create(client *eclcloud.ServiceClient, deviceType string, opts CreateOptsBuilder) (r CreateResult) {
 	b, err := opts.ToSingleDeviceCreateMap()
 	if err != nil {
 		r.Err = err
 		return
 	}
-	_, r.Err = client.Post(createURL(client), &b, &r.Body, &eclcloud.RequestOpts{
+	_, r.Err = client.Post(createURL(client, deviceType), &b, &r.Body, &eclcloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 	return
@@ -106,7 +106,7 @@ func (opts DeleteOpts) ToSingleDeviceDeleteMap() (map[string]interface{}, error)
 }
 
 // Delete deletes a user.
-func Delete(client *eclcloud.ServiceClient, opts DeleteOptsBuilder) (r DeleteResult) {
+func Delete(client *eclcloud.ServiceClient, deviceType string, opts DeleteOptsBuilder) (r DeleteResult) {
 	// _, r.Err = client.Delete(deleteURL(client), nil)
 	// return
 	b, err := opts.ToSingleDeviceDeleteMap()
@@ -114,7 +114,7 @@ func Delete(client *eclcloud.ServiceClient, opts DeleteOptsBuilder) (r DeleteRes
 		r.Err = err
 		return
 	}
-	_, r.Err = client.Post(createURL(client), &b, &r.Body, &eclcloud.RequestOpts{
+	_, r.Err = client.Post(createURL(client, deviceType), &b, &r.Body, &eclcloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 	return
@@ -148,13 +148,13 @@ func (opts UpdateOpts) ToSingleDeviceUpdateMap() (map[string]interface{}, error)
 }
 
 // Update modifies the attributes of a user.
-func Update(client *eclcloud.ServiceClient, opts UpdateOptsBuilder) (r UpdateResult) {
+func Update(client *eclcloud.ServiceClient, deviceType string, opts UpdateOptsBuilder) (r UpdateResult) {
 	b, err := opts.ToSingleDeviceUpdateMap()
 	if err != nil {
 		r.Err = err
 		return
 	}
-	_, r.Err = client.Post(updateURL(client), &b, &r.Body, &eclcloud.RequestOpts{
+	_, r.Err = client.Post(updateURL(client, deviceType), &b, &r.Body, &eclcloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 	return
