@@ -24,8 +24,8 @@ func (opts GetOpts) ToServiceOrderQuery() (string, error) {
 }
 
 // Get retrieves details on a single order, by ID.
-func Get(client *eclcloud.ServiceClient, postfix string, opts GetOptsBuilder) (r GetResult) {
-	url := getURL(client, postfix)
+func Get(client *eclcloud.ServiceClient, deviceType string, opts GetOptsBuilder) (r GetResult) {
+	url := getURL(client, deviceType)
 	if opts != nil {
 		query, _ := opts.ToServiceOrderQuery()
 		url += query
