@@ -10,7 +10,7 @@ type UpdateOptsBuilder interface {
 	ToPortUpdateMap() (map[string]interface{}, error)
 }
 
-// SinglePort represents parameters to update a Single Firewall/UTM.
+// SinglePort represents parameters to update a Single Port.
 type SinglePort struct {
 	EnablePort string `json:"enable_port" required:"true"`
 	IPAddress  string `json:"ip_address,omitempty"`

@@ -31,14 +31,8 @@ type UpdateResult struct {
 	commonResult
 }
 
-// // DeleteResult represents the result of a delete operation. Call its
-// // ExtractErr method to determine if the request succeeded or failed.
-// type DeleteResult struct {
-// 	commonResult
-// }
-
 // UpdateProcess represents the result of a each element in
-// response of single device api result.
+// response of port api result.
 type UpdateProcess struct {
 	Message   string `json:"message"`
 	ProcessID int    `json:"processId"`
@@ -46,7 +40,7 @@ type UpdateProcess struct {
 }
 
 // ProcessPage is the page returned by a pager
-// when traversing over a collection of Single Firewall/UTM.
+// when traversing over a collection of Single Port.
 type ProcessPage struct {
 	pagination.LinkedPageBase
 }
