@@ -9,14 +9,14 @@ type commonResult struct {
 }
 
 // Extract is a function that accepts a result
-// and extracts an Order resource.
+// and extracts an Order Progress resource.
 func (r commonResult) Extract() (*OrderProgress, error) {
 	var sd OrderProgress
 	err := r.ExtractInto(&sd)
 	return &sd, err
 }
 
-// Extract interprets any commonResult as an Order, if possible.
+// Extract interprets any commonResult as an Order Progress, if possible.
 func (r commonResult) ExtractInto(v interface{}) error {
 	return r.Result.ExtractIntoStructPtr(v, "")
 }
@@ -27,7 +27,7 @@ type GetResult struct {
 	commonResult
 }
 
-// OrderProgress represents an Order response.
+// OrderProgress represents an Order Progress response.
 type OrderProgress struct {
 	Status       int    `json:"status"`
 	Code         string `json:"code"`
