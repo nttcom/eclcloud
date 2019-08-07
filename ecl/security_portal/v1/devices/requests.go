@@ -12,7 +12,6 @@ type ListOptsBuilder interface {
 }
 
 // ListOpts enables filtering of a list request.
-// Currently SSS User API does not support any of query parameters.
 type ListOpts struct {
 	TenantID  string `q:"tenantid"`
 	UserToken string `q:"usertoken"`
