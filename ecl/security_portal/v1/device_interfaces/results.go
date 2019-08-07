@@ -10,7 +10,7 @@ type commonResult struct {
 }
 
 // DeviceInterface represents the result of a each element in
-// response of device api result.
+// response of device interface api result.
 type DeviceInterface struct {
 	OSIPAddress  string `json:"os_ip_address"`
 	MSAPortID    string `json:"msa_port_id"`
@@ -59,7 +59,7 @@ func ExtractDeviceInterfaces(r pagination.Page) ([]DeviceInterface, error) {
 }
 
 // ExtractDeviceInterfacesInto interprets the results of a single page from a List() call,
-// producing a slice of Server entities.
+// producing a slice of Device Interface entities.
 func ExtractDeviceInterfacesInto(r pagination.Page, v interface{}) error {
 	return r.(DeviceInterfacePage).Result.ExtractIntoSlicePtr(v, "device_interfaces")
 }

@@ -24,7 +24,7 @@ func (opts ListOpts) ToDeviceInterfaceQuery() (string, error) {
 }
 
 // List returns a Pager which allows you to iterate over a collection of
-// device interface
+// device interfaces.
 func List(client *eclcloud.ServiceClient, serverUUID string, opts ListOptsBuilder) pagination.Pager {
 	url := listURL(client, serverUUID)
 	if opts != nil {

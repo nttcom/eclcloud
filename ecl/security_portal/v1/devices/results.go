@@ -58,7 +58,7 @@ func ExtractDevices(r pagination.Page) ([]Device, error) {
 }
 
 // ExtractDevicesInto interprets the results of a single page from a List() call,
-// producing a slice of Server entities.
+// producing a slice of Device entities.
 func ExtractDevicesInto(r pagination.Page, v interface{}) error {
 	return r.(DevicePage).Result.ExtractIntoSlicePtr(v, "devices")
 }
