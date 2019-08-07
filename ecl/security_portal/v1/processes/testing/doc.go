@@ -1,2 +1,2 @@
-// zones unit tests
+// Package testing contains processes unit tests
 package testing
