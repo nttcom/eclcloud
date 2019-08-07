@@ -5,7 +5,6 @@ import (
 )
 
 const processID = "85385"
-const tenantID = "9b8f16df551e42f3b905859f28a33d55"
 
 const getResponse = `
 {
