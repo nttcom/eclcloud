@@ -144,7 +144,6 @@ func (r *Zone) UnmarshalJSON(b []byte) error {
 
 	r.CreatedAt = time.Time(s.CreatedAt)
 	r.UpdatedAt = time.Time(s.UpdatedAt)
-	// log.Printf("[MYDEBUG: s.TransfeerdAt %#v", s.TransferredAt)
 	r.TransferredAt = time.Time(s.TransferredAt)
 
 	switch t := s.Serial.(type) {

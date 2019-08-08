@@ -72,7 +72,11 @@ type SingleDevicePage struct {
 // In order to do this, it needs to construct the next page's URL.
 func (r SingleDevicePage) NextPageURL() (string, error) {
 	var s struct {
+<<<<<<< HEAD
 		Links []eclcloud.Link `json:"single_device_links"`
+=======
+		Links []eclcloud.Link `json:"single_firewall_utm_links"`
+>>>>>>> master
 	}
 	err := r.ExtractInto(&s)
 	if err != nil {
