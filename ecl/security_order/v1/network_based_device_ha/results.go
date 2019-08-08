@@ -1,4 +1,4 @@
-package network_based_device_single
+package network_based_device_ha
 
 import (
 	"github.com/nttcom/eclcloud"
@@ -11,8 +11,8 @@ type commonResult struct {
 
 // Extract is a function that accepts a result
 // and extracts a Single Device resource.
-func (r commonResult) Extract() (*SingleDeviceOrder, error) {
-	var sdo SingleDeviceOrder
+func (r commonResult) Extract() (*HADeviceOrder, error) {
+	var sdo HADeviceOrder
 	err := r.ExtractInto(&sdo)
 	return &sdo, err
 }
@@ -46,33 +46,33 @@ type DeleteResult struct {
 	commonResult
 }
 
-// SingleDevice represents the result of a each element in
+// HADevice represents the result of a each element in
 // response of single device api result.
-type SingleDevice struct {
+type HADevice struct {
 	ID   int      `json:"id"`
 	Cell []string `json:"cell"`
 }
 
-// SingleDeviceOrder represents a Single Device's each order.
-type SingleDeviceOrder struct {
+// HADeviceOrder represents a Single Device's each order.
+type HADeviceOrder struct {
 	ID      string `json:"soId"`
 	Code    string `json:"code"`
 	Message string `json:"message"`
 	Status  int    `json:"status"`
 }
 
-// SingleDevicePage is the page returned by a pager
+// HADevicePage is the page returned by a pager
 // when traversing over a collection of Single Device.
-type SingleDevicePage struct {
+type HADevicePage struct {
 	pagination.LinkedPageBase
 }
 
 // NextPageURL is invoked when a paginated collection of Single Device
 // has reached the end of a page and the pager seeks to traverse over a new one.
 // In order to do this, it needs to construct the next page's URL.
-func (r SingleDevicePage) NextPageURL() (string, error) {
+func (r HADevicePage) NextPageURL() (string, error) {
 	var s struct {
-		Links []eclcloud.Link `json:"single_device_links"`
+		Links []eclcloud.Link `json:"ha_device_links"`
 	}
 	err := r.ExtractInto(&s)
 	if err != nil {
@@ -81,24 +81,24 @@ func (r SingleDevicePage) NextPageURL() (string, error) {
 	return eclcloud.ExtractNextURL(s.Links)
 }
 
-// IsEmpty checks whether a SingleDevicePage struct is empty.
-func (r SingleDevicePage) IsEmpty() (bool, error) {
-	is, err := ExtractSingleDevices(r)
+// IsEmpty checks whether a HADevicePage struct is empty.
+func (r HADevicePage) IsEmpty() (bool, error) {
+	is, err := ExtractHADevices(r)
 	return len(is) == 0, err
 }
 
-// ExtractSingleDevices accepts a Page struct,
-// specifically a SingleDevicePage struct, and extracts the elements
+// ExtractHADevices accepts a Page struct,
+// specifically a HADevicePage struct, and extracts the elements
 // into a slice of Single Device structs.
 // In other words, a generic collection is mapped into a relevant slice.
-func ExtractSingleDevices(r pagination.Page) ([]SingleDevice, error) {
-	var s []SingleDevice
-	err := ExtractSingleDevicesInto(r, &s)
+func ExtractHADevices(r pagination.Page) ([]HADevice, error) {
+	var s []HADevice
+	err := ExtractHADevicesInto(r, &s)
 	return s, err
 }
 
-// ExtractSingleDevicesInto interprets the results of a single page from a List() call,
+// ExtractHADevicesInto interprets the results of a single page from a List() call,
 // producing a slice of Device entities.
-func ExtractSingleDevicesInto(r pagination.Page, v interface{}) error {
-	return r.(SingleDevicePage).Result.ExtractIntoSlicePtr(v, "rows")
+func ExtractHADevicesInto(r pagination.Page, v interface{}) error {
+	return r.(HADevicePage).Result.ExtractIntoSlicePtr(v, "rows")
 }
