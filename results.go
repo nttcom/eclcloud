@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+
 	// "log"
 	"log"
 	"net/http"
@@ -285,23 +286,12 @@ func (jt *JSONISO8601) UnmarshalJSON(data []byte) error {
 	b := bytes.NewBuffer(data)
 	dec := json.NewDecoder(b)
 
-	// log.Printf("[MYDEBUG] UnmarshalJSON b, dec is defined")
-
 	var s string
 	if err := dec.Decode(&s); err != nil {
 		return err
 	}
-	// log.Printf("[MYDEBUG] UnmarshalJSON Decode(s) finished")
 
 	t, _ := time.Parse(ISO8601, s)
-	// log.Printf("[MYDEBUG] UnmarshalJSON Parse finished")
-	// log.Printf("[MYDEBUG] t is %s", t)
-	// log.Printf("%s", fmt.Errorf("[MYDEBUG] err is", err))
-
-	// Skip error to ignore time.Parse(ISO8601, nil) error
-	// if err != nil {
-	// 	return err
-	// }
 	*jt = JSONISO8601(t)
 	return nil
 }
