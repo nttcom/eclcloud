@@ -24,7 +24,7 @@ func (opts ListOpts) ToHADeviceQuery() (string, error) {
 }
 
 // List enumerates the Devices to which the current token has access.
-func List(client *eclcloud.ServiceClient, deviceType string, opts ListOptsBuilder) pagination.Pager {
+func List(client *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager {
 	url := listURL(client)
 	if opts != nil {
 		query, err := opts.ToHADeviceQuery()
@@ -46,12 +46,14 @@ type CreateOptsBuilder interface {
 
 // GtHostInCreate represents parameters used to create a Single Device.
 type GtHostInCreate struct {
-	OperatingMode    string `json:"operatingmode" required:"true"`
-	LicenseKind      string `json:"licensekind" required:"true"`
-	AZGroup          string `json:"azgroup" required:"true"`
+	OperatingMode string `json:"operatingmode" required:"true"`
+	LicenseKind   string `json:"licensekind" required:"true"`
+	AZGroup       string `json:"azgroup" required:"true"`
+
 	HALink1NetworkID string `json:"halink1networkid" required:"true"`
 	HALink1SubnetID  string `json:"halink1subnetid" required:"true"`
 	HALink1IPAddress string `json:"halink1ipaddress" required:"true"`
+
 	HALink2NetworkID string `json:"halink2networkid" required:"true"`
 	HALink2SubnetID  string `json:"halink2subnetid" required:"true"`
 	HALink2IPAddress string `json:"halink2ipaddress" required:"true"`
@@ -71,7 +73,7 @@ func (opts CreateOpts) ToHADeviceCreateMap() (map[string]interface{}, error) {
 }
 
 // Create creates a new device.
-func Create(client *eclcloud.ServiceClient, deviceType string, opts CreateOptsBuilder) (r CreateResult) {
+func Create(client *eclcloud.ServiceClient, opts CreateOptsBuilder) (r CreateResult) {
 	b, err := opts.ToHADeviceCreateMap()
 	if err != nil {
 		r.Err = err
@@ -147,7 +149,7 @@ func (opts UpdateOpts) ToHADeviceUpdateMap() (map[string]interface{}, error) {
 }
 
 // Update modifies the attributes of a device.
-func Update(client *eclcloud.ServiceClient, deviceType string, opts UpdateOptsBuilder) (r UpdateResult) {
+func Update(client *eclcloud.ServiceClient, opts UpdateOptsBuilder) (r UpdateResult) {
 	b, err := opts.ToHADeviceUpdateMap()
 	if err != nil {
 		r.Err = err
