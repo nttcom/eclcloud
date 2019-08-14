@@ -12,12 +12,12 @@ type UpdateOptsBuilder interface {
 
 // SinglePort represents parameters to update a Single Port.
 type SinglePort struct {
-	EnablePort string    `json:"enable_port" required:"true"`
-	IPAddress  [2]string `json:"ip_address,omitempty"`
-	NetworkID  string    `json:"network_id,omitempty"`
-	SubnetID   string    `json:"subnet_id,omitempty"`
-	MTU        string    `json:"mtu,omitempty"`
-	Comment    string    `json:"comment,omitempty"`
+	EnablePort string   `json:"enable_port" required:"true"`
+	IPAddress  []string `json:"ip_address,omitempty"`
+	NetworkID  string   `json:"network_id,omitempty"`
+	SubnetID   string   `json:"subnet_id,omitempty"`
+	MTU        string   `json:"mtu,omitempty"`
+	Comment    string   `json:"comment,omitempty"`
 
 	EnablePing    string `json:"enable_ping,omitempty"`
 	VRRPGroupID   string `json:"vrrp_grp_id,omitempty"`
