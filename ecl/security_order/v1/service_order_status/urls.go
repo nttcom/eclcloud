@@ -7,10 +7,18 @@ import (
 )
 
 func getURL(client *eclcloud.ServiceClient, deviceType string) string {
-	part := "S"
-	if deviceType == "WAF" {
-		part = "WAF"
+	var part string
+	switch deviceType {
+	case "WAF":
+		part = "FGWAF"
+		break
+	case "HostBased":
+		part = "HBS"
+		break
+	default:
+		part = "FGS"
 	}
-	url := fmt.Sprintf("API/ScreenEventFG%sOrderProgressRate", part)
+
+	url := fmt.Sprintf("API/ScreenEvent%sOrderProgressRate", part)
 	return client.ServiceURL(url)
 }
