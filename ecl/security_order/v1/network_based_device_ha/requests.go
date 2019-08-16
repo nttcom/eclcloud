@@ -44,7 +44,7 @@ type CreateOptsBuilder interface {
 	ToHADeviceCreateMap() (map[string]interface{}, error)
 }
 
-// GtHostInCreate represents parameters used to create a Single Device.
+// GtHostInCreate represents parameters used to create a HA Device.
 type GtHostInCreate struct {
 	OperatingMode string `json:"operatingmode" required:"true"`
 	LicenseKind   string `json:"licensekind" required:"true"`
@@ -91,7 +91,7 @@ type DeleteOptsBuilder interface {
 	ToHADeviceDeleteMap() (map[string]interface{}, error)
 }
 
-// GtHostInDelete represents parameters used to delete a Single Device.
+// GtHostInDelete represents parameters used to delete a HA Device.
 type GtHostInDelete struct {
 	HostName string `json:"hostname" required:"true"`
 }
@@ -128,14 +128,14 @@ type UpdateOptsBuilder interface {
 	ToHADeviceUpdateMap() (map[string]interface{}, error)
 }
 
-// GtHostInUpdate represents parameters used to update a Single Device.
+// GtHostInUpdate represents parameters used to update a HA Device.
 type GtHostInUpdate struct {
 	OperatingMode string `json:"operatingmode" required:"true"`
 	LicenseKind   string `json:"licensekind" required:"true"`
 	HostName      string `json:"hostname" required:"true"`
 }
 
-// UpdateOpts represents parameters to update a Single Device.
+// UpdateOpts represents parameters to update a HA Device.
 type UpdateOpts struct {
 	SOKind   string            `json:"sokind" required:"true"`
 	Locale   string            `json:"locale,omitempty"`
