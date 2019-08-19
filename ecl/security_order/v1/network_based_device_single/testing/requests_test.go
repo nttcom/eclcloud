@@ -145,5 +145,5 @@ func TestDeleteDevice(t *testing.T) {
 
 	actual, err := security.Delete(fakeclient.ServiceClient(), "CES11811", deleteOpts).Extract()
 	th.AssertNoErr(t, err)
-	th.CheckDeepEquals(t, &updateResult, actual)
+	th.CheckDeepEquals(t, &deleteResult, actual)
 }
