@@ -13,8 +13,6 @@ type GetOptsBuilder interface {
 // GetOpts represents result of host based security API response.
 type GetOpts struct {
 	TenantID string `q:"tenant_id"`
-	// Locale   string `q:"locale"`
-	// SoID     string `q:"soid"`
 }
 
 // ToServiceOrderQuery formats a GetOpts into a query string.
@@ -38,7 +36,7 @@ func Get(client *eclcloud.ServiceClient, opts GetOptsBuilder) (r GetResult) {
 // CreateOptsBuilder allows extensions to add additional parameters to
 // the Create request.
 type CreateOptsBuilder interface {
-	ToHADeviceCreateMap() (map[string]interface{}, error)
+	ToHostBasedCreateMap() (map[string]interface{}, error)
 }
 
 // CreateOpts represents parameters used to create a Host based security.
@@ -47,20 +45,20 @@ type CreateOpts struct {
 	TenantID            string `json:"tenant_id" required:"true"`
 	Locale              string `json:"locale,omitempty"`
 	ServiceOrderService string `json:"service_order_service" required:"true"`
-	MaxAgentValue       string `json:"max_agent_value" required:"true"`
+	MaxAgentValue       int    `json:"max_agent_value" required:"true"`
 	MailAddress         string `json:"mailaddress" required:"true"`
 	DSMLang             string `json:"dsm_lang" required:"true"`
 	TimeZone            string `json:"time_zone" required:"true"`
 }
 
-// ToHADeviceCreateMap formats a CreateOpts into a create request.
-func (opts CreateOpts) ToHADeviceCreateMap() (map[string]interface{}, error) {
+// ToHostBasedCreateMap formats a CreateOpts into a create request.
+func (opts CreateOpts) ToHostBasedCreateMap() (map[string]interface{}, error) {
 	return eclcloud.BuildRequestBody(opts, "")
 }
 
 // Create creates a new Host based security.
 func Create(client *eclcloud.ServiceClient, opts CreateOptsBuilder) (r CreateResult) {
-	b, err := opts.ToHADeviceCreateMap()
+	b, err := opts.ToHostBasedCreateMap()
 	if err != nil {
 		r.Err = err
 		return
@@ -74,7 +72,7 @@ func Create(client *eclcloud.ServiceClient, opts CreateOptsBuilder) (r CreateRes
 // DeleteOptsBuilder allows extensions to add additional parameters to
 // the Delete request.
 type DeleteOptsBuilder interface {
-	ToHADeviceDeleteMap() (map[string]interface{}, error)
+	ToHostBasedDeleteMap() (map[string]interface{}, error)
 }
 
 // DeleteOpts represents parameters used to cancel Host Based Security.
@@ -85,14 +83,14 @@ type DeleteOpts struct {
 	MailAddress string `json:"mailaddress" required:"true"`
 }
 
-// ToHADeviceDeleteMap formats a DeleteOpts into a delete request.
-func (opts DeleteOpts) ToHADeviceDeleteMap() (map[string]interface{}, error) {
+// ToHostBasedDeleteMap formats a DeleteOpts into a delete request.
+func (opts DeleteOpts) ToHostBasedDeleteMap() (map[string]interface{}, error) {
 	return eclcloud.BuildRequestBody(opts, "")
 }
 
 // Delete deletes a device.
 func Delete(client *eclcloud.ServiceClient, opts DeleteOptsBuilder) (r DeleteResult) {
-	b, err := opts.ToHADeviceDeleteMap()
+	b, err := opts.ToHostBasedDeleteMap()
 	if err != nil {
 		r.Err = err
 		return
@@ -107,7 +105,7 @@ func Delete(client *eclcloud.ServiceClient, opts DeleteOptsBuilder) (r DeleteRes
 // UpdateOptsBuilder allows extensions to add additional parameters to
 // the Update request.
 type UpdateOptsBuilder interface {
-	ToHADeviceUpdateMap() (map[string]interface{}, error)
+	ToHostBasedUpdateMap() (map[string]interface{}, error)
 }
 
 // UpdateOpts represents parameters to update a Host Based Security.
@@ -119,17 +117,17 @@ type UpdateOpts struct {
 	// Set this in case of Type M1 Change
 	ServiceOrderService *string `json:"service_order_service,omitempty"`
 	// Set this in case of Type M2 Change
-	MaxAgentValue *string `json:"max_agent_value,omitempty"`
+	MaxAgentValue *int `json:"max_agent_value,omitempty"`
 }
 
-// ToHADeviceUpdateMap formats a UpdateOpts into an update request.
-func (opts UpdateOpts) ToHADeviceUpdateMap() (map[string]interface{}, error) {
+// ToHostBasedUpdateMap formats a UpdateOpts into an update request.
+func (opts UpdateOpts) ToHostBasedUpdateMap() (map[string]interface{}, error) {
 	return eclcloud.BuildRequestBody(opts, "")
 }
 
 // Update modifies the attributes of a Host Based Security.
 func Update(client *eclcloud.ServiceClient, opts UpdateOptsBuilder) (r UpdateResult) {
-	b, err := opts.ToHADeviceUpdateMap()
+	b, err := opts.ToHostBasedUpdateMap()
 	if err != nil {
 		r.Err = err
 		return

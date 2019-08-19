@@ -13,7 +13,7 @@ const getResponse = `
   "tenant_description": "Test Tenant",
   "contract_id": "econ9999999999",
   "service_order_service": "Managed Anti-Virus",
-  "max_agent_value": "1",
+  "max_agent_value": 1,
   "customer_name": "Customer",
   "time_zone": "Asia/Tokyo",
   "mailaddress": "terraform@example.com",
@@ -31,7 +31,7 @@ var expectedResult = security.HostBasedSecurity{
 	TenantDescription:   "Test Tenant",
 	ContractID:          "econ9999999999",
 	ServiceOrderService: "Managed Anti-Virus",
-	MaxAgentValue:       "1",
+	MaxAgentValue:       float64(1),
 	TimeZone:            "Asia/Tokyo",
 	CustomerName:        "Customer",
 	MailAddress:         "terraform@example.com",
@@ -46,7 +46,7 @@ var createRequest = `
     "tenant_id": "9ee80f2a926c49f88f166af47df4e9f5",
     "locale": "ja",
     "service_order_service": "Managed Anti-Virus",
-    "max_agent_value": "1",
+    "max_agent_value": 1,
     "mailaddress": "terraform@example.com",
     "dsm_lang": "ja",
     "time_zone": "Asia/Tokyo"
@@ -97,7 +97,7 @@ var updateRequestM2 = `
 	"tenant_id": "9ee80f2a926c49f88f166af47df4e9f5",
     "locale": "ja",
     "mailaddress": "terraform@example.com",
-    "max_agent_value": "10"
+    "max_agent_value": 10
 }`
 
 var updateResponseM2 = `

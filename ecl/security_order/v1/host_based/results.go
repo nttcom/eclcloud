@@ -35,20 +35,20 @@ type GetResult struct {
 
 // HostBasedSecurity represents a Host Based Security's each order.
 type HostBasedSecurity struct {
-	Code                string `json:"code"`
-	Message             string `json:"message"`
-	Region              string `json:"region"`
-	TenantName          string `json:"tenant_name"`
-	TenantDescription   string `json:"tenant_description"`
-	ContractID          string `json:"contract_id"`
-	ServiceOrderService string `json:"service_order_service"`
-	MaxAgentValue       string `json:"max_agent_value"`
-	TimeZone            string `json:"time_zone"`
-	CustomerName        string `json:"customer_name"`
-	MailAddress         string `json:"mailaddress"`
-	DSMLang             string `json:"dsm_lang"`
-	TenantFlg           bool   `json:"tenant_flg"`
-	Status              int    `json:"status"`
+	Code                string      `json:"code"`
+	Message             string      `json:"message"`
+	Region              string      `json:"region"`
+	TenantName          string      `json:"tenant_name"`
+	TenantDescription   string      `json:"tenant_description"`
+	ContractID          string      `json:"contract_id"`
+	ServiceOrderService string      `json:"service_order_service"`
+	MaxAgentValue       interface{} `json:"max_agent_value"`
+	TimeZone            string      `json:"time_zone"`
+	CustomerName        string      `json:"customer_name"`
+	MailAddress         string      `json:"mailaddress"`
+	DSMLang             string      `json:"dsm_lang"`
+	TenantFlg           bool        `json:"tenant_flg"`
+	Status              int         `json:"status"`
 }
 
 // Extract is a function that accepts a result
@@ -83,45 +83,3 @@ type HostBasedOrder struct {
 	Message string `json:"message"`
 	Status  int    `json:"status"`
 }
-
-// // HostBasedPage is the page returned by a pager
-// // when traversing over a collection of Host Based Security.
-// type HostBasedPage struct {
-// 	pagination.LinkedPageBase
-// }
-
-// // NextPageURL is invoked when a paginated collection of Host Based Security
-// // has reached the end of a page and the pager seeks to traverse over a new one.
-// // In order to do this, it needs to construct the next page's URL.
-// func (r HostBasedPage) NextPageURL() (string, error) {
-// 	var s struct {
-// 		Links []eclcloud.Link `json:"host_based_security_links"`
-// 	}
-// 	err := r.ExtractInto(&s)
-// 	if err != nil {
-// 		return "", err
-// 	}
-// 	return eclcloud.ExtractNextURL(s.Links)
-// }
-
-// // IsEmpty checks whether a HostBasedPage struct is empty.
-// func (r HostBasedPage) IsEmpty() (bool, error) {
-// 	is, err := ExtractHostBased(r)
-// 	return len(is) == 0, err
-// }
-
-// // ExtractHostBased accepts a Page struct,
-// // specifically a HostBasedPage struct, and extracts the elements
-// // into a slice of Host Based Security structs.
-// // In other words, a generic collection is mapped into a relevant slice.
-// func ExtractHostBased(r pagination.Page) ([]HADevice, error) {
-// 	var s []HADevice
-// 	err := ExtractHostBasedInto(r, &s)
-// 	return s, err
-// }
-
-// // ExtractHostBasedInto interprets the results of a single page from a List() call,
-// // producing a slice of Device entities.
-// func ExtractHostBasedInto(r pagination.Page, v interface{}) error {
-// 	return r.(HostBasedPage).Result.ExtractIntoSlicePtr(v, "")
-// }

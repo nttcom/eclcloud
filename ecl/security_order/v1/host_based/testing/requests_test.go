@@ -49,7 +49,7 @@ func TestCreateHostBasedSecurity(t *testing.T) {
 		TenantID:            "9ee80f2a926c49f88f166af47df4e9f5",
 		Locale:              "ja",
 		ServiceOrderService: "Managed Anti-Virus",
-		MaxAgentValue:       "1",
+		MaxAgentValue:       1,
 		MailAddress:         "terraform@example.com",
 		DSMLang:             "ja",
 		TimeZone:            "Asia/Tokyo",
@@ -111,7 +111,7 @@ func TestUpdateHostBasedSecurityTypeM2(t *testing.T) {
 		MailAddress: "terraform@example.com",
 	}
 
-	maxAgentValue := "10"
+	maxAgentValue := 10
 	updateOpts.MaxAgentValue = &maxAgentValue
 	actual, err := security.Update(fakeclient.ServiceClient(), updateOpts).Extract()
 	th.AssertNoErr(t, err)
