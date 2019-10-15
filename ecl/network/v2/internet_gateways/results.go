@@ -36,13 +36,13 @@ type DeleteResult struct {
 }
 
 type InternetGateway struct {
-	ID					string `json:"id"`
-	Description			string `json:"description"`
-	InternetServiceID	string `json:"internet_service_id"`
-	Name				string `json:"name"`
-	QoSOptionID			string `json:"qos_option_id"`
-	Status				string `json:"status"`
-	TenantID			string `json:"tenant_id"`
+	ID                string `json:"id"`
+	Description       string `json:"description"`
+	InternetServiceID string `json:"internet_service_id"`
+	Name              string `json:"name"`
+	QoSOptionID       string `json:"qos_option_id"`
+	Status            string `json:"status"`
+	TenantID          string `json:"tenant_id"`
 }
 
 type InternetGatewayPage struct {

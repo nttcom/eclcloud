@@ -22,12 +22,12 @@ func TestUpdatePort(t *testing.T) {
 
 		w.WriteHeader(http.StatusOK)
 		w.Header().Add("Content-Type", "application/json")
-		fmt.Fprintf(w, updateResponse)
+		fmt.Fprint(w, updateResponse)
 	})
 
 	updateOpts := ports.UpdateOpts{
 		Port: []ports.SinglePort{
-			ports.SinglePort{
+			{
 				Comment:    "port 0 comment",
 				EnablePort: "true",
 				IPAddress:  "192.168.1.50/24",

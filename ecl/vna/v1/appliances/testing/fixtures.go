@@ -267,13 +267,13 @@ var appliance1 = appliances.Appliance{
 			Tags:        map[string]string{},
 			Updatable:   true,
 			FixedIPs: []appliances.FixedIPInResponse{
-				appliances.FixedIPInResponse{
+				{
 					IPAddress: "192.168.1.51",
 					SubnetID:  "dummySubnetID",
 				},
 			},
 			AllowedAddressPairs: []appliances.AllowedAddressPairInResponse{
-				appliances.AllowedAddressPairInResponse{
+				{
 					IPAddress:  "1.1.1.1",
 					MACAddress: "aa:bb:cc:dd:ee:f1",
 					Type:       "vrrp",
@@ -313,13 +313,13 @@ var appliance2 = appliances.Appliance{
 			Tags:        map[string]string{},
 			Updatable:   true,
 			FixedIPs: []appliances.FixedIPInResponse{
-				appliances.FixedIPInResponse{
+				{
 					IPAddress: "192.168.1.52",
 					SubnetID:  "dummySubnetID",
 				},
 			},
 			AllowedAddressPairs: []appliances.AllowedAddressPairInResponse{
-				appliances.AllowedAddressPairInResponse{
+				{
 					IPAddress:  "2.2.2.2",
 					MACAddress: "aa:bb:cc:dd:ee:f2",
 					Type:       "",

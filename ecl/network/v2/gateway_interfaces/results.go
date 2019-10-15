@@ -36,27 +36,27 @@ type DeleteResult struct {
 }
 
 type GatewayInterface struct {
-	AwsGwID				string `json:"aws_gw_id"`
-	AzureGwID			string `json:"azure_gw_id"`
-	Description			string `json:"description"`
-	GcpGwID				string `json:"gcp_gw_id"`
-	GwVipv4				string `json:"gw_vipv4"`
-	GwVipv6				string `json:"gw_vipv6"`
-	ID					string `json:"id"`
-	InterdcGwID			string `json:"interdc_gw_id"`
-	InternetGwID		string `json:"internet_gw_id"`
-	Name				string `json:"name"`
-	Netmask				int    `json:"netmask"`
-	NetworkID			string `json:"network_id"`
-	PrimaryIpv4			string `json:"primary_ipv4"`
-	PrimaryIpv6			string `json:"primary_ipv6"`
-	SecondaryIpv4		string `json:"secondary_ipv4"`
-	SecondaryIpv6		string `json:"secondary_ipv6"`
-	ServiceType			string `json:"service_type"`
-	Status				string `json:"status"`
-	TenantID			string `json:"tenant_id"`
-	VpnGwID				string `json:"vpn_gw_id"`
-	VRID				int    `json:"vrid"`
+	AwsGwID       string `json:"aws_gw_id"`
+	AzureGwID     string `json:"azure_gw_id"`
+	Description   string `json:"description"`
+	GcpGwID       string `json:"gcp_gw_id"`
+	GwVipv4       string `json:"gw_vipv4"`
+	GwVipv6       string `json:"gw_vipv6"`
+	ID            string `json:"id"`
+	InterdcGwID   string `json:"interdc_gw_id"`
+	InternetGwID  string `json:"internet_gw_id"`
+	Name          string `json:"name"`
+	Netmask       int    `json:"netmask"`
+	NetworkID     string `json:"network_id"`
+	PrimaryIpv4   string `json:"primary_ipv4"`
+	PrimaryIpv6   string `json:"primary_ipv6"`
+	SecondaryIpv4 string `json:"secondary_ipv4"`
+	SecondaryIpv6 string `json:"secondary_ipv6"`
+	ServiceType   string `json:"service_type"`
+	Status        string `json:"status"`
+	TenantID      string `json:"tenant_id"`
+	VpnGwID       string `json:"vpn_gw_id"`
+	VRID          int    `json:"vrid"`
 }
 
 type GatewayInterfacePage struct {

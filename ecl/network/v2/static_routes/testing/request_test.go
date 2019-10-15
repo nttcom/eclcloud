@@ -86,13 +86,15 @@ func TestCreate(t *testing.T) {
 		fmt.Fprintf(w, CreateResponse)
 	})
 
-	options := static_routes.CreateOpts{Name: "TEST-01",
-										Description: "",
-										Destination: "100.127.254.152/29",  
-										InternetGwID: "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
-									    Nexthop: "100.127.254.153",
-									    ServiceType: "internet",
-									    TenantID: "60ed68071ca14fff8a6c28458379864b"}
+	options := static_routes.CreateOpts{
+		Name:         "TEST-01",
+		Description:  "",
+		Destination:  "100.127.254.152/29",
+		InternetGwID: "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
+		Nexthop:      "100.127.254.153",
+		ServiceType:  "internet",
+		TenantID:     "60ed68071ca14fff8a6c28458379864b",
+	}
 	i, err := static_routes.Create(fake.ServiceClient(), options).Extract()
 	th.AssertNoErr(t, err)
 

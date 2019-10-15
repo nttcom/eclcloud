@@ -61,7 +61,7 @@ type Network struct {
 
 	// Plane it the ype of the traffic for which network will be used.
 	Plane string `json:"plane"`
-	
+
 	// Specifies whether the network resource can be accessed by any tenant.
 	Shared bool `json:"shared"`
 

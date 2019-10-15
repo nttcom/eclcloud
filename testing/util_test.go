@@ -36,9 +36,9 @@ func TestWaitForError(t *testing.T) {
 	}
 
 	err := eclcloud.WaitFor(2, func() (bool, error) {
-		return false, errors.New("Error has occurred")
+		return false, errors.New("error has occurred")
 	})
-	th.AssertEquals(t, "Error has occurred", err.Error())
+	th.AssertEquals(t, "error has occurred", err.Error())
 }
 
 func TestWaitForPredicateExceed(t *testing.T) {
@@ -48,7 +48,7 @@ func TestWaitForPredicateExceed(t *testing.T) {
 
 	err := eclcloud.WaitFor(1, func() (bool, error) {
 		time.Sleep(4 * time.Second)
-		return false, errors.New("Just wasting time")
+		return false, errors.New("just wasting time")
 	})
 	th.AssertEquals(t, "A timeout occurred", err.Error())
 }

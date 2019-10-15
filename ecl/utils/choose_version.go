@@ -2,8 +2,9 @@ package utils
 
 import (
 	"fmt"
-	"github.com/nttcom/eclcloud"
 	"strings"
+
+	"github.com/nttcom/eclcloud"
 )
 
 // Version is a supported API version, corresponding to a vN package within the appropriate service.
@@ -83,7 +84,7 @@ func ChooseVersion(client *eclcloud.ProviderClient, recognized []*Version) (*Ver
 				// Prefer a version that exactly matches the provided endpoint.
 				if href == identityEndpoint {
 					if href == "" {
-						return nil, "", fmt.Errorf("Endpoint missing in version %s response from %s", value.ID, client.IdentityBase)
+						return nil, "", fmt.Errorf("endpoint missing in version %s response from %s", value.ID, client.IdentityBase)
 					}
 					return version, href, nil
 				}
@@ -100,10 +101,10 @@ func ChooseVersion(client *eclcloud.ProviderClient, recognized []*Version) (*Ver
 	}
 
 	if highest == nil {
-		return nil, "", fmt.Errorf("No supported version available from endpoint %s", client.IdentityBase)
+		return nil, "", fmt.Errorf("no supported version available from endpoint %s", client.IdentityBase)
 	}
 	if endpoint == "" {
-		return nil, "", fmt.Errorf("Endpoint missing in version %s response from %s", highest.ID, client.IdentityBase)
+		return nil, "", fmt.Errorf("endpoint missing in version %s response from %s", highest.ID, client.IdentityBase)
 	}
 
 	return highest, endpoint, nil

@@ -30,5 +30,5 @@ func (r DownloadResult) Extract() (io.Reader, error) {
 	if r, ok := r.Body.(io.Reader); ok {
 		return r, nil
 	}
-	return nil, fmt.Errorf("Expected io.Reader but got: %T(%#v)", r.Body, r.Body)
+	return nil, fmt.Errorf("expected io.Reader but got: %T(%#v)", r.Body, r.Body)
 }

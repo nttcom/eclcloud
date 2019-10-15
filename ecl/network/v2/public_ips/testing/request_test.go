@@ -86,11 +86,13 @@ func TestCreate(t *testing.T) {
 		fmt.Fprintf(w, CreateResponse)
 	})
 
-	options := public_ips.CreateOpts{Name: "seinou-test-public",
-									 Description: "",
-									 InternetGwID: "2a75cfa6-89af-425b-bce5-2a85197ef04f",
-									 SubmaskLength: 29,
-									 TenantID: "19ab165c7a664abe9c217334cd0e9cc9"}
+	options := public_ips.CreateOpts{
+		Name:          "seinou-test-public",
+		Description:   "",
+		InternetGwID:  "2a75cfa6-89af-425b-bce5-2a85197ef04f",
+		SubmaskLength: 29,
+		TenantID:      "19ab165c7a664abe9c217334cd0e9cc9",
+	}
 	i, err := public_ips.Create(fake.ServiceClient(), options).Extract()
 	th.AssertNoErr(t, err)
 

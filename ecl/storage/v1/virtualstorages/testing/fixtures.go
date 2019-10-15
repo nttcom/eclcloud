@@ -376,11 +376,11 @@ func getExpectedVirtualStoragesSlice() []virtualstorages.VirtualStorage {
 
 func getHostRoutes(isUpdate bool) []virtualstorages.HostRoute {
 	hostRoutes := []virtualstorages.HostRoute{
-		virtualstorages.HostRoute{
+		{
 			Destination: hostRoute1Destination,
 			Nexthop:     hostRoute1Nexthop,
 		},
-		virtualstorages.HostRoute{
+		{
 			Destination: hostRoute2Destination,
 			Nexthop:     hostRoute2Nexthop,
 		},

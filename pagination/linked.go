@@ -2,8 +2,9 @@ package pagination
 
 import (
 	"fmt"
-	"github.com/nttcom/eclcloud"
 	"reflect"
+
+	"github.com/nttcom/eclcloud"
 )
 
 // LinkedPageBase may be embedded to implement a page that provides navigational "Next" and "Previous" links within its result.
@@ -39,7 +40,7 @@ func (current LinkedPageBase) NextPageURL() (string, error) {
 	}
 
 	for {
-		key, path = path[0], path[1:len(path)]
+		key, path = path[0], path[1:]
 
 		value, ok := submap[key]
 		if !ok {

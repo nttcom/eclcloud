@@ -32,7 +32,7 @@ func List(client *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager
 		url += query
 	}
 	return pagination.NewPager(client, url, func(r pagination.PageResult) pagination.Page {
-		return ResourcePage{pagination.LinkedPageBase{PageResult: r}}
+		return SinglePage{pagination.LinkedPageBase{PageResult: r}}
 	})
 }
 

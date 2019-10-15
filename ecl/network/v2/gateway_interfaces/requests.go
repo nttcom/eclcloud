@@ -10,27 +10,27 @@ type ListOptsBuilder interface {
 }
 
 type ListOpts struct {
-	AwsGwID				string `q:"aws_gw_id"`
-	AzureGwID			string `q:"azure_gw_id"`
-	Description			string `q:"description"`
-	GcpGwID				string `q:"gcp_gw_id"`
-	GwVipv4				string `q:"gw_vipv4"`
-	GwVipv6				string `q:"gw_vipv6"`
-	ID					string `q:"id"`
-	InterdcGwID			string `q:"interdc_gw_id"`
-	InternetGwID		string `q:"internet_gw_id"`
-	Name				string `q:"name"`
-	Netmask				int    `q:"netmask"`
-	NetworkID			string `q:"network_id"`
-	PrimaryIpv4			string `q:"primary_ipv4"`
-	PrimaryIpv6			string `q:"primary_ipv6"`
-	SecondaryIpv4		string `q:"secondary_ipv4"`
-	SecondaryIpv6		string `q:"secondary_ipv6"`
-	ServiceType			string `q:"service_type"`
-	Status				string `q:"status"`
-	TenantID			string `q:"tenant_id"`
-	VpnGwID				string `q:"vpn_gw_id"`
-	VRID				int    `q:"vrid"`
+	AwsGwID       string `q:"aws_gw_id"`
+	AzureGwID     string `q:"azure_gw_id"`
+	Description   string `q:"description"`
+	GcpGwID       string `q:"gcp_gw_id"`
+	GwVipv4       string `q:"gw_vipv4"`
+	GwVipv6       string `q:"gw_vipv6"`
+	ID            string `q:"id"`
+	InterdcGwID   string `q:"interdc_gw_id"`
+	InternetGwID  string `q:"internet_gw_id"`
+	Name          string `q:"name"`
+	Netmask       int    `q:"netmask"`
+	NetworkID     string `q:"network_id"`
+	PrimaryIpv4   string `q:"primary_ipv4"`
+	PrimaryIpv6   string `q:"primary_ipv6"`
+	SecondaryIpv4 string `q:"secondary_ipv4"`
+	SecondaryIpv6 string `q:"secondary_ipv6"`
+	ServiceType   string `q:"service_type"`
+	Status        string `q:"status"`
+	TenantID      string `q:"tenant_id"`
+	VpnGwID       string `q:"vpn_gw_id"`
+	VRID          int    `q:"vrid"`
 }
 
 func (opts ListOpts) ToGatewayInterfaceListQuery() (string, error) {
@@ -52,37 +52,35 @@ func List(c *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager {
 	})
 }
 
-
 func Get(c *eclcloud.ServiceClient, gatewayInterfaceID string) (r GetResult) {
 	_, r.Err = c.Get(getURL(c, gatewayInterfaceID), &r.Body, nil)
 	return
 }
-
 
 type CreateOptsBuilder interface {
 	ToGatewayInterfaceCreateMap() (map[string]interface{}, error)
 }
 
 type CreateOpts struct {
-	AwsGwID				string `json:"aws_gw_id,omitempty"`
-	AzureGwID			string `json:"azure_gw_id,omitempty"`
-	Description			string `json:"description"`
-	GcpGwID				string `json:"gcp_gw_id,omitempty"`
-	GwVipv4				string `json:"gw_vipv4" required:"true"`
-	GwVipv6				string `json:"gw_vipv6,omitempty"`
-	InterdcGwID			string `json:"interdc_gw_id,omitempty"`
-	InternetGwID		string `json:"internet_gw_id,omitempty"`
-	Name				string `json:"name"`
-	Netmask				int	   `json:"netmask" required:"true"`
-	NetworkID			string `json:"network_id" required:"true"`
-	PrimaryIpv4			string `json:"primary_ipv4" required:"true"`
-	PrimaryIpv6			string `json:"primary_ipv6,omitempty"`
-	SecondaryIpv4		string `json:"secondary_ipv4" required:"true"`
-	SecondaryIpv6		string `json:"secondary_ipv6,omitempty"`
-	ServiceType			string `json:"service_type" required:"true"`
-	TenantID			string `json:"tenant_id,omitempty"`
-	VpnGwID				string `json:"vpn_gw_id,omitempty"`
-	VRID				int    `json:"vrid" required:"true"`
+	AwsGwID       string `json:"aws_gw_id,omitempty"`
+	AzureGwID     string `json:"azure_gw_id,omitempty"`
+	Description   string `json:"description"`
+	GcpGwID       string `json:"gcp_gw_id,omitempty"`
+	GwVipv4       string `json:"gw_vipv4" required:"true"`
+	GwVipv6       string `json:"gw_vipv6,omitempty"`
+	InterdcGwID   string `json:"interdc_gw_id,omitempty"`
+	InternetGwID  string `json:"internet_gw_id,omitempty"`
+	Name          string `json:"name"`
+	Netmask       int    `json:"netmask" required:"true"`
+	NetworkID     string `json:"network_id" required:"true"`
+	PrimaryIpv4   string `json:"primary_ipv4" required:"true"`
+	PrimaryIpv6   string `json:"primary_ipv6,omitempty"`
+	SecondaryIpv4 string `json:"secondary_ipv4" required:"true"`
+	SecondaryIpv6 string `json:"secondary_ipv6,omitempty"`
+	ServiceType   string `json:"service_type" required:"true"`
+	TenantID      string `json:"tenant_id,omitempty"`
+	VpnGwID       string `json:"vpn_gw_id,omitempty"`
+	VRID          int    `json:"vrid" required:"true"`
 }
 
 func (opts CreateOpts) ToGatewayInterfaceCreateMap() (map[string]interface{}, error) {
@@ -104,8 +102,8 @@ type UpdateOptsBuilder interface {
 }
 
 type UpdateOpts struct {
-	Description			*string `json:"description,omitempty"`
-	Name				*string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }
 
 func (opts UpdateOpts) ToGatewayInterfaceUpdateMap() (map[string]interface{}, error) {
@@ -123,7 +121,6 @@ func Update(c *eclcloud.ServiceClient, gatewayInterfaceID string, opts UpdateOpt
 	})
 	return
 }
-
 
 func Delete(c *eclcloud.ServiceClient, gatewayInterfaceID string) (r DeleteResult) {
 	_, r.Err = c.Delete(deleteURL(c, gatewayInterfaceID), nil)

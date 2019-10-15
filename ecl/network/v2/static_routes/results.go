@@ -36,20 +36,20 @@ type DeleteResult struct {
 }
 
 type StaticRoute struct {
-	AwsGwID				string `json:"aws_gw_id"`
-	AzureGwID			string `json:"azure_gw_id"`
-	Description			string `json:"description"`
-	Destination			string `json:"destination"`
-	GcpGwID				string `json:"gcp_gw_id"`
-	ID					string `json:"id"`
-	InterdcGwID			string `json:"interdc_gw_id"`
-	InternetGwID		string `json:"internet_gw_id"`
-	Name				string `json:"name"`
-	Nexthop				string `json:"nexthop"`
-	ServiceType			string `json:"service_type"`
-	Status				string `json:"status"`
-	TenantID			string `json:"tenant_id"`
-	VpnGwID				string `json:"vpn_gw_id"`
+	AwsGwID      string `json:"aws_gw_id"`
+	AzureGwID    string `json:"azure_gw_id"`
+	Description  string `json:"description"`
+	Destination  string `json:"destination"`
+	GcpGwID      string `json:"gcp_gw_id"`
+	ID           string `json:"id"`
+	InterdcGwID  string `json:"interdc_gw_id"`
+	InternetGwID string `json:"internet_gw_id"`
+	Name         string `json:"name"`
+	Nexthop      string `json:"nexthop"`
+	ServiceType  string `json:"service_type"`
+	Status       string `json:"status"`
+	TenantID     string `json:"tenant_id"`
+	VpnGwID      string `json:"vpn_gw_id"`
 }
 
 type StaticRoutePage struct {

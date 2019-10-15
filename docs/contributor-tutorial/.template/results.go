@@ -37,19 +37,19 @@ type UpdateResult struct {
 	commonResult
 }
 
-// ResourcePage is a single page of RESOURCE results.
-type ResourcePage struct {
+// SinglePage is a single page of RESOURCE results.
+type SinglePage struct {
 	pagination.LinkedPageBase
 }
 
 // IsEmpty determines whether or not a page of RESOURCES contains any results.
-func (r ResourcePage) IsEmpty() (bool, error) {
+func (r SinglePage) IsEmpty() (bool, error) {
 	resources, err := ExtractResources(r)
 	return len(resources) == 0, err
 }
 
 // NextPageURL extracts the "next" link from the links section of the result.
-func (r ResourcePage) NextPageURL() (string, error) {
+func (r SinglePage) NextPageURL() (string, error) {
 	var s struct {
 		Links struct {
 			Next     string `json:"next"`
@@ -69,7 +69,7 @@ func ExtractResources(r pagination.Page) ([]Resource, error) {
 	var s struct {
 		Resources []Resource `json:"resources"`
 	}
-	err := (r.(ResourcePage)).ExtractInto(&s)
+	err := (r.(SinglePage)).ExtractInto(&s)
 	return s.Resources, err
 }
 

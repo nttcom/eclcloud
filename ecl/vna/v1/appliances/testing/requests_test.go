@@ -34,13 +34,13 @@ func TestListAppliances(t *testing.T) {
 			w.Header().Add("Content-Type", "application/json")
 			w.WriteHeader(http.StatusOK)
 
-			fmt.Fprintf(w, listResponse)
+			fmt.Fprint(w, listResponse)
 		})
 
-	client := ServiceClient()
+	cli := ServiceClient()
 	count := 0
 
-	appliances.List(client, appliances.ListOpts{}).EachPage(func(page pagination.Page) (bool, error) {
+	err := appliances.List(cli, appliances.ListOpts{}).EachPage(func(page pagination.Page) (bool, error) {
 		count++
 		actual, err := appliances.ExtractAppliances(page)
 		if err != nil {
@@ -52,6 +52,10 @@ func TestListAppliances(t *testing.T) {
 
 		return true, nil
 	})
+
+	if err != nil {
+		t.Errorf("Failed to get virtual network appliance list: %v", err)
+	}
 
 	if count != 1 {
 		t.Errorf("Expected 1 page, got %d", count)
@@ -70,7 +74,7 @@ func TestGetAppliance(t *testing.T) {
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		fmt.Fprintf(w, getResponse)
+		fmt.Fprint(w, getResponse)
 	})
 
 	ap, err := appliances.Get(ServiceClient(), idAppliance1).Extract()
@@ -91,7 +95,7 @@ func TestCreateAppliance(t *testing.T) {
 			th.TestJSONRequest(t, r, createRequest)
 			w.Header().Add("Content-Type", "application/json")
 			w.WriteHeader(http.StatusOK)
-			fmt.Fprintf(w, createResponse)
+			fmt.Fprint(w, createResponse)
 		})
 
 	createOpts := appliances.CreateOpts{
@@ -108,7 +112,7 @@ func TestCreateAppliance(t *testing.T) {
 				NetworkID:   "dummyNetworkID",
 				Tags:        map[string]string{},
 				FixedIPs: [1]appliances.CreateOptsFixedIP{
-					appliances.CreateOptsFixedIP{
+					{
 						IPAddress: "192.168.1.51",
 					},
 				},
@@ -152,7 +156,7 @@ func TestUpdateApplianceMetadata(t *testing.T) {
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		fmt.Fprintf(w, updateMetadataResponse)
+		fmt.Fprint(w, updateMetadataResponse)
 	})
 
 	name := "appliance_1-update"
@@ -200,7 +204,7 @@ func TestUpdateApplianceNetworkIDAndFixedIP(t *testing.T) {
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		fmt.Fprintf(w, updateNetworkIDAndFixedIPResponse)
+		fmt.Fprint(w, updateNetworkIDAndFixedIPResponse)
 	})
 
 	networkID := "dummyNetworkID2"
@@ -250,14 +254,13 @@ func TestUpdateApplianceAllowedAddressPairs(t *testing.T) {
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		fmt.Fprintf(w, updateAllowedAddressPairsResponse)
+		fmt.Fprint(w, updateAllowedAddressPairsResponse)
 	})
 
 	mac1 := "aa:bb:cc:dd:ee:f1"
 	type1 := "vrrp"
 
-	var vrid1 interface{}
-	vrid1 = 123
+	var vrid1 interface{} = 123
 
 	UpdateAllowedAddressPairAddressInfo1 := appliances.UpdateAllowedAddressPairAddressInfo{
 		IPAddress:  "1.1.1.1",
@@ -269,8 +272,7 @@ func TestUpdateApplianceAllowedAddressPairs(t *testing.T) {
 	mac2 := "aa:bb:cc:dd:ee:f2"
 	type2 := ""
 
-	var vrid2 interface{}
-	vrid2 = interface{}(nil)
+	var vrid2 interface{} = nil
 
 	UpdateAllowedAddressPairAddressInfo2 := appliances.UpdateAllowedAddressPairAddressInfo{
 		IPAddress:  "2.2.2.2",

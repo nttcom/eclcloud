@@ -1,6 +1,6 @@
 package testing
 
-import(
+import (
 	"github.com/nttcom/eclcloud/ecl/network/v2/public_ips"
 )
 
@@ -72,7 +72,6 @@ const CreateResponse = `
 }
 `
 
-
 const UpdateRequest = `
 {
 	"public_ip": {
@@ -97,27 +96,26 @@ const UpdateResponse = `
 }
 `
 
-
-var PublicIP1 = public_ips.PublicIP {
-	Cidr: 					"100.127.255.80",
-	Description: 			"",
-	ID: 					"0718a31b-67be-4349-946b-61a0fc38e4cd",
-	InternetGwID: 			"2a75cfa6-89af-425b-bce5-2a85197ef04f",
-	Name: 				 	"seinou-test-public",
-	Status: 				"PENDING_CREATE",
-	SubmaskLength: 			29,
-	TenantID: 				"19ab165c7a664abe9c217334cd0e9cc9",
+var PublicIP1 = public_ips.PublicIP{
+	Cidr:          "100.127.255.80",
+	Description:   "",
+	ID:            "0718a31b-67be-4349-946b-61a0fc38e4cd",
+	InternetGwID:  "2a75cfa6-89af-425b-bce5-2a85197ef04f",
+	Name:          "seinou-test-public",
+	Status:        "PENDING_CREATE",
+	SubmaskLength: 29,
+	TenantID:      "19ab165c7a664abe9c217334cd0e9cc9",
 }
 
-var PublicIP2 = public_ips.PublicIP {
-	Cidr: 					"100.127.254.56",
-	Description: 			"",
-	ID: 					"110846c3-3a20-42ff-ad3d-25ba7b0272bb",
-	InternetGwID: 			"05db9b0e-65ed-4478-a6b3-d3fc259c8d07",
-	Name: 					"6_Public",
-	Status: 				"ACTIVE",
-	SubmaskLength: 			29,
-	TenantID: 				"19ab165c7a664abe9c217334cd0e9cc9",
+var PublicIP2 = public_ips.PublicIP{
+	Cidr:          "100.127.254.56",
+	Description:   "",
+	ID:            "110846c3-3a20-42ff-ad3d-25ba7b0272bb",
+	InternetGwID:  "05db9b0e-65ed-4478-a6b3-d3fc259c8d07",
+	Name:          "6_Public",
+	Status:        "ACTIVE",
+	SubmaskLength: 29,
+	TenantID:      "19ab165c7a664abe9c217334cd0e9cc9",
 }
 
 var ExpectedPublicIPSlice = []public_ips.PublicIP{PublicIP1, PublicIP2}

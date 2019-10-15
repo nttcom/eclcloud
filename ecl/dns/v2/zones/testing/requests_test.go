@@ -21,7 +21,7 @@ func TestListDNSZone(t *testing.T) {
 		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)
 
 		w.Header().Add("Content-Type", "application/json")
-		fmt.Fprintf(w, ListResponse)
+		fmt.Fprint(w, ListResponse)
 	})
 
 	count := 0
@@ -46,7 +46,7 @@ func TestListDNSZoneAllPages(t *testing.T) {
 		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)
 
 		w.Header().Add("Content-Type", "application/json")
-		fmt.Fprintf(w, ListResponse)
+		fmt.Fprint(w, ListResponse)
 	})
 
 	allPages, err := zones.List(fakeclient.ServiceClient(), nil).AllPages()
@@ -66,7 +66,7 @@ func TestGetDNSZone(t *testing.T) {
 		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)
 
 		w.Header().Add("Content-Type", "application/json")
-		fmt.Fprintf(w, GetResponse)
+		fmt.Fprint(w, GetResponse)
 	})
 
 	actual, err := zones.Get(fakeclient.ServiceClient(), idZone1).Extract()
@@ -85,7 +85,7 @@ func TestCreateDNSZone(t *testing.T) {
 
 		w.WriteHeader(http.StatusCreated)
 		w.Header().Add("Content-Type", "application/json")
-		fmt.Fprintf(w, CreateZoneResponse)
+		fmt.Fprint(w, CreateZoneResponse)
 	})
 
 	createOpts := zones.CreateOpts{
@@ -113,12 +113,12 @@ func TestUpdateDNSZone(t *testing.T) {
 
 		w.WriteHeader(http.StatusOK)
 		w.Header().Add("Content-Type", "application/json")
-		fmt.Fprintf(w, UpdateZoneResponse)
+		fmt.Fprint(w, UpdateZoneResponse)
 	})
 
 	description := descriptionZone1Update
 	ttl := 600
-	masters := []string{}
+	masters := make([]string, 0)
 	email := ""
 
 	updateOpts := zones.UpdateOpts{

@@ -81,7 +81,7 @@ func (rs *RS) Seek(offset int64, whence int) (int64, error) {
 	} else if whence == 2 {
 		rs.offset = len(rs.bs) - offsetInt
 	} else {
-		return 0, fmt.Errorf("For parameter `whence`, expected value in {0,1,2} but got: %#v", whence)
+		return 0, fmt.Errorf("for parameter `whence`, expected value in {0,1,2} but got: %#v", whence)
 	}
 
 	return int64(rs.offset), nil
