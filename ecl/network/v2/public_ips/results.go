@@ -36,14 +36,14 @@ type DeleteResult struct {
 }
 
 type PublicIP struct {
-	Cidr       		    string `json:"cidr"`
-	Description         string `json:"description"`
-	ID                  string `json:"id"`
-	InternetGwID        string `json:"internet_gw_id"`
-	Name                string `json:"name"`
-	Status              string `json:"status"`
-	SubmaskLength    	int    `json:"submask_length"`
-	TenantID            string `json:"tenant_id"`
+	Cidr          string `json:"cidr"`
+	Description   string `json:"description"`
+	ID            string `json:"id"`
+	InternetGwID  string `json:"internet_gw_id"`
+	Name          string `json:"name"`
+	Status        string `json:"status"`
+	SubmaskLength int    `json:"submask_length"`
+	TenantID      string `json:"tenant_id"`
 }
 
 type PublicIPPage struct {

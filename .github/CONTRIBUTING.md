@@ -4,7 +4,7 @@
 - [3 ways to get involved](#3-ways-to-get-involved)
 - [Getting started](#getting-started)
 - [Tests](#tests)
-- [Style guide](#basic-style-guide)
+- [Style guide](#style-guide)
 
 ## New Contributor Tutorial
 

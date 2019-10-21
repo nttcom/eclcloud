@@ -173,13 +173,13 @@ func (r Result) ExtractIntoStructPtr(to interface{}, label string) error {
 
 	t := reflect.TypeOf(to)
 	if k := t.Kind(); k != reflect.Ptr {
-		return fmt.Errorf("Expected pointer, got %v", k)
+		return fmt.Errorf("expected pointer, got %v", k)
 	}
 	switch t.Elem().Kind() {
 	case reflect.Struct:
 		return r.extractIntoPtr(to, label)
 	default:
-		return fmt.Errorf("Expected pointer to struct, got: %v", t)
+		return fmt.Errorf("expected pointer to struct, got: %v", t)
 	}
 }
 
@@ -199,13 +199,13 @@ func (r Result) ExtractIntoSlicePtr(to interface{}, label string) error {
 
 	t := reflect.TypeOf(to)
 	if k := t.Kind(); k != reflect.Ptr {
-		return fmt.Errorf("Expected pointer, got %v", k)
+		return fmt.Errorf("expected pointer, got %v", k)
 	}
 	switch t.Elem().Kind() {
 	case reflect.Slice:
 		return r.extractIntoPtr(to, label)
 	default:
-		return fmt.Errorf("Expected pointer to slice, got: %v", t)
+		return fmt.Errorf("expected pointer to slice, got: %v", t)
 	}
 }
 

@@ -53,7 +53,7 @@ type AllocationPool struct {
 // a subnet (not including local subnet route).
 type HostRoute struct {
 	DestinationCIDR string `json:"destination"`
-	NextHop     string `json:"nexthop"`
+	NextHop         string `json:"nexthop"`
 }
 
 // Subnet represents a subnet. See package documentation for a top-level

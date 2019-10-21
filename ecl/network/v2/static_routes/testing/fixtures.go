@@ -1,6 +1,6 @@
 package testing
 
-import(
+import (
 	"github.com/nttcom/eclcloud/ecl/network/v2/static_routes"
 )
 
@@ -94,7 +94,6 @@ const CreateResponse = `
 }
 `
 
-
 const UpdateRequest = `
 {
 	"static_route": {
@@ -119,29 +118,28 @@ const UpdateResponse = `
 }
 `
 
-
-var StaticRoute1 = static_routes.StaticRoute {
-  Description: "",
-  Destination: "100.127.254.152/29",
-  ID: "93aaec0f-1546-4062-88c5-93c397b93c03",
-  InternetGwID: "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
-  Name: "TEST-01",
-  Nexthop: "100.127.254.153",
-  ServiceType: "internet",
-  Status: "PENDING_CREATE",
-  TenantID: "60ed68071ca14fff8a6c28458379864b",
+var StaticRoute1 = static_routes.StaticRoute{
+	Description:  "",
+	Destination:  "100.127.254.152/29",
+	ID:           "93aaec0f-1546-4062-88c5-93c397b93c03",
+	InternetGwID: "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
+	Name:         "TEST-01",
+	Nexthop:      "100.127.254.153",
+	ServiceType:  "internet",
+	Status:       "PENDING_CREATE",
+	TenantID:     "60ed68071ca14fff8a6c28458379864b",
 }
 
-var StaticRoute2 = static_routes.StaticRoute {
-	Description: "jbd test",
-  Destination: "100.127.254.70/31",
-  ID: "a0caa2c8-5d30-49cd-a5f2-99517a4d848b",
-  InternetGwID: "b684b775-63cc-40e6-b615-cc88c804df19",
-  Name: "jbd_test_StaticRoute001",
-  Nexthop: "192.168.1.0",
-  ServiceType: "internet",
-  Status: "ACTIVE",
-	TenantID: "28ebaf1b212f4052a1a88d27f61deaa3",
+var StaticRoute2 = static_routes.StaticRoute{
+	Description:  "jbd test",
+	Destination:  "100.127.254.70/31",
+	ID:           "a0caa2c8-5d30-49cd-a5f2-99517a4d848b",
+	InternetGwID: "b684b775-63cc-40e6-b615-cc88c804df19",
+	Name:         "jbd_test_StaticRoute001",
+	Nexthop:      "192.168.1.0",
+	ServiceType:  "internet",
+	Status:       "ACTIVE",
+	TenantID:     "28ebaf1b212f4052a1a88d27f61deaa3",
 }
 
 var ExpectedStaticRouteSlice = []static_routes.StaticRoute{StaticRoute1, StaticRoute2}

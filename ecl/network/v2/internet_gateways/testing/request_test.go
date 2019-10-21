@@ -22,7 +22,7 @@ func TestList(t *testing.T) {
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		fmt.Fprintf(w, ListResponse)
+		fmt.Fprint(w, ListResponse)
 	})
 
 	client := fake.ServiceClient()
@@ -61,7 +61,7 @@ func TestGet(t *testing.T) {
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		fmt.Fprintf(w, GetResponse)
+		fmt.Fprint(w, GetResponse)
 	})
 
 	i, err := internet_gateways.Get(fake.ServiceClient(), "d32019d3-bc6e-4319-9c1d-6722fc136a22").Extract()
@@ -83,14 +83,16 @@ func TestCreate(t *testing.T) {
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusCreated)
 
-		fmt.Fprintf(w, CreateResponse)
+		fmt.Fprint(w, CreateResponse)
 	})
 
-	options := internet_gateways.CreateOpts{Name: "Lab3-Internet-Service-Provider-01",
-											TenantID: "6c0bdafab1914ab2b2b6c415477defc7",
-											Description: "test",
-											InternetServiceID: "5536154d-9a00-4b11-81fb-b185c9111d90",
-											QoSOptionID: "e497bbc3-1127-4490-a51d-93582c40ab40"}
+	options := internet_gateways.CreateOpts{
+		Name:              "Lab3-Internet-Service-Provider-01",
+		TenantID:          "6c0bdafab1914ab2b2b6c415477defc7",
+		Description:       "test",
+		InternetServiceID: "5536154d-9a00-4b11-81fb-b185c9111d90",
+		QoSOptionID:       "e497bbc3-1127-4490-a51d-93582c40ab40",
+	}
 	i, err := internet_gateways.Create(fake.ServiceClient(), options).Extract()
 	th.AssertNoErr(t, err)
 
@@ -112,15 +114,17 @@ func TestUpdate(t *testing.T) {
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		fmt.Fprintf(w, UpdateResponse)
+		fmt.Fprint(w, UpdateResponse)
 	})
 
 	name := "Lab3-Internet-Service-Provider-01"
 	description := "test2"
-	qos_option_id := "e497bbc3-1127-4490-a51d-93582c40ab40" 
-	options := internet_gateways.UpdateOpts{Name: &name,
-								   			Description: &description,
-								   			QoSOptionID: &qos_option_id}
+	qosOptionId := "e497bbc3-1127-4490-a51d-93582c40ab40"
+	options := internet_gateways.UpdateOpts{
+		Name:        &name,
+		Description: &description,
+		QoSOptionID: &qosOptionId,
+	}
 	i, err := internet_gateways.Update(fake.ServiceClient(), "d32019d3-bc6e-4319-9c1d-6722fc136a22", options).Extract()
 	th.AssertNoErr(t, err)
 

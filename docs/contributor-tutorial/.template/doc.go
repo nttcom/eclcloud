@@ -10,4 +10,4 @@ Example to Update a RESOURCE
 Example to Delete a RESOURCE
 
 */
-package RESOURCE
+package RESOURCEs

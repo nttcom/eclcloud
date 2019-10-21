@@ -96,7 +96,7 @@ func Authenticate(client *eclcloud.ProviderClient, options eclcloud.AuthOptions)
 		return v3auth(client, endpoint, &options, eclcloud.EndpointOpts{})
 	default:
 		// The switch statement must be out of date from the versions list.
-		return fmt.Errorf("Unrecognized identity version: %s", chosen.ID)
+		return fmt.Errorf("unrecognized identity version: %s", chosen.ID)
 	}
 }
 

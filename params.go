@@ -186,7 +186,7 @@ func BuildRequestBody(opts interface{}, parent string) (map[string]interface{}, 
 		return optsMap, nil
 	}
 	// Return an error if the underlying type of 'opts' isn't a struct.
-	return nil, fmt.Errorf("Options type is not a struct.")
+	return nil, fmt.Errorf("options type is not a struct")
 }
 
 // EnabledState is a convenience type, mostly used in Create and Update
@@ -282,10 +282,7 @@ func isZero(v reflect.Value) bool {
 		return z
 	case reflect.Struct:
 		if v.Type() == reflect.TypeOf(t) {
-			if v.Interface().(time.Time).IsZero() {
-				return true
-			}
-			return false
+			return v.Interface().(time.Time).IsZero()
 		}
 		z := true
 		for i := 0; i < v.NumField(); i++ {
@@ -381,7 +378,7 @@ func BuildQueryString(opts interface{}) (*url.URL, error) {
 				} else {
 					// if the field has a 'required' tag, it can't have a zero-value
 					if requiredTag := f.Tag.Get("required"); requiredTag == "true" {
-						return &url.URL{}, fmt.Errorf("Required query parameter [%s] not set.", f.Name)
+						return &url.URL{}, fmt.Errorf("required query parameter [%s] not set", f.Name)
 					}
 				}
 			}
@@ -390,7 +387,7 @@ func BuildQueryString(opts interface{}) (*url.URL, error) {
 		return &url.URL{RawQuery: params.Encode()}, nil
 	}
 	// Return an error if the underlying type of 'opts' isn't a struct.
-	return nil, fmt.Errorf("Options type is not a struct.")
+	return nil, fmt.Errorf("options type is not a struct")
 }
 
 /*
@@ -456,7 +453,7 @@ func BuildHeaders(opts interface{}) (map[string]string, error) {
 				} else {
 					// if the field has a 'required' tag, it can't have a zero-value
 					if requiredTag := f.Tag.Get("required"); requiredTag == "true" {
-						return optsMap, fmt.Errorf("Required header [%s] not set.", f.Name)
+						return optsMap, fmt.Errorf("required header [%s] not set", f.Name)
 					}
 				}
 			}
@@ -465,7 +462,7 @@ func BuildHeaders(opts interface{}) (map[string]string, error) {
 		return optsMap, nil
 	}
 	// Return an error if the underlying type of 'opts' isn't a struct.
-	return optsMap, fmt.Errorf("Options type is not a struct.")
+	return optsMap, fmt.Errorf("options type is not a struct")
 }
 
 // IDSliceToQueryString takes a slice of elements and converts them into a query

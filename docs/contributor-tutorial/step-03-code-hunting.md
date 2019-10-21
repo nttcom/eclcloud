@@ -27,5 +27,5 @@ ways. However, the following tips should be useful across all projects.
 
 ---
 
-Proceed to [Step 4](step-04-pull-requests.mdscript) to learn about Acceptance
+Proceed to [Step 4](step-04-pull-requests.md) to learn about Acceptance
 Testing.

@@ -10,13 +10,13 @@ type ListOptsBuilder interface {
 }
 
 type ListOpts struct {
-	Description         string `q:"description"`
-	ID                  string `q:"id"`
-	InternetServiceID   string `q:"internet_service_id"`
-	Name                string `q:"name"`
-	QoSOptionID         string `q:"qos_option_id"`
-	Status              string `q:"status"`
-	TenantID            string `q:"tenant_id"`
+	Description       string `q:"description"`
+	ID                string `q:"id"`
+	InternetServiceID string `q:"internet_service_id"`
+	Name              string `q:"name"`
+	QoSOptionID       string `q:"qos_option_id"`
+	Status            string `q:"status"`
+	TenantID          string `q:"tenant_id"`
 }
 
 func (opts ListOpts) ToInternetGatewayListQuery() (string, error) {
@@ -38,23 +38,21 @@ func List(c *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager {
 	})
 }
 
-
 func Get(c *eclcloud.ServiceClient, internetGatewayID string) (r GetResult) {
 	_, r.Err = c.Get(getURL(c, internetGatewayID), &r.Body, nil)
 	return
 }
-
 
 type CreateOptsBuilder interface {
 	ToInternetGatewayCreateMap() (map[string]interface{}, error)
 }
 
 type CreateOpts struct {
-	Description			string `json:"description,omitempty"`
-	InternetServiceID	string `json:"internet_service_id" required:"true"`
-	Name				string `json:"name,omitempty"`
-	QoSOptionID			string `json:"qos_option_id" required:"true"`
-	TenantID			string `json:"tenant_id,omitempty"`
+	Description       string `json:"description,omitempty"`
+	InternetServiceID string `json:"internet_service_id" required:"true"`
+	Name              string `json:"name,omitempty"`
+	QoSOptionID       string `json:"qos_option_id" required:"true"`
+	TenantID          string `json:"tenant_id,omitempty"`
 }
 
 func (opts CreateOpts) ToInternetGatewayCreateMap() (map[string]interface{}, error) {
@@ -76,9 +74,9 @@ type UpdateOptsBuilder interface {
 }
 
 type UpdateOpts struct {
-	Description			*string `json:"description,omitempty"`
-	Name				*string `json:"name,omitempty"`
-	QoSOptionID			*string `json:"qos_option_id,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	QoSOptionID *string `json:"qos_option_id,omitempty"`
 }
 
 func (opts UpdateOpts) ToInternetGatewayUpdateMap() (map[string]interface{}, error) {
@@ -96,7 +94,6 @@ func Update(c *eclcloud.ServiceClient, internetGatewayID string, opts UpdateOpts
 	})
 	return
 }
-
 
 func Delete(c *eclcloud.ServiceClient, internetGatewayID string) (r DeleteResult) {
 	_, r.Err = c.Delete(deleteURL(c, internetGatewayID), nil)

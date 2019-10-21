@@ -10,14 +10,14 @@ type ListOptsBuilder interface {
 }
 
 type ListOpts struct {
-	Cidr       		    string `q:"cidr"`
-	Description         string `q:"description"`
-	ID                  string `q:"id"`
-	InternetGwID        string `q:"internet_gw_id"`
-	Name                string `q:"name"`
-	Status              string `q:"status"`
-	SubmaskLength    	int    `q:"submask_length"`
-	TenantID            string `q:"tenant_id"`
+	Cidr          string `q:"cidr"`
+	Description   string `q:"description"`
+	ID            string `q:"id"`
+	InternetGwID  string `q:"internet_gw_id"`
+	Name          string `q:"name"`
+	Status        string `q:"status"`
+	SubmaskLength int    `q:"submask_length"`
+	TenantID      string `q:"tenant_id"`
 }
 
 func (opts ListOpts) ToPublicIPListQuery() (string, error) {
@@ -39,23 +39,21 @@ func List(c *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager {
 	})
 }
 
-
 func Get(c *eclcloud.ServiceClient, publicIPID string) (r GetResult) {
 	_, r.Err = c.Get(getURL(c, publicIPID), &r.Body, nil)
 	return
 }
-
 
 type CreateOptsBuilder interface {
 	ToPublicIPCreateMap() (map[string]interface{}, error)
 }
 
 type CreateOpts struct {
-	Description			string `json:"description,omitempty"`
-	InternetGwID		string `json:"internet_gw_id" required:"true"`
-	Name				string `json:"name,omitempty"`
-	SubmaskLength		int    `json:"submask_length" required:"true"`
-	TenantID			string `json:"tenant_id,omitempty"`
+	Description   string `json:"description,omitempty"`
+	InternetGwID  string `json:"internet_gw_id" required:"true"`
+	Name          string `json:"name,omitempty"`
+	SubmaskLength int    `json:"submask_length" required:"true"`
+	TenantID      string `json:"tenant_id,omitempty"`
 }
 
 func (opts CreateOpts) ToPublicIPCreateMap() (map[string]interface{}, error) {
@@ -77,8 +75,8 @@ type UpdateOptsBuilder interface {
 }
 
 type UpdateOpts struct {
-	Description			*string `json:"description,omitempty"`
-	Name				*string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
 }
 
 func (opts UpdateOpts) ToPublicIPUpdateMap() (map[string]interface{}, error) {
@@ -96,7 +94,6 @@ func Update(c *eclcloud.ServiceClient, publicIPID string, opts UpdateOptsBuilder
 	})
 	return
 }
-
 
 func Delete(c *eclcloud.ServiceClient, publicIPID string) (r DeleteResult) {
 	_, r.Err = c.Delete(deleteURL(c, publicIPID), nil)

@@ -86,17 +86,19 @@ func TestCreate(t *testing.T) {
 		fmt.Fprintf(w, CreateResponse)
 	})
 
-	options := gateway_interfaces.CreateOpts{Description: "",
-											 GwVipv4: "100.127.254.49",
-										 	 InternetGwID: "e72ef35a-c96f-45f8-aeee-e7547c5b94b3",
-										 	 Name: "5_Gateway",
-										 	 Netmask: 29,
-										 	 NetworkID: "0200a550-82cf-4d6d-b564-a87eb63e2b75",
-										 	 PrimaryIpv4: "100.127.254.53",
-										 	 SecondaryIpv4: "100.127.254.54",
-										 	 ServiceType: "internet",
-										 	 TenantID: "19ab165c7a664abe9c217334cd0e9cc9",
-										 	 VRID: 1}
+	options := gateway_interfaces.CreateOpts{
+		Description:   "",
+		GwVipv4:       "100.127.254.49",
+		InternetGwID:  "e72ef35a-c96f-45f8-aeee-e7547c5b94b3",
+		Name:          "5_Gateway",
+		Netmask:       29,
+		NetworkID:     "0200a550-82cf-4d6d-b564-a87eb63e2b75",
+		PrimaryIpv4:   "100.127.254.53",
+		SecondaryIpv4: "100.127.254.54",
+		ServiceType:   "internet",
+		TenantID:      "19ab165c7a664abe9c217334cd0e9cc9",
+		VRID:          1,
+	}
 	i, err := gateway_interfaces.Create(fake.ServiceClient(), options).Extract()
 	th.AssertNoErr(t, err)
 
@@ -123,9 +125,10 @@ func TestUpdate(t *testing.T) {
 
 	description := "Updated"
 	name := "5_Gateway"
-	options := gateway_interfaces.UpdateOpts{Description: &description,
-											 Name: &name,
-											}
+	options := gateway_interfaces.UpdateOpts{
+		Description: &description,
+		Name:        &name,
+	}
 	i, err := gateway_interfaces.Update(fake.ServiceClient(), "09771fbb-6496-4ae1-9b53-226b6edcc1be", options).Extract()
 	th.AssertNoErr(t, err)
 

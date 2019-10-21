@@ -1,4 +1,4 @@
-package RESOURCE
+package RESOURCEs
 
 import (
 	"github.com/nttcom/eclcloud"

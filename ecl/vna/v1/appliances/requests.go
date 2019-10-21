@@ -17,7 +17,7 @@ type ListOptsBuilder interface {
 type ListOpts struct {
 	Name                          string `q:"name"`
 	ID                            string `q:"id"`
-	ApplianceType                 string `q:"appliance_type`
+	ApplianceType                 string `q:"appliance_type"`
 	Description                   string `q:"description"`
 	AvailabilityZone              string `q:"availability_zone"`
 	OSMonitoringStatus            string `q:"os_monitoring_status"`
