@@ -235,6 +235,12 @@ func NewComputeV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*e
 	return initClientOpts(client, eo, "compute")
 }
 
+// NewBaremetalV2 creates a ServiceClient that may be used with the v2 baremetal
+// package.
+func NewBaremetalV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
+	return initClientOpts(client, eo, "baremetal-server")
+}
+
 // NewNetworkV2 creates a ServiceClient that may be used with the v2 network
 // package.
 func NewNetworkV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
