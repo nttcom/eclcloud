@@ -368,3 +368,8 @@ func NewSecurityPortalV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOp
 	// sc.ResourceBase = sc.Endpoint + "v2/"
 	return sc, err
 }
+
+// NewDedicatedHypervisorV1 creates a ServiceClient that may be used to access the v1 Dedicated Hypervisor service.
+func NewDedicatedHypervisorV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
+	return initClientOpts(client, eo, "dedicated-hypervisor")
+}
