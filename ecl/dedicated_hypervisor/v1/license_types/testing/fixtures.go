@@ -35,7 +35,7 @@ const ListResult = `
 }
 `
 
-// FirstUsage is the first LicenseType in the List request.
+// FirstLicenseType is the first LicenseType in the List request.
 var FirstLicenseType = license_types.LicenseType{
 	ID:            "9c54c437-5f0f-46f5-8270-ddf450a44135",
 	Name:          "Windows Server 2016 Standard Edition",
@@ -45,7 +45,7 @@ var FirstLicenseType = license_types.LicenseType{
 	Description:   "Windows Server 2016 Standard Edition",
 }
 
-// SecondUsage is the second LicenseType in the List request.
+// SecondLicenseType is the second LicenseType in the List request.
 var SecondLicenseType = license_types.LicenseType{
 	ID:            "e37c05ba-8fd0-493e-93d2-688833363a74",
 	Name:          "vCenter Server 6.x Standard",
@@ -55,7 +55,7 @@ var SecondLicenseType = license_types.LicenseType{
 	Description:   "vCenter Server 6.x Standard",
 }
 
-// ExpectedUsagesSlice is the slice of LicenseTypes expected to be returned from ListResult.
+// ExpectedLicenseTypesSlice is the slice of LicenseTypes expected to be returned from ListResult.
 var ExpectedLicenseTypesSlice = []license_types.LicenseType{FirstLicenseType, SecondLicenseType}
 
 // HandleListLicenseTypesSuccessfully creates an HTTP handler at `/license_types` on the

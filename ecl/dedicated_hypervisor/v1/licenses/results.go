@@ -53,7 +53,7 @@ func ExtractLicenses(r pagination.Page) ([]License, error) {
 	return s.Licenses, err
 }
 
-// Extract interprets any commonResult as a License.
+// ExtractLicenseInfo interprets any commonResult as a License.
 func (r commonResult) ExtractLicenseInfo() (*License, error) {
 	var s struct {
 		License *License `json:"license"`

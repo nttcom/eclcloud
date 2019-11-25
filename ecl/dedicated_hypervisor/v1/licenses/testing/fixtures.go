@@ -34,6 +34,7 @@ const ListResult = `
 }
 `
 
+// GetResult provides a Get result.
 const GetResult = `
 {
 	"license": {
