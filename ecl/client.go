@@ -373,3 +373,8 @@ func NewSecurityPortalV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOp
 func NewDedicatedHypervisorV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
 	return initClientOpts(client, eo, "dedicated-hypervisor")
 }
+
+// NewRCAV1 creates a ServiceClient that may be used to access the v1 Remote Console Access service.
+func NewRCAV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
+	return initClientOpts(client, eo, "rca")
+}
