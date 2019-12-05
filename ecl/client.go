@@ -279,11 +279,6 @@ func NewOrchestrationV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpt
 	return initClientOpts(client, eo, "orchestration")
 }
 
-// NewDBV1 creates a ServiceClient that may be used to access the v1 DB service.
-func NewDBV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
-	return initClientOpts(client, eo, "database")
-}
-
 // NewDNSV2 creates a ServiceClient that may be used to access the v2 DNS
 // service.
 func NewDNSV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
