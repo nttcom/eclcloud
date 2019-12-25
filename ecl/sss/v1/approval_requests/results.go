@@ -57,12 +57,6 @@ type GetResult struct {
 	commonResult
 }
 
-// DeleteResult is the response from a Delete operation. Call its ExtractErr to
-// determine if the request succeeded or failed.
-type DeleteResult struct {
-	eclcloud.ErrResult
-}
-
 // UpdateResult is the result of an Update request. Call its Extract method to
 // interpret it as an approval request.
 type UpdateResult struct {
