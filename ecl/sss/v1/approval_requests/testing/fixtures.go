@@ -102,7 +102,7 @@ var firstApprovalRequest = ar.ApprovalRequest{
 	RequestUserID:     "ecid9999888881",
 	Service:           "network",
 	Actions: []ar.Action{
-		ar.Action{
+		{
 			Service: "network",
 			Region:  "jp1",
 			APIPath: "/network/v1/firewall",
@@ -111,7 +111,7 @@ var firstApprovalRequest = ar.ApprovalRequest{
 		},
 	},
 	Descriptions: []ar.Description{
-		ar.Description{
+		{
 			Lang: "en",
 			Text: "approval resquest test",
 		},
@@ -133,7 +133,7 @@ var secondApprovalRequest = ar.ApprovalRequest{
 	RequestUserID:     "ecid9999888882",
 	Service:           "network",
 	Actions: []ar.Action{
-		ar.Action{
+		{
 			Service: "network",
 			Region:  "jp1",
 			APIPath: "/network/v1/firewall",
@@ -142,7 +142,7 @@ var secondApprovalRequest = ar.ApprovalRequest{
 		},
 	},
 	Descriptions: []ar.Description{
-		ar.Description{
+		{
 			Lang: "en",
 			Text: "approval resquest test",
 		},
