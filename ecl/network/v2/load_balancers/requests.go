@@ -92,7 +92,9 @@ func Create(c *eclcloud.ServiceClient, opts CreateOpts) (r CreateResult) {
 		r.Err = err
 		return
 	}
-	_, r.Err = c.Post(createURL(c), b, &r.Body, nil)
+	_, r.Err = c.Post(createURL(c), b, &r.Body, &eclcloud.RequestOpts{
+		OkCodes: []int{200},
+	})
 	return
 }
 
