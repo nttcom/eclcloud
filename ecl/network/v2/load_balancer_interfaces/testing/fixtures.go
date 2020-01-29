@@ -107,7 +107,7 @@ var LoadBalancerInterface1 = load_balancer_interfaces.LoadBalancerInterface{
 	Status:              "ACTIVE",
 	TenantID:            "8fe1cc29-ff7d4773bced6cb02fc8002f",
 	VirtualIPAddress:    "100.64.64.101",
-	VirtualIPProperties: load_balancer_interfaces.VirtualIpProperties{
+	VirtualIPProperties: load_balancer_interfaces.VirtualIPProperties{
 		Protocol: "vrrp",
 		Vrid:     10,
 	},
@@ -134,7 +134,7 @@ var LoadBalancerInterfaceDetail = load_balancer_interfaces.LoadBalancerInterface
 	Status:              "ACTIVE",
 	TenantID:            "401c9473a52b4ee486d17ea76f466f66",
 	VirtualIPAddress:    "100.64.64.101",
-	VirtualIPProperties: load_balancer_interfaces.VirtualIpProperties{
+	VirtualIPProperties: load_balancer_interfaces.VirtualIPProperties{
 		Protocol: "vrrp",
 		Vrid:     10,
 	},

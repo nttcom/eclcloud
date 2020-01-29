@@ -99,20 +99,17 @@ func Create(c *eclcloud.ServiceClient, opts CreateOpts) (r CreateResult) {
 // UpdateOpts represents the attributes used when updating an existing Load Balancer.
 type UpdateOpts struct {
 
-	// AdminUsername is admin's username
-	AdminUsername string `json:"admin_username"`
+	// Description is description
+	DefaultGateway *string `json:"default_gateway,omitempty"`
 
 	// Description is description
-	DefaultGateway string `json:"default_gateway,omitempty"`
-
-	// Description is description
-	Description string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty"`
 
 	// LoadBalancerPlanID is the UUID of Load Balancer Plan.
 	LoadBalancerPlanID string `json:"load_balancer_plan_id,omitempty"`
 
 	// Name is a human-readable name of the Load Balancer.
-	Name string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 // ToLoadBalancerUpdateMap builds a request body from UpdateOpts.

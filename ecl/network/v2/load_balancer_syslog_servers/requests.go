@@ -143,7 +143,7 @@ type UpdateOpts struct {
 	DateFormat string `json:"date_format,omitempty"`
 
 	// Description is description
-	Description string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty"`
 
 	// 	Log facility for syslog
 	LogFacility string `json:"log_facility,omitempty"`

@@ -22,6 +22,19 @@ Example to List Load Balancers
 		fmt.Printf("%+v\n", loadBalancer)
 	}
 
+
+Example to Show Load Balancer
+
+	loadBalancerID := "f44e063c-5fea-45b8-9124-956995eafe2a"
+
+	loadBalancer, err := load_balancers.Get(networkClient, loadBalancerID).Extract()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("%+v\n", loadBalancer)
+
+
 Example to Create a Load Balancer
 
 	createOpts := load_balancers.CreateOpts{
@@ -40,9 +53,10 @@ Example to Create a Load Balancer
 Example to Update a Load Balancer
 
 	loadBalancerID := "f44e063c-5fea-45b8-9124-956995eafe2a"
+	name := "new_name"
 
 	updateOpts := load_balancers.UpdateOpts{
-		Name:           "new_name",
+		Name:           &name,
 	}
 
 	loadBalancer, err := load_balancers.Update(networkClient, loadBalancerID, updateOpts).Extract()

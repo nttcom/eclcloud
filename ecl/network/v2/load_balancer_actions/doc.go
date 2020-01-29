@@ -10,7 +10,7 @@ Example to reboot a Load Balancer
 		Type: "HARD",
 	}
 
-	err := load_balancer_actions.Reboot(networkClient, loadBalancerID, rebootOpts).Extract()
+	err := load_balancer_actions.Reboot(networkClient, loadBalancerID, rebootOpts).ExtractErr()
 	if err != nil {
 		panic(err)
 	}
@@ -27,6 +27,8 @@ Example to reset password of Load Balancer
 	if err != nil {
 		panic(err)
 	}
+
+	fmt.Printf("%+v\n", resetPasswordResult)
 
 */
 package load_balancer_actions

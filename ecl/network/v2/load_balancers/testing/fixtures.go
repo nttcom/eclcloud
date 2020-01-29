@@ -226,7 +226,6 @@ const UpdateResponse = `
 const UpdateRequest = `
 {
   "load_balancer": {
-	"admin_username": "user-admin",
     "default_gateway": "100.127.253.1",
     "description": "UPDATED",
     "load_balancer_plan_id": "bd12784a-c66e-4f13-9f72-5143d64762b6",

@@ -22,6 +22,19 @@ Example to List Load Balancer Syslog Servers
 		fmt.Printf("%+v\n", loadBalancerSyslogServer)
 	}
 
+
+Example to Show Load Balancer Syslog Server
+
+	loadBalancerSyslogServerID := "9ab7ab3c-38a6-417c-926b-93772c4eb2f9"
+
+	loadBalancerSyslogServer, err := load_balancer_syslog_servers.Get(networkClient, loadBalancerSyslogServerID).Extract()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("%+v\n", loadBalancerSyslogServer)
+
+
 Example to Create a Load Balancer Syslog Server
 
 	createOpts := load_balancer_syslog_servers.CreateOpts{
@@ -51,9 +64,10 @@ Example to Create a Load Balancer Syslog Server
 Example to Update a Load Balancer Syslog Server
 
 	loadBalancerSyslogServerID := "9ab7ab3c-38a6-417c-926b-93772c4eb2f9"
+	description := "new_description"
 
 	updateOpts := load_balancer_syslog_servers.UpdateOpts{
-		Name:           "new_name",
+		Description:           &description,
 	}
 
 	loadBalancerSyslogServer, err := load_balancer_syslog_servers.Update(networkClient, loadBalancerSyslogServerID, updateOpts).Extract()

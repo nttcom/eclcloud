@@ -23,7 +23,19 @@ Example to List Load Balancer Interfaces
 	}
 
 
-Example to Update a Load Balancer
+Example to Show Load Balancer Interface
+
+	loadBalancerInterfaceID := "f44e063c-5fea-45b8-9124-956995eafe2a"
+
+	loadBalancerInterface, err := load_balancer_interfaces.Get(networkClient, loadBalancerInterfaceID).Extract()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("%+v\n", loadBalancerInterface)
+
+
+Example to Update Load Balancer Interface
 
 	loadBalancerInterfaceID := "f44e063c-5fea-45b8-9124-956995eafe2a"
 
@@ -31,7 +43,7 @@ Example to Update a Load Balancer
 		Name:           "new_name",
 	}
 
-	loadBalancer, err := load_balancer_interfaces.Update(networkClient, loadBalancerInterfaceID, updateOpts).Extract()
+	loadBalancerInterface, err := load_balancer_interfaces.Update(networkClient, loadBalancerInterfaceID, updateOpts).Extract()
 	if err != nil {
 		panic(err)
 	}

@@ -87,7 +87,7 @@ func TestUpdateLoadBalancerInterface(t *testing.T) {
 	name := "Interface 1/2"
 	networkID := "e6106a35-d79b-44a3-bda0-6009b2f8775a"
 	virtualIPAddress := "100.64.64.101"
-	virtualIPProperties := load_balancer_interfaces.VirtualIpProperties{
+	virtualIPProperties := load_balancer_interfaces.VirtualIPProperties{
 		Protocol: "vrrp",
 		Vrid:     10,
 	}
@@ -102,9 +102,9 @@ func TestUpdateLoadBalancerInterface(t *testing.T) {
 	loadBalancerID := "9f872504-36ab-46af-83ce-a4991c669edd"
 
 	options := load_balancer_interfaces.UpdateOpts{
-		Description:         description,
+		Description:         &description,
 		IPAddress:           ipAddress,
-		Name:                name,
+		Name:                &name,
 		NetworkID:           "e6106a35-d79b-44a3-bda0-6009b2f8775a",
 		VirtualIPAddress:    "100.64.64.101",
 		VirtualIPProperties: virtualIPProperties,

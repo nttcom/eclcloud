@@ -58,34 +58,22 @@ func Get(c *eclcloud.ServiceClient, id string) (r GetResult) {
 type UpdateOpts struct {
 
 	// Description is description
-	Description string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty"`
 
 	// IP Address
 	IPAddress string `json:"ip_address,omitempty"`
 
-	// The ID of load_balancer this load_balancer_interface belongs to.
-	LoadBalancerID string `json:"load_balancer_id,omitempty"`
-
 	// Name of the Load Balancer Interface
-	Name string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty"`
 
 	// UUID of the parent network.
 	NetworkID string `json:"network_id,omitempty"`
-
-	// Slot Number
-	SlotNumber int `json:"slot_number,omitempty"`
-
-	// Load Balancer Interface status
-	Status string `json:"status,omitempty"`
-
-	// Tenant ID of the owner (UUID)
-	TenantID string `json:"tenant_id,omitempty"`
 
 	// Virtual IP Address
 	VirtualIPAddress string `json:"virtual_ip_address,omitempty"`
 
 	// Properties used for virtual IP address
-	VirtualIPProperties VirtualIpProperties `json:"virtual_ip_properties,omitempty"`
+	VirtualIPProperties VirtualIPProperties `json:"virtual_ip_properties,omitempty"`
 
 }
 

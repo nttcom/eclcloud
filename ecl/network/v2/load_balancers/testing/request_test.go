@@ -173,11 +173,10 @@ func TestUpdateLoadBalancer(t *testing.T) {
 	userUsername := "user-read"
 
 	options := load_balancers.UpdateOpts{
-		AdminUsername:      adminUsername,
-		DefaultGateway:     defaultGateway,
-		Description:        description,
+		DefaultGateway:     &defaultGateway,
+		Description:        &description,
 		LoadBalancerPlanID: loadBalancerPlanID,
-		Name:               name,
+		Name:               &name,
 	}
 
 	s, err := load_balancers.Update(fake.ServiceClient(), "ab49eb24-667f-4a4e-9421-b4d915bff416", options).Extract()

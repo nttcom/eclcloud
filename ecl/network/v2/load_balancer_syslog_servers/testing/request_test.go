@@ -156,7 +156,7 @@ func TestUpdateLoadBalancerSyslogServer(t *testing.T) {
 		AclLogging:                  aclLogging,
 		AppflowLogging:              appflowLogging,
 		DateFormat:                  dateFormat,
-		Description:                 description,
+		Description:                 &description,
 		LogFacility:                 logFacility,
 		LogLevel:                    logLevel,
 		Priority:                    priority,

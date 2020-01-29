@@ -59,8 +59,8 @@ type LoadBalancerPlan struct {
 	Version string `json:"version"`
 }
 
-// LoadBalancerPage is the page returned by a pager when traversing over a collection
-// of load balancers.
+// LoadBalancerPlanPage is the page returned by a pager when traversing over a collection
+// of load balancer plans.
 type LoadBalancerPlanPage struct {
 	pagination.LinkedPageBase
 }
