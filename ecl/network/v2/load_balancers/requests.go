@@ -16,7 +16,7 @@ type ListOpts struct {
 	DefaultGateway     string `q:"default_gateway"`
 	Description        string `q:"description"`
 	ID                 string `q:"id"`
-	LoadBalancerPlanId string `q:"load_balancer_plan_id"`
+	LoadBalancerPlanID string `q:"load_balancer_plan_id"`
 	Name               string `q:"name"`
 	Status             string `q:"status"`
 	TenantID           string `q:"tenant_id"`
