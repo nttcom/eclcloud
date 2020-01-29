@@ -119,20 +119,6 @@ type LoadBalancerPage struct {
 	pagination.LinkedPageBase
 }
 
-// NextPageURL is invoked when a paginated collection of load balancers has reached
-// the end of a page and the pager seeks to traverse over a new one. In order
-// to do this, it needs to construct the next page's URL.
-func (r LoadBalancerPage) NextPageURL() (string, error) {
-	var s struct {
-		Links []eclcloud.Link `json:"load_balancers_links"`
-	}
-	err := r.ExtractInto(&s)
-	if err != nil {
-		return "", err
-	}
-	return eclcloud.ExtractNextURL(s.Links)
-}
-
 // IsEmpty checks whether a LoadBalancerPage struct is empty.
 func (r LoadBalancerPage) IsEmpty() (bool, error) {
 	is, err := ExtractLoadBalancers(r)
