@@ -22,7 +22,7 @@ func TestRebootLoadBalancer(t *testing.T) {
 		th.TestJSONRequest(t, r, RebootRequest)
 
 		w.Header().Add("Content-Type", "application/json")
-		w.WriteHeader(http.StatusAccepted)
+		w.WriteHeader(http.StatusOK)
 
 	})
 
@@ -54,7 +54,7 @@ func TestResetPasswordLoadBalancer(t *testing.T) {
 		th.TestHeader(t, r, "Accept", "application/json")
 		th.TestJSONRequest(t, r, ResetPasswordRequest)
 		w.Header().Add("Content-Type", "application/json")
-		w.WriteHeader(http.StatusAccepted)
+		w.WriteHeader(http.StatusOK)
 
 		fmt.Fprintf(w, ResetPasswordResponse)
 	})

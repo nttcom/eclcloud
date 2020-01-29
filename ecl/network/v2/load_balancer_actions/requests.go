@@ -30,7 +30,9 @@ func Reboot(c *eclcloud.ServiceClient, id string, opts RebootOpts) (r RebootResu
 		r.Err = err
 		return
 	}
-	_, r.Err = c.Post(rebootURL(c, id), b, nil, nil)
+	_, r.Err = c.Post(rebootURL(c, id), b, nil, &eclcloud.RequestOpts{
+		OkCodes: []int{200},
+	})
 	return
 }
 
@@ -60,7 +62,9 @@ func ResetPassword(c *eclcloud.ServiceClient, id string, opts ResetPasswordOpts)
 		r.Err = err
 		return
 	}
-	_, r.Err = c.Post(resetPasswordURL(c, id), b, &r.Body, nil)
+	_, r.Err = c.Post(resetPasswordURL(c, id), b, &r.Body, &eclcloud.RequestOpts{
+		OkCodes: []int{200},
+	})
 	return
 }
 
