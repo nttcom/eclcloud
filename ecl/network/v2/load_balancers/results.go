@@ -58,7 +58,7 @@ type LoadBalancer struct {
 	AvailabilityZone string `json:"availability_zone"`
 
 	// Description is description
-	DefaultGateway string `json:"default_gateway"`
+	DefaultGateway *string `json:"default_gateway"`
 
 	// Description is description
 	Description string `json:"description"`
