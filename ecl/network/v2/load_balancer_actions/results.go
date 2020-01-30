@@ -28,7 +28,7 @@ type ResetPasswordResult struct {
 }
 
 // LoadBalancerActionResetPassword represents a detail of a Reset Password operation.
-type LoadBalancerActionResetPassword struct {
+type ResetPassword struct {
 
 	// new password
 	NewPassword string `json:"new_password"`
