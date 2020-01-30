@@ -21,7 +21,7 @@ const ResetPasswordRequest = `
 }
 `
 
-var ResetPasswordDetail = load_balancer_actions.ResetPasswordDetail{
+var ResetPasswordDetail = load_balancer_actions.Password{
 	NewPassword: "ABCDabcd4321",
 	Username:    "user-read",
 }

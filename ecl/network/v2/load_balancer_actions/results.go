@@ -9,8 +9,8 @@ type commonResult struct {
 }
 
 // ExtractResetPassword is a function that accepts a result and extracts a result of reset_password.
-func (r commonResult) ExtractResetPassword() (*ResetPasswordDetail, error) {
-	var s ResetPasswordDetail
+func (r commonResult) ExtractResetPassword() (*Password, error) {
+	var s Password
 	err := r.ExtractInto(&s)
 	return &s, err
 }
@@ -27,8 +27,8 @@ type ResetPasswordResult struct {
 	commonResult
 }
 
-// ResetPasswordDetail represents a detail of a Reset Password operation.
-type ResetPasswordDetail struct {
+// Password represents a detail of a Reset Password operation.
+type Password struct {
 
 	// new password
 	NewPassword string `json:"new_password"`
