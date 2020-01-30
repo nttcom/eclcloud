@@ -146,29 +146,29 @@ const UpdateRequest = `
 `
 
 var LoadBalancerSyslogServer1 = load_balancer_syslog_servers.LoadBalancerSyslogServer{
-	Description:                 "test",
-	ID:                          "6e9c7745-61f2-491f-9689-add8c5fc4b9a",
-	IPAddress:                   "120.120.120.30",
-	LoadBalancerID:              "9f872504-36ab-46af-83ce-a4991c669edd",
-	LogFacility:                 "LOCAL3",
-	LogLevel:                    "DEBUG",
-	Name:                        "first_syslog_server",
-	PortNumber:                  514,
-	Status:                      "ACTIVE",
-	TransportType:               "UDP",
+	Description:    "test",
+	ID:             "6e9c7745-61f2-491f-9689-add8c5fc4b9a",
+	IPAddress:      "120.120.120.30",
+	LoadBalancerID: "9f872504-36ab-46af-83ce-a4991c669edd",
+	LogFacility:    "LOCAL3",
+	LogLevel:       "DEBUG",
+	Name:           "first_syslog_server",
+	PortNumber:     514,
+	Status:         "ACTIVE",
+	TransportType:  "UDP",
 }
 
 var LoadBalancerSyslogServer2 = load_balancer_syslog_servers.LoadBalancerSyslogServer{
-	Description:                 "My second backup server",
-	ID:                          "c7de2dee-73a0-4a9b-acdf-8a348c242a30",
-	IPAddress:                   "120.120.122.30",
-	LoadBalancerID:              "9f872504-36ab-46af-83ce-a4991c669edd",
-	LogFacility:                 "LOCAL2",
-	LogLevel:                    "ERROR",
-	Name:                        "second_syslog_server",
-	PortNumber:                  514,
-	Status:                      "ACTIVE",
-	TransportType:               "UDP",
+	Description:    "My second backup server",
+	ID:             "c7de2dee-73a0-4a9b-acdf-8a348c242a30",
+	IPAddress:      "120.120.122.30",
+	LoadBalancerID: "9f872504-36ab-46af-83ce-a4991c669edd",
+	LogFacility:    "LOCAL2",
+	LogLevel:       "ERROR",
+	Name:           "second_syslog_server",
+	PortNumber:     514,
+	Status:         "ACTIVE",
+	TransportType:  "UDP",
 }
 
 var LoadBalancerSyslogServerDetail = load_balancer_syslog_servers.LoadBalancerSyslogServer{

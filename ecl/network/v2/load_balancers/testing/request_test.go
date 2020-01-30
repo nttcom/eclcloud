@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	fake "github.com/nttcom/eclcloud/ecl/network/v2/common"
-	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancers"
 	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_interfaces"
 	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_syslog_servers"
+	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancers"
 	"github.com/nttcom/eclcloud/pagination"
 	th "github.com/nttcom/eclcloud/testhelper"
 )
@@ -135,20 +135,20 @@ func TestUpdateLoadBalancer(t *testing.T) {
 
 	interfaces := []load_balancer_interfaces.LoadBalancerInterface{
 		{
-			ID:                      "ee335c69-b50f-4a32-9d0f-f44cef84a456",
-			IPAddress:               &ipAddress1,
-			Name:                  "Interface 1/1",
-			NetworkID:            &networkID1,
-			SlotNumber:           1,
-			Status:                "ACTIVE",
+			ID:         "ee335c69-b50f-4a32-9d0f-f44cef84a456",
+			IPAddress:  &ipAddress1,
+			Name:       "Interface 1/1",
+			NetworkID:  &networkID1,
+			SlotNumber: 1,
+			Status:     "ACTIVE",
 		},
 		{
-			ID: "b39b61e4-00b1-4698-aed0-1928beb90abe",
-			IPAddress: &ipAddress2,
-			Name: "Interface 1/2",
-			NetworkID: &networkID2,
+			ID:         "b39b61e4-00b1-4698-aed0-1928beb90abe",
+			IPAddress:  &ipAddress2,
+			Name:       "Interface 1/2",
+			NetworkID:  &networkID2,
 			SlotNumber: 2,
-			Status: "ACTIVE",
+			Status:     "ACTIVE",
 		},
 	}
 

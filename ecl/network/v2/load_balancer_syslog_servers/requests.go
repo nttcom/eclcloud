@@ -105,7 +105,6 @@ type CreateOpts struct {
 
 	// can user configure log messages
 	UserConfigurableLogMessages string `json:"user_configurable_log_messages,omitempty"`
-
 }
 
 // ToLoadBalancerSyslogServerCreateMap builds a request body from CreateOpts.

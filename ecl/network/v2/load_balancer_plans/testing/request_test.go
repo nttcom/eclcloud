@@ -64,4 +64,3 @@ func TestGetLoadBalancerPlan(t *testing.T) {
 	th.AssertNoErr(t, err)
 	th.CheckDeepEquals(t, &LoadBalancerDetail, s)
 }
-

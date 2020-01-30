@@ -9,7 +9,6 @@ type RebootOpts struct {
 
 	// should syslog record acl info
 	Type string `json:"type" required:"true"`
-
 }
 
 // ToLoadBalancerActionRebootMap builds a request body from RebootOpts.
@@ -41,7 +40,6 @@ type ResetPasswordOpts struct {
 
 	// should syslog record acl info
 	Username string `json:"username" required:"true"`
-
 }
 
 // ToLoadBalancerActionResetPasswordMap builds a request body from ResetPasswordOpts.
@@ -67,5 +65,3 @@ func ResetPassword(c *eclcloud.ServiceClient, id string, opts ResetPasswordOpts)
 	})
 	return
 }
-
-

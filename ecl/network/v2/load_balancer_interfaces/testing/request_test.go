@@ -96,7 +96,7 @@ func TestUpdateLoadBalancerInterface(t *testing.T) {
 	slotNumber := 2
 
 	status := "PENDING_UPDATE"
-	
+
 	tenantID := "6a156ddf2ecd497ca786ff2da6df5aa8"
 
 	loadBalancerID := "9f872504-36ab-46af-83ce-a4991c669edd"

@@ -17,4 +17,3 @@ func listURL(c *eclcloud.ServiceClient) string {
 func getURL(c *eclcloud.ServiceClient, id string) string {
 	return resourceURL(c, id)
 }
-

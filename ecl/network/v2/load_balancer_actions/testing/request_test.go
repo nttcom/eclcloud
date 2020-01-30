@@ -26,8 +26,8 @@ func TestRebootLoadBalancer(t *testing.T) {
 
 	})
 
-	options := load_balancer_actions.RebootOpts	{
-		Type:                        "HARD",
+	options := load_balancer_actions.RebootOpts{
+		Type: "HARD",
 	}
 	res := load_balancer_actions.Reboot(fake.ServiceClient(), "6e9c7745-61f2-491f-9689-add8c5fc4b9a", options)
 	th.AssertNoErr(t, res.Err)
@@ -59,7 +59,7 @@ func TestResetPasswordLoadBalancer(t *testing.T) {
 		fmt.Fprintf(w, ResetPasswordResponse)
 	})
 
-	options := load_balancer_actions.ResetPasswordOpts {
+	options := load_balancer_actions.ResetPasswordOpts{
 		Username: "user-read",
 	}
 	s, err := load_balancer_actions.ResetPassword(fake.ServiceClient(), "6e9c7745-61f2-491f-9689-add8c5fc4b9a", options).ExtractResetPassword()
@@ -76,4 +76,3 @@ func TestRequiredResetPasswordOptsLoadBalancer(t *testing.T) {
 		t.Fatalf("Expected error, got none")
 	}
 }
-

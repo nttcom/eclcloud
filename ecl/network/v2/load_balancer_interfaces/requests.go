@@ -74,7 +74,6 @@ type UpdateOpts struct {
 
 	// Properties used for virtual IP address
 	VirtualIPProperties VirtualIPProperties `json:"virtual_ip_properties,omitempty"`
-
 }
 
 // ToLoadBalancerUpdateMap builds a request body from UpdateOpts.

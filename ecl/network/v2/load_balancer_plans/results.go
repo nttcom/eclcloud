@@ -26,8 +26,8 @@ type GetResult struct {
 
 // Model of Load Balancer.
 type Model struct {
-	Edition     string `json:"edition"`
-	Size        string `json:"size"`
+	Edition string `json:"edition"`
+	Size    string `json:"size"`
 }
 
 // LoadBalancerPlan represents a Load Balancer Plan. See package documentation for a top-level

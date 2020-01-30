@@ -54,19 +54,18 @@ const GetResponse = `
 }
   `
 
-
 var LoadBalancerPlan1 = load_balancer_plans.LoadBalancerPlan{
 	Description:          "Load Balancer Description 1",
 	Enabled:              true,
 	ID:                   "58ab4df4-10f2-4fa0-b374-74b06dd648ee",
 	MaximumSyslogServers: 10,
-	Model:                load_balancer_plans.Model{
+	Model: load_balancer_plans.Model{
 		Edition: "Standard",
 		Size:    "50",
 	},
-	Name:                 "LB_Plan1",
-	Vendor:               "citrix",
-	Version:              "10.5-57.7",
+	Name:    "LB_Plan1",
+	Vendor:  "citrix",
+	Version: "10.5-57.7",
 }
 
 var LoadBalancerPlan2 = load_balancer_plans.LoadBalancerPlan{
@@ -74,13 +73,13 @@ var LoadBalancerPlan2 = load_balancer_plans.LoadBalancerPlan{
 	Enabled:              false,
 	ID:                   "8b0cc5cc-b612-4810-ae45-7d6c5e806b3a",
 	MaximumSyslogServers: 10,
-	Model:                load_balancer_plans.Model{
+	Model: load_balancer_plans.Model{
 		Edition: "Standard",
 		Size:    "1000",
 	},
-	Name:                 "LB_Plan2",
-	Vendor:               "citrix",
-	Version:              "10.5-57.7",
+	Name:    "LB_Plan2",
+	Vendor:  "citrix",
+	Version: "10.5-57.7",
 }
 
 var LoadBalancerDetail = load_balancer_plans.LoadBalancerPlan{
@@ -88,13 +87,13 @@ var LoadBalancerDetail = load_balancer_plans.LoadBalancerPlan{
 	Enabled:              true,
 	ID:                   "6e5faf0c-9361-4b98-bfc4-670497c9bde3",
 	MaximumSyslogServers: 10,
-	Model:                load_balancer_plans.Model{
+	Model: load_balancer_plans.Model{
 		Edition: "Standard",
 		Size:    "50",
 	},
-	Name:                 "LB_Plan1",
-	Vendor:               "citrix",
-	Version:              "10.5-57.7",
+	Name:    "LB_Plan1",
+	Vendor:  "citrix",
+	Version: "10.5-57.7",
 }
 
 var ExpectedLoadBalancerPlanSlice = []load_balancer_plans.LoadBalancerPlan{LoadBalancerPlan1, LoadBalancerPlan2}
