@@ -88,7 +88,7 @@ type CreateOpts struct {
 	PortNumber int `json:"port_number,omitempty"`
 
 	// priority (0-255)
-	Priority int `json:"priority,omitempty"`
+	Priority *int `json:"priority,omitempty"`
 
 	// should syslog record tcp protocol info
 	TcpLogging string `json:"tcp_logging,omitempty"`
