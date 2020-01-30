@@ -154,7 +154,7 @@ type UpdateOpts struct {
 	LogLevel string `json:"log_level,omitempty"`
 
 	// priority (0-255)
-	Priority int `json:"priority,omitempty"`
+	Priority *int `json:"priority,omitempty"`
 
 	// should syslog record tcp protocol info
 	TcpLogging string `json:"tcp_logging,omitempty"`
