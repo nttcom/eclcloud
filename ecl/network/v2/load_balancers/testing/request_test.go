@@ -7,6 +7,8 @@ import (
 
 	fake "github.com/nttcom/eclcloud/ecl/network/v2/common"
 	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancers"
+	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_interfaces"
+	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_syslog_servers"
 	"github.com/nttcom/eclcloud/pagination"
 	th "github.com/nttcom/eclcloud/testhelper"
 )
@@ -125,7 +127,7 @@ func TestUpdateLoadBalancer(t *testing.T) {
 	defaultGateway := "100.127.253.1"
 	description := "UPDATED"
 	id := "5f3cae7c-58a5-4124-b622-9ca3cfbf2525"
-	interfaces := []load_balancers.Interface{
+	interfaces := []load_balancer_interfaces.LoadBalancerInterface{
 		{
 			ID:                      "ee335c69-b50f-4a32-9d0f-f44cef84a456",
 			IPAddress:               "100.127.253.173",
@@ -148,7 +150,7 @@ func TestUpdateLoadBalancer(t *testing.T) {
 	name := "abcdefghijklmnopqrstuvwxyz"
 	status := "PENDING_UPDATE"
 
-	syslogServers := []load_balancers.SyslogServer{
+	syslogServers := []load_balancer_syslog_servers.LoadBalancerSyslogServer{
 		{
 			ID:          "11001101-2edf-1844-1ff7-12ba5b7e566a",
 			IPAddress:   "177.77.07.215",

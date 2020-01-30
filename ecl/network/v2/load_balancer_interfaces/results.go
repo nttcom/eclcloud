@@ -67,6 +67,9 @@ type LoadBalancerInterface struct {
 	// Tenant ID of the owner (UUID)
 	TenantID string `json:"tenant_id"`
 
+	// Load Balancer Interface type
+	Type string `json:"type"`
+
 	// Virtual IP Address
 	VirtualIPAddress string `json:"virtual_ip_address"`
 

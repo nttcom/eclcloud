@@ -1,6 +1,8 @@
 package testing
 
 import (
+	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_interfaces"
+	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_syslog_servers"
 	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancers"
 )
 
@@ -52,7 +54,10 @@ const GetResponse = `
         "status": "ACTIVE",
         "type": "user",
         "virtual_ip_address": "100.127.253.174",
-        "virtual_ip_properties": "100.127.253.175"
+        "virtual_ip_properties": {
+			"protocol": "vrrp",
+			"vrid": 10
+		}
       },
       {
         "id": "b39b61e4-00b1-4698-aed0-1928beb90abe",
@@ -112,7 +117,10 @@ const CreateResponse = `
         "status": "ACTIVE",
         "type": "user",
         "virtual_ip_address": "100.127.253.174",
-        "virtual_ip_properties": "100.127.253.175"
+        "virtual_ip_properties": {
+			"protocol": "vrrp",
+			"vrid": 10
+		}
       },
       {
         "id": "b39b61e4-00b1-4698-aed0-1928beb90abe",
@@ -265,7 +273,7 @@ var LoadBalancerDetail = load_balancers.LoadBalancer{
 	AvailabilityZone:   "zone1-groupa",
 	DefaultGateway:     "100.127.253.1",
 	Description:        "Load Balancer 1 Description",
-	Interfaces:			[]load_balancers.Interface{
+	Interfaces:			[]load_balancer_interfaces.LoadBalancerInterface{
 		{
 			ID:                  "ee335c69-b50f-4a32-9d0f-f44cef84a456",
 			IPAddress:           "100.127.253.173",
@@ -275,7 +283,10 @@ var LoadBalancerDetail = load_balancers.LoadBalancer{
 			Status:              "ACTIVE",
 			Type:                "user",
 			VirtualIPAddress:    "100.127.253.174",
-			VirtualIPProperties: "100.127.253.175",
+			VirtualIPProperties: load_balancer_interfaces.VirtualIPProperties {
+				Protocol: "vrrp",
+				Vrid:     10,
+			},
 		},
 		{
 			ID:                  "b39b61e4-00b1-4698-aed0-1928beb90abe",
@@ -290,7 +301,7 @@ var LoadBalancerDetail = load_balancers.LoadBalancer{
 	LoadBalancerPlanID: "bd12784a-c66e-4f13-9f72-5143d64762b6",
 	Name:               "Load Balancer 1",
 	Status:             "ACTIVE",
-	SyslogServers:      []load_balancers.SyslogServer{
+	SyslogServers:      []load_balancer_syslog_servers.LoadBalancerSyslogServer{
 		{
 			ID: "11001101-2edf-1844-1ff7-12ba5b7e566a",
 			IPAddress: "177.77.07.215",

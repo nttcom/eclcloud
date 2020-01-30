@@ -2,6 +2,8 @@ package load_balancers
 
 import (
 	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_interfaces"
+	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_syslog_servers"
 	"github.com/nttcom/eclcloud/pagination"
 )
 
@@ -42,30 +44,6 @@ type DeleteResult struct {
 	eclcloud.ErrResult
 }
 
-// Interface represents a attached interfaces by Load Balancer.
-type Interface struct {
-	ID                  string `json:"id"`
-	IPAddress           string `json:"ip_address"`
-	Name                string `json:"name"`
-	NetworkID           string `json:"network_id"`
-	SlotNumber          int    `json:"slot_number"`
-	Status              string `json:"status"`
-	Type                string `json:"type"`
-	VirtualIPAddress    string `json:"virtual_ip_address"`
-	VirtualIPProperties string `json:"virtual_ip_properties"`
-}
-
-// Interface represents a attached interfaces by Load Balancer.
-type SyslogServer struct {
-	ID          string `json:"id"`
-	IPAddress   string `json:"ip_address"`
-	LogFacility string `json:"log_facility"`
-	LogLevel    string `json:"log_level"`
-	Name        string `json:"name"`
-	PortNumber  int    `json:"port_number"`
-	Status      string `json:"status"`
-}
-
 // LoadBalancer represents a Load Balancer. See package documentation for a top-level
 // description of what this is.
 type LoadBalancer struct {
@@ -89,7 +67,7 @@ type LoadBalancer struct {
 	ID string `json:"id"`
 
 	// Attached interfaces by Load Balancer.
-	Interfaces []Interface `json:"interfaces"`
+	Interfaces []load_balancer_interfaces.LoadBalancerInterface `json:"interfaces"`
 
 	// LoadBalancerPlanID is the UUID of Load Balancer Plan.
 	LoadBalancerPlanID string `json:"load_balancer_plan_id"`
@@ -101,7 +79,7 @@ type LoadBalancer struct {
 	Status string `json:"status"`
 
 	// Connected syslog servers.
-	SyslogServers []SyslogServer `json:"syslog_servers"`
+	SyslogServers []load_balancer_syslog_servers.LoadBalancerSyslogServer `json:"syslog_servers"`
 
 	// TenantID is the project owner of the Load Balancer.
 	TenantID string `json:"tenant_id"`
