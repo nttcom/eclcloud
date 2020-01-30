@@ -97,3 +97,36 @@ var LoadBalancerDetail = load_balancer_plans.LoadBalancerPlan{
 }
 
 var ExpectedLoadBalancerPlanSlice = []load_balancer_plans.LoadBalancerPlan{LoadBalancerPlan1, LoadBalancerPlan2}
+
+const ListResponseDuplicatedNames = `
+{
+  "load_balancer_plans": [
+    {
+      "description": "Load Balancer Description 1",
+      "enabled": true,
+      "id": "58ab4df4-10f2-4fa0-b374-74b06dd648ee",
+      "maximum_syslog_servers": 10,
+      "model": {
+        "edition": "Standard",
+        "size": "50"
+      },
+      "name": "LB_Plan1",
+      "vendor": "citrix",
+      "version": "10.5-57.7"
+    },
+    {
+      "description": "Load Balancer Description 2",
+      "enabled": false,
+      "id": "8b0cc5cc-b612-4810-ae45-7d6c5e806b3a",
+      "maximum_syslog_servers": 10,
+      "model": {
+        "edition": "Standard",
+        "size": "1000"
+      },
+      "name": "LB_Plan1",
+      "vendor": "citrix",
+      "version": "10.5-57.7"
+    }
+  ]
+}
+`

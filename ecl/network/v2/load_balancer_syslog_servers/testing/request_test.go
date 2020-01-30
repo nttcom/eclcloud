@@ -204,3 +204,73 @@ func TestDeleteLoadBalancerSyslogServer(t *testing.T) {
 	res := load_balancer_syslog_servers.Delete(fake.ServiceClient(), "6e9c7745-61f2-491f-9689-add8c5fc4b9a")
 	th.AssertNoErr(t, res.Err)
 }
+
+func TestIDFromName(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc("/v2.0/load_balancer_syslog_servers", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, ListResponse)
+	})
+
+	client := fake.ServiceClient()
+
+	expectedID := "6e9c7745-61f2-491f-9689-add8c5fc4b9a"
+	actualID, err := load_balancer_syslog_servers.IDFromName(client, "first_syslog_server")
+
+	th.AssertNoErr(t, err)
+	th.AssertEquals(t, expectedID, actualID)
+}
+
+func TestIDFromNameNoResult(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc("/v2.0/load_balancer_syslog_servers", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, ListResponse)
+	})
+
+	client := fake.ServiceClient()
+
+	_, err := load_balancer_syslog_servers.IDFromName(client, "syslog_server X")
+
+	if err == nil {
+		t.Fatalf("Expected error, got none")
+	}
+
+}
+
+func TestIDFromNameDuplicated(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc("/v2.0/load_balancer_syslog_servers", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, ListResponseDuplicatedNames)
+	})
+
+	client := fake.ServiceClient()
+
+	_, err := load_balancer_syslog_servers.IDFromName(client, "first_syslog_server")
+
+	if err == nil {
+		t.Fatalf("Expected error, got none")
+	}
+}

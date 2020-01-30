@@ -193,3 +193,34 @@ var LoadBalancerSyslogServerDetail = load_balancer_syslog_servers.LoadBalancerSy
 }
 
 var ExpectedLoadBalancerSlice = []load_balancer_syslog_servers.LoadBalancerSyslogServer{LoadBalancerSyslogServer1, LoadBalancerSyslogServer2}
+
+const ListResponseDuplicatedNames = `
+{
+  "load_balancer_syslog_servers": [
+    {
+      "description": "test",
+      "id": "6e9c7745-61f2-491f-9689-add8c5fc4b9a",
+      "ip_address": "120.120.120.30",
+      "load_balancer_id": "9f872504-36ab-46af-83ce-a4991c669edd",
+      "log_facility": "LOCAL3",
+      "log_level": "DEBUG",
+      "name": "first_syslog_server",
+      "port_number": 514,
+      "status": "ACTIVE",
+      "transport_type": "UDP"
+    },
+    {
+      "description": "My second backup server",
+      "id": "c7de2dee-73a0-4a9b-acdf-8a348c242a30",
+      "ip_address": "120.120.122.30",
+      "load_balancer_id": "9f872504-36ab-46af-83ce-a4991c669edd",
+      "log_facility": "LOCAL2",
+      "log_level": "ERROR",
+      "name": "first_syslog_server",
+      "port_number": 514,
+      "status": "ACTIVE",
+      "transport_type": "UDP"
+    }
+  ]
+}
+`

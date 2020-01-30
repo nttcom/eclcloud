@@ -334,3 +334,34 @@ var LoadBalancerDetail = load_balancers.LoadBalancer{
 }
 
 var ExpectedLoadBalancerSlice = []load_balancers.LoadBalancer{LoadBalancer1, LoadBalancer2}
+
+const ListResponseDuplicatedNames = `
+{
+  "load_balancers": [
+    {
+      "admin_username": "user-admin",
+      "availability_zone": "zone1-groupa",
+      "default_gateway": "100.127.253.1",
+      "description": "Load Balancer 1 Description",
+      "id": "5f3cae7c-58a5-4124-b622-9ca3cfbf2525",
+      "load_balancer_plan_id": "bd12784a-c66e-4f13-9f72-5143d64762b6",
+      "name": "Load Balancer 1",
+      "status": "ACTIVE",
+      "tenant_id": "6a156ddf2ecd497ca786ff2da6df5aa8",
+      "user_username": "user-read"
+    },
+    {
+      "admin_username": "user-admin",
+      "availability_zone": "zone1_groupa",
+      "default_gateway": null,
+      "description": "abcdefghijklmnopqrstuvwxyz",
+      "id": "601665cf-c161-4e80-87f0-a3c0925d07a0",
+      "load_balancer_plan_id": "bd12784a-c66e-4f13-9f72-5143d64762b6",
+      "name": "Load Balancer 1",
+      "status": "PENDING_CREATE",
+      "tenant_id": "6a156ddf2ecd497ca786ff2da6df5aa8",
+      "user_username": "user-read"
+    }
+  ]
+}
+`

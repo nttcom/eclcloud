@@ -217,3 +217,73 @@ func TestDeleteLoadBalancer(t *testing.T) {
 	res := load_balancers.Delete(fake.ServiceClient(), "ab49eb24-667f-4a4e-9421-b4d915bff416")
 	th.AssertNoErr(t, res.Err)
 }
+
+func TestIDFromName(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc("/v2.0/load_balancers", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, ListResponse)
+	})
+
+	client := fake.ServiceClient()
+
+	expectedID := "5f3cae7c-58a5-4124-b622-9ca3cfbf2525"
+	actualID, err := load_balancers.IDFromName(client, "Load Balancer 1")
+
+	th.AssertNoErr(t, err)
+	th.AssertEquals(t, expectedID, actualID)
+}
+
+func TestIDFromNameNoResult(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc("/v2.0/load_balancers", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, ListResponse)
+	})
+
+	client := fake.ServiceClient()
+
+	_, err := load_balancers.IDFromName(client, "Load Balancer X")
+
+	if err == nil {
+		t.Fatalf("Expected error, got none")
+	}
+
+}
+
+func TestIDFromNameDuplicated(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc("/v2.0/load_balancers", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, ListResponseDuplicatedNames)
+	})
+
+	client := fake.ServiceClient()
+
+	_, err := load_balancers.IDFromName(client, "Load Balancer 1")
+
+	if err == nil {
+		t.Fatalf("Expected error, got none")
+	}
+}

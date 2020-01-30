@@ -125,3 +125,73 @@ func TestUpdateLoadBalancerInterface(t *testing.T) {
 	th.CheckEquals(t, virtualIPAddress, *s.VirtualIPAddress)
 	th.CheckDeepEquals(t, virtualIPProperties, *s.VirtualIPProperties)
 }
+
+func TestIDFromName(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc("/v2.0/load_balancer_interfaces", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, ListResponse)
+	})
+
+	client := fake.ServiceClient()
+
+	expectedID := "b409f68e-9307-4649-9073-bb3cb776bda5"
+	actualID, err := load_balancer_interfaces.IDFromName(client, "Interface 1/2")
+
+	th.AssertNoErr(t, err)
+	th.AssertEquals(t, expectedID, actualID)
+}
+
+func TestIDFromNameNoResult(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc("/v2.0/load_balancer_interfaces", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, ListResponse)
+	})
+
+	client := fake.ServiceClient()
+
+	_, err := load_balancer_interfaces.IDFromName(client, "Interface X")
+
+	if err == nil {
+		t.Fatalf("Expected error, got none")
+	}
+
+}
+
+func TestIDFromNameDuplicated(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc("/v2.0/load_balancer_interfaces", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, ListResponseDuplicatedNames)
+	})
+
+	client := fake.ServiceClient()
+
+	_, err := load_balancer_interfaces.IDFromName(client, "Interface 1/2")
+
+	if err == nil {
+		t.Fatalf("Expected error, got none")
+	}
+}
