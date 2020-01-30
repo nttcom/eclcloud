@@ -74,7 +74,7 @@ type LoadBalancerInterface struct {
 	VirtualIPAddress *string `json:"virtual_ip_address"`
 
 	// Properties used for virtual IP address
-	VirtualIPProperties VirtualIPProperties `json:"virtual_ip_properties"`
+	VirtualIPProperties *VirtualIPProperties `json:"virtual_ip_properties"`
 }
 
 // LoadBalancerPage is the page returned by a pager when traversing over a collection
