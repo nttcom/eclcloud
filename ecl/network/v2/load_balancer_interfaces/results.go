@@ -56,7 +56,7 @@ type LoadBalancerInterface struct {
 	Name string `json:"name"`
 
 	// UUID of the parent network.
-	NetworkID string `json:"network_id"`
+	NetworkID *string `json:"network_id"`
 
 	// Slot Number
 	SlotNumber int `json:"slot_number"`
