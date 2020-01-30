@@ -81,6 +81,8 @@ func TestCreateLoadBalancerSyslogServer(t *testing.T) {
 		fmt.Fprintf(w, CreateResponse)
 	})
 
+	priority := 20
+
 	options := load_balancer_syslog_servers.CreateOpts{
 		AclLogging:                  "DISABLED",
 		AppflowLogging:              "DISABLED",
@@ -92,7 +94,7 @@ func TestCreateLoadBalancerSyslogServer(t *testing.T) {
 		LogLevel:                    "DEBUG",
 		Name:                        "first_syslog_server",
 		PortNumber:                  514,
-		Priority:                    20,
+		Priority:                    &priority,
 		TcpLogging:                  "ALL",
 		TenantID:                    "6a156ddf2ecd497ca786ff2da6df5aa8",
 		TimeZone:                    "LOCAL_TIME",
@@ -159,7 +161,7 @@ func TestUpdateLoadBalancerSyslogServer(t *testing.T) {
 		Description:                 &description,
 		LogFacility:                 logFacility,
 		LogLevel:                    logLevel,
-		Priority:                    priority,
+		Priority:                    &priority,
 		TcpLogging:                  tcpLogging,
 		TimeZone:                    timeZone,
 		UserConfigurableLogMessages: userConfigurableLogMessages,

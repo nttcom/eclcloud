@@ -115,13 +115,13 @@ func TestUpdateLoadBalancerInterface(t *testing.T) {
 
 	th.CheckEquals(t, description, s.Description)
 	th.CheckEquals(t, id, s.ID)
-	th.CheckEquals(t, ipAddress, s.IPAddress)
+	th.CheckEquals(t, ipAddress, *s.IPAddress)
 	th.CheckEquals(t, loadBalancerID, s.LoadBalancerID)
 	th.CheckEquals(t, name, s.Name)
-	th.CheckEquals(t, networkID, s.NetworkID)
+	th.CheckEquals(t, networkID, *s.NetworkID)
 	th.CheckEquals(t, slotNumber, s.SlotNumber)
 	th.CheckEquals(t, status, s.Status)
 	th.CheckEquals(t, tenantID, s.TenantID)
-	th.CheckEquals(t, virtualIPAddress, s.VirtualIPAddress)
-	th.CheckDeepEquals(t, virtualIPProperties, s.VirtualIPProperties)
+	th.CheckEquals(t, virtualIPAddress, *s.VirtualIPAddress)
+	th.CheckDeepEquals(t, virtualIPProperties, *s.VirtualIPProperties)
 }

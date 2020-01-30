@@ -13,7 +13,7 @@ const ListResponse = `
       "ip_address": "100.64.64.34",
       "load_balancer_id": "5a109f4a-ebd8-4998-8410-98629e2bd5cd",
       "name": "Interface 1/2",
-      "network_id": "db79f4e1-ae25-46ca-b0f0-00892bf83929",
+      "network_id": "30b665e3-db2b-473b-a09a-8940148b6491",
       "slot_number": 2,
       "status": "ACTIVE",
       "tenant_id": "8fe1cc29-ff7d4773bced6cb02fc8002f",
@@ -99,19 +99,23 @@ const UpdateResponse = `
 var LoadBalancerInterface1 = load_balancer_interfaces.LoadBalancerInterface{
 	Description:         "test1",
 	ID:                  "b409f68e-9307-4649-9073-bb3cb776bda5",
-	IPAddress:           "100.64.64.34",
+	IPAddress:           &DetailIPAddress,
 	LoadBalancerID:      "5a109f4a-ebd8-4998-8410-98629e2bd5cd",
 	Name:                "Interface 1/2",
-	NetworkID:           "db79f4e1-ae25-46ca-b0f0-00892bf83929",
+	NetworkID:           &DetailNetworkID,
 	SlotNumber:          2,
 	Status:              "ACTIVE",
 	TenantID:            "8fe1cc29-ff7d4773bced6cb02fc8002f",
-	VirtualIPAddress:    "100.64.64.101",
-	VirtualIPProperties: load_balancer_interfaces.VirtualIPProperties{
+	VirtualIPAddress:    &DetailVirtualIPAddress,
+	VirtualIPProperties: &load_balancer_interfaces.VirtualIPProperties{
 		Protocol: "vrrp",
 		Vrid:     10,
 	},
 }
+
+var DetailIPAddress = "100.64.64.34"
+var DetailNetworkID = "30b665e3-db2b-473b-a09a-8940148b6491"
+var DetailVirtualIPAddress = "100.64.64.101"
 
 var LoadBalancerInterface2 = load_balancer_interfaces.LoadBalancerInterface{
 	Description:         "test2",
@@ -126,15 +130,15 @@ var LoadBalancerInterface2 = load_balancer_interfaces.LoadBalancerInterface{
 var LoadBalancerInterfaceDetail = load_balancer_interfaces.LoadBalancerInterface{
 	Description:         "test3",
 	ID:                  "da3f99e8-a949-40e7-a0e4-4609b705a7c7",
-	IPAddress:           "100.64.64.34",
+	IPAddress:           &DetailIPAddress,
 	LoadBalancerID:      "79378a5d-bc2f-4a74-ab4b-ceae8693dca5",
 	Name:                "Interface 1/2",
-	NetworkID:           "30b665e3-db2b-473b-a09a-8940148b6491",
+	NetworkID:           &DetailNetworkID,
 	SlotNumber:          2,
 	Status:              "ACTIVE",
 	TenantID:            "401c9473a52b4ee486d17ea76f466f66",
-	VirtualIPAddress:    "100.64.64.101",
-	VirtualIPProperties: load_balancer_interfaces.VirtualIPProperties{
+	VirtualIPAddress:    &DetailVirtualIPAddress,
+	VirtualIPProperties: &load_balancer_interfaces.VirtualIPProperties{
 		Protocol: "vrrp",
 		Vrid:     10,
 	},

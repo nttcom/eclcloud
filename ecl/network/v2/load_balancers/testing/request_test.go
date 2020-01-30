@@ -127,20 +127,26 @@ func TestUpdateLoadBalancer(t *testing.T) {
 	defaultGateway := "100.127.253.1"
 	description := "UPDATED"
 	id := "5f3cae7c-58a5-4124-b622-9ca3cfbf2525"
+
+	ipAddress1 := "100.127.253.173"
+	networkID1 := "c7f88fab-573e-47aa-b0b4-257db28dae23"
+	ipAddress2 := "192.168.110.1"
+	networkID2 := "1839d290-721c-49ba-99f1-3d7aa37811b0"
+
 	interfaces := []load_balancer_interfaces.LoadBalancerInterface{
 		{
 			ID:                      "ee335c69-b50f-4a32-9d0f-f44cef84a456",
-			IPAddress:               "100.127.253.173",
+			IPAddress:               &ipAddress1,
 			Name:                  "Interface 1/1",
-			NetworkID:            "c7f88fab-573e-47aa-b0b4-257db28dae23",
+			NetworkID:            &networkID1,
 			SlotNumber:           1,
 			Status:                "ACTIVE",
 		},
 		{
 			ID: "b39b61e4-00b1-4698-aed0-1928beb90abe",
-			IPAddress: "192.168.110.1",
+			IPAddress: &ipAddress2,
 			Name: "Interface 1/2",
-			NetworkID: "1839d290-721c-49ba-99f1-3d7aa37811b0",
+			NetworkID: &networkID2,
 			SlotNumber: 2,
 			Status: "ACTIVE",
 		},
@@ -186,7 +192,7 @@ func TestUpdateLoadBalancer(t *testing.T) {
 
 	th.CheckEquals(t, adminUsername, s.AdminUsername)
 	th.CheckEquals(t, availabilityZone, s.AvailabilityZone)
-	th.CheckEquals(t, defaultGateway, s.DefaultGateway)
+	th.CheckEquals(t, defaultGateway, *s.DefaultGateway)
 	th.CheckEquals(t, description, s.Description)
 	th.CheckEquals(t, id, s.ID)
 	th.CheckDeepEquals(t, interfaces, s.Interfaces)

@@ -246,7 +246,7 @@ var LoadBalancer1 = load_balancers.LoadBalancer{
 	ID:                 "5f3cae7c-58a5-4124-b622-9ca3cfbf2525",
 	AdminUsername:      "user-admin",
 	AvailabilityZone:   "zone1-groupa",
-	DefaultGateway:     "100.127.253.1",
+	DefaultGateway:     &DetailDefaultGateway,
 	Description:        "Load Balancer 1 Description",
 	LoadBalancerPlanID: "bd12784a-c66e-4f13-9f72-5143d64762b6",
 	Name:               "Load Balancer 1",
@@ -267,32 +267,40 @@ var LoadBalancer2 = load_balancers.LoadBalancer{
 	UserUsername:       "user-read",
 }
 
+var DetailDefaultGateway = "100.127.253.1"
+var DetailIPAddress1 = "100.127.253.173"
+var DetailNetworkID1 = "c7f88fab-573e-47aa-b0b4-257db28dae23"
+var DetailVirtualIPAddress1 = "100.127.253.174"
+
+var DetailIPAddress2 = "192.168.110.1"
+var DetailNetworkID2 = "1839d290-721c-49ba-99f1-3d7aa37811b0"
+
 var LoadBalancerDetail = load_balancers.LoadBalancer{
 	ID:                 "5f3cae7c-58a5-4124-b622-9ca3cfbf2525",
 	AdminUsername:      "user-admin",
 	AvailabilityZone:   "zone1-groupa",
-	DefaultGateway:     "100.127.253.1",
+	DefaultGateway:     &DetailDefaultGateway,
 	Description:        "Load Balancer 1 Description",
 	Interfaces:			[]load_balancer_interfaces.LoadBalancerInterface{
 		{
 			ID:                  "ee335c69-b50f-4a32-9d0f-f44cef84a456",
-			IPAddress:           "100.127.253.173",
+			IPAddress:           &DetailIPAddress1,
 			Name:                "Interface 1/1",
-			NetworkID:           "c7f88fab-573e-47aa-b0b4-257db28dae23",
+			NetworkID:           &DetailNetworkID1,
 			SlotNumber:          1,
 			Status:              "ACTIVE",
 			Type:                "user",
-			VirtualIPAddress:    "100.127.253.174",
-			VirtualIPProperties: load_balancer_interfaces.VirtualIPProperties {
+			VirtualIPAddress:    &DetailVirtualIPAddress1,
+			VirtualIPProperties: &load_balancer_interfaces.VirtualIPProperties {
 				Protocol: "vrrp",
 				Vrid:     10,
 			},
 		},
 		{
 			ID:                  "b39b61e4-00b1-4698-aed0-1928beb90abe",
-			IPAddress:           "192.168.110.1",
+			IPAddress:           &DetailIPAddress2,
 			Name:                "Interface 1/2",
-			NetworkID:           "1839d290-721c-49ba-99f1-3d7aa37811b0",
+			NetworkID:           &DetailNetworkID2,
 			SlotNumber:          2,
 			Status:              "ACTIVE",
 			Type:                "user",
