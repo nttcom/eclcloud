@@ -47,7 +47,7 @@ type LoadBalancerInterface struct {
 	ID string `json:"id"`
 
 	// IP Address
-	IPAddress string `json:"ip_address"`
+	IPAddress *string `json:"ip_address"`
 
 	// The ID of load_balancer this load_balancer_interface belongs to.
 	LoadBalancerID string `json:"load_balancer_id"`
