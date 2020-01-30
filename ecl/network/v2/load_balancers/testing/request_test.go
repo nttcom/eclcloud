@@ -34,7 +34,7 @@ func TestListLoadBalancer(t *testing.T) {
 		count++
 		actual, err := load_balancers.ExtractLoadBalancers(page)
 		if err != nil {
-			t.Errorf("Failed to extrace ports: %v", err)
+			t.Errorf("Failed to extract Load Balancers: %v", err)
 			return false, nil
 		}
 

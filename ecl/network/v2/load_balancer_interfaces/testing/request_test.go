@@ -32,7 +32,7 @@ func TestListLoadBalancerInterface(t *testing.T) {
 		count++
 		actual, err := load_balancer_interfaces.ExtractLoadBalancerInterfaces(page)
 		if err != nil {
-			t.Errorf("Failed to extrace ports: %v", err)
+			t.Errorf("Failed to extract Load Balancer Interfaces: %v", err)
 			return false, nil
 		}
 

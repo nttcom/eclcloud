@@ -32,7 +32,7 @@ func TestListLoadBalancerSyslogServer(t *testing.T) {
 		count++
 		actual, err := load_balancer_syslog_servers.ExtractLoadBalancerSyslogServers(page)
 		if err != nil {
-			t.Errorf("Failed to extrace ports: %v", err)
+			t.Errorf("Failed to extract Load Balancer Syslog Servers: %v", err)
 			return false, nil
 		}
 
