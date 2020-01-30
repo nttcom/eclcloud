@@ -64,7 +64,7 @@ func TestResetPasswordLoadBalancer(t *testing.T) {
 	}
 	s, err := load_balancer_actions.ResetPassword(fake.ServiceClient(), "6e9c7745-61f2-491f-9689-add8c5fc4b9a", options).ExtractResetPassword()
 	th.AssertNoErr(t, err)
-	th.AssertDeepEquals(t, &LoadBalancerActionResetPassword, s)
+	th.AssertDeepEquals(t, &ResetPasswordDetail, s)
 }
 
 func TestRequiredResetPasswordOptsLoadBalancer(t *testing.T) {
