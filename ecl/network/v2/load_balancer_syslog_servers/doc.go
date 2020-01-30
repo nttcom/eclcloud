@@ -37,6 +37,8 @@ Example to Show Load Balancer Syslog Server
 
 Example to Create a Load Balancer Syslog Server
 
+	priority := 20
+
 	createOpts := load_balancer_syslog_servers.CreateOpts{
 		AclLogging:                  "DISABLED",
 		AppflowLogging:              "DISABLED",
@@ -48,7 +50,7 @@ Example to Create a Load Balancer Syslog Server
 		LogLevel:                    "DEBUG",
 		Name:                        "first_syslog_server",
 		PortNumber:                  514,
-		Priority:                    20,
+		Priority:                    &priority,
 		TcpLogging:                  "ALL",
 		TenantID:                    "b58531f716614e82a9bf001571c8bb15",
 		TimeZone:                    "LOCAL_TIME",
