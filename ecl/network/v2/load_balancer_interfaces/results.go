@@ -71,7 +71,7 @@ type LoadBalancerInterface struct {
 	Type string `json:"type"`
 
 	// Virtual IP Address
-	VirtualIPAddress string `json:"virtual_ip_address"`
+	VirtualIPAddress *string `json:"virtual_ip_address"`
 
 	// Properties used for virtual IP address
 	VirtualIPProperties VirtualIPProperties `json:"virtual_ip_properties"`
