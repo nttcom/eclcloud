@@ -4,7 +4,10 @@ fmt:
 fmtcheck:
 	(! gofmt -s -d . | grep '^')
 
-test: fmtcheck
+vet:
+	go vet ./...
+
+test:
 	go test ./... -count=1
 
-.PHONY: fmt fmtcheck test
+.PHONY: fmt fmtcheck vet test

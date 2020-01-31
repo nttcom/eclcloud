@@ -2,7 +2,6 @@ package testing
 
 import (
 	"errors"
-	"os"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -69,22 +68,22 @@ func TestNormalizeURL(t *testing.T) {
 }
 
 func TestNormalizePathURL(t *testing.T) {
-	baseDir, _ := os.Getwd()
+	baseDir := "/test/path"
 
 	rawPath := "template.yaml"
-	basePath, _ := filepath.Abs(".")
+	basePath := "/test/path"
 	result, _ := eclcloud.NormalizePathURL(basePath, rawPath)
 	expected := strings.Join([]string{"file:/", filepath.ToSlash(baseDir), "template.yaml"}, "/")
 	th.CheckEquals(t, expected, result)
 
 	rawPath = "http://www.google.com"
-	basePath, _ = filepath.Abs(".")
+	basePath = "/test/path"
 	result, _ = eclcloud.NormalizePathURL(basePath, rawPath)
 	expected = "http://www.google.com"
 	th.CheckEquals(t, expected, result)
 
 	rawPath = "very/nested/file.yaml"
-	basePath, _ = filepath.Abs(".")
+	basePath = "/test/path"
 	result, _ = eclcloud.NormalizePathURL(basePath, rawPath)
 	expected = strings.Join([]string{"file:/", filepath.ToSlash(baseDir), "very/nested/file.yaml"}, "/")
 	th.CheckEquals(t, expected, result)
