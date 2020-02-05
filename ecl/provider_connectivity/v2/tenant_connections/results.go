@@ -15,7 +15,7 @@ type TenantConnection struct {
 	TenantID                  string            `json:"tenant_id"`
 	NameOther                 string            `json:"name_other"`
 	DescriptionOther          string            `json:"description_other"`
-	TagsOther                 interface{} 		`json:"tags_other"`
+	TagsOther                 interface{}       `json:"tags_other"`
 	TenantIDOther             string            `json:"tenant_id_other"`
 	NetworkID                 string            `json:"network_id"`
 	DeviceType                string            `json:"device_type"`
