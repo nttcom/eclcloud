@@ -1,0 +1,98 @@
+package testing
+
+import (
+	"testing"
+
+	"github.com/nttcom/eclcloud/ecl/provider_connectivity/v2/tenant_connection_requests"
+	"github.com/nttcom/eclcloud/pagination"
+	th "github.com/nttcom/eclcloud/testhelper"
+	"github.com/nttcom/eclcloud/testhelper/client"
+)
+
+func TestListTenantConnectionRequests(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleListTenantConnectionRequestsSuccessfully(t)
+
+	count := 0
+	err := tenant_connection_requests.List(client.ServiceClient(), nil).EachPage(func(page pagination.Page) (bool, error) {
+		count++
+
+		actual, err := tenant_connection_requests.ExtractTenantConnectionRequests(page)
+		th.AssertNoErr(t, err)
+
+		th.AssertDeepEquals(t, ExpectedTenantConnectionRequestsSlice, actual)
+
+		return true, nil
+	})
+	th.AssertNoErr(t, err)
+	th.AssertEquals(t, count, 1)
+}
+
+func TestListTenantConnectionRequestsAllPages(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleListTenantConnectionRequestsSuccessfully(t)
+
+	allPages, err := tenant_connection_requests.List(client.ServiceClient(), nil).AllPages()
+	th.AssertNoErr(t, err)
+	actual, err := tenant_connection_requests.ExtractTenantConnectionRequests(allPages)
+	th.AssertNoErr(t, err)
+	th.AssertDeepEquals(t, ExpectedTenantConnectionRequestsSlice, actual)
+}
+
+func TestGetTenantConnectionRequest(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleGetTenantConnectionRequestSuccessfully(t)
+
+	actual, err := tenant_connection_requests.Get(client.ServiceClient(), SecondTenantConnectionRequest.ID).Extract()
+	th.AssertNoErr(t, err)
+	th.AssertDeepEquals(t, SecondTenantConnectionRequest, *actual)
+}
+
+func TestCreateTenantConnectionRequest(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleCreateTenantConnectionRequestSuccessfully(t)
+
+	createOpts := tenant_connection_requests.CreateOpts{
+		TenantIDOther: "7e91b19b9baa423793ee74a8e1ff2be1",
+		NetworkID:     "77cfc6b0-d032-4e5a-b6fb-4cce2537f4d1",
+		Name:          "test_name1",
+		Description:   "test_desc1",
+		Tags:          map[string]string{"test_tags1": "test1"},
+	}
+
+	actual, err := tenant_connection_requests.Create(client.ServiceClient(), createOpts).Extract()
+	th.AssertNoErr(t, err)
+	th.AssertDeepEquals(t, &FirstTenantConnectionRequest, actual)
+}
+
+func TestDeleteTenantConnectionRequest(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleDeleteTenantConnectionRequestSuccessfully(t)
+
+	res := tenant_connection_requests.Delete(client.ServiceClient(), FirstTenantConnectionRequest.ID)
+	th.AssertNoErr(t, res.Err)
+}
+
+func TestUpdateTenantConnectionRequest(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleUpdateTenantConnectionRequestSuccessfully(t)
+
+	updateOpts := tenant_connection_requests.UpdateOpts{
+		Name:             "updated_name",
+		Description:      "updated_desc",
+		Tags:             map[string]string{"k2": "v2"},
+		NameOther:        "updeted_name_other",
+		DescriptionOther: "updated_desc_other",
+		TagsOther:        map[string]string{"k3": "v3"},
+	}
+
+	actual, err := tenant_connection_requests.Update(client.ServiceClient(), SecondTenantConnectionRequest.ID, updateOpts).Extract()
+	th.AssertNoErr(t, err)
+	th.AssertDeepEquals(t, SecondTenantConnectionRequestUpdated, *actual)
+}
