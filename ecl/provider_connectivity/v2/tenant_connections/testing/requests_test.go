@@ -1,11 +1,12 @@
 package testing
 
 import (
+	"testing"
+
 	"github.com/nttcom/eclcloud/ecl/provider_connectivity/v2/tenant_connections"
 	"github.com/nttcom/eclcloud/pagination"
 	th "github.com/nttcom/eclcloud/testhelper"
 	"github.com/nttcom/eclcloud/testhelper/client"
-	"testing"
 )
 
 func TestListTenantConnections(t *testing.T) {
@@ -63,7 +64,7 @@ func TestCreateTenantConnectionAttachServer(t *testing.T) {
 		DeviceType:                "ECL::Compute::Server",
 		DeviceID:                  "8c235a3b-8dee-41a1-b81a-64e06edc0986",
 		DeviceInterfaceID:         "",
-		AttachmentOpts: tenant_connections.Server{
+		AttachmentOpts: tenant_connections.ComputeServer{
 			AllowedAddressPairs: []tenant_connections.AddressPair{
 				{
 					IPAddress:  "192.168.1.2",
@@ -125,13 +126,20 @@ func TestUpdateTenantConnection(t *testing.T) {
 	defer th.TeardownHTTP()
 	HandleUpdateTenantConnectionSuccessfully(t)
 
+	name := "update_name"
+	description := "update_desc"
+	tags := map[string]string{"update_tags": "update"}
+	nameOther := "update_name_other"
+	descriptionOther := "update_desc_other"
+	tagsOther := map[string]string{"test_tags_other": "update"}
+
 	updateOpts := tenant_connections.UpdateOpts{
-		Name:             "update_name",
-		Description:      "update_desc",
-		Tags:             map[string]string{"update_tags": "update"},
-		NameOther:        "update_name_other",
-		DescriptionOther: "update_desc_other",
-		TagsOther:        map[string]string{"test_tags_other": "update"},
+		Name:             &name,
+		Description:      &description,
+		Tags:             &tags,
+		NameOther:        &nameOther,
+		DescriptionOther: &descriptionOther,
+		TagsOther:        &tagsOther,
 	}
 
 	actual, err := tenant_connections.Update(client.ServiceClient(), SecondTenantConnection.ID, updateOpts).Extract()

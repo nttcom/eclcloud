@@ -84,11 +84,17 @@ type Vna struct {
 	FixedIPs []VnaFixedIPs `json:"fixed_ips,omitempty"`
 }
 
-// Server represents the parameter when device_type is Server.
-type Server struct {
+// ComputeServer represents the parameter when device_type is Compute Server.
+type ComputeServer struct {
 	AllowedAddressPairs []AddressPair    `json:"allowed_address_pairs,omitempty"`
 	FixedIPs            []ServerFixedIPs `json:"fixed_ips,omitempty"`
-	SegmentationID      int              `json:"segmentation_id,omitempty"`
+}
+
+// BaremetalServer represents the parameter when device_type is Baremetal Server.
+type BaremetalServer struct {
+	AllowedAddressPairs []AddressPair    `json:"allowed_address_pairs,omitempty"`
+	FixedIPs            []ServerFixedIPs `json:"fixed_ips,omitempty"`
+	SegmentationID      *int             `json:"segmentation_id,omitempty"`
 	SegmentationType    string           `json:"segmentation_type,omitempty"`
 }
 
@@ -138,12 +144,12 @@ type UpdateOptsBuilder interface {
 
 // UpdateOpts represents parameters to update a Tenant Connection.
 type UpdateOpts struct {
-	Name             string            `json:"name,omitempty"`
-	Description      string            `json:"description,omitempty"`
-	Tags             map[string]string `json:"tags,omitempty"`
-	NameOther        string            `json:"name_other,omitempty"`
-	DescriptionOther string            `json:"description_other,omitempty"`
-	TagsOther        map[string]string `json:"tags_other,omitempty"`
+	Name             *string            `json:"name,omitempty"`
+	Description      *string            `json:"description,omitempty"`
+	Tags             *map[string]string `json:"tags,omitempty"`
+	NameOther        *string            `json:"name_other,omitempty"`
+	DescriptionOther *string            `json:"description_other,omitempty"`
+	TagsOther        *map[string]string `json:"tags_other,omitempty"`
 }
 
 // ToTenantConnectionUpdateMap formats a UpdateOpts into an update request.

@@ -83,13 +83,20 @@ func TestUpdateTenantConnectionRequest(t *testing.T) {
 	defer th.TeardownHTTP()
 	HandleUpdateTenantConnectionRequestSuccessfully(t)
 
+	name := "updated_name"
+	description := "updated_desc"
+	tags := map[string]string{"k2": "v2"}
+	nameOther := "updeted_name_other"
+	descriptionOther := "updated_desc_other"
+	tagsOther := map[string]string{"k3": "v3"}
+
 	updateOpts := tenant_connection_requests.UpdateOpts{
-		Name:             "updated_name",
-		Description:      "updated_desc",
-		Tags:             map[string]string{"k2": "v2"},
-		NameOther:        "updeted_name_other",
-		DescriptionOther: "updated_desc_other",
-		TagsOther:        map[string]string{"k3": "v3"},
+		Name:             &name,
+		Description:      &description,
+		Tags:             &tags,
+		NameOther:        &nameOther,
+		DescriptionOther: &descriptionOther,
+		TagsOther:        &tagsOther,
 	}
 
 	actual, err := tenant_connection_requests.Update(client.ServiceClient(), SecondTenantConnectionRequest.ID, updateOpts).Extract()

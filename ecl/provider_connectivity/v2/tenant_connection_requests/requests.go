@@ -62,8 +62,8 @@ type CreateOptsBuilder interface {
 
 // CreateOpts provides options used to create a Tenant Connection Request.
 type CreateOpts struct {
-	TenantIDOther string            `json:"tenant_id_other"`
-	NetworkID     string            `json:"network_id"`
+	TenantIDOther string            `json:"tenant_id_other" required:"true"`
+	NetworkID     string            `json:"network_id" required:"true"`
 	Name          string            `json:"name,omitempty"`
 	Description   string            `json:"description,omitempty"`
 	Tags          map[string]string `json:"tags,omitempty"`
@@ -103,12 +103,12 @@ type UpdateOptsBuilder interface {
 
 // UpdateOpts represents parameters to update a Tenant Connection Request.
 type UpdateOpts struct {
-	Name             string            `json:"name,omitempty"`
-	Description      string            `json:"description,omitempty"`
-	Tags             map[string]string `json:"tags,omitempty"`
-	NameOther        string            `json:"name_other,omitempty"`
-	DescriptionOther string            `json:"description_other,omitempty"`
-	TagsOther        map[string]string `json:"tags_other,omitempty"`
+	Name             *string            `json:"name,omitempty"`
+	Description      *string            `json:"description,omitempty"`
+	Tags             *map[string]string `json:"tags,omitempty"`
+	NameOther        *string            `json:"name_other,omitempty"`
+	DescriptionOther *string            `json:"description_other,omitempty"`
+	TagsOther        *map[string]string `json:"tags_other,omitempty"`
 }
 
 // ToResourceUpdateCreateMap formats a UpdateOpts into an update request.
