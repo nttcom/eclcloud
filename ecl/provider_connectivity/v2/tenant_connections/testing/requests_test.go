@@ -113,8 +113,8 @@ func TestCreateTenantConnectionAttachBaremetalServer(t *testing.T) {
 					IPAddress: "192.168.1.1",
 				},
 			},
-			SegmentationID:      &segmentationID,
-			SegmentationType:    "flat",
+			SegmentationID:   &segmentationID,
+			SegmentationType: "flat",
 		},
 	}
 
