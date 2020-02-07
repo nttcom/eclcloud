@@ -76,7 +76,7 @@ const GetResult = `
 }
 `
 
-// CreateAttachServerRequest provides the input to a Create request.
+// CreateRequest provides the input to a Create request.
 const CreateRequest = `
 {
   "tenant_connection_request": {
@@ -91,7 +91,7 @@ const CreateRequest = `
 }
 `
 
-// CreateAttachServerResponse provides the output from a Create request.
+// CreateResponse provides the output from a Create request.
 const CreateResponse = `
 {
   "tenant_connection_request": {

@@ -6,6 +6,7 @@ import (
 )
 
 // TenantConnection represents Tenant Connection.
+// TagsOther is interface {} because the data type returned by Create API depends on the value of device_type.
 type TenantConnection struct {
 	ID                        string            `json:"id"`
 	TenantConnectionRequestID string            `json:"tenant_connection_request_id"`

@@ -87,8 +87,8 @@ const GetResult = `
 }
 `
 
-// CreateAttachServerRequest provides the input to a Create request.
-const CreateAttachServerRequest = `
+// CreateAttachComputeServerRequest provides the input to a Create request.
+const CreateAttachComputeServerRequest = `
 {
     "tenant_connection": {
         "name": "test_name_1",
@@ -117,8 +117,8 @@ const CreateAttachServerRequest = `
 }
 `
 
-// CreateAttachServerResponse provides the output from a Create request.
-const CreateAttachServerResponse = `
+// CreateAttachComputeServerResponse provides the output from a Create request.
+const CreateAttachComputeServerResponse = `
 {
     "tenant_connection":{
         "id": "2a23e5a6-bd34-11e7-afb6-0050569c850d",
@@ -138,6 +138,65 @@ const CreateAttachServerResponse = `
         "device_id": "8c235a3b-8dee-41a1-b81a-64e06edc0986",
         "device_interface_id": "",
         "port_id": "b404ed73-9438-41a1-91ed-49d0e403be64",
+        "status": "creating"
+    }
+}
+`
+
+// CreateAttachBaremetalServerRequest provides the input to a Create request.
+const CreateAttachBaremetalServerRequest = `
+{
+    "tenant_connection": {
+        "name": "attach_bare_name",
+        "description": "attach_bare_desc",
+		"tags": {
+			"test_tags1": "test1"
+		},
+		"tenant_connection_request_id": "147c4ffa-481e-11ea-8088-525400060300",
+		"device_type": "ECL::Baremetal::Server",
+		"device_interface_id": "46eb7624-d462-46c2-8ac7-f988a15d3280",
+		"device_id": "0acab22f-8993-451c-8a6b-398b0244f578",
+		"attachment_opts": {
+			"segmentation_id": 10,
+			"segmentation_type": "flat",
+			"fixed_ips": [
+				{
+					"ip_address": "192.168.1.1",
+					"subnet_id": "1f424165-2202-4022-ad70-0fa6f9ec99e1"
+				}
+			],
+			"allowed_address_pairs": [
+				{
+					"ip_address": "192.168.1.2",
+					"mac_address": "11:22:33:aa:bb:cc"
+				}
+			]
+		}
+    }
+}
+`
+
+// CreateAttachBaremetalServerResponse provides the output from a Create request.
+const CreateAttachBaremetalServerResponse = `
+{
+    "tenant_connection":{
+        "id": "0d956a2e-4958-11ea-8088-525400060300",
+        "tenant_connection_request_id": "147c4ffa-481e-11ea-8088-525400060300",
+        "name": "attach_bare_name",
+        "description": "attach_bare_desc",
+        "tags": {
+			"test_tags1": "test1"
+		},
+        "tenant_id": "7e91b19b9baa423793ee74a8e1ff2be1",
+        "name_other": "",
+        "description_other": "",
+        "tags_other": {},
+        "tenant_id_other": "c7f3a68a73e845d4ba6a42fb80fce03f",
+        "network_id": "061dbaa9-a3e0-4343-b3fc-0a619db66854",
+        "device_type": "ECL::Baremetal::Server",
+        "device_id": "0acab22f-8993-451c-8a6b-398b0244f578",
+        "device_interface_id": "46eb7624-d462-46c2-8ac7-f988a15d3280",
+        "port_id": "87449d66-4e99-4cf7-9b93-9f153548ccc7",
         "status": "creating"
     }
 }
@@ -285,6 +344,28 @@ var SecondTenantConnection = tenant_connections.TenantConnection{
 	Status:            "down",
 }
 
+// CreateTenantConnectionAttachBaremetalServer is the tenant_connection in the Create Attach Baremetal Server request.
+var CreateTenantConnectionAttachBaremetalServer = tenant_connections.TenantConnection{
+	ID:                        "0d956a2e-4958-11ea-8088-525400060300",
+	TenantConnectionRequestID: "147c4ffa-481e-11ea-8088-525400060300",
+	Name:                      "attach_bare_name",
+	Description:               "attach_bare_desc",
+	Tags: map[string]string{
+		"test_tags1": "test1",
+	},
+	TenantID:          "7e91b19b9baa423793ee74a8e1ff2be1",
+	NameOther:         "",
+	DescriptionOther:  "",
+	TagsOther:         map[string]string{},
+	TenantIDOther:     "c7f3a68a73e845d4ba6a42fb80fce03f",
+	NetworkID:         "061dbaa9-a3e0-4343-b3fc-0a619db66854",
+	DeviceType:        "ECL::Baremetal::Server",
+	DeviceID:          "0acab22f-8993-451c-8a6b-398b0244f578",
+	DeviceInterfaceID: "46eb7624-d462-46c2-8ac7-f988a15d3280",
+	PortID:            "87449d66-4e99-4cf7-9b93-9f153548ccc7",
+	Status:            "creating",
+}
+
 // CreateTenantConnectionAttachVna is the tenant_connection in the Create Attach Vna request.
 var CreateTenantConnectionAttachVna = tenant_connections.TenantConnection{
 	ID:                        "f6331886-3804-11ea-95a8-525400060400",
@@ -362,16 +443,29 @@ func HandleGetTenantConnectionSuccessfully(t *testing.T) {
 	})
 }
 
-// HandleCreateTenantConnectionAttachServerSuccessfully creates an HTTP handler at `/tenant_connections` on the
-// test handler mux that tests creation of tenant_connection with Server attached.
-func HandleCreateTenantConnectionAttachServerSuccessfully(t *testing.T) {
+// HandleCreateTenantConnectionAttachComputeServerSuccessfully creates an HTTP handler at `/tenant_connections` on the
+// test handler mux that tests creation of tenant_connection with Compute Server attached.
+func HandleCreateTenantConnectionAttachComputeServerSuccessfully(t *testing.T) {
 	th.Mux.HandleFunc("/tenant_connections", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "POST")
 		th.TestHeader(t, r, "X-Auth-Token", client.TokenID)
-		th.TestJSONRequest(t, r, CreateAttachServerRequest)
+		th.TestJSONRequest(t, r, CreateAttachComputeServerRequest)
 
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprint(w, CreateAttachServerResponse)
+		fmt.Fprint(w, CreateAttachComputeServerResponse)
+	})
+}
+
+// HandleCreateTenantConnectionAttachBaremetalServerSuccessfully creates an HTTP handler at `/tenant_connections` on the
+// test handler mux that tests creation of tenant_connection with Baremetal Server attached.
+func HandleCreateTenantConnectionAttachBaremetalServerSuccessfully(t *testing.T) {
+	th.Mux.HandleFunc("/tenant_connections", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "POST")
+		th.TestHeader(t, r, "X-Auth-Token", client.TokenID)
+		th.TestJSONRequest(t, r, CreateAttachBaremetalServerRequest)
+
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, CreateAttachBaremetalServerResponse)
 	})
 }
 

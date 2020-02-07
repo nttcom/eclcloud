@@ -51,10 +51,10 @@ func TestGetTenantConnection(t *testing.T) {
 	th.AssertDeepEquals(t, SecondTenantConnection, *actual)
 }
 
-func TestCreateTenantConnectionAttachServer(t *testing.T) {
+func TestCreateTenantConnectionAttachComputeServer(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
-	HandleCreateTenantConnectionAttachServerSuccessfully(t)
+	HandleCreateTenantConnectionAttachComputeServerSuccessfully(t)
 
 	createOpts := tenant_connections.CreateOpts{
 		Name:                      "test_name_1",
@@ -83,6 +83,44 @@ func TestCreateTenantConnectionAttachServer(t *testing.T) {
 	actual, err := tenant_connections.Create(client.ServiceClient(), createOpts).Extract()
 	th.AssertNoErr(t, err)
 	th.AssertDeepEquals(t, &FirstTenantConnection, actual)
+}
+
+func TestCreateTenantConnectionAttachBaremetalServer(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleCreateTenantConnectionAttachBaremetalServerSuccessfully(t)
+
+	segmentationID := 10
+
+	createOpts := tenant_connections.CreateOpts{
+		Name:                      "attach_bare_name",
+		Description:               "attach_bare_desc",
+		Tags:                      map[string]string{"test_tags1": "test1"},
+		TenantConnectionRequestID: "147c4ffa-481e-11ea-8088-525400060300",
+		DeviceType:                "ECL::Baremetal::Server",
+		DeviceID:                  "0acab22f-8993-451c-8a6b-398b0244f578",
+		DeviceInterfaceID:         "46eb7624-d462-46c2-8ac7-f988a15d3280",
+		AttachmentOpts: tenant_connections.BaremetalServer{
+			AllowedAddressPairs: []tenant_connections.AddressPair{
+				{
+					IPAddress:  "192.168.1.2",
+					MACAddress: "11:22:33:aa:bb:cc",
+				},
+			},
+			FixedIPs: []tenant_connections.ServerFixedIPs{
+				{
+					SubnetID:  "1f424165-2202-4022-ad70-0fa6f9ec99e1",
+					IPAddress: "192.168.1.1",
+				},
+			},
+			SegmentationID:      &segmentationID,
+			SegmentationType:    "flat",
+		},
+	}
+
+	actual, err := tenant_connections.Create(client.ServiceClient(), createOpts).Extract()
+	th.AssertNoErr(t, err)
+	th.AssertDeepEquals(t, &CreateTenantConnectionAttachBaremetalServer, actual)
 }
 
 func TestCreateTenantConnectionAttachVna(t *testing.T) {
