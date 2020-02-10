@@ -103,3 +103,41 @@ func TestUpdateTenantConnectionRequest(t *testing.T) {
 	th.AssertNoErr(t, err)
 	th.AssertDeepEquals(t, SecondTenantConnectionRequestUpdated, *actual)
 }
+
+func TestBlankUpdateTenantConnectionRequest(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleBlankUpdateTenantConnectionRequestSuccessfully(t)
+
+	name := ""
+	description := ""
+	tags := map[string]string{"": ""}
+	nameOther := ""
+	descriptionOther := ""
+	tagsOther := map[string]string{"": ""}
+
+	updateOpts := tenant_connection_requests.UpdateOpts{
+		Name:             &name,
+		Description:      &description,
+		Tags:             &tags,
+		NameOther:        &nameOther,
+		DescriptionOther: &descriptionOther,
+		TagsOther:        &tagsOther,
+	}
+
+	actual, err := tenant_connection_requests.Update(client.ServiceClient(), SecondTenantConnectionRequest.ID, updateOpts).Extract()
+	th.AssertNoErr(t, err)
+	th.AssertDeepEquals(t, SecondTenantConnectionRequestBlankUpdated, *actual)
+}
+
+func TestNilUpdateTenantConnectionRequest(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleNilUpdateTenantConnectionRequestSuccessfully(t)
+
+	updateOpts := tenant_connection_requests.UpdateOpts{}
+
+	actual, err := tenant_connection_requests.Update(client.ServiceClient(), SecondTenantConnectionRequest.ID, updateOpts).Extract()
+	th.AssertNoErr(t, err)
+	th.AssertDeepEquals(t, SecondTenantConnectionRequest, *actual)
+}

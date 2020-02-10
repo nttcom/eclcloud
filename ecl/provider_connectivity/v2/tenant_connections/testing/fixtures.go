@@ -298,6 +298,88 @@ const UpdateResult = `
 }
 `
 
+// UpdateBlankRequest provides the input to as Update with blank request.
+const UpdateBlankRequest = `
+{
+  "tenant_connection": {
+    "name": "",
+    "description": "",
+    "tags": {
+      "": ""
+    },
+	"name_other": "",
+    "description_other": "",
+    "tags_other": {
+      "": ""
+    }
+  }
+}
+`
+
+// UpdateBlankResult provides an update with blank result.
+const UpdateBlankResult = `
+{
+    "tenant_connection":{
+        "id": "ea5d975c-bd31-11e7-bcac-0050569c850d",
+        "tenant_connection_request_id": "90381138-b572-11e7-9391-0050569c850d",
+        "name": "",
+        "description": "",
+        "tags": {
+			"": ""
+		},
+        "tenant_id": "c7f3a68a73e845d4ba6a42fb80fce03f",
+        "name_other": "",
+        "description_other": "",
+        "tags_other": {
+			"": ""
+		},
+        "tenant_id_other": "7e91b19b9baa423793ee74a8e1ff2be1",
+        "network_id": "c4d5fc41-b7e8-4f19-96f4-85299e54373c",
+        "device_type": "ECL::Compute::Server",
+        "device_id": "7cc34d4b-a345-4e51-b3d9-62540faca7bf",
+        "device_interface_id": "",
+        "port_id": "c9c3de44-0720-4acd-87c1-9c76f0f77cac",
+        "status": "down"
+    }
+}
+`
+
+// UpdateNilRequest provides the input to as Update with nil request.
+const UpdateNilRequest = `
+{
+  "tenant_connection": {
+  }
+}
+`
+
+// UpdateNilResult provides an update with blank with nil result.
+const UpdateNilResult = `
+{
+    "tenant_connection":{
+        "id": "ea5d975c-bd31-11e7-bcac-0050569c850d",
+        "tenant_connection_request_id": "90381138-b572-11e7-9391-0050569c850d",
+        "name": "test_name_2",
+        "description": "test_desc_2",
+        "tags": {
+			"test_tags2": "test2"
+		},
+        "tenant_id": "c7f3a68a73e845d4ba6a42fb80fce03f",
+        "name_other": "test_name_other_2",
+        "description_other": "test_desc_other_2",
+        "tags_other": {
+			"test_tags_other2": "test2"
+		},
+        "tenant_id_other": "7e91b19b9baa423793ee74a8e1ff2be1",
+        "network_id": "c4d5fc41-b7e8-4f19-96f4-85299e54373c",
+        "device_type": "ECL::Compute::Server",
+        "device_id": "7cc34d4b-a345-4e51-b3d9-62540faca7bf",
+        "device_interface_id": "",
+        "port_id": "c9c3de44-0720-4acd-87c1-9c76f0f77cac",
+        "status": "down"
+    }
+}
+`
+
 // FirstTenantConnection is the first tenant_connection in the List request.
 var FirstTenantConnection = tenant_connections.TenantConnection{
 	ID:                        "2a23e5a6-bd34-11e7-afb6-0050569c850d",
@@ -412,6 +494,30 @@ var SecondTenantConnectionUpdated = tenant_connections.TenantConnection{
 	Status:            "down",
 }
 
+// SecondTenantConnectionBlankUpdated is how second tenant_connection should look after an Update with blank.
+var SecondTenantConnectionBlankUpdated = tenant_connections.TenantConnection{
+	ID:                        "ea5d975c-bd31-11e7-bcac-0050569c850d",
+	TenantConnectionRequestID: "90381138-b572-11e7-9391-0050569c850d",
+	Name:                      "",
+	Description:               "",
+	Tags: map[string]string{
+		"": "",
+	},
+	TenantID:         "c7f3a68a73e845d4ba6a42fb80fce03f",
+	NameOther:        "",
+	DescriptionOther: "",
+	TagsOther: map[string]string{
+		"": "",
+	},
+	TenantIDOther:     "7e91b19b9baa423793ee74a8e1ff2be1",
+	NetworkID:         "c4d5fc41-b7e8-4f19-96f4-85299e54373c",
+	DeviceType:        "ECL::Compute::Server",
+	DeviceID:          "7cc34d4b-a345-4e51-b3d9-62540faca7bf",
+	DeviceInterfaceID: "",
+	PortID:            "c9c3de44-0720-4acd-87c1-9c76f0f77cac",
+	Status:            "down",
+}
+
 // ExpectedTenantConnectionsSlice is the slice of tenant_connection expected to be returned from ListResult.
 var ExpectedTenantConnectionsSlice = []tenant_connections.TenantConnection{FirstTenantConnection, SecondTenantConnection}
 
@@ -503,5 +609,31 @@ func HandleUpdateTenantConnectionSuccessfully(t *testing.T) {
 
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprint(w, UpdateResult)
+	})
+}
+
+// HandleBlankUpdateTenantConnectionSuccessfully creates an HTTP handler at `/tenant_connections` on the
+// test handler mux that tests tenant_connection update with blank.
+func HandleBlankUpdateTenantConnectionSuccessfully(t *testing.T) {
+	th.Mux.HandleFunc(fmt.Sprintf("/tenant_connections/%s", SecondTenantConnection.ID), func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "PUT")
+		th.TestHeader(t, r, "X-Auth-Token", client.TokenID)
+		th.TestJSONRequest(t, r, UpdateBlankRequest)
+
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, UpdateBlankResult)
+	})
+}
+
+// HandleNilUpdateTenantConnectionSuccessfully creates an HTTP handler at `/tenant_connections` on the
+// test handler mux that tests tenant_connection update with nil.
+func HandleNilUpdateTenantConnectionSuccessfully(t *testing.T) {
+	th.Mux.HandleFunc(fmt.Sprintf("/tenant_connections/%s", SecondTenantConnection.ID), func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "PUT")
+		th.TestHeader(t, r, "X-Auth-Token", client.TokenID)
+		th.TestJSONRequest(t, r, UpdateNilRequest)
+
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, UpdateNilResult)
 	})
 }

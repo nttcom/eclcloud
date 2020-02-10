@@ -184,3 +184,41 @@ func TestUpdateTenantConnection(t *testing.T) {
 	th.AssertNoErr(t, err)
 	th.AssertDeepEquals(t, SecondTenantConnectionUpdated, *actual)
 }
+
+func TestBlankUpdateTenantConnection(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleBlankUpdateTenantConnectionSuccessfully(t)
+
+	name := ""
+	description := ""
+	tags := map[string]string{"": ""}
+	nameOther := ""
+	descriptionOther := ""
+	tagsOther := map[string]string{"": ""}
+
+	updateOpts := tenant_connections.UpdateOpts{
+		Name:             &name,
+		Description:      &description,
+		Tags:             &tags,
+		NameOther:        &nameOther,
+		DescriptionOther: &descriptionOther,
+		TagsOther:        &tagsOther,
+	}
+
+	actual, err := tenant_connections.Update(client.ServiceClient(), SecondTenantConnection.ID, updateOpts).Extract()
+	th.AssertNoErr(t, err)
+	th.AssertDeepEquals(t, SecondTenantConnectionBlankUpdated, *actual)
+}
+
+func TestNilUpdateTenantConnection(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleNilUpdateTenantConnectionSuccessfully(t)
+
+	updateOpts := tenant_connections.UpdateOpts{}
+
+	actual, err := tenant_connections.Update(client.ServiceClient(), SecondTenantConnection.ID, updateOpts).Extract()
+	th.AssertNoErr(t, err)
+	th.AssertDeepEquals(t, SecondTenantConnection, *actual)
+}

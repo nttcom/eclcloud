@@ -155,6 +155,80 @@ const UpdateResult = `
 }
 `
 
+// UpdateBlankRequest provides the input to as Update with blank request.
+const UpdateBlankRequest = `
+{
+  "tenant_connection_request":{
+    "name": "",
+    "description": "",
+    "tags": {
+		"":""
+	},
+    "name_other": "",
+    "description_other": "",
+    "tags_other": {
+		"":""
+	}
+  }
+}
+`
+
+// UpdateBlankResult provides an update with blank result.
+const UpdateBlankResult = `
+{
+  "tenant_connection_request": {
+    "id": "90381138-b572-11e7-9391-0050569c850d",
+    "name": "",
+    "description": "",
+    "tags": {
+		"": ""
+	},
+    "tenant_id": "7e91b19b9baa423793ee74a8e1ff2be1",
+    "name_other": "",
+    "description_other": "",
+    "tenant_id_other": "c7f3a68a73e845d4ba6a42fb80fce03f",
+    "tags_other": {
+		"": ""
+	},
+    "network_id": "77cfc6b0-d032-4e5a-b6fb-4cce2537f4d1",
+    "status": "registered",
+    "approval_request_id": "req0000010363"
+  }
+}
+`
+
+// UpdateNilRequest provides the input to as Update with nil request.
+const UpdateNilRequest = `
+{
+  "tenant_connection_request":{
+  }
+}
+`
+
+// UpdateResult provides an update with nil result.
+const UpdateNilResult = `
+{
+  "tenant_connection_request": {
+    "id": "90381138-b572-11e7-9391-0050569c850d",
+    "name": "created_name",
+    "description": "created_desc",
+    "tags": {
+		"test_tags2": "test2"
+	},
+    "tenant_id": "7e91b19b9baa423793ee74a8e1ff2be1",
+    "name_other": "",
+    "description_other": "",
+    "tenant_id_other": "c7f3a68a73e845d4ba6a42fb80fce03f",
+    "tags_other": {
+		"test_tags_other2": "test2"
+	},
+    "network_id": "77cfc6b0-d032-4e5a-b6fb-4cce2537f4d1",
+    "status": "registered",
+    "approval_request_id": "req0000010363"
+  }
+}
+`
+
 // FirstTenantConnectionRequest is the first tenant_connection_request in the List request.
 var FirstTenantConnectionRequest = tenant_connection_requests.TenantConnectionRequest{
 	ID:                "5fbcc350-bd33-11e7-afb6-0050569c850d",
@@ -201,6 +275,23 @@ var SecondTenantConnectionRequestUpdated = tenant_connection_requests.TenantConn
 	NameOther:         "updated_name_other",
 	DescriptionOther:  "updated_desc_other",
 	TagsOther:         map[string]string{"k3": "v3"},
+	TenantIDOther:     "c7f3a68a73e845d4ba6a42fb80fce03f",
+	NetworkID:         "77cfc6b0-d032-4e5a-b6fb-4cce2537f4d1",
+	ApprovalRequestID: "req0000010363",
+}
+
+// SecondTenantConnectionRequestBlankUpdated is how second tenant_connection_request should look after an Update with blank.
+var SecondTenantConnectionRequestBlankUpdated = tenant_connection_requests.TenantConnectionRequest{
+	ID:                "90381138-b572-11e7-9391-0050569c850d",
+	Status:            "registered",
+	KeystoneUserID:    "",
+	Name:              "",
+	Description:       "",
+	Tags:              map[string]string{"": ""},
+	TenantID:          "7e91b19b9baa423793ee74a8e1ff2be1",
+	NameOther:         "",
+	DescriptionOther:  "",
+	TagsOther:         map[string]string{"": ""},
 	TenantIDOther:     "c7f3a68a73e845d4ba6a42fb80fce03f",
 	NetworkID:         "77cfc6b0-d032-4e5a-b6fb-4cce2537f4d1",
 	ApprovalRequestID: "req0000010363",
@@ -271,5 +362,31 @@ func HandleUpdateTenantConnectionRequestSuccessfully(t *testing.T) {
 
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprint(w, UpdateResult)
+	})
+}
+
+// HandleBlankUpdateTenantConnectionRequestSuccessfully creates an HTTP handler at `/tenant_connection_requests` on the
+// test handler mux that tests tenant_connection_request update with blank.
+func HandleBlankUpdateTenantConnectionRequestSuccessfully(t *testing.T) {
+	th.Mux.HandleFunc(fmt.Sprintf("/tenant_connection_requests/%s", SecondTenantConnectionRequest.ID), func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "PUT")
+		th.TestHeader(t, r, "X-Auth-Token", client.TokenID)
+		th.TestJSONRequest(t, r, UpdateBlankRequest)
+
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, UpdateBlankResult)
+	})
+}
+
+// HandleNilUpdateTenantConnectionRequestSuccessfully creates an HTTP handler at `/tenant_connection_requests` on the
+// test handler mux that tests tenant_connection_request update with nil.
+func HandleNilUpdateTenantConnectionRequestSuccessfully(t *testing.T) {
+	th.Mux.HandleFunc(fmt.Sprintf("/tenant_connection_requests/%s", SecondTenantConnectionRequest.ID), func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "PUT")
+		th.TestHeader(t, r, "X-Auth-Token", client.TokenID)
+		th.TestJSONRequest(t, r, UpdateNilRequest)
+
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, UpdateNilResult)
 	})
 }
