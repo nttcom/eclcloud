@@ -304,14 +304,10 @@ const UpdateBlankRequest = `
   "tenant_connection": {
     "name": "",
     "description": "",
-    "tags": {
-      "": ""
-    },
+    "tags": {},
 	"name_other": "",
     "description_other": "",
-    "tags_other": {
-      "": ""
-    }
+    "tags_other": {}
   }
 }
 `
@@ -324,15 +320,11 @@ const UpdateBlankResult = `
         "tenant_connection_request_id": "90381138-b572-11e7-9391-0050569c850d",
         "name": "",
         "description": "",
-        "tags": {
-			"": ""
-		},
+        "tags": {},
         "tenant_id": "c7f3a68a73e845d4ba6a42fb80fce03f",
         "name_other": "",
         "description_other": "",
-        "tags_other": {
-			"": ""
-		},
+        "tags_other": {},
         "tenant_id_other": "7e91b19b9baa423793ee74a8e1ff2be1",
         "network_id": "c4d5fc41-b7e8-4f19-96f4-85299e54373c",
         "device_type": "ECL::Compute::Server",
@@ -500,15 +492,11 @@ var SecondTenantConnectionBlankUpdated = tenant_connections.TenantConnection{
 	TenantConnectionRequestID: "90381138-b572-11e7-9391-0050569c850d",
 	Name:                      "",
 	Description:               "",
-	Tags: map[string]string{
-		"": "",
-	},
+	Tags: map[string]string{},
 	TenantID:         "c7f3a68a73e845d4ba6a42fb80fce03f",
 	NameOther:        "",
 	DescriptionOther: "",
-	TagsOther: map[string]string{
-		"": "",
-	},
+	TagsOther: map[string]string{},
 	TenantIDOther:     "7e91b19b9baa423793ee74a8e1ff2be1",
 	NetworkID:         "c4d5fc41-b7e8-4f19-96f4-85299e54373c",
 	DeviceType:        "ECL::Compute::Server",

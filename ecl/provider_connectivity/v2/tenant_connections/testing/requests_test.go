@@ -90,8 +90,6 @@ func TestCreateTenantConnectionAttachBaremetalServer(t *testing.T) {
 	defer th.TeardownHTTP()
 	HandleCreateTenantConnectionAttachBaremetalServerSuccessfully(t)
 
-	segmentationID := 10
-
 	createOpts := tenant_connections.CreateOpts{
 		Name:                      "attach_bare_name",
 		Description:               "attach_bare_desc",
@@ -113,7 +111,7 @@ func TestCreateTenantConnectionAttachBaremetalServer(t *testing.T) {
 					IPAddress: "192.168.1.1",
 				},
 			},
-			SegmentationID:   &segmentationID,
+			SegmentationID:   10,
 			SegmentationType: "flat",
 		},
 	}
@@ -192,10 +190,10 @@ func TestBlankUpdateTenantConnection(t *testing.T) {
 
 	name := ""
 	description := ""
-	tags := map[string]string{"": ""}
+	tags := map[string]string{}
 	nameOther := ""
 	descriptionOther := ""
-	tagsOther := map[string]string{"": ""}
+	tagsOther := map[string]string{}
 
 	updateOpts := tenant_connections.UpdateOpts{
 		Name:             &name,

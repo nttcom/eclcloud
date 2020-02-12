@@ -94,7 +94,7 @@ type ComputeServer struct {
 type BaremetalServer struct {
 	AllowedAddressPairs []AddressPair    `json:"allowed_address_pairs,omitempty"`
 	FixedIPs            []ServerFixedIPs `json:"fixed_ips,omitempty"`
-	SegmentationID      *int             `json:"segmentation_id,omitempty"`
+	SegmentationID      int              `json:"segmentation_id,omitempty"`
 	SegmentationType    string           `json:"segmentation_type,omitempty"`
 }
 

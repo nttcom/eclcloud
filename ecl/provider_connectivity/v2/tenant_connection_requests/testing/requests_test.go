@@ -111,10 +111,10 @@ func TestBlankUpdateTenantConnectionRequest(t *testing.T) {
 
 	name := ""
 	description := ""
-	tags := map[string]string{"": ""}
+	tags := map[string]string{}
 	nameOther := ""
 	descriptionOther := ""
-	tagsOther := map[string]string{"": ""}
+	tagsOther := map[string]string{}
 
 	updateOpts := tenant_connection_requests.UpdateOpts{
 		Name:             &name,

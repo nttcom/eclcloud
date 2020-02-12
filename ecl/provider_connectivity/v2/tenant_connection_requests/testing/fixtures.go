@@ -161,14 +161,10 @@ const UpdateBlankRequest = `
   "tenant_connection_request":{
     "name": "",
     "description": "",
-    "tags": {
-		"":""
-	},
+    "tags": {},
     "name_other": "",
     "description_other": "",
-    "tags_other": {
-		"":""
-	}
+    "tags_other": {}
   }
 }
 `
@@ -180,16 +176,12 @@ const UpdateBlankResult = `
     "id": "90381138-b572-11e7-9391-0050569c850d",
     "name": "",
     "description": "",
-    "tags": {
-		"": ""
-	},
+    "tags": {},
     "tenant_id": "7e91b19b9baa423793ee74a8e1ff2be1",
     "name_other": "",
     "description_other": "",
     "tenant_id_other": "c7f3a68a73e845d4ba6a42fb80fce03f",
-    "tags_other": {
-		"": ""
-	},
+    "tags_other": {},
     "network_id": "77cfc6b0-d032-4e5a-b6fb-4cce2537f4d1",
     "status": "registered",
     "approval_request_id": "req0000010363"
@@ -287,11 +279,11 @@ var SecondTenantConnectionRequestBlankUpdated = tenant_connection_requests.Tenan
 	KeystoneUserID:    "",
 	Name:              "",
 	Description:       "",
-	Tags:              map[string]string{"": ""},
+	Tags:              map[string]string{},
 	TenantID:          "7e91b19b9baa423793ee74a8e1ff2be1",
 	NameOther:         "",
 	DescriptionOther:  "",
-	TagsOther:         map[string]string{"": ""},
+	TagsOther:         map[string]string{},
 	TenantIDOther:     "c7f3a68a73e845d4ba6a42fb80fce03f",
 	NetworkID:         "77cfc6b0-d032-4e5a-b6fb-4cce2537f4d1",
 	ApprovalRequestID: "req0000010363",
