@@ -225,7 +225,6 @@ const UpdateNilResult = `
 var FirstTenantConnectionRequest = tenant_connection_requests.TenantConnectionRequest{
 	ID:                "5fbcc350-bd33-11e7-afb6-0050569c850d",
 	Status:            "registering",
-	KeystoneUserID:    "",
 	Name:              "test_name1",
 	Description:       "test_desc1",
 	Tags:              map[string]string{"test_tags1": "test1"},
@@ -242,7 +241,6 @@ var FirstTenantConnectionRequest = tenant_connection_requests.TenantConnectionRe
 var SecondTenantConnectionRequest = tenant_connection_requests.TenantConnectionRequest{
 	ID:                "90381138-b572-11e7-9391-0050569c850d",
 	Status:            "registered",
-	KeystoneUserID:    "",
 	Name:              "created_name",
 	Description:       "created_desc",
 	Tags:              map[string]string{"test_tags2": "test2"},
@@ -259,7 +257,6 @@ var SecondTenantConnectionRequest = tenant_connection_requests.TenantConnectionR
 var SecondTenantConnectionRequestUpdated = tenant_connection_requests.TenantConnectionRequest{
 	ID:                "90381138-b572-11e7-9391-0050569c850d",
 	Status:            "registered",
-	KeystoneUserID:    "",
 	Name:              "updated_name",
 	Description:       "updated_desc",
 	Tags:              map[string]string{"k2": "v2"},
@@ -276,7 +273,6 @@ var SecondTenantConnectionRequestUpdated = tenant_connection_requests.TenantConn
 var SecondTenantConnectionRequestBlankUpdated = tenant_connection_requests.TenantConnectionRequest{
 	ID:                "90381138-b572-11e7-9391-0050569c850d",
 	Status:            "registered",
-	KeystoneUserID:    "",
 	Name:              "",
 	Description:       "",
 	Tags:              map[string]string{},

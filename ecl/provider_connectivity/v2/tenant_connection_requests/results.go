@@ -9,7 +9,6 @@ import (
 type TenantConnectionRequest struct {
 	ID                string            `json:"id"`
 	Status            string            `json:"status"`
-	KeystoneUserID    string            `json:"keystone_user_id"`
 	Name              string            `json:"name"`
 	Description       string            `json:"description"`
 	Tags              map[string]string `json:"tags"`

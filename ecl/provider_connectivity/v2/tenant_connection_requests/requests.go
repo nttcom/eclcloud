@@ -15,7 +15,6 @@ type ListOptsBuilder interface {
 type ListOpts struct {
 	TenantConnectionRequestID string `q:"tenant_connection_request_id"`
 	Status                    string `q:"status"`
-	KeystoneUserID            string `q:"keystone_user_id"`
 	Name                      string `q:"name"`
 	TenantID                  string `q:"tenant_id"`
 	NameOther                 string `q:"name_other"`
