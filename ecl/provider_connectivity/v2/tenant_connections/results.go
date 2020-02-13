@@ -6,7 +6,9 @@ import (
 )
 
 // TenantConnection represents Tenant Connection.
-// TagsOther is interface {} because the data type returned by Create API depends on the value of device_type.
+// TagsOther is interface{} because the data type returned by Create API depends on the value of device_type.
+// When the device_type of Create Request is ECL::Compute::Server, the data type of tags_other is map[].
+// When the device_type of Create Request is ECL::Baremetal::Server or ECL::VirtualNetworkAppliance::VSRX, the data type of tags_other is string.
 type TenantConnection struct {
 	ID                        string            `json:"id"`
 	TenantConnectionRequestID string            `json:"tenant_connection_request_id"`
