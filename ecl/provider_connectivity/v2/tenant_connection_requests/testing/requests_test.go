@@ -86,14 +86,28 @@ func TestUpdateTenantConnectionRequest(t *testing.T) {
 	name := "updated_name"
 	description := "updated_desc"
 	tags := map[string]string{"k2": "v2"}
-	nameOther := "updeted_name_other"
+
+	updateOpts := tenant_connection_requests.UpdateOpts{
+		Name:        &name,
+		Description: &description,
+		Tags:        &tags,
+	}
+
+	actual, err := tenant_connection_requests.Update(client.ServiceClient(), SecondTenantConnectionRequest.ID, updateOpts).Extract()
+	th.AssertNoErr(t, err)
+	th.AssertDeepEquals(t, SecondTenantConnectionRequestUpdated, *actual)
+}
+
+func TestUpdateOtherMetadataTenantConnectionRequest(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+	HandleUpdateOtherMetadataTenantConnectionRequestSuccessfully(t)
+
+	nameOther := "updated_name_other"
 	descriptionOther := "updated_desc_other"
 	tagsOther := map[string]string{"k3": "v3"}
 
 	updateOpts := tenant_connection_requests.UpdateOpts{
-		Name:             &name,
-		Description:      &description,
-		Tags:             &tags,
 		NameOther:        &nameOther,
 		DescriptionOther: &descriptionOther,
 		TagsOther:        &tagsOther,
@@ -101,7 +115,7 @@ func TestUpdateTenantConnectionRequest(t *testing.T) {
 
 	actual, err := tenant_connection_requests.Update(client.ServiceClient(), SecondTenantConnectionRequest.ID, updateOpts).Extract()
 	th.AssertNoErr(t, err)
-	th.AssertDeepEquals(t, SecondTenantConnectionRequestUpdated, *actual)
+	th.AssertDeepEquals(t, SecondTenantConnectionRequestOtherMetadataUpdated, *actual)
 }
 
 func TestBlankUpdateTenantConnectionRequest(t *testing.T) {
@@ -112,17 +126,11 @@ func TestBlankUpdateTenantConnectionRequest(t *testing.T) {
 	name := ""
 	description := ""
 	tags := map[string]string{}
-	nameOther := ""
-	descriptionOther := ""
-	tagsOther := map[string]string{}
 
 	updateOpts := tenant_connection_requests.UpdateOpts{
-		Name:             &name,
-		Description:      &description,
-		Tags:             &tags,
-		NameOther:        &nameOther,
-		DescriptionOther: &descriptionOther,
-		TagsOther:        &tagsOther,
+		Name:        &name,
+		Description: &description,
+		Tags:        &tags,
 	}
 
 	actual, err := tenant_connection_requests.Update(client.ServiceClient(), SecondTenantConnectionRequest.ID, updateOpts).Extract()
@@ -135,9 +143,13 @@ func TestNilUpdateTenantConnectionRequest(t *testing.T) {
 	defer th.TeardownHTTP()
 	HandleNilUpdateTenantConnectionRequestSuccessfully(t)
 
-	updateOpts := tenant_connection_requests.UpdateOpts{}
+	name := "nilupdate"
+
+	updateOpts := tenant_connection_requests.UpdateOpts{
+		Name: &name,
+	}
 
 	actual, err := tenant_connection_requests.Update(client.ServiceClient(), SecondTenantConnectionRequest.ID, updateOpts).Extract()
 	th.AssertNoErr(t, err)
-	th.AssertDeepEquals(t, SecondTenantConnectionRequest, *actual)
+	th.AssertDeepEquals(t, SecondTenantConnectionRequestNilUpdated, *actual)
 }

@@ -121,11 +121,6 @@ const UpdateRequest = `
     "description": "updated_desc",
     "tags": {
 		"k2":"v2"
-	},
-    "name_other": "updeted_name_other",
-    "description_other": "updated_desc_other",
-    "tags_other": {
-		"k3":"v3"
 	}
   }
 }
@@ -140,6 +135,43 @@ const UpdateResult = `
     "description": "updated_desc",
     "tags": {
 		"k2": "v2"
+	},
+    "tenant_id": "7e91b19b9baa423793ee74a8e1ff2be1",
+    "name_other": "",
+    "description_other": "",
+    "tenant_id_other": "c7f3a68a73e845d4ba6a42fb80fce03f",
+    "tags_other": {
+		"test_tags_other2": "test2"
+	},
+    "network_id": "77cfc6b0-d032-4e5a-b6fb-4cce2537f4d1",
+    "status": "registered",
+    "approval_request_id": "req0000010363"
+  }
+}
+`
+
+// UpdateOtherMetadataRequest provides the input to as Update to other metadata request.
+const UpdateOtherMetadataRequest = `
+{
+  "tenant_connection_request":{
+    "name_other": "updated_name_other",
+    "description_other": "updated_desc_other",
+    "tags_other": {
+		"k3":"v3"
+	}
+  }
+}
+`
+
+// UpdateOtherMetadataResult provides an update to other metadata result.
+const UpdateOtherMetadataResult = `
+{
+  "tenant_connection_request": {
+    "id": "90381138-b572-11e7-9391-0050569c850d",
+    "name": "created_name",
+    "description": "created_desc",
+    "tags": {
+		"test_tags2": "test2"
 	},
     "tenant_id": "7e91b19b9baa423793ee74a8e1ff2be1",
     "name_other": "updated_name_other",
@@ -161,10 +193,7 @@ const UpdateBlankRequest = `
   "tenant_connection_request":{
     "name": "",
     "description": "",
-    "tags": {},
-    "name_other": "",
-    "description_other": "",
-    "tags_other": {}
+    "tags": {}
   }
 }
 `
@@ -181,7 +210,9 @@ const UpdateBlankResult = `
     "name_other": "",
     "description_other": "",
     "tenant_id_other": "c7f3a68a73e845d4ba6a42fb80fce03f",
-    "tags_other": {},
+    "tags_other": {
+		"test_tags_other2": "test2"
+	},
     "network_id": "77cfc6b0-d032-4e5a-b6fb-4cce2537f4d1",
     "status": "registered",
     "approval_request_id": "req0000010363"
@@ -193,16 +224,17 @@ const UpdateBlankResult = `
 const UpdateNilRequest = `
 {
   "tenant_connection_request":{
+    "name": "nilupdate"
   }
 }
 `
 
-// UpdateResult provides an update with nil result.
+// UpdateNilResult provides an update with nil result.
 const UpdateNilResult = `
 {
   "tenant_connection_request": {
     "id": "90381138-b572-11e7-9391-0050569c850d",
-    "name": "created_name",
+    "name": "nilupdate",
     "description": "created_desc",
     "tags": {
 		"test_tags2": "test2"
@@ -261,6 +293,22 @@ var SecondTenantConnectionRequestUpdated = tenant_connection_requests.TenantConn
 	Description:       "updated_desc",
 	Tags:              map[string]string{"k2": "v2"},
 	TenantID:          "7e91b19b9baa423793ee74a8e1ff2be1",
+	NameOther:         "",
+	DescriptionOther:  "",
+	TagsOther:         map[string]string{"test_tags_other2": "test2"},
+	TenantIDOther:     "c7f3a68a73e845d4ba6a42fb80fce03f",
+	NetworkID:         "77cfc6b0-d032-4e5a-b6fb-4cce2537f4d1",
+	ApprovalRequestID: "req0000010363",
+}
+
+// SecondTenantConnectionRequestOtherMetadataUpdated is how second tenant_connection_request should look after an Update to other metadata.
+var SecondTenantConnectionRequestOtherMetadataUpdated = tenant_connection_requests.TenantConnectionRequest{
+	ID:                "90381138-b572-11e7-9391-0050569c850d",
+	Status:            "registered",
+	Name:              "created_name",
+	Description:       "created_desc",
+	Tags:              map[string]string{"test_tags2": "test2"},
+	TenantID:          "7e91b19b9baa423793ee74a8e1ff2be1",
 	NameOther:         "updated_name_other",
 	DescriptionOther:  "updated_desc_other",
 	TagsOther:         map[string]string{"k3": "v3"},
@@ -279,7 +327,23 @@ var SecondTenantConnectionRequestBlankUpdated = tenant_connection_requests.Tenan
 	TenantID:          "7e91b19b9baa423793ee74a8e1ff2be1",
 	NameOther:         "",
 	DescriptionOther:  "",
-	TagsOther:         map[string]string{},
+	TagsOther:         map[string]string{"test_tags_other2": "test2"},
+	TenantIDOther:     "c7f3a68a73e845d4ba6a42fb80fce03f",
+	NetworkID:         "77cfc6b0-d032-4e5a-b6fb-4cce2537f4d1",
+	ApprovalRequestID: "req0000010363",
+}
+
+// SecondTenantConnectionRequestNilUpdated is how second tenant_connection_request should look after an Update with nil.
+var SecondTenantConnectionRequestNilUpdated = tenant_connection_requests.TenantConnectionRequest{
+	ID:                "90381138-b572-11e7-9391-0050569c850d",
+	Status:            "registered",
+	Name:              "nilupdate",
+	Description:       "created_desc",
+	Tags:              map[string]string{"test_tags2": "test2"},
+	TenantID:          "7e91b19b9baa423793ee74a8e1ff2be1",
+	NameOther:         "",
+	DescriptionOther:  "",
+	TagsOther:         map[string]string{"test_tags_other2": "test2"},
 	TenantIDOther:     "c7f3a68a73e845d4ba6a42fb80fce03f",
 	NetworkID:         "77cfc6b0-d032-4e5a-b6fb-4cce2537f4d1",
 	ApprovalRequestID: "req0000010363",
@@ -350,6 +414,19 @@ func HandleUpdateTenantConnectionRequestSuccessfully(t *testing.T) {
 
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprint(w, UpdateResult)
+	})
+}
+
+// HandleUpdateOtherMetadataTenantConnectionRequestSuccessfully creates an HTTP handler at `/tenant_connection_requests` on the
+// test handler mux that tests tenant_connection_request update to other metadata result.
+func HandleUpdateOtherMetadataTenantConnectionRequestSuccessfully(t *testing.T) {
+	th.Mux.HandleFunc(fmt.Sprintf("/tenant_connection_requests/%s", SecondTenantConnectionRequest.ID), func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "PUT")
+		th.TestHeader(t, r, "X-Auth-Token", client.TokenID)
+		th.TestJSONRequest(t, r, UpdateOtherMetadataRequest)
+
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, UpdateOtherMetadataResult)
 	})
 }
 
