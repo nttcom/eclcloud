@@ -19,7 +19,7 @@ type GetResult struct {
 	commonResult
 }
 
-// QoSOpt represents a QoS option.
+// QoSOption represents a QoS option.
 type QoSOption struct {
 	AWSServiceID      string `json:"aws_service_id"`
 	AzureServiceID    string `json:"azure_service_id"`
