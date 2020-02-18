@@ -18,46 +18,46 @@ type ListOptsBuilder interface {
 // for pagination.
 type ListOpts struct {
 	// Unique ID for the AWSService.
-	AWSServiceID      string `q:"aws_service_id"`
+	AWSServiceID string `q:"aws_service_id"`
 
 	// Unique ID for the AzureService.
-	AzureServiceID    string `q:"azure_service_id"`
+	AzureServiceID string `q:"azure_service_id"`
 
 	// Bandwidth assigned with this QoS Option
-	Bandwidth         string `q:"bandwidth"`
+	Bandwidth string `q:"bandwidth"`
 
 	// Description is the description of the QoS Policy.
-	Description       string `q:"description"`
+	Description string `q:"description"`
 
 	// Unique ID for the FICService.
-	FICServiceID      string `q:"fic_service_id"`
+	FICServiceID string `q:"fic_service_id"`
 
 	// Unique ID for the GCPService.
-	GCPServiceID      string `q:"gcp_service_id"`
+	GCPServiceID string `q:"gcp_service_id"`
 
 	// Unique ID for the QoS option.
-	ID                string `q:"id"`
+	ID string `q:"id"`
 
 	// Unique ID for the InterDCService.
-	InterDCServiceID  string `q:"interdc_service_id"`
+	InterDCServiceID string `q:"interdc_service_id"`
 
 	// Unique ID for the InternetService.
 	InternetServiceID string `q:"internet_service_id"`
 
 	// Name is the name of the QoS option.
-	Name              string `q:"name"`
+	Name string `q:"name"`
 
 	// Type of the QoS option.(guarantee or besteffort)
-	QoSType           string `q:"qos_type"`
+	QoSType string `q:"qos_type"`
 
 	// Service type of the QoS option.(aws, azure, fic, gcp, vpn, internet, interdc)
-	ServiceType       string `q:"service_type"`
+	ServiceType string `q:"service_type"`
 
 	// Indicates whether QoS option is currently operational.
-	Status            string `q:"status"`
+	Status string `q:"status"`
 
 	// Unique ID for the VPNService.
-	VPNServiceID      string `q:"vpn_service_id"`
+	VPNServiceID string `q:"vpn_service_id"`
 }
 
 // ToQosOptionsListQuery formats a ListOpts into a query string.
