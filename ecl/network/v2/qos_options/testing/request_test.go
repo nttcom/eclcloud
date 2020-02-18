@@ -33,7 +33,7 @@ func TestListQoS(t *testing.T) {
 		count++
 		actual, err := qos_options.ExtractQoSOptions(page)
 		if err != nil {
-			t.Errorf("Failed to extrace extract QoS options: %v", err)
+			t.Errorf("Failed to extract QoS options: %v", err)
 			return false, nil
 		}
 		th.CheckDeepEquals(t, ExpectedQosSlice, actual)
