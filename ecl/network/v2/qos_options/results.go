@@ -14,7 +14,7 @@ type commonResult struct {
 }
 
 // GetResult is the result of Get operations. Call its Extract method to
-// interpret it as a QoSOpt.
+// interpret it as a QoSOption.
 type GetResult struct {
 	commonResult
 }
@@ -52,7 +52,7 @@ func ExtractQoSOptions(r pagination.Page) ([]QoSOption, error) {
 	return s, err
 }
 
-// Extract is a function that accepts a result and extracts a QoSOpt.
+// Extract is a function that accepts a result and extracts a QoSOption.
 func (r GetResult) Extract() (*QoSOption, error) {
 	var l QoSOption
 	err := r.Result.ExtractIntoStructPtr(&l, "qos_option")
