@@ -20,7 +20,7 @@ type GetResult struct {
 }
 
 // QoSOpt represents a QoS option.
-type QoSOpt struct {
+type QoSOption struct {
 	AWSServiceID      string `json:"aws_service_id"`
 	AzureServiceID    string `json:"azure_service_id"`
 	Bandwidth         string `json:"bandwidth"`
@@ -46,23 +46,15 @@ func (r QosOptionPage) IsEmpty() (bool, error) {
 // ExtractQoSOptions accepts a Page struct, specifically a QoSOptionPage struct,
 // and extracts the elements into a slice of ListOpts structs. In other words,
 // a generic collection is mapped into a relevant slice.
-func ExtractQoSOptions(r pagination.Page) ([]QoSOpt, error) {
-	var s []QoSOpt
-	err := ExtractQoSOptionsInto(r, &s)
+func ExtractQoSOptions(r pagination.Page) ([]QoSOption, error) {
+	var s []QoSOption
+	err := r.(QosOptionPage).Result.ExtractIntoSlicePtr(&s, "qos_options")
 	return s, err
 }
 
-func ExtractQoSOptionsInto(r pagination.Page, v interface{}) error {
-	return r.(QosOptionPage).Result.ExtractIntoSlicePtr(v, "qos_options")
-}
-
 // Extract is a function that accepts a result and extracts a QoSOpt.
-func (r GetResult) Extract() (*QoSOpt, error) {
-	var l QoSOpt
-	err := r.ExtractInto(&l)
+func (r GetResult) Extract() (*QoSOption, error) {
+	var l QoSOption
+	err := r.Result.ExtractIntoStructPtr(&l, "qos_option")
 	return &l, err
-}
-
-func (r GetResult) ExtractInto(v interface{}) error {
-	return r.Result.ExtractIntoStructPtr(v, "qos_option")
 }

@@ -33,7 +33,7 @@ func TestListQoS(t *testing.T) {
 		count++
 		actual, err := qos_options.ExtractQoSOptions(page)
 		if err != nil {
-			t.Errorf("Failed to extrace ports: %v", err)
+			t.Errorf("Failed to extrace extract QoS options: %v", err)
 			return false, nil
 		}
 		th.CheckDeepEquals(t, ExpectedQosSlice, actual)
@@ -50,17 +50,19 @@ func TestGetQoS(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/v2.0/qos_options/2c649b8e-f007-4d90-b208-9b8710937a94", func(w http.ResponseWriter, r *http.Request) {
-		th.TestMethod(t, r, "GET")
-		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+	id := "2c649b8e-f007-4d90-b208-9b8710937a94"
+	th.Mux.HandleFunc(fmt.Sprintf("/v2.0/qos_options/%s", id),
+		func(w http.ResponseWriter, r *http.Request) {
+			th.TestMethod(t, r, "GET")
+			th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 
-		w.Header().Add("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
+			w.Header().Add("Content-Type", "application/json")
+			w.WriteHeader(http.StatusOK)
 
-		fmt.Fprintf(w, GetResponse)
-	})
+			fmt.Fprintf(w, GetResponse)
+		})
 
-	n, err := qos_options.Get(fake.ServiceClient(), "2c649b8e-f007-4d90-b208-9b8710937a94").Extract()
+	n, err := qos_options.Get(fake.ServiceClient(), id).Extract()
 	th.AssertNoErr(t, err)
 	th.CheckDeepEquals(t, &Qos1, n)
 }

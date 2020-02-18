@@ -1,7 +1,6 @@
 package qos_options
 
 import (
-	// "encoding/json"
 	"github.com/nttcom/eclcloud"
 	"github.com/nttcom/eclcloud/pagination"
 )

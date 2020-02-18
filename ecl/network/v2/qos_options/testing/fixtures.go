@@ -5,91 +5,95 @@ import "github.com/nttcom/eclcloud/ecl/network/v2/qos_options"
 const ListResponse = `
 {
 	"qos_options": [
-	  	{
-			  "aws_service_id"		: "3472d029-8378-424c-aaaf-150edc08947b",
-			  "azure_service_id"	: "",
-			  "bandwidth"			: "400",
-			  "description"			: "this is test1",
-			  "fic_service_id"		: "23456",
-			  "gcp_service_id"		: "7891011",
-			  "id"					: "2c649b8e-f007-4d90-b208-9b8710937a94",
-			  "interdc_service_id"	: "34567",
-			  "internet_service_id" : "89101112",
-			  "name"				: "100Gbps-Guaranteed",
-			  "qos_type"			: "guarantee",
-			  "service_type"		: "vpn",
-			  "status"				: "ACTIVE",
-			  "vpn_service_id"		: ""
-	  	},
-	  	{
-			  "aws_service_id"		: "",
-			  "azure_service_id"	: "99b91166-2166-4187-81e0-23d957773257",
-			  "bandwidth"			: "100",
-			  "description"			: "this is test2",
-			  "fic_service_id"		: "34567",
-			  "gcp_service_id"		: "89101112",
-			  "id"					: "e39cd764-a30b-4b65-8dd7-b908b1665085",
-			  "interdc_service_id"	: "45678",
-			  "internet_service_id" : "910111213",
-			  "name"				: "100Gbps-BestEffort",
-			  "qos_type"			: "besteffort",
-			  "service_type"		: "gcp",
-			  "status"				: "ACTIVE",
-			  "vpn_service_id"		: "613b6f71-ec65-4d51-93f8-ed43eaf4fd15"
+		{
+			"aws_service_id"	  : null,
+			"azure_service_id"	  : "d4006e79-9f60-4b72-9f86-5f6ef8b4e9e9",
+			"bandwidth"			  : "20",
+			"description"		  : "20M-guarantee-menu-for-azure",
+			"fic_service_id"	  : null,
+			"gcp_service_id"	  : null,
+			"id"				  : "a6b91294-8870-4f2c-b9e9-a899acada723",
+			"interdc_service_id"  : null,
+			"internet_service_id" : null,
+			"name"				  : "20M-GA-AZURE",
+			"qos_type"			  : "guarantee",
+			"service_type"		  : "azure",
+			"status"			  : "ACTIVE",
+			"vpn_service_id"	  : null
+		},
+		{
+			"aws_service_id"	  : null,
+			"azure_service_id"	  : "d4006e79-9f60-4b72-9f86-5f6ef8b4e9e9",
+			"bandwidth"			  : "500",
+			"description"		  : "500M-guarantee-menu-for-azure",
+			"fic_service_id"	  : null,
+			"gcp_service_id"	  : null,
+			"id"				  : "aa776ce4-08a8-4cc1-9a2c-bb95e547916b",
+			"interdc_service_id"  : null,
+			"internet_service_id" : null,
+			"name"				  : "500M-GA-AZURE",
+			"qos_type"			  : "guarantee",
+			"service_type"		  : "azure",
+			"status"			  : "ACTIVE",
+			"vpn_service_id"	  : null
 		}
 	]
-}`
-const GetResponse = `{
-	"qos_option": {
-		  "aws_service_id"		: "3472d029-8378-424c-aaaf-150edc08947b",
-		  "azure_service_id"	: "",
-		  "bandwidth"			: "400",
-		  "description"			: "this is test1",
-		  "fic_service_id"		: "23456",
-		  "gcp_service_id"		: "7891011",
-		  "id"					: "2c649b8e-f007-4d90-b208-9b8710937a94",
-		  "interdc_service_id"	: "34567",
-		  "internet_service_id" : "89101112",
-		  "name"				: "100Gbps-Guaranteed",
-		  "qos_type"			: "guarantee",
-		  "service_type"		: "vpn",
-		  "status"				: "ACTIVE",
-		  "vpn_service_id"		: ""
-	}
-}`
+}
+`
 
-var Qos1 = qos_options.QoSOpt{
-	AWSServiceID:      "3472d029-8378-424c-aaaf-150edc08947b",
-	AzureServiceID:    "",
-	Bandwidth:         "400",
-	Description:       "this is test1",
-	FICServiceID:      "23456",
-	GCPServiceID:      "7891011",
-	ID:                "2c649b8e-f007-4d90-b208-9b8710937a94",
-	InterDCServiceID:  "34567",
-	InternetServiceID: "89101112",
-	Name:              "100Gbps-Guaranteed",
+const GetResponse = `
+{
+	"qos_option": {
+		"aws_service_id"	  : null,
+		"azure_service_id"	  : "d4006e79-9f60-4b72-9f86-5f6ef8b4e9e9",
+		"bandwidth"			  : "20",
+		"description"		  : "20M-guarantee-menu-for-azure",
+		"fic_service_id"	  : null,
+		"gcp_service_id"	  : null,
+		"id"				  : "a6b91294-8870-4f2c-b9e9-a899acada723",
+		"interdc_service_id"  : null,
+		"internet_service_id" : null,
+		"name"				  : "20M-GA-AZURE",
+		"qos_type"			  : "guarantee",
+		"service_type"		  : "azure",
+		"status"			  : "ACTIVE",
+		"vpn_service_id"	  : null
+	}
+}
+`
+
+var Qos1 = qos_options.QoSOption{
+	AWSServiceID:      "",
+	AzureServiceID:    "d4006e79-9f60-4b72-9f86-5f6ef8b4e9e9",
+	Bandwidth:         "20",
+	Description:       "20M-guarantee-menu-for-azure",
+	FICServiceID:      "",
+	GCPServiceID:      "",
+	ID:                "a6b91294-8870-4f2c-b9e9-a899acada723",
+	InterDCServiceID:  "",
+	InternetServiceID: "",
+	Name:              "20M-GA-AZURE",
 	QoSType:           "guarantee",
-	ServiceType:       "vpn",
+	ServiceType:       "azure",
 	Status:            "ACTIVE",
 	VPNServiceID:      "",
 }
 
-var Qos2 = qos_options.QoSOpt{
+var Qos2 = qos_options.QoSOption{
 	AWSServiceID:      "",
-	AzureServiceID:    "99b91166-2166-4187-81e0-23d957773257",
-	Bandwidth:         "100",
-	Description:       "this is test2",
-	FICServiceID:      "34567",
-	GCPServiceID:      "89101112",
-	ID:                "e39cd764-a30b-4b65-8dd7-b908b1665085",
-	InterDCServiceID:  "45678",
-	InternetServiceID: "910111213",
-	Name:              "100Gbps-BestEffort",
-	QoSType:           "besteffort",
-	ServiceType:       "gcp",
+	AzureServiceID:    "d4006e79-9f60-4b72-9f86-5f6ef8b4e9e9",
+	Bandwidth:         "500",
+	Description:       "500M-guarantee-menu-for-azure",
+	FICServiceID:      "",
+	GCPServiceID:      "",
+	ID:                "aa776ce4-08a8-4cc1-9a2c-bb95e547916b",
+	InterDCServiceID:  "",
+	InternetServiceID: "",
+	Name:              "500M-GA-AZURE",
+	QoSType:           "guarantee",
+	ServiceType:       "azure",
 	Status:            "ACTIVE",
-	VPNServiceID:      "613b6f71-ec65-4d51-93f8-ed43eaf4fd15",
+	VPNServiceID:      "",
 }
 
-var ExpectedQosSlice = []qos_options.QoSOpt{Qos1, Qos2}
+var ExpectedQosSlice = []qos_options.QoSOption{Qos1, Qos2}
