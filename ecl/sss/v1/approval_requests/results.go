@@ -1,16 +1,17 @@
 package approval_requests
 
 import (
+	"encoding/json"
 	"github.com/nttcom/eclcloud"
 	"github.com/nttcom/eclcloud/pagination"
 )
 
 type Action struct {
-	Service string                 `json:"service"`
-	Region  string                 `json:"region"`
-	APIPath string                 `json:"api_path"`
-	Method  string                 `json:"method"`
-	Body    map[string]interface{} `json:"body"`
+	Service string          `json:"service"`
+	Region  string          `json:"region"`
+	APIPath string          `json:"api_path"`
+	Method  string          `json:"method"`
+	Body    json.RawMessage `json:"body"`
 }
 
 type Description struct {
