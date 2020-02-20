@@ -12,8 +12,8 @@ type Action struct {
 	Method  string `json:"method"`
 	// Basically JSON is passed to Action.Body,
 	// but depending on the value of the service, it may be a String, so it is set to interface{}.
-	// service: "provider-connectivity" Action.Body's data type: JSON
-	// service: "network" 				Action.Body's data type: String
+	// If service is "provider-connectivity", body's type is JSON.
+	// If service is "network", body's type is String.
 	Body interface{} `json:"body"`
 }
 
