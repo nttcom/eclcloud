@@ -10,7 +10,11 @@ type Action struct {
 	Region  string `json:"region"`
 	APIPath string `json:"api_path"`
 	Method  string `json:"method"`
-	Body    string `json:"body"`
+	// Basically JSON is passed to Action.Body,
+	// but depending on the value of the service, it may be a String, so it is set to interface{}.
+	// If service is "provider-connectivity", body's type is JSON.
+	// If service is "network", body's type is String.
+	Body interface{} `json:"body"`
 }
 
 type Description struct {
@@ -26,7 +30,7 @@ type ApprovalRequest struct {
 	ApproverID        string        `json:"approver_id"`
 	RequestUserID     string        `json:"request_user_id"`
 	Service           string        `json:"service"`
-	Actions           []Action      `json:"action"`
+	Actions           []Action      `json:"actions"`
 	Descriptions      []Description `json:"descriptions"`
 	RequestUser       interface{}   `json:"request_user"`
 	Approver          bool          `json:"approver"`

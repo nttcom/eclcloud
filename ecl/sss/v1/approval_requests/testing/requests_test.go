@@ -25,11 +25,7 @@ func TestListApprovalRequest(t *testing.T) {
 	})
 
 	count := 0
-	opts := ar.ListOpts{
-		Service: "network",
-		Status:  "registered",
-	}
-	err := ar.List(fakeclient.ServiceClient(), opts).EachPage(func(page pagination.Page) (bool, error) {
+	err := ar.List(fakeclient.ServiceClient(), nil).EachPage(func(page pagination.Page) (bool, error) {
 		count++
 		actual, err := ar.ExtractApprovalRequests(page)
 		th.AssertNoErr(t, err)
@@ -53,11 +49,7 @@ func TestListApprovalRequestAllPages(t *testing.T) {
 		fmt.Fprintf(w, listResponse)
 	})
 
-	opts := ar.ListOpts{
-		Service: "network",
-		Status:  "registered",
-	}
-	allPages, err := ar.List(fakeclient.ServiceClient(), opts).AllPages()
+	allPages, err := ar.List(fakeclient.ServiceClient(), nil).AllPages()
 	th.AssertNoErr(t, err)
 	allRequests, err := ar.ExtractApprovalRequests(allPages)
 	th.AssertNoErr(t, err)
