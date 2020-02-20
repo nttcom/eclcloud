@@ -1,6 +1,7 @@
 package testing
 
 import (
+	"encoding/json"
 	"fmt"
 
 	ar "github.com/nttcom/eclcloud/ecl/sss/v1/approval_requests"
@@ -8,19 +9,21 @@ import (
 
 const idApprovalRequest1 = "9a76dca6-d8cd-4391-aac6f-2ea052f10f4"
 const idApprovalRequest2 = "fc578e8b-dea2-4f8c-aa7e-9026fa173632"
+const stringBody = "{\n\t\"firewall\": {\n\t\t\"availability_zone\": \"zone1-groupa\",\n\t\t\"default_gateway\": \"\",\n\t\t\"description\": \"abcdefghijklmnopqrstuvwxyz\",\n\t\t\"firewall_plan_id\": \"bd12784a-c66e-4f13-9f72-5143d64762b6\",\n\t\t\"name\": \"abcdefghijklmnopqrstuvwxyz\",\n\t\t\"tenant_id\": \"6a156ddf2ecd497ca786ff2da6df5aa8\"\n\t}\n}"
 
-var actionsBody = []byte(
-	`{` +
-		`"firewall":` +
-		`{` +
-		`"availability_zone":"zone1-groupa",` +
-		`"default_gateway":"",` +
-		`"description":"abcdefghijklmnopqrstuvwxyz",` +
-		`"firewall_plan_id":"bd12784a-c66e-4f13-9f72-5143d64762b6",` +
-		`"name":"abcdefghijklmnopqrstuvwxyz",` +
-		`"tenant_id":"6a156ddf2ecd497ca786ff2da6df5aa8"` +
-		`}` +
-		`}`)
+var actionsBody = json.RawMessage(fmt.Sprint(
+	`{`,
+	`"firewall":`,
+	`{`,
+	`"availability_zone":"zone1-groupa",`,
+	`"default_gateway":"",`,
+	`"description":"abcdefghijklmnopqrstuvwxyz",`,
+	`"firewall_plan_id":"bd12784a-c66e-4f13-9f72-5143d64762b6",`,
+	`"name":"abcdefghijklmnopqrstuvwxyz",`,
+	`"tenant_id":"6a156ddf2ecd497ca786ff2da6df5aa8"`,
+	`}`,
+	`}`,
+))
 
 var listResponse = fmt.Sprintf(`
 {
@@ -38,16 +41,7 @@ var listResponse = fmt.Sprintf(`
 					"region": "jp1",
 					"api_path": "/network/v1/firewall",
 					"method": "POST",
-					"body": {
-						"firewall": {
-						"availability_zone": "zone1-groupa",
-						"default_gateway":   "",
-						"description":       "abcdefghijklmnopqrstuvwxyz",
-						"firewall_plan_id":  "bd12784a-c66e-4f13-9f72-5143d64762b6",
-						"name":              "abcdefghijklmnopqrstuvwxyz",
-						"tenant_id":         "6a156ddf2ecd497ca786ff2da6df5aa8"
-						}
-					}
+					"body": %s
 				}
 			],
 			"descriptions": [
@@ -77,16 +71,7 @@ var listResponse = fmt.Sprintf(`
 					"region": "jp1",
 					"api_path": "/network/v1/firewall",
 					"method": "POST",
-					"body": {
-						"firewall": {
-							"availability_zone": "zone1-groupa",
-							"default_gateway":   "",
-							"description":       "abcdefghijklmnopqrstuvwxyz",
-							"firewall_plan_id":  "bd12784a-c66e-4f13-9f72-5143d64762b6",
-							"name":              "abcdefghijklmnopqrstuvwxyz",
-							"tenant_id":         "6a156ddf2ecd497ca786ff2da6df5aa8"
-						}
-					}
+					"body": %s
 				}
 			],
 			"descriptions": [
@@ -107,20 +92,14 @@ var listResponse = fmt.Sprintf(`
 }
 `,
 	idApprovalRequest1,
+	stringBody,
 	idApprovalRequest2,
+	stringBody,
 )
 
 var expectedApprovalRequestsSlice = []ar.ApprovalRequest{
 	firstApprovalRequest,
 	secondApprovalRequest,
-}
-
-var actionForApproveRequest1 = ar.Action{
-	Service: "network",
-	Region:  "jp1",
-	APIPath: "/network/v1/firewall",
-	Method:  "POST",
-	Body:    actionsBody,
 }
 
 var firstApprovalRequest = ar.ApprovalRequest{
