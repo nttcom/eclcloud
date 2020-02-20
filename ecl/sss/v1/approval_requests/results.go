@@ -10,7 +10,10 @@ type Action struct {
 	Region  string `json:"region"`
 	APIPath string `json:"api_path"`
 	Method  string `json:"method"`
-	// Basically json is passed to Action.Body, but it may be a string, so it is set to interface{}.
+	// Basically JSON is passed to Action.Body,
+	// but depending on the value of the service, it may be a String, so it is set to interface{}.
+	// service: "provider-connectivity" Action.Body's data type: JSON
+	// service: "network" 				Action.Body's data type: String
 	Body interface{} `json:"body"`
 }
 
