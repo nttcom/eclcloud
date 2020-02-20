@@ -1,7 +1,6 @@
 package testing
 
 import (
-	"encoding/json"
 	"fmt"
 
 	ar "github.com/nttcom/eclcloud/ecl/sss/v1/approval_requests"
@@ -9,21 +8,6 @@ import (
 
 const idApprovalRequest1 = "9a76dca6-d8cd-4391-aac6f-2ea052f10f4"
 const idApprovalRequest2 = "fc578e8b-dea2-4f8c-aa7e-9026fa173632"
-const stringBody = "{\n\t\"firewall\": {\n\t\t\"availability_zone\": \"zone1-groupa\",\n\t\t\"default_gateway\": \"\",\n\t\t\"description\": \"abcdefghijklmnopqrstuvwxyz\",\n\t\t\"firewall_plan_id\": \"bd12784a-c66e-4f13-9f72-5143d64762b6\",\n\t\t\"name\": \"abcdefghijklmnopqrstuvwxyz\",\n\t\t\"tenant_id\": \"6a156ddf2ecd497ca786ff2da6df5aa8\"\n\t}\n}"
-
-var actionsBody = json.RawMessage(fmt.Sprint(
-	`{`,
-	`"firewall":`,
-	`{`,
-	`"availability_zone":"zone1-groupa",`,
-	`"default_gateway":"",`,
-	`"description":"abcdefghijklmnopqrstuvwxyz",`,
-	`"firewall_plan_id":"bd12784a-c66e-4f13-9f72-5143d64762b6",`,
-	`"name":"abcdefghijklmnopqrstuvwxyz",`,
-	`"tenant_id":"6a156ddf2ecd497ca786ff2da6df5aa8"`,
-	`}`,
-	`}`,
-))
 
 var listResponse = fmt.Sprintf(`
 {
@@ -34,14 +18,19 @@ var listResponse = fmt.Sprintf(`
 			"approver_type":"tenant_owner",
 			"approver_id":"11a98bf9cb144af5a204c9da566d2bd0",
 			"request_user_id":"ecid9999888881",
-			"service":"network",
+			"service":"provider-connectivity",
 			"actions" : [
 				{
-					"service": "network",
+					"service": "provider-connectivity",
 					"region": "jp1",
-					"api_path": "/network/v1/firewall",
+					"api_path": "/v2.0/tenant_connections_requests",
 					"method": "POST",
-					"body": %s
+					"body": {
+							"tenant_connection_request": {
+								"tenant_id_other": "d2f19c353e6d4c519e530c6a78438b33",
+								"network_id": "ea7eea8c-0d91-4553-9ecb-01f81e2c3989"
+							}
+					}
 				}
 			],
 			"descriptions": [
@@ -71,7 +60,7 @@ var listResponse = fmt.Sprintf(`
 					"region": "jp1",
 					"api_path": "/network/v1/firewall",
 					"method": "POST",
-					"body": %s
+					"body": "{\n\t\"firewall\": {\n\t\t\"availability_zone\": \"zone1-groupa\",\n\t\t\"default_gateway\": \"\",\n\t\t\"description\": \"abcdefghijklmnopqrstuvwxyz\",\n\t\t\"firewall_plan_id\": \"bd12784a-c66e-4f13-9f72-5143d64762b6\",\n\t\t\"name\": \"abcdefghijklmnopqrstuvwxyz\",\n\t\t\"tenant_id\": \"6a156ddf2ecd497ca786ff2da6df5aa8\"\n\t}\n}"
 				}
 			],
 			"descriptions": [
@@ -92,9 +81,7 @@ var listResponse = fmt.Sprintf(`
 }
 `,
 	idApprovalRequest1,
-	stringBody,
 	idApprovalRequest2,
-	stringBody,
 )
 
 var expectedApprovalRequestsSlice = []ar.ApprovalRequest{
@@ -108,14 +95,19 @@ var firstApprovalRequest = ar.ApprovalRequest{
 	ApproverType:      "tenant_owner",
 	ApproverID:        "11a98bf9cb144af5a204c9da566d2bd0",
 	RequestUserID:     "ecid9999888881",
-	Service:           "network",
+	Service:           "provider-connectivity",
 	Actions: []ar.Action{
 		{
-			Service: "network",
+			Service: "provider-connectivity",
 			Region:  "jp1",
-			APIPath: "/network/v1/firewall",
+			APIPath: "/v2.0/tenant_connections_requests",
 			Method:  "POST",
-			Body:    actionsBody,
+			Body: map[string]interface{}{
+				"tenant_connection_request": map[string]string{
+					"tenant_id_other": "d2f19c353e6d4c519e530c6a78438b33",
+					"network_id":      "ea7eea8c-0d91-4553-9ecb-01f81e2c3989",
+				},
+			},
 		},
 	},
 	Descriptions: []ar.Description{
@@ -146,7 +138,7 @@ var secondApprovalRequest = ar.ApprovalRequest{
 			Region:  "jp1",
 			APIPath: "/network/v1/firewall",
 			Method:  "POST",
-			Body:    actionsBody,
+			Body:    "{\n\t\"firewall\": {\n\t\t\"availability_zone\": \"zone1-groupa\",\n\t\t\"default_gateway\": \"\",\n\t\t\"description\": \"abcdefghijklmnopqrstuvwxyz\",\n\t\t\"firewall_plan_id\": \"bd12784a-c66e-4f13-9f72-5143d64762b6\",\n\t\t\"name\": \"abcdefghijklmnopqrstuvwxyz\",\n\t\t\"tenant_id\": \"6a156ddf2ecd497ca786ff2da6df5aa8\"\n\t}\n}",
 		},
 	},
 	Descriptions: []ar.Description{
@@ -171,23 +163,19 @@ var getResponse = fmt.Sprintf(`
 		"approver_type":"tenant_owner",
 		"approver_id":"11a98bf9cb144af5a204c9da566d2bd0",
 		"request_user_id":"ecid9999888881",
-		"service":"network",
+		"service":"provider-connectivity",
 		"actions" : [
 			{
-				"service": "network",
+				"service": "provider-connectivity",
 				"region": "jp1",
-				"api_path": "/network/v1/firewall",
+				"api_path": "/v2.0/tenant_connections_requests",
 				"method": "POST",
 				"body": {
-				"firewall": {
-					"availability_zone": "zone1-groupa",
-					"default_gateway":   "",
-					"description":       "abcdefghijklmnopqrstuvwxyz",
-					"firewall_plan_id":  "bd12784a-c66e-4f13-9f72-5143d64762b6",
-					"name":              "abcdefghijklmnopqrstuvwxyz",
-					"tenant_id":         "6a156ddf2ecd497ca786ff2da6df5aa8"
+					"tenant_connection_request": {
+						"tenant_id_other": "d2f19c353e6d4c519e530c6a78438b33",
+						"network_id": "ea7eea8c-0d91-4553-9ecb-01f81e2c3989"
+					}
 				}
-			}
 			}
 		],
 		"descriptions": [
