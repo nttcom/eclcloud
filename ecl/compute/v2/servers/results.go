@@ -214,6 +214,9 @@ type Server struct {
 
 	// Fault contains failure information about a server.
 	Fault Fault `json:"fault"`
+
+	// ConfigDrive is the name of the server's config drive.
+	ConfigDrive string `json:"config_drive"`
 }
 
 type Fault struct {
