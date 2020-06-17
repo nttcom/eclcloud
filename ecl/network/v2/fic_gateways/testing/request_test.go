@@ -13,7 +13,7 @@ import (
 	th "github.com/nttcom/eclcloud/testhelper"
 )
 
-func TestList(t *testing.T) {
+func TestListFICGateway(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
@@ -47,7 +47,7 @@ func TestList(t *testing.T) {
 	}
 }
 
-func TestGet(t *testing.T) {
+func TestGetFICGateway(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
