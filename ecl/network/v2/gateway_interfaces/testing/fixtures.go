@@ -10,7 +10,8 @@ const ListResponse = `
     	{
     	  "aws_gw_id": null,
     	  "azure_gw_id": null,
-    	  "description": "",
+		  "description": "",
+		  "fic_gw_id": "9c5c6441-e174-4b9a-9d16-4ed38cc95dd5",
     	  "gcp_gw_id": null,
     	  "gw_vipv4": "100.127.254.49",
     	  "gw_vipv6": null,
@@ -33,7 +34,8 @@ const ListResponse = `
     	{
     	  "aws_gw_id": null,
     	  "azure_gw_id": null,
-    	  "description": "lab3-test-user-internet-gateway-interface, role : member",
+		  "description": "lab3-test-user-internet-gateway-interface, role : member",
+		  "fic_gw_id": "dd04adc4-459f-4fc4-83a5-47436c6aece5",
     	  "gcp_gw_id": null,
     	  "gw_vipv4": "100.127.254.1",
     	  "gw_vipv6": null,
@@ -62,6 +64,7 @@ const GetResponse = `
 		"aws_gw_id": null,
 		"azure_gw_id": null,
 		"description": "",
+		"fic_gw_id": "9c5c6441-e174-4b9a-9d16-4ed38cc95dd5",
 		"gcp_gw_id": null,
 		"gw_vipv4": "100.127.254.49",
 		"gw_vipv6": null,
@@ -87,6 +90,7 @@ const CreateRequest = `
 {
 	"gw_interface": {
 		"description": "",
+		"fic_gw_id": "9c5c6441-e174-4b9a-9d16-4ed38cc95dd5",
 		"gw_vipv4": "100.127.254.49",
 		"internet_gw_id": "e72ef35a-c96f-45f8-aeee-e7547c5b94b3",
 		"name": "5_Gateway",
@@ -105,6 +109,7 @@ const CreateResponse = `
 {
 	"gw_interface": {
 		"description": "",
+		"fic_gw_id": "9c5c6441-e174-4b9a-9d16-4ed38cc95dd5",
 		"gw_vipv4": "100.127.254.49",
 		"id": "09771fbb-6496-4ae1-9b53-226b6edcc1be",
 		"internet_gw_id": "e72ef35a-c96f-45f8-aeee-e7547c5b94b3",
@@ -132,6 +137,7 @@ const UpdateResponse = `
 {
 	"gw_interface": {
 		"description": "Updated",
+		"fic_gw_id": "9c5c6441-e174-4b9a-9d16-4ed38cc95dd5",
 		"gw_vipv4": "100.127.254.49",
 		"id": "09771fbb-6496-4ae1-9b53-226b6edcc1be",
 		"internet_gw_id": "e72ef35a-c96f-45f8-aeee-e7547c5b94b3",
@@ -149,6 +155,7 @@ const UpdateResponse = `
 
 var GatewayInterface1 = gateway_interfaces.GatewayInterface{
 	Description:   "",
+	FICGatewayID:  "9c5c6441-e174-4b9a-9d16-4ed38cc95dd5",
 	GwVipv4:       "100.127.254.49",
 	ID:            "09771fbb-6496-4ae1-9b53-226b6edcc1be",
 	InternetGwID:  "e72ef35a-c96f-45f8-aeee-e7547c5b94b3",
@@ -167,6 +174,7 @@ var GatewayInterface2 = gateway_interfaces.GatewayInterface{
 	AwsGwID:       "",
 	AzureGwID:     "",
 	Description:   "lab3-test-user-internet-gateway-interface, role : member",
+	FICGatewayID:  "dd04adc4-459f-4fc4-83a5-47436c6aece5",
 	GcpGwID:       "",
 	GwVipv4:       "100.127.254.1",
 	GwVipv6:       "",
