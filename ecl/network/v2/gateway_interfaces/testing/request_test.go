@@ -11,7 +11,7 @@ import (
 	th "github.com/nttcom/eclcloud/testhelper"
 )
 
-func TestListGatewayInterface(t *testing.T) {
+func TestListGatewayInterfaces(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
