@@ -12,6 +12,7 @@ const ListResponse = `
       "azure_gw_id": null,
       "description": "",
       "destination": "100.127.254.152/29",
+      "fic_gw_id": "5af4f343-91a7-4956-aabb-9ac678d215e5",
       "gcp_gw_id": null,
       "id": "93aaec0f-1546-4062-88c5-93c397b93c03",
       "interdc_gw_id": null,
@@ -28,6 +29,7 @@ const ListResponse = `
       "azure_gw_id": null,
       "description": "jbd test",
       "destination": "100.127.254.70/31",
+      "fic_gw_id": "1331e6a7-2876-4d34-b12f-5aac9517b034",
       "gcp_gw_id": null,
       "id": "a0caa2c8-5d30-49cd-a5f2-99517a4d848b",
       "interdc_gw_id": null,
@@ -50,6 +52,7 @@ const GetResponse = `
     "azure_gw_id": null,
     "description": "",
     "destination": "100.127.254.152/29",
+    "fic_gw_id": "5af4f343-91a7-4956-aabb-9ac678d215e5",
     "gcp_gw_id": null,
     "id": "93aaec0f-1546-4062-88c5-93c397b93c03",
     "interdc_gw_id": null,
@@ -69,6 +72,7 @@ const CreateRequest = `
 	"static_route": {
     "description": "",
     "destination": "100.127.254.152/29",
+    "fic_gw_id": "5af4f343-91a7-4956-aabb-9ac678d215e5",
     "internet_gw_id": "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
     "name": "TEST-01",
     "nexthop": "100.127.254.153",
@@ -83,6 +87,7 @@ const CreateResponse = `
 	"static_route": {
     "description": "",
     "destination": "100.127.254.152/29",
+    "fic_gw_id": "5af4f343-91a7-4956-aabb-9ac678d215e5",
     "id": "93aaec0f-1546-4062-88c5-93c397b93c03",
     "internet_gw_id": "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
     "name": "TEST-01",
@@ -107,6 +112,7 @@ const UpdateResponse = `
 	"static_route": {
     "description": "",
     "destination": "100.127.254.152/29",
+    "fic_gw_id": "5af4f343-91a7-4956-aabb-9ac678d215e5",
     "id": "93aaec0f-1546-4062-88c5-93c397b93c03",
     "internet_gw_id": "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
     "name": "TEST-02",
@@ -121,6 +127,7 @@ const UpdateResponse = `
 var StaticRoute1 = static_routes.StaticRoute{
 	Description:  "",
 	Destination:  "100.127.254.152/29",
+	FICGatewayID: "5af4f343-91a7-4956-aabb-9ac678d215e5",
 	ID:           "93aaec0f-1546-4062-88c5-93c397b93c03",
 	InternetGwID: "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
 	Name:         "TEST-01",
@@ -133,6 +140,7 @@ var StaticRoute1 = static_routes.StaticRoute{
 var StaticRoute2 = static_routes.StaticRoute{
 	Description:  "jbd test",
 	Destination:  "100.127.254.70/31",
+	FICGatewayID: "1331e6a7-2876-4d34-b12f-5aac9517b034",
 	ID:           "a0caa2c8-5d30-49cd-a5f2-99517a4d848b",
 	InternetGwID: "b684b775-63cc-40e6-b615-cc88c804df19",
 	Name:         "jbd_test_StaticRoute001",

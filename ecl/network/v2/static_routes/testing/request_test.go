@@ -11,7 +11,7 @@ import (
 	th "github.com/nttcom/eclcloud/testhelper"
 )
 
-func TestList(t *testing.T) {
+func TestListStaticRoutes(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
@@ -50,7 +50,7 @@ func TestList(t *testing.T) {
 	}
 }
 
-func TestGet(t *testing.T) {
+func TestGetStaticRoute(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
@@ -70,7 +70,7 @@ func TestGet(t *testing.T) {
 	th.CheckDeepEquals(t, &StaticRoute1, i)
 }
 
-func TestCreate(t *testing.T) {
+func TestCreateStaticRoute(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
@@ -90,6 +90,7 @@ func TestCreate(t *testing.T) {
 		Name:         "TEST-01",
 		Description:  "",
 		Destination:  "100.127.254.152/29",
+		FICGatewayID: "5af4f343-91a7-4956-aabb-9ac678d215e5",
 		InternetGwID: "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
 		Nexthop:      "100.127.254.153",
 		ServiceType:  "internet",
@@ -102,7 +103,7 @@ func TestCreate(t *testing.T) {
 	th.AssertDeepEquals(t, &StaticRoute1, i)
 }
 
-func TestUpdate(t *testing.T) {
+func TestUpdateStaticRoute(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
@@ -129,7 +130,7 @@ func TestUpdate(t *testing.T) {
 	th.AssertEquals(t, i.ID, "93aaec0f-1546-4062-88c5-93c397b93c03")
 }
 
-func TestDelete(t *testing.T) {
+func TestDeleteStaticRoute(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
