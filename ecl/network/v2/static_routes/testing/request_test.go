@@ -50,7 +50,7 @@ func TestListStaticRoutes(t *testing.T) {
 	}
 }
 
-func TestGetStaticRoutes(t *testing.T) {
+func TestGetStaticRoute(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
@@ -70,7 +70,7 @@ func TestGetStaticRoutes(t *testing.T) {
 	th.CheckDeepEquals(t, &StaticRoute1, i)
 }
 
-func TestCreateStaticRoutes(t *testing.T) {
+func TestCreateStaticRoute(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
@@ -103,7 +103,7 @@ func TestCreateStaticRoutes(t *testing.T) {
 	th.AssertDeepEquals(t, &StaticRoute1, i)
 }
 
-func TestUpdateStaticRoutes(t *testing.T) {
+func TestUpdateStaticRoute(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
