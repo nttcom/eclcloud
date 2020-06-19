@@ -13,6 +13,7 @@ type ListOpts struct {
 	AwsGwID       string `q:"aws_gw_id"`
 	AzureGwID     string `q:"azure_gw_id"`
 	Description   string `q:"description"`
+	FICGatewayID  string `q:"fic_gw_id"`
 	GcpGwID       string `q:"gcp_gw_id"`
 	GwVipv4       string `q:"gw_vipv4"`
 	GwVipv6       string `q:"gw_vipv6"`
@@ -65,6 +66,7 @@ type CreateOpts struct {
 	AwsGwID       string `json:"aws_gw_id,omitempty"`
 	AzureGwID     string `json:"azure_gw_id,omitempty"`
 	Description   string `json:"description"`
+	FICGatewayID  string `json:"fic_gw_id"`
 	GcpGwID       string `json:"gcp_gw_id,omitempty"`
 	GwVipv4       string `json:"gw_vipv4" required:"true"`
 	GwVipv6       string `json:"gw_vipv6,omitempty"`

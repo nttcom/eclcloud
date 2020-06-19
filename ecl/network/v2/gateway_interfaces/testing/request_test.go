@@ -11,7 +11,7 @@ import (
 	th "github.com/nttcom/eclcloud/testhelper"
 )
 
-func TestList(t *testing.T) {
+func TestListGatewayInterfaces(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
@@ -50,7 +50,7 @@ func TestList(t *testing.T) {
 	}
 }
 
-func TestGet(t *testing.T) {
+func TestGetGatewayInterface(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
@@ -70,7 +70,7 @@ func TestGet(t *testing.T) {
 	th.CheckDeepEquals(t, &GatewayInterface1, i)
 }
 
-func TestCreate(t *testing.T) {
+func TestCreateGatewayInterface(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
@@ -88,6 +88,7 @@ func TestCreate(t *testing.T) {
 
 	options := gateway_interfaces.CreateOpts{
 		Description:   "",
+		FICGatewayID:  "9c5c6441-e174-4b9a-9d16-4ed38cc95dd5",
 		GwVipv4:       "100.127.254.49",
 		InternetGwID:  "e72ef35a-c96f-45f8-aeee-e7547c5b94b3",
 		Name:          "5_Gateway",
@@ -106,7 +107,7 @@ func TestCreate(t *testing.T) {
 	th.AssertDeepEquals(t, &GatewayInterface1, i)
 }
 
-func TestUpdate(t *testing.T) {
+func TestUpdateGatewayInterface(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
@@ -137,7 +138,7 @@ func TestUpdate(t *testing.T) {
 	th.AssertEquals(t, i.ID, "09771fbb-6496-4ae1-9b53-226b6edcc1be")
 }
 
-func TestDelete(t *testing.T) {
+func TestDeleteGatewayInterface(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
