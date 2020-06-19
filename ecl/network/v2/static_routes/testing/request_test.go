@@ -130,7 +130,7 @@ func TestUpdateStaticRoute(t *testing.T) {
 	th.AssertEquals(t, i.ID, "93aaec0f-1546-4062-88c5-93c397b93c03")
 }
 
-func TestDeleteStaticRoutes(t *testing.T) {
+func TestDeleteStaticRoute(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
