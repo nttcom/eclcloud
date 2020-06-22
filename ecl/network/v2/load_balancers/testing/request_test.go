@@ -78,7 +78,7 @@ func TestCreateLoadBalancer(t *testing.T) {
 		th.TestHeader(t, r, "Accept", "application/json")
 		th.TestJSONRequest(t, r, CreateRequest)
 		w.Header().Add("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
+		w.WriteHeader(http.StatusCreated)
 
 		fmt.Fprintf(w, CreateResponse)
 	})
@@ -124,7 +124,8 @@ func TestUpdateLoadBalancer(t *testing.T) {
 
 	adminUsername := "user-admin"
 	availabilityZone := "zone1-groupa"
-	defaultGateway := "100.127.253.1"
+	var defaultGateway interface{}
+	defaultGateway = "100.127.253.1"
 	description := "UPDATED"
 	id := "5f3cae7c-58a5-4124-b622-9ca3cfbf2525"
 

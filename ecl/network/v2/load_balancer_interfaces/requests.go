@@ -61,19 +61,19 @@ type UpdateOpts struct {
 	Description *string `json:"description,omitempty"`
 
 	// IP Address
-	IPAddress string `json:"ip_address,omitempty"`
+	IPAddress *interface{} `json:"ip_address,omitempty"`
 
 	// Name of the Load Balancer Interface
 	Name *string `json:"name,omitempty"`
 
 	// UUID of the parent network.
-	NetworkID string `json:"network_id,omitempty"`
+	NetworkID *interface{} `json:"network_id,omitempty"`
 
 	// Virtual IP Address
-	VirtualIPAddress string `json:"virtual_ip_address,omitempty"`
+	VirtualIPAddress *interface{} `json:"virtual_ip_address,omitempty"`
 
 	// Properties used for virtual IP address
-	VirtualIPProperties VirtualIPProperties `json:"virtual_ip_properties,omitempty"`
+	VirtualIPProperties *VirtualIPProperties `json:"virtual_ip_properties,omitempty"`
 }
 
 // ToLoadBalancerUpdateMap builds a request body from UpdateOpts.

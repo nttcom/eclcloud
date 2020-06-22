@@ -275,6 +275,9 @@ var DetailVirtualIPAddress1 = "100.127.253.174"
 var DetailIPAddress2 = "192.168.110.1"
 var DetailNetworkID2 = "1839d290-721c-49ba-99f1-3d7aa37811b0"
 
+var VirtualIPPropertiesProtocol = "vrrp"
+var VirtualIPPropertiesVrid = 10
+
 var LoadBalancerDetail = load_balancers.LoadBalancer{
 	ID:               "5f3cae7c-58a5-4124-b622-9ca3cfbf2525",
 	AdminUsername:    "user-admin",
@@ -292,8 +295,8 @@ var LoadBalancerDetail = load_balancers.LoadBalancer{
 			Type:             "user",
 			VirtualIPAddress: &DetailVirtualIPAddress1,
 			VirtualIPProperties: &load_balancer_interfaces.VirtualIPProperties{
-				Protocol: "vrrp",
-				Vrid:     10,
+				Protocol: VirtualIPPropertiesProtocol,
+				Vrid:     VirtualIPPropertiesVrid,
 			},
 		},
 		{

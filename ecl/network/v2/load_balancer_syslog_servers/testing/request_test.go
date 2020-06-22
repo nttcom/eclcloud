@@ -76,7 +76,7 @@ func TestCreateLoadBalancerSyslogServer(t *testing.T) {
 		th.TestHeader(t, r, "Accept", "application/json")
 		th.TestJSONRequest(t, r, CreateRequest)
 		w.Header().Add("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
+		w.WriteHeader(http.StatusCreated)
 
 		fmt.Fprintf(w, CreateResponse)
 	})
