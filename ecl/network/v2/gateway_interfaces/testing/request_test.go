@@ -88,7 +88,6 @@ func TestCreateGatewayInterface(t *testing.T) {
 
 	options := gateway_interfaces.CreateOpts{
 		Description:   "",
-		FICGatewayID:  "9c5c6441-e174-4b9a-9d16-4ed38cc95dd5",
 		GwVipv4:       "100.127.254.49",
 		InternetGwID:  "e72ef35a-c96f-45f8-aeee-e7547c5b94b3",
 		Name:          "5_Gateway",
@@ -97,13 +96,10 @@ func TestCreateGatewayInterface(t *testing.T) {
 		PrimaryIpv4:   "100.127.254.53",
 		SecondaryIpv4: "100.127.254.54",
 		ServiceType:   "internet",
-		TenantID:      "19ab165c7a664abe9c217334cd0e9cc9",
 		VRID:          1,
 	}
 	i, err := gateway_interfaces.Create(fake.ServiceClient(), options).Extract()
 	th.AssertNoErr(t, err)
-
-	th.AssertEquals(t, i.Status, "PENDING_CREATE")
 	th.AssertDeepEquals(t, &GatewayInterface1, i)
 }
 
@@ -125,7 +121,7 @@ func TestUpdateGatewayInterface(t *testing.T) {
 	})
 
 	description := "Updated"
-	name := "5_Gateway"
+	name := "6_Gateway"
 	options := gateway_interfaces.UpdateOpts{
 		Description: &description,
 		Name:        &name,
@@ -133,7 +129,7 @@ func TestUpdateGatewayInterface(t *testing.T) {
 	i, err := gateway_interfaces.Update(fake.ServiceClient(), "09771fbb-6496-4ae1-9b53-226b6edcc1be", options).Extract()
 	th.AssertNoErr(t, err)
 
-	th.AssertEquals(t, i.Name, "5_Gateway")
+	th.AssertEquals(t, i.Name, "6_Gateway")
 	th.AssertEquals(t, i.Description, "Updated")
 	th.AssertEquals(t, i.ID, "09771fbb-6496-4ae1-9b53-226b6edcc1be")
 }
