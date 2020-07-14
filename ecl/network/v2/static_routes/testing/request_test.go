@@ -54,7 +54,7 @@ func TestGetStaticRoute(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/v2.0/static_routes/93aaec0f-1546-4062-88c5-93c397b93c03", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v2.0/static_routes/cd1dacf1-0838-4ffc-bbb8-54d3152b9a5a", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 
@@ -64,7 +64,7 @@ func TestGetStaticRoute(t *testing.T) {
 		fmt.Fprintf(w, GetResponse)
 	})
 
-	i, err := static_routes.Get(fake.ServiceClient(), "93aaec0f-1546-4062-88c5-93c397b93c03").Extract()
+	i, err := static_routes.Get(fake.ServiceClient(), "cd1dacf1-0838-4ffc-bbb8-54d3152b9a5a").Extract()
 	t.Logf("%s", err)
 	th.AssertNoErr(t, err)
 	th.CheckDeepEquals(t, &StaticRoute1, i)
@@ -87,14 +87,13 @@ func TestCreateStaticRoute(t *testing.T) {
 	})
 
 	options := static_routes.CreateOpts{
-		Name:         "TEST-01",
-		Description:  "",
-		Destination:  "100.127.254.152/29",
+		Name:         "SRT2",
+		Description:  "SRT2",
+		Destination:  "100.127.254.116/30",
 		FICGatewayID: "5af4f343-91a7-4956-aabb-9ac678d215e5",
-		InternetGwID: "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
-		Nexthop:      "100.127.254.153",
-		ServiceType:  "internet",
-		TenantID:     "60ed68071ca14fff8a6c28458379864b",
+		Nexthop:      "100.127.254.117",
+		ServiceType:  "fic",
+		TenantID:     "6a156ddf2ecd497ca786ff2da6df5aa8",
 	}
 	i, err := static_routes.Create(fake.ServiceClient(), options).Extract()
 	th.AssertNoErr(t, err)
@@ -107,7 +106,7 @@ func TestUpdateStaticRoute(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/v2.0/static_routes/93aaec0f-1546-4062-88c5-93c397b93c03", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v2.0/static_routes/cd1dacf1-0838-4ffc-bbb8-54d3152b9a5a", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "PUT")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 		th.TestHeader(t, r, "Content-Type", "application/json")
@@ -120,26 +119,27 @@ func TestUpdateStaticRoute(t *testing.T) {
 		fmt.Fprintf(w, UpdateResponse)
 	})
 
-	name := "TEST-02"
-	options := static_routes.UpdateOpts{Name: &name}
-	i, err := static_routes.Update(fake.ServiceClient(), "93aaec0f-1546-4062-88c5-93c397b93c03", options).Extract()
+	name := "SRT2"
+	description := "SRT2"
+	options := static_routes.UpdateOpts{Name: &name, Description: &description}
+	i, err := static_routes.Update(fake.ServiceClient(), "cd1dacf1-0838-4ffc-bbb8-54d3152b9a5a", options).Extract()
 	th.AssertNoErr(t, err)
 
-	th.AssertEquals(t, i.Name, "TEST-02")
-	th.AssertEquals(t, i.Description, "")
-	th.AssertEquals(t, i.ID, "93aaec0f-1546-4062-88c5-93c397b93c03")
+	th.AssertEquals(t, i.Name, "SRT2")
+	th.AssertEquals(t, i.Description, "SRT2")
+	th.AssertEquals(t, i.ID, "cd1dacf1-0838-4ffc-bbb8-54d3152b9a5a")
 }
 
 func TestDeleteStaticRoute(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/v2.0/static_routes/93aaec0f-1546-4062-88c5-93c397b93c03", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/v2.0/static_routes/cd1dacf1-0838-4ffc-bbb8-54d3152b9a5a", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "DELETE")
 		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
 		w.WriteHeader(http.StatusNoContent)
 	})
 
-	res := static_routes.Delete(fake.ServiceClient(), "93aaec0f-1546-4062-88c5-93c397b93c03")
+	res := static_routes.Delete(fake.ServiceClient(), "cd1dacf1-0838-4ffc-bbb8-54d3152b9a5a")
 	th.AssertNoErr(t, res.Err)
 }

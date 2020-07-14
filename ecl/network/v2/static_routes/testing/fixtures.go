@@ -6,39 +6,39 @@ import (
 
 const ListResponse = `
 {
-	"static_routes": [
+  "static_routes": [
     {
       "aws_gw_id": null,
       "azure_gw_id": null,
-      "description": "",
-      "destination": "100.127.254.152/29",
+      "description": "SRT2",
+      "destination": "100.127.254.116/30",
       "fic_gw_id": "5af4f343-91a7-4956-aabb-9ac678d215e5",
       "gcp_gw_id": null,
-      "id": "93aaec0f-1546-4062-88c5-93c397b93c03",
+      "id": "cd1dacf1-0838-4ffc-bbb8-54d3152b9a5a",
       "interdc_gw_id": null,
-      "internet_gw_id": "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
-      "name": "TEST-01",
-      "nexthop": "100.127.254.153",
-      "service_type": "internet",
+      "internet_gw_id": null,
+      "name": "SRT2",
+      "nexthop": "100.127.254.117",
+      "service_type": "fic",
       "status": "PENDING_CREATE",
-      "tenant_id": "60ed68071ca14fff8a6c28458379864b",
+      "tenant_id": "6a156ddf2ecd497ca786ff2da6df5aa8",
       "vpn_gw_id": null
     },
     {
       "aws_gw_id": null,
       "azure_gw_id": null,
-      "description": "jbd test",
-      "destination": "100.127.254.70/31",
+      "description": "StaticRoute for Scenario-test.",
+      "destination": "100.127.255.184/29",
       "fic_gw_id": "1331e6a7-2876-4d34-b12f-5aac9517b034",
       "gcp_gw_id": null,
-      "id": "a0caa2c8-5d30-49cd-a5f2-99517a4d848b",
+      "id": "e58162ca-9fef-4f27-898f-af0d495b780c",
       "interdc_gw_id": null,
-      "internet_gw_id": "b684b775-63cc-40e6-b615-cc88c804df19",
-      "name": "jbd_test_StaticRoute001",
-      "nexthop": "192.168.1.0",
-      "service_type": "internet",
-      "status": "ACTIVE",
-      "tenant_id": "28ebaf1b212f4052a1a88d27f61deaa3",
+      "internet_gw_id": null,
+      "name": "StaticRoute_INGW_02_01",
+      "nexthop": "100.127.255.189",
+      "service_type": "fic",
+      "status": "PENDING_CREATE",
+      "tenant_id": "6a156ddf2ecd497ca786ff2da6df5aa8",
       "vpn_gw_id": null
     }
   ]
@@ -47,21 +47,21 @@ const ListResponse = `
 
 const GetResponse = `
 {
-	"static_route": {
+  "static_route": {
     "aws_gw_id": null,
     "azure_gw_id": null,
-    "description": "",
-    "destination": "100.127.254.152/29",
+    "description": "SRT2",
+    "destination": "100.127.254.116/30",
     "fic_gw_id": "5af4f343-91a7-4956-aabb-9ac678d215e5",
     "gcp_gw_id": null,
-    "id": "93aaec0f-1546-4062-88c5-93c397b93c03",
+    "id": "cd1dacf1-0838-4ffc-bbb8-54d3152b9a5a",
     "interdc_gw_id": null,
-    "internet_gw_id": "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
-    "name": "TEST-01",
-    "nexthop": "100.127.254.153",
-    "service_type": "internet",
+    "internet_gw_id": null,
+    "name": "SRT2",
+    "nexthop": "100.127.254.117",
+    "service_type": "fic",
     "status": "PENDING_CREATE",
-    "tenant_id": "60ed68071ca14fff8a6c28458379864b",
+    "tenant_id": "6a156ddf2ecd497ca786ff2da6df5aa8",
     "vpn_gw_id": null
   }
 }
@@ -69,85 +69,87 @@ const GetResponse = `
 
 const CreateRequest = `
 {
-	"static_route": {
-    "description": "",
-    "destination": "100.127.254.152/29",
+  "static_route": {
+    "description": "SRT2",
+    "destination": "100.127.254.116/30",
     "fic_gw_id": "5af4f343-91a7-4956-aabb-9ac678d215e5",
-    "internet_gw_id": "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
-    "name": "TEST-01",
-    "nexthop": "100.127.254.153",
-    "service_type": "internet",
-    "tenant_id": "60ed68071ca14fff8a6c28458379864b"
+    "name": "SRT2",
+    "nexthop": "100.127.254.117",
+    "service_type": "fic",
+    "tenant_id": "6a156ddf2ecd497ca786ff2da6df5aa8"
   }
 }
 `
 
 const CreateResponse = `
 {
-	"static_route": {
-    "description": "",
-    "destination": "100.127.254.152/29",
+  "static_route": {
+    "description": "SRT2",
+    "destination": "100.127.254.116/30",
     "fic_gw_id": "5af4f343-91a7-4956-aabb-9ac678d215e5",
-    "id": "93aaec0f-1546-4062-88c5-93c397b93c03",
-    "internet_gw_id": "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
-    "name": "TEST-01",
-    "nexthop": "100.127.254.153",
-    "service_type": "internet",
+    "id": "cd1dacf1-0838-4ffc-bbb8-54d3152b9a5a",
+    "name": "SRT2",
+    "nexthop": "100.127.254.117",
+    "service_type": "fic",
     "status": "PENDING_CREATE",
-    "tenant_id": "60ed68071ca14fff8a6c28458379864b"
+    "tenant_id": "6a156ddf2ecd497ca786ff2da6df5aa8"
   }
 }
 `
 
 const UpdateRequest = `
 {
-	"static_route": {
-    "name": "TEST-02"
+  "static_route": {
+    "description": "SRT2",
+    "name": "SRT2"
   }
 }
  `
 
 const UpdateResponse = `
 {
-	"static_route": {
-    "description": "",
-    "destination": "100.127.254.152/29",
+  "static_route": {
+    "aws_gw_id": null,
+    "azure_gw_id": null,
+    "description": "SRT2",
+    "destination": "100.127.254.116/30",
     "fic_gw_id": "5af4f343-91a7-4956-aabb-9ac678d215e5",
-    "id": "93aaec0f-1546-4062-88c5-93c397b93c03",
-    "internet_gw_id": "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
-    "name": "TEST-02",
-    "nexthop": "100.127.254.153",
-    "service_type": "internet",
+    "gcp_gw_id": null,
+    "id": "cd1dacf1-0838-4ffc-bbb8-54d3152b9a5a",
+    "interdc_gw_id": null,
+    "internet_gw_id": null,
+    "name": "SRT2",
+    "nexthop": "100.127.254.117",
+    "service_type": "fic",
     "status": "PENDING_UPDATE",
-    "tenant_id": "60ed68071ca14fff8a6c28458379864b"
+    "tenant_id": "6a156ddf2ecd497ca786ff2da6df5aa8",
+    "vpn_gw_id": null
   }
 }
 `
 
 var StaticRoute1 = static_routes.StaticRoute{
-	Description:  "",
-	Destination:  "100.127.254.152/29",
+	Description:  "SRT2",
+	Destination:  "100.127.254.116/30",
 	FICGatewayID: "5af4f343-91a7-4956-aabb-9ac678d215e5",
-	ID:           "93aaec0f-1546-4062-88c5-93c397b93c03",
-	InternetGwID: "3c5703b7-e783-42fe-ba23-5b0fe872cccb",
-	Name:         "TEST-01",
-	Nexthop:      "100.127.254.153",
-	ServiceType:  "internet",
+	ID:           "cd1dacf1-0838-4ffc-bbb8-54d3152b9a5a",
+	Name:         "SRT2",
+	Nexthop:      "100.127.254.117",
+	ServiceType:  "fic",
 	Status:       "PENDING_CREATE",
-	TenantID:     "60ed68071ca14fff8a6c28458379864b",
+	TenantID:     "6a156ddf2ecd497ca786ff2da6df5aa8",
 }
 
 var StaticRoute2 = static_routes.StaticRoute{
-	Description:  "jbd test",
-	Destination:  "100.127.254.70/31",
+	Description:  "StaticRoute for Scenario-test.",
+	Destination:  "100.127.255.184/29",
 	FICGatewayID: "1331e6a7-2876-4d34-b12f-5aac9517b034",
-	ID:           "a0caa2c8-5d30-49cd-a5f2-99517a4d848b",
-	InternetGwID: "b684b775-63cc-40e6-b615-cc88c804df19",
-	Name:         "jbd_test_StaticRoute001",
-	Nexthop:      "192.168.1.0",
-	ServiceType:  "internet",
-	Status:       "ACTIVE",
-	TenantID:     "28ebaf1b212f4052a1a88d27f61deaa3",
+	ID:           "e58162ca-9fef-4f27-898f-af0d495b780c",
+	Name:         "StaticRoute_INGW_02_01",
+	Nexthop:      "100.127.255.189",
+	ServiceType:  "fic",
+	Status:       "PENDING_CREATE",
+	TenantID:     "6a156ddf2ecd497ca786ff2da6df5aa8",
 }
 
 var ExpectedStaticRouteSlice = []static_routes.StaticRoute{StaticRoute1, StaticRoute2}
