@@ -61,7 +61,7 @@ type UpdateOpts struct {
 	Description *string `json:"description,omitempty"`
 
 	// IP Address
-	IPAddress *interface{} `json:"ip_address,omitempty"`
+	IPAddress string `json:"ip_address,omitempty"`
 
 	// Name of the Load Balancer Interface
 	Name *string `json:"name,omitempty"`

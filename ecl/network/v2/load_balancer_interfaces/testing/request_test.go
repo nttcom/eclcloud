@@ -83,8 +83,7 @@ func TestUpdateLoadBalancerInterface(t *testing.T) {
 	})
 
 	description := "test"
-	var ipAddress interface{}
-	ipAddress = "100.64.64.34"
+	ipAddress := "100.64.64.34"
 	name := "Interface 1/2"
 	var networkID interface{}
 	networkID = "e6106a35-d79b-44a3-bda0-6009b2f8775a"
@@ -106,7 +105,7 @@ func TestUpdateLoadBalancerInterface(t *testing.T) {
 
 	options := load_balancer_interfaces.UpdateOpts{
 		Description:         &description,
-		IPAddress:           &ipAddress,
+		IPAddress:           ipAddress,
 		Name:                &name,
 		NetworkID:           &networkID,
 		VirtualIPAddress:    &virtualIPAddress,
