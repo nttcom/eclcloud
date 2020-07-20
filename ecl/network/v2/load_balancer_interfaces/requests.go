@@ -67,13 +67,13 @@ type UpdateOpts struct {
 	Name *string `json:"name,omitempty"`
 
 	// UUID of the parent network.
-	NetworkID string `json:"network_id,omitempty"`
+	NetworkID *interface{} `json:"network_id,omitempty"`
 
 	// Virtual IP Address
-	VirtualIPAddress string `json:"virtual_ip_address,omitempty"`
+	VirtualIPAddress *interface{} `json:"virtual_ip_address,omitempty"`
 
 	// Properties used for virtual IP address
-	VirtualIPProperties VirtualIPProperties `json:"virtual_ip_properties,omitempty"`
+	VirtualIPProperties *VirtualIPProperties `json:"virtual_ip_properties,omitempty"`
 }
 
 // ToLoadBalancerUpdateMap builds a request body from UpdateOpts.

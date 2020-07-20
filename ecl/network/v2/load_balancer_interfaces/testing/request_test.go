@@ -2,11 +2,11 @@ package testing
 
 import (
 	"fmt"
-	load_balancer_interfaces "github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_interfaces"
 	"net/http"
 	"testing"
 
 	fake "github.com/nttcom/eclcloud/ecl/network/v2/common"
+	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_interfaces"
 	"github.com/nttcom/eclcloud/pagination"
 	th "github.com/nttcom/eclcloud/testhelper"
 )
@@ -85,8 +85,8 @@ func TestUpdateLoadBalancerInterface(t *testing.T) {
 	description := "test"
 	ipAddress := "100.64.64.34"
 	name := "Interface 1/2"
-	networkID := "e6106a35-d79b-44a3-bda0-6009b2f8775a"
-	virtualIPAddress := "100.64.64.101"
+	networkID := interface{}("e6106a35-d79b-44a3-bda0-6009b2f8775a")
+	virtualIPAddress := interface{}("100.64.64.101")
 	virtualIPProperties := load_balancer_interfaces.VirtualIPProperties{
 		Protocol: "vrrp",
 		Vrid:     10,
@@ -105,9 +105,9 @@ func TestUpdateLoadBalancerInterface(t *testing.T) {
 		Description:         &description,
 		IPAddress:           ipAddress,
 		Name:                &name,
-		NetworkID:           "e6106a35-d79b-44a3-bda0-6009b2f8775a",
-		VirtualIPAddress:    "100.64.64.101",
-		VirtualIPProperties: virtualIPProperties,
+		NetworkID:           &networkID,
+		VirtualIPAddress:    &virtualIPAddress,
+		VirtualIPProperties: &virtualIPProperties,
 	}
 
 	s, err := load_balancer_interfaces.Update(fake.ServiceClient(), "ab49eb24-667f-4a4e-9421-b4d915bff416", options).Extract()

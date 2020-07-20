@@ -93,7 +93,7 @@ func Create(c *eclcloud.ServiceClient, opts CreateOpts) (r CreateResult) {
 		return
 	}
 	_, r.Err = c.Post(createURL(c), b, &r.Body, &eclcloud.RequestOpts{
-		OkCodes: []int{200},
+		OkCodes: []int{201},
 	})
 	return
 }
@@ -102,7 +102,7 @@ func Create(c *eclcloud.ServiceClient, opts CreateOpts) (r CreateResult) {
 type UpdateOpts struct {
 
 	// Description is description
-	DefaultGateway *string `json:"default_gateway,omitempty"`
+	DefaultGateway *interface{} `json:"default_gateway,omitempty"`
 
 	// Description is description
 	Description *string `json:"description,omitempty"`
