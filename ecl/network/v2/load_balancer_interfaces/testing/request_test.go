@@ -2,11 +2,11 @@ package testing
 
 import (
 	"fmt"
-	load_balancer_interfaces "github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_interfaces"
 	"net/http"
 	"testing"
 
 	fake "github.com/nttcom/eclcloud/ecl/network/v2/common"
+	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_interfaces"
 	"github.com/nttcom/eclcloud/pagination"
 	th "github.com/nttcom/eclcloud/testhelper"
 )
