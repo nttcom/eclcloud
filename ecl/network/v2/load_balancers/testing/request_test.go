@@ -124,8 +124,7 @@ func TestUpdateLoadBalancer(t *testing.T) {
 
 	adminUsername := "user-admin"
 	availabilityZone := "zone1-groupa"
-	var defaultGateway interface{}
-	defaultGateway = "100.127.253.1"
+	defaultGateway := interface{}("100.127.253.1")
 	description := "UPDATED"
 	id := "5f3cae7c-58a5-4124-b622-9ca3cfbf2525"
 
