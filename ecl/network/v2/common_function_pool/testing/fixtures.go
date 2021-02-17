@@ -33,19 +33,19 @@ const GetResponse = `
 
 var CommonFunctionPool1 = common_function_pool.CommonFunctionPool{
 	Description: "Common Function Pool 1",
-	ID:					 "c57066cc-9553-43a6-90de-asfdfesfffff",
+	ID:          "c57066cc-9553-43a6-90de-asfdfesfffff",
 	Name:        "CF_Pool1",
 }
 
 var CommonFunctionPool2 = common_function_pool.CommonFunctionPool{
 	Description: "Common Function Pool 2",
-	ID:					 "fesg66cc-9553-43a6-90de-c8472fdsafedf",
+	ID:          "fesg66cc-9553-43a6-90de-c8472fdsafedf",
 	Name:        "CF_Pool2",
 }
 
 var CommonFunctionDetail = common_function_pool.CommonFunctionPool{
 	Description: "Common Function Pool Description",
-	ID:					 "c57066cc-9553-43a6-90de-c847231bc70b",
+	ID:          "c57066cc-9553-43a6-90de-c847231bc70b",
 	Name:        "CF_Pool1",
 }
 
