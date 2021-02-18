@@ -5,15 +5,17 @@ import (
 	"github.com/nttcom/eclcloud/pagination"
 )
 
+// ListOptsBuilder allows extensions to add additional parameters to the
+// List request.
+type ListOptsBuilder interface {
+	ToCommonFunctionPoolListQuery() (string, error)
+}
+
 // ListOpts allows the filtering and sorting of paginated collections through
 // the API. Filtering is achieved by passing in struct field values that map to
 // the Common Function Pool attributes you want to see returned. SortKey allows you to sort
 // by a particular Common Function Pool attribute. SortDir sets the direction, and is either
 // `asc' or `desc'. Marker and Limit are used for pagination.
-type ListOptsBuilder interface {
-	ToCommonFunctionPoolListQuery() (string, error)
-}
-
 type ListOpts struct {
 	Description string `q:"description"`
 	ID          string `q:"id"`
@@ -47,7 +49,7 @@ func List(c *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager {
 	})
 }
 
-// Get retrieves a specific Common Function Plan based on its unique ID.
+// Get retrieves a specific Common Function Pool based on its unique ID.
 func Get(c *eclcloud.ServiceClient, id string) (r GetResult) {
 	_, r.Err = c.Get(getURL(c, id), &r.Body, nil)
 	return
