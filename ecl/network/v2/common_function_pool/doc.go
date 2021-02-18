@@ -33,5 +33,15 @@ Example to Show Common Function Pool
 
 	fmt.Printf("%+v\n", commonFunctionPool)
 
+Example to look for Common Function Pool's ID by its name
+
+	commonFunctionPoolName := "CF_Pool1"
+
+	commonFunctionPoolID, err := common_function_pool.IDFromName(networkClient, commonFunctionPoolName)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("%+v\n", commonFunctionPoolID)
 */
 package common_function_pool

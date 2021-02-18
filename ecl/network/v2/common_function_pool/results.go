@@ -5,25 +5,6 @@ import (
 	"github.com/nttcom/eclcloud/pagination"
 )
 
-type commonResult struct {
-	eclcloud.Result
-}
-
-// Extract is a function that accepts a result and extracts a Common Function Pool resource.
-func (r commonResult) Extract() (*CommonFunctionPool, error) {
-	var s struct {
-		CommonFunctionPool *CommonFunctionPool `json:"common_function_pool"`
-	}
-	err := r.ExtractInto(&s)
-	return s.CommonFunctionPool, err
-}
-
-// GetResult represents the result of a get operation. Call its Extract
-// method to interpret it as a Common Function Pool.
-type GetResult struct {
-	commonResult
-}
-
 // CommonFunctionPool represents a Common Function Pool. See package documentation for a top-level
 // description of what this is.
 type CommonFunctionPool struct {
@@ -36,6 +17,16 @@ type CommonFunctionPool struct {
 
 	// Name of Common Function Pool
 	Name string `json:"name"`
+}
+
+type commonResult struct {
+	eclcloud.Result
+}
+
+// GetResult represents the result of a get operation. Call its Extract
+// method to interpret it as a Common Function Pool.
+type GetResult struct {
+	commonResult
 }
 
 // CommonFunctionPoolPage is the page returned by a pager when traversing over a collection
@@ -59,4 +50,13 @@ func ExtractCommonFunctionPools(r pagination.Page) ([]CommonFunctionPool, error)
 	}
 	err := (r.(CommonFunctionPoolPage)).ExtractInto(&s)
 	return s.CommonFunctionPools, err
+}
+
+// Extract is a function that accepts a result and extracts a Common Function Pool resource.
+func (r commonResult) Extract() (*CommonFunctionPool, error) {
+	var s struct {
+		CommonFunctionPool *CommonFunctionPool `json:"common_function_pool"`
+	}
+	err := r.ExtractInto(&s)
+	return s.CommonFunctionPool, err
 }
