@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/ecl/service/vN/resources"
-	th "github.com/nttcom/eclcloud/testhelper"
-	"github.com/nttcom/eclcloud/testhelper/client"
+	"github.com/nttcom/eclcloud/v2/ecl/service/vN/resources"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	"github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 // ListResult provides a single page of RESOURCE results.

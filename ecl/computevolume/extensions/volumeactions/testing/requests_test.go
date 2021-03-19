@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nttcom/eclcloud/ecl/computevolume/extensions/volumeactions"
-	th "github.com/nttcom/eclcloud/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/testhelper/client"
+	"github.com/nttcom/eclcloud/v2/ecl/computevolume/extensions/volumeactions"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 func TestVolumeUploadImage(t *testing.T) {

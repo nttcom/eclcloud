@@ -1,8 +1,8 @@
 package volumes
 
 import (
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/pagination"
 )
 
 // CreateOptsBuilder allows extensions to add additional parameters to the

@@ -1,6 +1,6 @@
 package keypairs
 
-import "github.com/nttcom/eclcloud"
+import "github.com/nttcom/eclcloud/v2"
 
 const resourcePath = "os-keypairs"
 

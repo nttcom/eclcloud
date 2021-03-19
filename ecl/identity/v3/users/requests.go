@@ -1,10 +1,10 @@
 package users
 
 import (
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/ecl/identity/v3/groups"
-	"github.com/nttcom/eclcloud/ecl/identity/v3/projects"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/ecl/identity/v3/groups"
+	"github.com/nttcom/eclcloud/v2/ecl/identity/v3/projects"
+	"github.com/nttcom/eclcloud/v2/pagination"
 	"net/http"
 	"net/url"
 	"strings"

@@ -1,6 +1,6 @@
 package roles
 
-import "github.com/nttcom/eclcloud"
+import "github.com/nttcom/eclcloud/v2"
 
 const (
 	rolePath = "roles"

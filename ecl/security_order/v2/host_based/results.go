@@ -1,7 +1,7 @@
 package host_based
 
 import (
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 type commonResult struct {

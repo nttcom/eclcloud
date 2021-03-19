@@ -1,7 +1,7 @@
 package virtualstorages
 
 import (
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 // WaitForStatus will continually poll the resource, checking for a particular

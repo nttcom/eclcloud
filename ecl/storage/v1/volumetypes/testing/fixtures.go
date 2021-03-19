@@ -3,7 +3,7 @@ package testing
 import (
 	"fmt"
 
-	"github.com/nttcom/eclcloud/ecl/storage/v1/volumetypes"
+	"github.com/nttcom/eclcloud/v2/ecl/storage/v1/volumetypes"
 )
 
 // Define parameters which are used in assertion.

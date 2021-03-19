@@ -1,6 +1,6 @@
 package zones
 
-import "github.com/nttcom/eclcloud"
+import "github.com/nttcom/eclcloud/v2"
 
 func baseURL(c *eclcloud.ServiceClient) string {
 	return c.ServiceURL("zones")

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/ecl/sss/v1/users"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/ecl/sss/v1/users"
 )
 
 const contractID = "econ8000008888"

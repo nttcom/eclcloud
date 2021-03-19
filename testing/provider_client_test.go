@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nttcom/eclcloud"
-	th "github.com/nttcom/eclcloud/testhelper"
-	"github.com/nttcom/eclcloud/testhelper/client"
+	"github.com/nttcom/eclcloud/v2"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	"github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 func TestAuthenticatedHeaders(t *testing.T) {
@@ -27,17 +27,17 @@ func TestUserAgent(t *testing.T) {
 	p := &eclcloud.ProviderClient{}
 
 	p.UserAgent.Prepend("custom-user-agent/2.4.0")
-	expected := "custom-user-agent/2.4.0 eclcloud/1.0.0"
+	expected := "custom-user-agent/2.4.0 eclcloud/2.0.0"
 	actual := p.UserAgent.Join()
 	th.CheckEquals(t, expected, actual)
 
 	p.UserAgent.Prepend("another-custom-user-agent/0.3.0", "a-third-ua/5.9.0")
-	expected = "another-custom-user-agent/0.3.0 a-third-ua/5.9.0 custom-user-agent/2.4.0 eclcloud/1.0.0"
+	expected = "another-custom-user-agent/0.3.0 a-third-ua/5.9.0 custom-user-agent/2.4.0 eclcloud/2.0.0"
 	actual = p.UserAgent.Join()
 	th.CheckEquals(t, expected, actual)
 
 	p.UserAgent = eclcloud.UserAgent{}
-	expected = "eclcloud/1.0.0"
+	expected = "eclcloud/2.0.0"
 	actual = p.UserAgent.Join()
 	th.CheckEquals(t, expected, actual)
 }

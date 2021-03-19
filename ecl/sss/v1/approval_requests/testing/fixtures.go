@@ -3,7 +3,7 @@ package testing
 import (
 	"fmt"
 
-	ar "github.com/nttcom/eclcloud/ecl/sss/v1/approval_requests"
+	ar "github.com/nttcom/eclcloud/v2/ecl/sss/v1/approval_requests"
 )
 
 const idApprovalRequest1 = "9a76dca6-d8cd-4391-aac6f-2ea052f10f4"

@@ -3,10 +3,10 @@ package testing
 import (
 	"testing"
 
-	"github.com/nttcom/eclcloud/ecl/compute/v2/servers"
-	"github.com/nttcom/eclcloud/pagination"
-	th "github.com/nttcom/eclcloud/testhelper"
-	"github.com/nttcom/eclcloud/testhelper/client"
+	"github.com/nttcom/eclcloud/v2/ecl/compute/v2/servers"
+	"github.com/nttcom/eclcloud/v2/pagination"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	"github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 func TestListServers(t *testing.T) {

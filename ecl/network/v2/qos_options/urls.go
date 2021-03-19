@@ -1,6 +1,6 @@
 package qos_options
 
-import "github.com/nttcom/eclcloud"
+import "github.com/nttcom/eclcloud/v2"
 
 func getURL(client *eclcloud.ServiceClient, id string) string {
 	return client.ServiceURL("qos_options", id)

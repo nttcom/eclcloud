@@ -2,7 +2,7 @@ package testing
 
 import (
 	"fmt"
-	"github.com/nttcom/eclcloud/ecl/network/v2/common_function_gateways"
+	"github.com/nttcom/eclcloud/v2/ecl/network/v2/common_function_gateways"
 )
 
 // Define parameters which are used in assertion.

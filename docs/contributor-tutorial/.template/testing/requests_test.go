@@ -3,10 +3,10 @@ package testing
 import (
 	"testing"
 
-	"github.com/nttcom/eclcloud/ecl/service/vN/resources"
-	"github.com/nttcom/eclcloud/pagination"
-	th "github.com/nttcom/eclcloud/testhelper"
-	"github.com/nttcom/eclcloud/testhelper/client"
+	"github.com/nttcom/eclcloud/v2/ecl/service/vN/resources"
+	"github.com/nttcom/eclcloud/v2/pagination"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	"github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 func TestListResources(t *testing.T) {

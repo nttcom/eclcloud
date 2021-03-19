@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/ecl/dedicated_hypervisor/v1/license_types"
+	"github.com/nttcom/eclcloud/v2/ecl/dedicated_hypervisor/v1/license_types"
 
-	th "github.com/nttcom/eclcloud/testhelper"
-	"github.com/nttcom/eclcloud/testhelper/client"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	"github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 // ListResult provides a single page of LicenseType results.

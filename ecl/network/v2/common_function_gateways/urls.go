@@ -1,7 +1,7 @@
 package common_function_gateways
 
 import (
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 func resourceURL(c *eclcloud.ServiceClient, id string) string {

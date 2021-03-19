@@ -60,13 +60,13 @@ way than just downloading it. Here are the basic instructions:
 [README](/README.md#how-to-install).
 
    ```bash
-   go get github.com/nttcom/eclcloud
+   go get github.com/nttcom/eclcloud/v2
    ```
 
 2. Move into the directory that houses your local repository:
 
    ```bash
-   cd ${GOPATH}/src/github.com/nttcom/eclcloud
+   cd ${GOPATH}/src/github.com/nttcom/eclcloud/v2
    ```
 
 3. Fork the `nttcom/eclcloud` repository and update your remote refs. You
@@ -130,7 +130,7 @@ process of testing expectations with assertions:
 import (
   "testing"
 
-  "github.com/nttcom/eclcloud/testhelper"
+  "github.com/nttcom/eclcloud/v2/testhelper"
 )
 
 func TestSomething(t *testing.T) {
@@ -156,9 +156,9 @@ Here is a truncated example of mocked HTTP responses:
 import (
 	"testing"
 
-	th "github.com/nttcom/eclcloud/testhelper"
-	fake "github.com/nttcom/eclcloud/testhelper/client"
-	"github.com/nttcom/eclcloud/ecl/network/v2/networks"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	fake "github.com/nttcom/eclcloud/v2/testhelper/client"
+	"github.com/nttcom/eclcloud/v2/ecl/network/v2/networks"
 )
 
 func TestGet(t *testing.T) {

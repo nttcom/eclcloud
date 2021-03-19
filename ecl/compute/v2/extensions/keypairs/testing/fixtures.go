@@ -1,7 +1,7 @@
 package testing
 
 import (
-	"github.com/nttcom/eclcloud/ecl/compute/v2/extensions/keypairs"
+	"github.com/nttcom/eclcloud/v2/ecl/compute/v2/extensions/keypairs"
 )
 
 const listOutput = `

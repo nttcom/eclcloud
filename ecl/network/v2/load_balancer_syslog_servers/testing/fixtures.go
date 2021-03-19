@@ -1,7 +1,7 @@
 package testing
 
 import (
-	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_syslog_servers"
+	"github.com/nttcom/eclcloud/v2/ecl/network/v2/load_balancer_syslog_servers"
 )
 
 const ListResponse = `

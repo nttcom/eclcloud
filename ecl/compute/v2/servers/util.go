@@ -1,6 +1,6 @@
 package servers
 
-import "github.com/nttcom/eclcloud"
+import "github.com/nttcom/eclcloud/v2"
 
 // WaitForStatus will continually poll a server until it successfully
 // transitions to a specified status. It will do this for at most the number

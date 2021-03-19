@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 // UploadResult is the result of an upload image operation. Call its ExtractErr

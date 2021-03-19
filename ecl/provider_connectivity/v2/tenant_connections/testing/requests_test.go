@@ -3,10 +3,10 @@ package testing
 import (
 	"testing"
 
-	"github.com/nttcom/eclcloud/ecl/provider_connectivity/v2/tenant_connections"
-	"github.com/nttcom/eclcloud/pagination"
-	th "github.com/nttcom/eclcloud/testhelper"
-	"github.com/nttcom/eclcloud/testhelper/client"
+	"github.com/nttcom/eclcloud/v2/ecl/provider_connectivity/v2/tenant_connections"
+	"github.com/nttcom/eclcloud/v2/pagination"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	"github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 func TestListTenantConnections(t *testing.T) {

@@ -1,8 +1,8 @@
 package testing
 
 import (
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/testhelper"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/testhelper"
 )
 
 func createClient() *eclcloud.ServiceClient {

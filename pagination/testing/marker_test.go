@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/nttcom/eclcloud/pagination"
-	"github.com/nttcom/eclcloud/testhelper"
+	"github.com/nttcom/eclcloud/v2/pagination"
+	"github.com/nttcom/eclcloud/v2/testhelper"
 )
 
 // MarkerPager sample and test cases.

@@ -1,8 +1,8 @@
 package client
 
 import (
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/testhelper"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/testhelper"
 )
 
 // Fake token to use.

@@ -1,7 +1,7 @@
 package availabilityzones
 
 import (
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2/pagination"
 )
 
 // ZoneState represents the current state of the availability zone.

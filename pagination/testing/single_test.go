@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/pagination"
-	"github.com/nttcom/eclcloud/testhelper"
+	"github.com/nttcom/eclcloud/v2/pagination"
+	"github.com/nttcom/eclcloud/v2/testhelper"
 )
 
 // SinglePage sample and test cases.

@@ -12,7 +12,7 @@ import (
 )
 
 // DefaultUserAgent is the default User-Agent string set in the request header.
-const DefaultUserAgent = "eclcloud/1.0.0"
+const DefaultUserAgent = "eclcloud/2.0.0"
 
 // UserAgent represents a User-Agent header.
 type UserAgent struct {
