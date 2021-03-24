@@ -1,7 +1,7 @@
 package ecl
 
 import (
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 	"os"
 )
 

@@ -1,7 +1,7 @@
 package volumeactions
 
 import (
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 // ExtendSizeOptsBuilder allows extensions to add additional parameters to the

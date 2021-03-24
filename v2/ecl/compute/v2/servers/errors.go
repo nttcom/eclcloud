@@ -3,7 +3,7 @@ package servers
 import (
 	"fmt"
 
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 // ErrNeitherImageIDNorImageNameProvided is the error when neither the image

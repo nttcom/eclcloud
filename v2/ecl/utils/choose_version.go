@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 // Version is a supported API version, corresponding to a vN package within the appropriate service.

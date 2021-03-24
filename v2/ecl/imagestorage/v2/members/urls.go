@@ -1,6 +1,6 @@
 package members
 
-import "github.com/nttcom/eclcloud"
+import "github.com/nttcom/eclcloud/v2"
 
 func imageMembersURL(c *eclcloud.ServiceClient, imageID string) string {
 	return c.ServiceURL("images", imageID, "members")

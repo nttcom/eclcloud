@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 // UploadImageResult contains the response body and error from an UploadImage

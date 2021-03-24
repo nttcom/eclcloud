@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	th "github.com/nttcom/eclcloud/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/testhelper/client"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 type imageEntry struct {

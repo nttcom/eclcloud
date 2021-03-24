@@ -6,9 +6,9 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/nttcom/eclcloud/ecl/imagestorage/v2/imagedata"
-	th "github.com/nttcom/eclcloud/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/testhelper/client"
+	"github.com/nttcom/eclcloud/v2/ecl/imagestorage/v2/imagedata"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 func TestUpload(t *testing.T) {

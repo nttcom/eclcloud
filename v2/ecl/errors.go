@@ -2,8 +2,8 @@ package ecl
 
 import (
 	"fmt"
-	"github.com/nttcom/eclcloud"
-	tokens3 "github.com/nttcom/eclcloud/ecl/identity/v3/tokens"
+	"github.com/nttcom/eclcloud/v2"
+	tokens3 "github.com/nttcom/eclcloud/v2/ecl/identity/v3/tokens"
 )
 
 // ErrEndpointNotFound is the error when no suitable endpoint can be found

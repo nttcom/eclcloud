@@ -4,10 +4,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nttcom/eclcloud/ecl/imagestorage/v2/images"
-	"github.com/nttcom/eclcloud/pagination"
-	th "github.com/nttcom/eclcloud/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/testhelper/client"
+	"github.com/nttcom/eclcloud/v2/ecl/imagestorage/v2/images"
+	"github.com/nttcom/eclcloud/v2/pagination"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 func TestListImage(t *testing.T) {

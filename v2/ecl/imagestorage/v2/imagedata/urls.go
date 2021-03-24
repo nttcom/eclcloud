@@ -1,6 +1,6 @@
 package imagedata
 
-import "github.com/nttcom/eclcloud"
+import "github.com/nttcom/eclcloud/v2"
 
 const (
 	rootPath   = "images"

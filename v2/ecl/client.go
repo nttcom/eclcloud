@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/nttcom/eclcloud"
-	tokens3 "github.com/nttcom/eclcloud/ecl/identity/v3/tokens"
-	"github.com/nttcom/eclcloud/ecl/utils"
+	"github.com/nttcom/eclcloud/v2"
+	tokens3 "github.com/nttcom/eclcloud/v2/ecl/identity/v3/tokens"
+	"github.com/nttcom/eclcloud/v2/ecl/utils"
 )
 
 const (

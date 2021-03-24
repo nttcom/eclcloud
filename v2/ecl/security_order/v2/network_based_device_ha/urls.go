@@ -1,7 +1,7 @@
 package network_based_device_ha
 
 import (
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 func listURL(client *eclcloud.ServiceClient) string {

@@ -1,8 +1,8 @@
 package images
 
 import (
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/ecl/utils"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/ecl/utils"
 	"net/url"
 	"strings"
 )

@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/ecl/rca/v1/users"
+	"github.com/nttcom/eclcloud/v2/ecl/rca/v1/users"
 
-	th "github.com/nttcom/eclcloud/testhelper"
-	"github.com/nttcom/eclcloud/testhelper/client"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	"github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 var (

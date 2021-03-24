@@ -2,9 +2,9 @@ package roles
 
 import (
 	"encoding/json"
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/internal"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/internal"
+	"github.com/nttcom/eclcloud/v2/pagination"
 )
 
 // Role grants permissions to a user.

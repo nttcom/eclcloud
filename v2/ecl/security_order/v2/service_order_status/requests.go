@@ -1,7 +1,7 @@
 package service_order_status
 
 import (
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 // GetOptsBuilder allows extensions to add additional parameters to

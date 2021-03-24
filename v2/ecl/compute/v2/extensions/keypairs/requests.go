@@ -1,9 +1,9 @@
 package keypairs
 
 import (
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/ecl/compute/v2/servers"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/ecl/compute/v2/servers"
+	"github.com/nttcom/eclcloud/v2/pagination"
 )
 
 // CreateOptsExt adds a KeyPair option to the base CreateOpts.

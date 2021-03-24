@@ -3,7 +3,7 @@ package device_interfaces
 import (
 	"fmt"
 
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 func listURL(client *eclcloud.ServiceClient, serverUUID string) string {

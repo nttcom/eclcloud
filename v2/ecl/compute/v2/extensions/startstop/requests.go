@@ -1,6 +1,6 @@
 package startstop
 
-import "github.com/nttcom/eclcloud"
+import "github.com/nttcom/eclcloud/v2"
 
 func actionURL(client *eclcloud.ServiceClient, id string) string {
 	return client.ServiceURL("servers", id, "action")

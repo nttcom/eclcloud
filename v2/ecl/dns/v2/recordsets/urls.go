@@ -1,6 +1,6 @@
 package recordsets
 
-import "github.com/nttcom/eclcloud"
+import "github.com/nttcom/eclcloud/v2"
 
 func baseURL(c *eclcloud.ServiceClient, zoneID string) string {
 	return c.ServiceURL("zones", zoneID, "recordsets")

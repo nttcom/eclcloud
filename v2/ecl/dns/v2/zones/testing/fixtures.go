@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/ecl/dns/v2/zones"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/ecl/dns/v2/zones"
 )
 
 const idZone1 = "dcbd3d17-26ce-461d-b77c-a8774cafee75"

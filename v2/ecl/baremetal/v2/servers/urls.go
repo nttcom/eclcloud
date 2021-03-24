@@ -1,7 +1,7 @@
 package servers
 
 import (
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 func getURL(client *eclcloud.ServiceClient, id string) string {

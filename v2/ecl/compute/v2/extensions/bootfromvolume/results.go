@@ -1,7 +1,7 @@
 package bootfromvolume
 
 import (
-	os "github.com/nttcom/eclcloud/ecl/compute/v2/servers"
+	os "github.com/nttcom/eclcloud/v2/ecl/compute/v2/servers"
 )
 
 // CreateResult temporarily contains the response from a Create call.

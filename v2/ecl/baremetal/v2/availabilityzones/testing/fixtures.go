@@ -1,7 +1,7 @@
 package testing
 
 import (
-	az "github.com/nttcom/eclcloud/ecl/baremetal/v2/availabilityzones"
+	az "github.com/nttcom/eclcloud/v2/ecl/baremetal/v2/availabilityzones"
 )
 
 const getResponse = `

@@ -1,6 +1,6 @@
 package load_balancer_syslog_servers
 
-import "github.com/nttcom/eclcloud"
+import "github.com/nttcom/eclcloud/v2"
 
 func resourceURL(c *eclcloud.ServiceClient, id string) string {
 	return c.ServiceURL("load_balancer_syslog_servers", id)

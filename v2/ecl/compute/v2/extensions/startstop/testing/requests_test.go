@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/ecl/compute/v2/extensions/startstop"
-	th "github.com/nttcom/eclcloud/testhelper"
-	"github.com/nttcom/eclcloud/testhelper/client"
+	"github.com/nttcom/eclcloud/v2/ecl/compute/v2/extensions/startstop"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	"github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 const serverID = "645b787e-7fbb-4111-a217-63a2882930f2"

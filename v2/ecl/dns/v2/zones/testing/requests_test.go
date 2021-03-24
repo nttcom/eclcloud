@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/ecl/dns/v2/zones"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2/ecl/dns/v2/zones"
+	"github.com/nttcom/eclcloud/v2/pagination"
 
-	th "github.com/nttcom/eclcloud/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/testhelper/client"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 func TestListDNSZone(t *testing.T) {

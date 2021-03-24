@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/ecl/dns/v2/recordsets"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/ecl/dns/v2/recordsets"
 )
 
 const idZone = "4eb5c333-7031-48ff-a247-0eeccc57472e"

@@ -1,8 +1,8 @@
 package users
 
 import (
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/pagination"
 )
 
 // User represents VPN user.

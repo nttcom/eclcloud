@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"testing"
 
-	fake "github.com/nttcom/eclcloud/ecl/network/v2/common"
-	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_interfaces"
-	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancer_syslog_servers"
-	"github.com/nttcom/eclcloud/ecl/network/v2/load_balancers"
-	"github.com/nttcom/eclcloud/pagination"
-	th "github.com/nttcom/eclcloud/testhelper"
+	fake "github.com/nttcom/eclcloud/v2/ecl/network/v2/common"
+	"github.com/nttcom/eclcloud/v2/ecl/network/v2/load_balancer_interfaces"
+	"github.com/nttcom/eclcloud/v2/ecl/network/v2/load_balancer_syslog_servers"
+	"github.com/nttcom/eclcloud/v2/ecl/network/v2/load_balancers"
+	"github.com/nttcom/eclcloud/v2/pagination"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
 )
 
 func TestListLoadBalancer(t *testing.T) {

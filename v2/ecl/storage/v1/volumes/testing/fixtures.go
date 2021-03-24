@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/ecl/storage/v1/volumes"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/ecl/storage/v1/volumes"
 )
 
 // Define parameters which are used in assertion.

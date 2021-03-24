@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"testing"
 
-	fake "github.com/nttcom/eclcloud/ecl/network/v2/common"
-	"github.com/nttcom/eclcloud/ecl/network/v2/ports"
-	"github.com/nttcom/eclcloud/pagination"
-	th "github.com/nttcom/eclcloud/testhelper"
+	fake "github.com/nttcom/eclcloud/v2/ecl/network/v2/common"
+	"github.com/nttcom/eclcloud/v2/ecl/network/v2/ports"
+	"github.com/nttcom/eclcloud/v2/pagination"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
 )
 
 func TestListPort(t *testing.T) {

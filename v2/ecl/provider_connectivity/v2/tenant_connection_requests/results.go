@@ -1,8 +1,8 @@
 package tenant_connection_requests
 
 import (
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/pagination"
 )
 
 // TenantConnectionRequest represents Tenant Connection Request.

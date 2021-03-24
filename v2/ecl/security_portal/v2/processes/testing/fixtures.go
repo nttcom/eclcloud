@@ -1,7 +1,7 @@
 package testing
 
 import (
-	"github.com/nttcom/eclcloud/ecl/security_portal/v2/processes"
+	"github.com/nttcom/eclcloud/v2/ecl/security_portal/v2/processes"
 )
 
 const processID = "85385"

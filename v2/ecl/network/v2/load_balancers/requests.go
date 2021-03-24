@@ -1,8 +1,8 @@
 package load_balancers
 
 import (
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/pagination"
 )
 
 // ListOpts allows the filtering and sorting of paginated collections through

@@ -1,7 +1,7 @@
 package testing
 
 import (
-	"github.com/nttcom/eclcloud/ecl/network/v2/internet_services"
+	"github.com/nttcom/eclcloud/v2/ecl/network/v2/internet_services"
 )
 
 const ListResponse = `

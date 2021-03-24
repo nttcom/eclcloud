@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/pagination"
 )
 
 type commonResult struct {

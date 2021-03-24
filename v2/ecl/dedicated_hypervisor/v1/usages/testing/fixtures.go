@@ -6,10 +6,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nttcom/eclcloud/ecl/dedicated_hypervisor/v1/usages"
+	"github.com/nttcom/eclcloud/v2/ecl/dedicated_hypervisor/v1/usages"
 
-	th "github.com/nttcom/eclcloud/testhelper"
-	"github.com/nttcom/eclcloud/testhelper/client"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	"github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 // ListResult provides a single page of Usage results.

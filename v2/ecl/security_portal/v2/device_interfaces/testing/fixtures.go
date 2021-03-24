@@ -1,7 +1,7 @@
 package testing
 
 import (
-	"github.com/nttcom/eclcloud/ecl/security_portal/v2/device_interfaces"
+	"github.com/nttcom/eclcloud/v2/ecl/security_portal/v2/device_interfaces"
 )
 
 const deviceUUID = "cad6e00a-2af9-491c-b732-ca5688d147f5"

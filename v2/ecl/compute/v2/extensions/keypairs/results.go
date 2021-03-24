@@ -1,8 +1,8 @@
 package keypairs
 
 import (
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/pagination"
 )
 
 // KeyPair is an SSH key known to the Enterprise Cloud that is available to be

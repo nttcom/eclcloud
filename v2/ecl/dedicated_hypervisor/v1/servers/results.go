@@ -3,8 +3,8 @@ package servers
 import (
 	"time"
 
-	"github.com/nttcom/eclcloud"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v2/pagination"
 )
 
 // Server represents dedicated hypervisor server information.

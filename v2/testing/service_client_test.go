@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud"
-	th "github.com/nttcom/eclcloud/testhelper"
+	"github.com/nttcom/eclcloud/v2"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
 )
 
 func TestServiceURL(t *testing.T) {

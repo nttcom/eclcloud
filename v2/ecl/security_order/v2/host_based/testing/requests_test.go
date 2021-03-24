@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"testing"
 
-	security "github.com/nttcom/eclcloud/ecl/security_order/v2/host_based"
+	security "github.com/nttcom/eclcloud/v2/ecl/security_order/v2/host_based"
 
-	th "github.com/nttcom/eclcloud/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/testhelper/client"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 func TestGetHostBasedSecurity(t *testing.T) {

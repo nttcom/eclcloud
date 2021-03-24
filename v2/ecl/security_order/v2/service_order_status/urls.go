@@ -3,7 +3,7 @@ package service_order_status
 import (
 	"fmt"
 
-	"github.com/nttcom/eclcloud"
+	"github.com/nttcom/eclcloud/v2"
 )
 
 func getURL(client *eclcloud.ServiceClient, deviceType string) string {

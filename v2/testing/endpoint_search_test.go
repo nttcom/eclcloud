@@ -3,8 +3,8 @@ package testing
 import (
 	"testing"
 
-	"github.com/nttcom/eclcloud"
-	th "github.com/nttcom/eclcloud/testhelper"
+	"github.com/nttcom/eclcloud/v2"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
 )
 
 func TestApplyDefaultsToEndpointOpts(t *testing.T) {

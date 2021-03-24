@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nttcom/eclcloud/ecl/dns/v2/recordsets"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2/ecl/dns/v2/recordsets"
+	"github.com/nttcom/eclcloud/v2/pagination"
 
-	th "github.com/nttcom/eclcloud/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/testhelper/client"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
 )
 
 func TestListDNSRecordSet(t *testing.T) {

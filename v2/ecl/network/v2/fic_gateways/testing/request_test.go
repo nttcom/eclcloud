@@ -3,14 +3,14 @@ package testing
 import (
 	"fmt"
 
-	"github.com/nttcom/eclcloud/ecl/network/v2/fic_gateways"
-	"github.com/nttcom/eclcloud/pagination"
+	"github.com/nttcom/eclcloud/v2/ecl/network/v2/fic_gateways"
+	"github.com/nttcom/eclcloud/v2/pagination"
 
 	"net/http"
 	"testing"
 
-	fake "github.com/nttcom/eclcloud/ecl/network/v2/common"
-	th "github.com/nttcom/eclcloud/testhelper"
+	fake "github.com/nttcom/eclcloud/v2/ecl/network/v2/common"
+	th "github.com/nttcom/eclcloud/v2/testhelper"
 )
 
 func TestListFICGateway(t *testing.T) {
