@@ -105,13 +105,13 @@ func TestCreateAppliance(t *testing.T) {
 		AvailabilityZone:              "zone1-groupb",
 		VirtualNetworkAppliancePlanID: idVirtualNetworkAppliancePlan,
 		Tags:                          map[string]string{"k1": "v1"},
-		Interfaces: appliances.CreateOptsInterfaces{
-			Interface1: appliances.CreateOptsInterface{
+		Interfaces: &appliances.CreateOptsInterfaces{
+			Interface1: &appliances.CreateOptsInterface{
 				Name:        "interface_1",
 				Description: "interface_1_description",
 				NetworkID:   "dummyNetworkID",
 				Tags:        map[string]string{},
-				FixedIPs: [1]appliances.CreateOptsFixedIP{
+				FixedIPs: &[]appliances.CreateOptsFixedIP{
 					{
 						IPAddress: "192.168.1.51",
 					},
