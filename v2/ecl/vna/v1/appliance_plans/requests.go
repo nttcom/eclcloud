@@ -16,9 +16,9 @@ type ListOpts struct {
 	Version                   string `q:"version"`
 	Flavor                    string `q:"flavor"`
 	NumberOfInterfaces        int    `q:"number_of_interfaces"`
-	Enabled                   string `q:"enabled"`
+	Enabled                   bool   `q:"enabled"`
 	MaxNumberOfAap            int    `q:"max_number_of_aap"`
-	Details                   string `q:"details"`
+	Details                   bool   `q:"details"`
 	AvailabilityZone          string `q:"availability_zone"`
 	AvailabilityZoneAvailable bool   `q:"availability_zone.available"`
 }
