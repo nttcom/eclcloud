@@ -176,11 +176,11 @@ Parameters for Update
 // UpdateOptsBuilder allows extensions to add additional parameters to the
 // Update request.
 type UpdateOptsBuilder interface {
-	ToHealthMonitorUpdateMap() (map[string]interface{}, error)
+	ToHealthMonitorUpdateMetadataMap() (map[string]interface{}, error)
 }
 
-// UpdateOpts represents options used to update an existing health monitor.
-type UpdateOpts struct {
+// UpdateMetadataOpts represents options used to update metadata of exisiting health monitor.
+type UpdateMetadataOpts struct {
 
 	// Name of the health monitor
 	Name string `json:"name,omitempty"`
@@ -193,8 +193,8 @@ type UpdateOpts struct {
 	Tags map[string]string `json:"tags,omitempty"`
 }
 
-// ToHealthMonitorUpdateMap builds a request body from UpdateOpts.
-func (opts UpdateOpts) ToHealthMonitorUpdateMap() (map[string]interface{}, error) {
+// ToHealthMonitorUpdateMetadataMap builds a request body from UpdateMetadataOpts.
+func (opts UpdateMetadataOpts) ToHealthMonitorUpdateMetadataMap() (map[string]interface{}, error) {
 	return eclcloud.BuildRequestBody(opts, "health_monitor")
 }
 
@@ -202,10 +202,10 @@ func (opts UpdateOpts) ToHealthMonitorUpdateMap() (map[string]interface{}, error
 Update Common
 */
 
-// Update accepts a UpdateOpts struct and updates an existing health monitor
+// UpdateMetadata accepts a UpdateMetadataOpts struct and updates an existing health monitor
 // using the values provided. For more information, see the Create function.
-func Update(c *eclcloud.ServiceClient, healthMonitorID string, opts UpdateOptsBuilder) (r UpdateResult) {
-	b, err := opts.ToHealthMonitorUpdateMap()
+func UpdateMetadata(c *eclcloud.ServiceClient, healthMonitorID string, opts UpdateOptsBuilder) (r UpdateResult) {
+	b, err := opts.ToHealthMonitorUpdateMetadataMap()
 	if err != nil {
 		r.Err = err
 		return

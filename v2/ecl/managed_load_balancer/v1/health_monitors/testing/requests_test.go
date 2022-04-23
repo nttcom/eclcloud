@@ -105,9 +105,19 @@ func TestGetChangesHealthMonitor(t *testing.T) {
 	hm, err := health_monitors.Get(ServiceClient(), idHealthMonitor1, getOpts).Extract()
 	th.AssertNoErr(t, err)
 
-	th.CheckDeepEquals(t, &current, hm.Current)
-	th.AssertEquals(t, (*health_monitors.Configuration)(nil), hm.Staged)
-	th.CheckDeepEquals(t, &changesHealthMonitor1, hm)
+	// Current has same fields with inline parameters only when changes=true
+	healthMonitor1.Current = &health_monitors.Configuration{
+		Port:     healthMonitor1.Port,
+		Protocol: healthMonitor1.Protocol,
+		Interval: healthMonitor1.Interval,
+		Retry:    healthMonitor1.Retry,
+		Timeout:  healthMonitor1.Timeout,
+	}
+
+	// Staged is nil until updating some fielads for the health monitor
+	healthMonitor1.Staged = (*health_monitors.Configuration)(nil)
+
+	th.CheckDeepEquals(t, &healthMonitor1, hm)
 }
 
 func TestCreateHealthMonitor(t *testing.T) {
@@ -127,9 +137,9 @@ func TestCreateHealthMonitor(t *testing.T) {
 		})
 
 	createOpts := health_monitors.CreateOpts{
-		Name:           "health_monitor_1",
-		Description:    "health_monitor_1_description",
-		Tags:           map[string]string{"key1": "value1"},
+		Name:           "health_monitor_3",
+		Description:    "health_monitor_3_description",
+		Tags:           map[string]string{"key3": "value3"},
 		Port:           0,
 		Protocol:       "icmp",
 		Interval:       5,
@@ -137,13 +147,13 @@ func TestCreateHealthMonitor(t *testing.T) {
 		Timeout:        5,
 		LoadBalancerID: idLoadBalancer,
 	}
-  th.AssertEquals(t, createOpts.Port, 0)
+
 	hm, err := health_monitors.Create(ServiceClient(), createOpts).Extract()
 	th.AssertNoErr(t, err)
 
 	th.AssertEquals(t, hm.ConfigurationStatus, "CREATE_STAGED")
 	th.AssertEquals(t, hm.OperationStatus, "NONE")
-	th.AssertDeepEquals(t, &healthMonitor1, hm)
+	th.AssertDeepEquals(t, &healthMonitor3, hm)
 }
 
 func TestDeleteHealthMonitor(t *testing.T) {
@@ -161,7 +171,7 @@ func TestDeleteHealthMonitor(t *testing.T) {
 	th.AssertNoErr(t, res.Err)
 }
 
-func TestUpdateHealthMonitor(t *testing.T) {
+func TestUpdateMetadataHealthMonitor(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
@@ -179,12 +189,12 @@ func TestUpdateHealthMonitor(t *testing.T) {
 		fmt.Fprint(w, updateResponse)
 	})
 
-	updateOpts := health_monitors.UpdateOpts{
+	updateOpts := health_monitors.UpdateMetadataOpts{
 		Name:        "health_monitor_1-update",
 		Description: "health_monitor_1_description-update",
 		Tags:        map[string]string{"key1": "value1", "key2": "value2"},
 	}
-	hm, err := health_monitors.Update(
+	hm, err := health_monitors.UpdateMetadata(
 		ServiceClient(), idHealthMonitor1, updateOpts).Extract()
 	th.AssertNoErr(t, err)
 

@@ -8,6 +8,7 @@ import (
 
 const idHealthMonitor1 = "497f6eca-6276-4993-bfeb-53cbbbba6f01"
 const idHealthMonitor2 = "497f6eca-6276-4993-bfeb-53cbbbba6f02"
+const idHealthMonitor3 = "497f6eca-6276-4993-bfeb-53cbbbba6f03"
 
 const idLoadBalancer = "67fea379-cff0-4191-9175-de7d6941a040"
 
@@ -21,8 +22,8 @@ var listResponse = fmt.Sprintf(`
       "tags": {
         "key1": "value1"
       },
-      "configuration_status": "CREATE_STAGED",
-      "operation_status": "NONE",
+      "configuration_status": "ACTIVE",
+      "operation_status": "COMPLETE",
       "load_balancer_id": "%s",
       "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
       "port": 0,
@@ -64,8 +65,8 @@ var healthMonitor1 = health_monitors.HealthMonitor{
 	Name:                "health_monitor_1",
 	Description:         "health_monitor_1_description",
 	Tags:                map[string]string{"key1": "value1"},
-	ConfigurationStatus: "CREATE_STAGED",
-	OperationStatus:     "NONE",
+	ConfigurationStatus: "ACTIVE",
+	OperationStatus:     "COMPLETE",
 	LoadBalancerID:      idLoadBalancer,
 	TenantID:            "34f5c98ef430457ba81292637d0c6fd0",
 	Port:                0,
@@ -73,31 +74,6 @@ var healthMonitor1 = health_monitors.HealthMonitor{
 	Interval:            5,
 	Retry:               3,
 	Timeout:             5,
-}
-
-var current = health_monitors.Configuration{
-	Port:                0,
-	Protocol:            "icmp",
-	Interval:            5,
-	Retry:               3,
-	Timeout:             5,
-}
-
-var changesHealthMonitor1 = health_monitors.HealthMonitor{
-	ID:                  idHealthMonitor1,
-	Name:                "health_monitor_1",
-	Description:         "health_monitor_1_description",
-	Tags:                map[string]string{"key1": "value1"},
-	ConfigurationStatus: "CREATE_STAGED",
-	OperationStatus:     "NONE",
-	LoadBalancerID:      idLoadBalancer,
-	TenantID:            "34f5c98ef430457ba81292637d0c6fd0",
-	Port:                0,
-	Protocol:            "icmp",
-	Interval:            5,
-	Retry:               3,
-	Timeout:             5,
-  Current:             &current,
 }
 
 var healthMonitor2 = health_monitors.HealthMonitor{
@@ -130,8 +106,8 @@ var getResponse = fmt.Sprintf(`
     "tags": {
       "key1": "value1"
     },
-    "configuration_status": "CREATE_STAGED",
-    "operation_status": "NONE",
+    "configuration_status": "ACTIVE",
+    "operation_status": "COMPLETE",
     "load_balancer_id": "%s",
     "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
     "port": 0,
@@ -155,8 +131,8 @@ var getChangesResponse = fmt.Sprintf(`
     "tags": {
       "key1": "value1"
     },
-    "configuration_status": "CREATE_STAGED",
-    "operation_status": "NONE",
+    "configuration_status": "ACTIVE",
+    "operation_status": "COMPLETE",
     "load_balancer_id": "%s",
     "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
     "port": 0,
@@ -179,13 +155,29 @@ var getChangesResponse = fmt.Sprintf(`
 	idLoadBalancer,
 )
 
+var healthMonitor3 = health_monitors.HealthMonitor{
+	ID:                  idHealthMonitor3,
+	Name:                "health_monitor_3",
+	Description:         "health_monitor_3_description",
+	Tags:                map[string]string{"key3": "value3"},
+	ConfigurationStatus: "CREATE_STAGED",
+	OperationStatus:     "NONE",
+	LoadBalancerID:      idLoadBalancer,
+	TenantID:            "34f5c98ef430457ba81292637d0c6fd0",
+	Port:                0,
+	Protocol:            "",
+	Interval:            0,
+	Retry:               0,
+	Timeout:             0,
+}
+
 var createRequest = fmt.Sprintf(`
 {
   "health_monitor": {
-    "name": "health_monitor_1",
-    "description": "health_monitor_1_description",
+    "name": "health_monitor_3",
+    "description": "health_monitor_3_description",
     "tags": {
-      "key1": "value1"
+      "key3": "value3"
     },
     "port": 0,
     "protocol": "icmp",
@@ -203,23 +195,23 @@ var createResponse = fmt.Sprintf(`
 {
   "health_monitor": {
     "id": "%s",
-    "name": "health_monitor_1",
-    "description": "health_monitor_1_description",
+    "name": "health_monitor_3",
+    "description": "health_monitor_3_description",
     "tags": {
-      "key1": "value1"
+      "key3": "value3"
     },
     "configuration_status": "CREATE_STAGED",
     "operation_status": "NONE",
     "load_balancer_id": "%s",
     "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
-    "port": 0,
-    "protocol": "icmp",
-    "interval": 5,
-    "retry": 3,
-    "timeout": 5
+    "port": null,
+    "protocol": null,
+    "interval": null,
+    "retry": null,
+    "timeout": null
   }
 }`,
-	idHealthMonitor1,
+	idHealthMonitor3,
 	idLoadBalancer,
 )
 
@@ -247,8 +239,8 @@ var updateResponse = fmt.Sprintf(`
       "key1": "value1",
       "key2": "value2"
     },
-    "configuration_status": "CREATE_STAGED",
-    "operation_status": "NONE",
+    "configuration_status": "ACTIVE",
+    "operation_status": "COMPLETE",
     "load_balancer_id": "%s",
     "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
     "port": 0,
