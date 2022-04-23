@@ -30,10 +30,8 @@ func TestListHealthMonitors(t *testing.T) {
 		func(w http.ResponseWriter, r *http.Request) {
 			th.TestMethod(t, r, "GET")
 			th.TestHeader(t, r, "X-Auth-Token", TokenID)
-
 			w.Header().Add("Content-Type", "application/json")
 			w.WriteHeader(http.StatusOK)
-
 			fmt.Fprint(w, listResponse)
 		})
 
@@ -70,10 +68,8 @@ func TestGetHealthMonitor(t *testing.T) {
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", TokenID)
-
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-
 		fmt.Fprint(w, getResponse)
 	})
 
@@ -91,10 +87,8 @@ func TestGetChangesHealthMonitor(t *testing.T) {
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", TokenID)
-
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-
 		fmt.Fprint(w, getChangesResponse)
 	})
 
@@ -105,8 +99,8 @@ func TestGetChangesHealthMonitor(t *testing.T) {
 	hm, err := health_monitors.Get(ServiceClient(), idHealthMonitor1, getOpts).Extract()
 	th.AssertNoErr(t, err)
 
-	// Current has same fields with inline parameters only when changes=true
-	healthMonitor1.Current = &health_monitors.Configuration{
+	// Current has same fields as inline parameters only when changes=true
+	healthMonitor1.Current = &health_monitors.HealthMonitor{
 		Port:     healthMonitor1.Port,
 		Protocol: healthMonitor1.Protocol,
 		Interval: healthMonitor1.Interval,
@@ -115,7 +109,7 @@ func TestGetChangesHealthMonitor(t *testing.T) {
 	}
 
 	// Staged is nil until updating some fielads for the health monitor
-	healthMonitor1.Staged = (*health_monitors.Configuration)(nil)
+	healthMonitor1.Staged = (*health_monitors.HealthMonitor)(nil)
 
 	th.CheckDeepEquals(t, &healthMonitor1, hm)
 }
@@ -156,6 +150,35 @@ func TestCreateHealthMonitor(t *testing.T) {
 	th.AssertDeepEquals(t, &healthMonitor3, hm)
 }
 
+func TestUpdateHealthMonitor(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	url := fmt.Sprintf("/v1.0/health_monitors/%s", idHealthMonitor1)
+	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "PATCH")
+		th.TestHeader(t, r, "X-Auth-Token", TokenID)
+		th.TestHeader(t, r, "Content-Type", "application/json")
+		th.TestHeader(t, r, "Accept", "application/json")
+		th.TestJSONRequest(t, r, updateRequest)
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, updateResponse)
+	})
+
+	updateOpts := health_monitors.UpdateOpts{
+		Name:        "health_monitor_1-update",
+		Description: "health_monitor_1_description-update",
+	}
+	hm, err := health_monitors.Update(
+		ServiceClient(), idHealthMonitor1, updateOpts).Extract()
+	th.AssertNoErr(t, err)
+
+	th.AssertEquals(t, hm.Name, "health_monitor_1-update")
+	th.AssertEquals(t, hm.Description, "health_monitor_1_description-update")
+	th.AssertEquals(t, hm.ID, idHealthMonitor1)
+}
+
 func TestDeleteHealthMonitor(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
@@ -171,34 +194,94 @@ func TestDeleteHealthMonitor(t *testing.T) {
 	th.AssertNoErr(t, res.Err)
 }
 
-func TestUpdateMetadataHealthMonitor(t *testing.T) {
+func TestCreateStagedHealthMonitor(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := fmt.Sprintf("/v1.0/health_monitors/%s", idHealthMonitor1)
+	url := fmt.Sprintf("/v1.0/health_monitors/%s/staged", idHealthMonitor1)
+	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "POST")
+		th.TestHeader(t, r, "X-Auth-Token", TokenID)
+		th.TestHeader(t, r, "Content-Type", "application/json")
+		th.TestHeader(t, r, "Accept", "application/json")
+		th.TestJSONRequest(t, r, createStagedRequest)
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, createStagedResponse)
+	})
+
+	createStagedOpts := health_monitors.CreateStagedOpts{
+		Port:     0,
+		Protocol: "icmp",
+		Interval: 6,
+		Retry:    4,
+		Timeout:  6,
+	}
+
+	hm, err := health_monitors.CreateStaged(ServiceClient(), idHealthMonitor1, createStagedOpts).Extract()
+	th.AssertNoErr(t, err)
+
+	th.CheckDeepEquals(t, &stagedHealthMonitor, hm)
+}
+
+func TestGetStagedHealthMonitor(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	url := fmt.Sprintf("/v1.0/health_monitors/%s/staged", idHealthMonitor1)
+	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "GET")
+		th.TestHeader(t, r, "X-Auth-Token", TokenID)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprint(w, getStagedResponse)
+	})
+
+	hm, err := health_monitors.GetStaged(ServiceClient(), idHealthMonitor1).Extract()
+	th.AssertNoErr(t, err)
+
+	th.CheckDeepEquals(t, &stagedHealthMonitor, hm)
+}
+
+func TestUpdateStagedHealthMonitor(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	url := fmt.Sprintf("/v1.0/health_monitors/%s/staged", idHealthMonitor1)
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "PATCH")
 		th.TestHeader(t, r, "X-Auth-Token", TokenID)
 		th.TestHeader(t, r, "Content-Type", "application/json")
 		th.TestHeader(t, r, "Accept", "application/json")
-		th.TestJSONRequest(t, r, updateRequest)
-
+		th.TestJSONRequest(t, r, updateStagedRequest)
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-
-		fmt.Fprint(w, updateResponse)
+		fmt.Fprint(w, updateStagedResponse)
 	})
 
-	updateOpts := health_monitors.UpdateMetadataOpts{
-		Name:        "health_monitor_1-update",
-		Description: "health_monitor_1_description-update",
-		Tags:        map[string]string{"key1": "value1", "key2": "value2"},
+	updateStagedOpts := health_monitors.UpdateStagedOpts{
+		Interval: 10,
 	}
-	hm, err := health_monitors.UpdateMetadata(
-		ServiceClient(), idHealthMonitor1, updateOpts).Extract()
+
+	hm, err := health_monitors.UpdateStaged(ServiceClient(), idHealthMonitor1, updateStagedOpts).Extract()
 	th.AssertNoErr(t, err)
 
-	th.AssertEquals(t, hm.Name, "health_monitor_1-update")
-	th.AssertEquals(t, hm.Description, "health_monitor_1_description-update")
-	th.AssertEquals(t, hm.ID, idHealthMonitor1)
+	th.CheckDeepEquals(t, &updateStagedHealthMonitor, hm)
+}
+
+func TestDeleteStagedHealthMonitor(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	url := fmt.Sprintf("/v1.0/health_monitors/%s/staged", idHealthMonitor1)
+	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "DELETE")
+		th.TestHeader(t, r, "X-Auth-Token", TokenID)
+		w.WriteHeader(http.StatusNoContent)
+	})
+
+	res := health_monitors.DeleteStaged(ServiceClient(), idHealthMonitor1)
+	th.AssertNoErr(t, res.Err)
 }

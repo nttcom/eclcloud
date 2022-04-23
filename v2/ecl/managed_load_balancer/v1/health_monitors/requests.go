@@ -5,6 +5,10 @@ import (
 	"github.com/nttcom/eclcloud/v2/pagination"
 )
 
+/*
+Parameters for List
+*/
+
 // ListOptsBuilder allows extensions to add additional parameters to the
 // List request.
 type ListOptsBuilder interface {
@@ -76,6 +80,10 @@ func List(c *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager {
 	})
 }
 
+/*
+Parameters for Get
+*/
+
 // GetOptsBuilder allows extensions to add additional parameters to
 // the health monitor API request
 type GetOptsBuilder interface {
@@ -104,15 +112,15 @@ func Get(c *eclcloud.ServiceClient, id string, opts GetOptsBuilder) (r GetResult
 	return
 }
 
+/*
+Parameters for Create
+*/
+
 // CreateOptsBuilder allows extensions to add additional parameters to the
 // Create request.
 type CreateOptsBuilder interface {
 	ToHealthMonitorCreateMap() (map[string]interface{}, error)
 }
-
-/*
-Parameters for Create
-*/
 
 // CreateOpts represents options used to create a health monitor.
 type CreateOpts struct {
@@ -132,7 +140,7 @@ type CreateOpts struct {
 	Port int `json:"port"`
 
 	// Protocol of the health monitor for healthchecking
-	Protocol string `json:"protocol" required:"true"`
+	Protocol string `json:"protocol"`
 
 	// Interval of healthchecking (in seconds)
 	Interval int `json:"interval,omitempty"`
@@ -147,7 +155,7 @@ type CreateOpts struct {
 	Timeout int `json:"timeout,omitempty"`
 
 	// ID of the load balancer which the health monitor belongs to
-	LoadBalancerID string `json:"load_balancer_id" required:"true"`
+	LoadBalancerID string `json:"load_balancer_id"`
 }
 
 // ToHealthMonitorCreateMap builds a request body from CreateOpts.
@@ -176,11 +184,11 @@ Parameters for Update
 // UpdateOptsBuilder allows extensions to add additional parameters to the
 // Update request.
 type UpdateOptsBuilder interface {
-	ToHealthMonitorUpdateMetadataMap() (map[string]interface{}, error)
+	ToHealthMonitorUpdateMap() (map[string]interface{}, error)
 }
 
-// UpdateMetadataOpts represents options used to update metadata of exisiting health monitor.
-type UpdateMetadataOpts struct {
+// UpdateOpts represents options used to update metadata of exisiting health monitor.
+type UpdateOpts struct {
 
 	// Name of the health monitor
 	Name string `json:"name,omitempty"`
@@ -193,32 +201,32 @@ type UpdateMetadataOpts struct {
 	Tags map[string]string `json:"tags,omitempty"`
 }
 
-// ToHealthMonitorUpdateMetadataMap builds a request body from UpdateMetadataOpts.
-func (opts UpdateMetadataOpts) ToHealthMonitorUpdateMetadataMap() (map[string]interface{}, error) {
+// ToHealthMonitorUpdateMap builds a request body from UpdateMOpts.
+func (opts UpdateOpts) ToHealthMonitorUpdateMap() (map[string]interface{}, error) {
 	return eclcloud.BuildRequestBody(opts, "health_monitor")
 }
 
-/*
-Update Common
-*/
-
-// UpdateMetadata accepts a UpdateMetadataOpts struct and updates an existing health monitor
-// using the values provided. For more information, see the Create function.
-func UpdateMetadata(c *eclcloud.ServiceClient, healthMonitorID string, opts UpdateOptsBuilder) (r UpdateResult) {
-	b, err := opts.ToHealthMonitorUpdateMetadataMap()
+// Update accepts a UpdateOpts struct and updates an existing health monitor
+// using the values provided.
+func Update(c *eclcloud.ServiceClient, id string, opts UpdateOptsBuilder) (r UpdateResult) {
+	b, err := opts.ToHealthMonitorUpdateMap()
 	if err != nil {
 		r.Err = err
 		return
 	}
-	_, r.Err = c.Patch(updateURL(c, healthMonitorID), b, &r.Body, &eclcloud.RequestOpts{
+	_, r.Err = c.Patch(updateURL(c, id), b, &r.Body, &eclcloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 	return
 }
 
+/*
+Parameters for Delete
+*/
+
 // Delete accepts a unique ID and deletes the health monitor associated with it.
-func Delete(c *eclcloud.ServiceClient, healthMonitorID string) (r DeleteResult) {
-	_, r.Err = c.Delete(deleteURL(c, healthMonitorID), nil)
+func Delete(c *eclcloud.ServiceClient, id string) (r DeleteResult) {
+	_, r.Err = c.Delete(deleteURL(c, id), nil)
 	return
 }
 
@@ -257,4 +265,97 @@ func IDFromName(client *eclcloud.ServiceClient, name string) (string, error) {
 	default:
 		return "", eclcloud.ErrMultipleResourcesFound{Name: name, Count: count, ResourceType: "health_monitor"}
 	}
+}
+
+/*
+Parameters for Staged request
+*/
+
+// StagedOpts represents options used to create/update staged a health monitor.
+type StagedOpts struct {
+
+	// Port number of the health monitor for healthchecking
+	// Must be specified 0 when protocol is "icmp"
+	Port int `json:"port"`
+
+	// Protocol of the health monitor for healthchecking
+	Protocol string `json:"protocol,omitempty"`
+
+	// Interval of healthchecking (in seconds)
+	Interval int `json:"interval,omitempty"`
+
+	// Retry count of healthchecking
+	// Initial monitoring is not included
+	// Retry is executed at the interval specified by interval
+	Retry int `json:"retry,omitempty"`
+
+	// Timeout of healthchecking (in seconds)
+	// Must be specified a number less than or equal to interval
+	Timeout int `json:"timeout,omitempty"`
+}
+
+// CreateStagedOptsBuilder allows extensions to add additional parameters to the
+// CreateStaged request.
+type CreateStagedOptsBuilder interface {
+	ToHealthMonitorCreateStagedMap() (map[string]interface{}, error)
+}
+
+type CreateStagedOpts StagedOpts
+
+// ToHealthMonitorCreateStagedMap builds a request body from CreateOpts.
+func (opts CreateStagedOpts) ToHealthMonitorCreateStagedMap() (map[string]interface{}, error) {
+	return eclcloud.BuildRequestBody(opts, "health_monitor")
+}
+
+// CreateStaged accepts a CreateStagedOpts struct and creates a new health monitor
+// using the values provided.
+func CreateStaged(c *eclcloud.ServiceClient, id string, opts CreateStagedOptsBuilder) (r CreateResult) {
+	b, err := opts.ToHealthMonitorCreateStagedMap()
+	if err != nil {
+		r.Err = err
+		return
+	}
+	_, r.Err = c.Post(stagedURL(c, id), b, &r.Body, &eclcloud.RequestOpts{
+		OkCodes: []int{200},
+	})
+	return
+}
+
+// GetStaged retrieves a specific health monitor based on its unique ID.
+func GetStaged(c *eclcloud.ServiceClient, id string) (r GetResult) {
+	_, r.Err = c.Get(stagedURL(c, id), &r.Body, nil)
+	return
+}
+
+// UpdateStagedOptsBuilder allows extensions to add additional parameters to the
+// UpdateStaged request.
+type UpdateStagedOptsBuilder interface {
+	ToHealthMonitorUpdateStagedMap() (map[string]interface{}, error)
+}
+
+type UpdateStagedOpts StagedOpts
+
+// ToHealthMonitorUpdateStagedMap builds a request body from UpdateStagedOpts.
+func (opts UpdateStagedOpts) ToHealthMonitorUpdateStagedMap() (map[string]interface{}, error) {
+	return eclcloud.BuildRequestBody(opts, "health_monitor")
+}
+
+// UpdateStaged accepts a UpdateOpts struct and updates an existing health monitor
+// using the values provided. For more information, see the Create function.
+func UpdateStaged(c *eclcloud.ServiceClient, id string, opts UpdateStagedOptsBuilder) (r UpdateResult) {
+	b, err := opts.ToHealthMonitorUpdateStagedMap()
+	if err != nil {
+		r.Err = err
+		return
+	}
+	_, r.Err = c.Patch(stagedURL(c, id), b, &r.Body, &eclcloud.RequestOpts{
+		OkCodes: []int{200},
+	})
+	return
+}
+
+// DeleteStaged retrieves a specific health monitor based on its unique ID.
+func DeleteStaged(c *eclcloud.ServiceClient, id string) (r GetResult) {
+	_, r.Err = c.Delete(stagedURL(c, id), nil)
+	return
 }

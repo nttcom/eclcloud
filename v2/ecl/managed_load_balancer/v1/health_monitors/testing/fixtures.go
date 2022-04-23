@@ -55,7 +55,7 @@ var listResponse = fmt.Sprintf(`
 	// for health_monitor1
 	idHealthMonitor1,
 	idLoadBalancer,
-	// for appliance2
+	// for health_monitor2
 	idHealthMonitor2,
 	idLoadBalancer,
 )
@@ -215,19 +215,14 @@ var createResponse = fmt.Sprintf(`
 	idLoadBalancer,
 )
 
-var updateRequest = fmt.Sprintf(`
+var updateRequest = `
 {
   "health_monitor": {
     "name": "health_monitor_1-update",
-    "description": "health_monitor_1_description-update",
-    "tags": {
-      "key1": "value1",
-      "key2": "value2"
-    }
+    "description": "health_monitor_1_description-update"
   }
 }
-`,
-)
+`
 
 var updateResponse = fmt.Sprintf(`
 {
@@ -236,8 +231,7 @@ var updateResponse = fmt.Sprintf(`
     "name": "health_monitor_1-update",
     "description": "health_monitor_1_description-update",
     "tags": {
-      "key1": "value1",
-      "key2": "value2"
+      "key1": "value1"
     },
     "configuration_status": "ACTIVE",
     "operation_status": "COMPLETE",
@@ -254,3 +248,71 @@ var updateResponse = fmt.Sprintf(`
 	idHealthMonitor1,
 	idLoadBalancer,
 )
+
+var stagedHealthMonitor = health_monitors.HealthMonitor{
+	Port:     0,
+	Protocol: "icmp",
+	Interval: 6,
+	Retry:    4,
+	Timeout:  6,
+}
+var createStagedRequest = `
+{
+  "health_monitor": {
+    "port": 0,
+    "protocol": "icmp",
+    "interval": 6,
+    "retry": 4,
+    "timeout": 6
+  }
+}
+`
+var createStagedResponse = `
+{
+  "health_monitor": {
+    "port": 0,
+    "protocol": "icmp",
+    "interval": 6,
+    "retry": 4,
+    "timeout": 6
+  }
+}
+`
+var getStagedResponse = `
+{
+  "health_monitor": {
+    "port": 0,
+    "protocol": "icmp",
+    "interval": 6,
+    "retry": 4,
+    "timeout": 6
+  }
+}
+`
+
+var updateStagedHealthMonitor = health_monitors.HealthMonitor{
+	Port:     80,
+	Protocol: "tcp",
+	Interval: 10,
+	Retry:    4,
+	Timeout:  6,
+}
+
+var updateStagedRequest = `
+{
+  "health_monitor": {
+    "interval": 10
+  }
+}
+`
+var updateStagedResponse = `
+{
+  "health_monitor": {
+    "port": 80,
+    "protocol": "tcp",
+    "interval": 10,
+    "retry": 4,
+    "timeout": 6
+  }
+}
+`

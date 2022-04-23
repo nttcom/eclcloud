@@ -46,53 +46,31 @@ type DeleteResult struct {
 	eclcloud.ErrResult
 }
 
-// Configuration represents current and staged configurations.
-type Configuration struct {
-
-	// Port number of the health monitor for healthchecking
-	// Returns 0 when protocol is "icmp"
-	Port int `json:"port"`
-
-	// Protocol of the health monitor for healthchecking
-	Protocol string `json:"protocol"`
-
-	// Interval of healthchecking (in seconds)
-	Interval int `json:"interval"`
-
-	// Retry count of healthchecking
-	// Initial monitoring is not included
-	// Retry is executed at the interval specified by interval
-	Retry int `json:"retry"`
-
-	// Timeout of healthchecking (in seconds)
-	Timeout int `json:"timeout"`
-}
-
 // HealthMonitor represents a health monitor.
 type HealthMonitor struct {
 	// ID of the health monitor
-	ID string `json:"id"`
+	ID string `json:"id,omitempty"`
 
 	// Name of the health monitor
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 
 	// Description of the health monitor
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	// Tags of the health monitor (JSON object format)
-	Tags map[string]string `json:"tags"`
+	Tags map[string]string `json:"tags,omitempty"`
 
 	// Configuration status of the health monitor
-	ConfigurationStatus string `json:"configuration_status"`
+	ConfigurationStatus string `json:"configuration_status,omitempty"`
 
 	// Operation status of the load balancer which the health monitor belongs to
-	OperationStatus string `json:"operation_status"`
+	OperationStatus string `json:"operation_status,omitempty"`
 
 	// ID of the load balancer which the health monitor belongs to
-	LoadBalancerID string `json:"load_balancer_id"`
+	LoadBalancerID string `json:"load_balancer_id,omitempty"`
 
 	// ID of the owner tenant of the health monitor
-	TenantID string `json:"tenant_id"`
+	TenantID string `json:"tenant_id,omitempty"`
 
 	// Port number of the health monitor for healthchecking
 	// Returns 0 when protocol is "icmp"
@@ -115,12 +93,12 @@ type HealthMonitor struct {
 	// Running configurations of the health monitor
 	// Return object when changes is true
 	// Return null when current configuretion does not exist
-	Current *Configuration `json:"current,omitempty"`
+	Current *HealthMonitor `json:"current,omitempty"`
 
 	// Added or changed configurations of the health monitor that waiting to be applied
 	// Return object when changes is true
 	// Return null when staged configuretion does not exist
-	Staged *Configuration `json:"staged,omitempty"`
+	Staged *HealthMonitor `json:"staged,omitempty"`
 }
 
 // HealthMonitorPage is the page returned by a pager

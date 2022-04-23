@@ -12,6 +12,10 @@ func rootURL(c *eclcloud.ServiceClient) string {
 	return c.ServiceURL("health_monitors")
 }
 
+func stagedURL(c *eclcloud.ServiceClient, id string) string {
+	return c.ServiceURL("health_monitors", id, "staged")
+}
+
 func getURL(c *eclcloud.ServiceClient, id string) string {
 	return resourceURL(c, id)
 }
