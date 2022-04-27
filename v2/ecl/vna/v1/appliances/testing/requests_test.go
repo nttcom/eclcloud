@@ -123,7 +123,7 @@ func TestCreateAppliance(t *testing.T) {
 	th.AssertNoErr(t, err)
 
 	th.AssertEquals(t, ap.OperationStatus, "COMPLETE")
-	th.AssertDeepEquals(t, &appliance1, ap)
+	th.AssertDeepEquals(t, &appliance3, ap)
 }
 
 func TestDeleteAppliance(t *testing.T) {

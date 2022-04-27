@@ -9,6 +9,7 @@ import (
 const applianceType = "ECL::VirtualNetworkAppliance::VSRX"
 const idAppliance1 = "45db3e66-31af-45a6-8ad2-d01521726141"
 const idAppliance2 = "45db3e66-31af-45a6-8ad2-d01521726142"
+const idAppliance3 = "45db3e66-31af-45a6-8ad2-d01521726143"
 
 const idVirtualNetworkAppliancePlan = "6589b37a-cf82-4918-96fe-255683f78e76"
 
@@ -111,12 +112,10 @@ var listResponse = fmt.Sprintf(`
             "operation_status": "COMPLETE",
             "os_login_status": "ACTIVE",
             "os_monitoring_status": "ACTIVE",
-            "password": "Passw0rd",
             "tags": {
                 "k1": "v1"
             },
             "tenant_id": "9ee80f2a926c49f88f166af47df4e9f5",
-            "username": "root",
             "virtual_network_appliance_plan_id": "%s",
             "vm_status": "ACTIVE"
         },
@@ -216,12 +215,10 @@ var listResponse = fmt.Sprintf(`
             "operation_status": "COMPLETE",
             "os_login_status": "ACTIVE",
             "os_monitoring_status": "ACTIVE",
-            "password": "Passw0rd",
             "tags": {
                 "k1": "v1"
             },
             "tenant_id": "9ee80f2a926c49f88f166af47df4e9f5",
-            "username": "root",
             "virtual_network_appliance_plan_id": "%s",
             "vm_status": "ACTIVE"
         }
@@ -324,6 +321,54 @@ var appliance2 = appliances.Appliance{
 					MACAddress: "aa:bb:cc:dd:ee:f2",
 					Type:       "",
 					VRID:       interface{}(nil),
+				},
+			},
+		},
+		Interface2: defaultInterface,
+		Interface3: defaultInterface,
+		Interface4: defaultInterface,
+		Interface5: defaultInterface,
+		Interface6: defaultInterface,
+		Interface7: defaultInterface,
+		Interface8: defaultInterface,
+	},
+}
+
+var appliance3 = appliances.Appliance{
+	ID:                 idAppliance3,
+	Name:               "appliance_3",
+	ApplianceType:      applianceType,
+	Description:        "appliance_3_description",
+	DefaultGateway:     "192.168.1.1",
+	AvailabilityZone:   "zone1-groupb",
+	OSMonitoringStatus: "ACTIVE",
+	OSLoginStatus:      "ACTIVE",
+	VMStatus:           "ACTIVE",
+	OperationStatus:    "COMPLETE",
+	AppliancePlanID:    idVirtualNetworkAppliancePlan,
+	TenantID:           "9ee80f2a926c49f88f166af47df4e9f5",
+	Username:           "root",
+	Password:           "Passw0rd",
+	Tags:               map[string]string{"k1": "v1"},
+	Interfaces: appliances.InterfacesInResponse{
+		Interface1: appliances.InterfaceInResponse{
+			Name:        "interface_1",
+			Description: "interface_1_description",
+			NetworkID:   "dummyNetworkID",
+			Tags:        map[string]string{},
+			Updatable:   true,
+			FixedIPs: []appliances.FixedIPInResponse{
+				{
+					IPAddress: "192.168.1.53",
+					SubnetID:  "dummySubnetID",
+				},
+			},
+			AllowedAddressPairs: []appliances.AllowedAddressPairInResponse{
+				{
+					IPAddress:  "3.3.3.3",
+					MACAddress: "aa:bb:cc:dd:ee:f3",
+					Type:       "vrrp",
+					VRID:       float64(123),
 				},
 			},
 		},
@@ -440,12 +485,10 @@ var getResponse = fmt.Sprintf(`
         "operation_status": "COMPLETE",
         "os_login_status": "ACTIVE",
         "os_monitoring_status": "ACTIVE",
-        "password": "Passw0rd",
         "tags": {
             "k1": "v1"
         },
         "tenant_id": "9ee80f2a926c49f88f166af47df4e9f5",
-        "username": "root",
         "virtual_network_appliance_plan_id": "%s",
         "vm_status": "ACTIVE"
     }
@@ -481,7 +524,117 @@ var createRequest = fmt.Sprintf(`
 	idVirtualNetworkAppliancePlan,
 )
 
-var createResponse = getResponse
+var createResponse = fmt.Sprintf(`
+{
+    "virtual_network_appliance": {
+        "appliance_type": "ECL::VirtualNetworkAppliance::VSRX",
+        "availability_zone": "zone1-groupb",
+        "default_gateway": "192.168.1.1",
+        "description": "appliance_3_description",
+        "id": "%s",
+        "interfaces": {
+            "interface_1": {
+                "allowed_address_pairs": [
+                    {
+                        "ip_address": "3.3.3.3",
+                        "mac_address": "aa:bb:cc:dd:ee:f3",
+                        "type": "vrrp",
+                        "vrid": 123
+                    }
+                ],
+                "description": "interface_1_description",
+                "fixed_ips": [
+                    {
+                        "ip_address": "192.168.1.53",
+                        "subnet_id": "dummySubnetID"
+                    }
+                ],
+                "name": "interface_1",
+                "network_id": "dummyNetworkID",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_2": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_3": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_4": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_5": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_6": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_7": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            },
+            "interface_8": {
+                "allowed_address_pairs": [],
+                "description": "",
+                "fixed_ips": [],
+                "name": "",
+                "network_id": "",
+                "tags": {},
+                "updatable": true
+            }
+        },
+        "name": "appliance_3",
+        "operation_status": "COMPLETE",
+        "os_login_status": "ACTIVE",
+        "os_monitoring_status": "ACTIVE",
+        "password": "Passw0rd",
+        "tags": {
+            "k1": "v1"
+        },
+        "tenant_id": "9ee80f2a926c49f88f166af47df4e9f5",
+        "username": "root",
+        "virtual_network_appliance_plan_id": "%s",
+        "vm_status": "ACTIVE"
+    }
+}`,
+	idAppliance3,
+	idVirtualNetworkAppliancePlan,
+)
 
 var updateMetadataRequest = fmt.Sprintf(`
     {
