@@ -1,7 +1,7 @@
 package testing
 
 import (
-	"github.com/nttcom/eclcloud/v2/ecl/baremetal/v2/keypairs"
+	"github.com/nttcom/eclcloud/v3/ecl/baremetal/v2/keypairs"
 )
 
 const listOutput = `

@@ -1,7 +1,7 @@
 package volumes
 
 import (
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 )
 
 // WaitForStatus will continually poll the resource, checking for a particular

@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/v2/ecl/compute/v2/servers"
+	"github.com/nttcom/eclcloud/v3/ecl/compute/v2/servers"
 
-	"github.com/nttcom/eclcloud/v2"
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	"github.com/nttcom/eclcloud/v2/testhelper/client"
+	"github.com/nttcom/eclcloud/v3"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	"github.com/nttcom/eclcloud/v3/testhelper/client"
 
 	"time"
 )

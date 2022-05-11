@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"testing"
 
-	az "github.com/nttcom/eclcloud/v2/ecl/compute/v2/extensions/availabilityzones"
-	th "github.com/nttcom/eclcloud/v2/testhelper"
+	az "github.com/nttcom/eclcloud/v3/ecl/compute/v2/extensions/availabilityzones"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
 
-	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
+	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 func TestListAvailabilityZone(t *testing.T) {

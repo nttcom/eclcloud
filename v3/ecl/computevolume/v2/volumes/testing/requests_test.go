@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/v2/ecl/computevolume/v2/volumes"
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
+	"github.com/nttcom/eclcloud/v3/ecl/computevolume/v2/volumes"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 func TestListVolumeAll(t *testing.T) {

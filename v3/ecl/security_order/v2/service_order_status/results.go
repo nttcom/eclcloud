@@ -1,7 +1,7 @@
 package service_order_status
 
 import (
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 )
 
 type commonResult struct {

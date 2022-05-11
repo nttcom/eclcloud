@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"testing"
 
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 // HandleCreateImageMemberSuccessfully setup

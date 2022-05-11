@@ -3,7 +3,7 @@ package testing
 import (
 	"fmt"
 
-	"github.com/nttcom/eclcloud/v2/ecl/vna/v1/appliances"
+	"github.com/nttcom/eclcloud/v3/ecl/vna/v1/appliances"
 )
 
 const applianceType = "ECL::VirtualNetworkAppliance::VSRX"

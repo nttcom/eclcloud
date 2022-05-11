@@ -3,7 +3,7 @@ package ha_ports
 import (
 	"fmt"
 
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 )
 
 func updateURL(client *eclcloud.ServiceClient, hostName string) string {

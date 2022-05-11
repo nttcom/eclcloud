@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/v2/ecl/security_portal/v2/processes"
+	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v2/processes"
 
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 func TestGetProcess(t *testing.T) {

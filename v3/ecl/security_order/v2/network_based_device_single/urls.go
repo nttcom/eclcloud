@@ -3,7 +3,7 @@ package network_based_device_single
 import (
 	"fmt"
 
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 )
 
 func getURLPartFromDeviceType(deviceType string) string {

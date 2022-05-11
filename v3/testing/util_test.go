@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nttcom/eclcloud/v2"
-	th "github.com/nttcom/eclcloud/v2/testhelper"
+	"github.com/nttcom/eclcloud/v3"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
 )
 
 func TestWaitFor(t *testing.T) {

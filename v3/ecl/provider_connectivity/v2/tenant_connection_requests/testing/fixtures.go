@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/v2/ecl/provider_connectivity/v2/tenant_connection_requests"
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	"github.com/nttcom/eclcloud/v2/testhelper/client"
+	"github.com/nttcom/eclcloud/v3/ecl/provider_connectivity/v2/tenant_connection_requests"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	"github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 // ListResult provides a single page of tenant_connection_request results.

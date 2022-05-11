@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"testing"
 
-	security "github.com/nttcom/eclcloud/v2/ecl/security_order/v2/network_based_device_ha"
-	"github.com/nttcom/eclcloud/v2/pagination"
+	security "github.com/nttcom/eclcloud/v3/ecl/security_order/v2/network_based_device_ha"
+	"github.com/nttcom/eclcloud/v3/pagination"
 
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 func TestListDevice(t *testing.T) {

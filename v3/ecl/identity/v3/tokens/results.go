@@ -1,7 +1,7 @@
 package tokens
 
 import (
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 	"time"
 )
 

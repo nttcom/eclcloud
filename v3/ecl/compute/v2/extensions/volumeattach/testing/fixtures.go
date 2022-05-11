@@ -3,7 +3,7 @@ package testing
 import (
 	"fmt"
 
-	"github.com/nttcom/eclcloud/v2/ecl/compute/v2/extensions/volumeattach"
+	"github.com/nttcom/eclcloud/v3/ecl/compute/v2/extensions/volumeattach"
 )
 
 const serverID = "4d8c3732-a248-40ed-bebc-539a6ffd25c0"

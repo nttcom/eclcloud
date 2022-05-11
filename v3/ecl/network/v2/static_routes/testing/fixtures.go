@@ -1,7 +1,7 @@
 package testing
 
 import (
-	"github.com/nttcom/eclcloud/v2/ecl/network/v2/static_routes"
+	"github.com/nttcom/eclcloud/v3/ecl/network/v2/static_routes"
 )
 
 const ListResponse = `

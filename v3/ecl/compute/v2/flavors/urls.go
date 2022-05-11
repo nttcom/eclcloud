@@ -1,7 +1,7 @@
 package flavors
 
 import (
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 )
 
 func getURL(client *eclcloud.ServiceClient, id string) string {

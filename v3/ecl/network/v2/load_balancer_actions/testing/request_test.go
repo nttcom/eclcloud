@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"testing"
 
-	fake "github.com/nttcom/eclcloud/v2/ecl/network/v2/common"
-	"github.com/nttcom/eclcloud/v2/ecl/network/v2/load_balancer_actions"
-	th "github.com/nttcom/eclcloud/v2/testhelper"
+	fake "github.com/nttcom/eclcloud/v3/ecl/network/v2/common"
+	"github.com/nttcom/eclcloud/v3/ecl/network/v2/load_balancer_actions"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
 )
 
 func TestRebootLoadBalancer(t *testing.T) {

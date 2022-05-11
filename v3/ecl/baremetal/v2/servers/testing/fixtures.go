@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/nttcom/eclcloud/v2"
-	"github.com/nttcom/eclcloud/v2/ecl/baremetal/v2/servers"
+	"github.com/nttcom/eclcloud/v3"
+	"github.com/nttcom/eclcloud/v3/ecl/baremetal/v2/servers"
 )
 
 var listResponse = fmt.Sprintf(`

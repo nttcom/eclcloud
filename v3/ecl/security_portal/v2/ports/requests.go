@@ -1,7 +1,7 @@
 package ports
 
 import (
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 )
 
 // UpdateOptsBuilder allows extensions to add additional parameters to

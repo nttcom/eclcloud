@@ -1,8 +1,8 @@
 package internet_services
 
 import (
-	"github.com/nttcom/eclcloud/v2"
-	"github.com/nttcom/eclcloud/v2/pagination"
+	"github.com/nttcom/eclcloud/v3"
+	"github.com/nttcom/eclcloud/v3/pagination"
 )
 
 type ListOptsBuilder interface {

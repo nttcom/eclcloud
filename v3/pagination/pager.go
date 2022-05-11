@@ -3,7 +3,7 @@ package pagination
 import (
 	"errors"
 	"fmt"
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 	"net/http"
 	"reflect"
 	"strings"

@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/v2"
-	"github.com/nttcom/eclcloud/v2/ecl/vna/v1/appliances"
-	"github.com/nttcom/eclcloud/v2/pagination"
-	"github.com/nttcom/eclcloud/v2/testhelper/client"
+	"github.com/nttcom/eclcloud/v3"
+	"github.com/nttcom/eclcloud/v3/ecl/vna/v1/appliances"
+	"github.com/nttcom/eclcloud/v3/pagination"
+	"github.com/nttcom/eclcloud/v3/testhelper/client"
 
-	th "github.com/nttcom/eclcloud/v2/testhelper"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
 )
 
 const TokenID = client.TokenID

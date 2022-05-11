@@ -1,8 +1,8 @@
 package common_function_pool
 
 import (
-	"github.com/nttcom/eclcloud/v2"
-	"github.com/nttcom/eclcloud/v2/pagination"
+	"github.com/nttcom/eclcloud/v3"
+	"github.com/nttcom/eclcloud/v3/pagination"
 )
 
 // CommonFunctionPool represents a Common Function Pool. See package documentation for a top-level

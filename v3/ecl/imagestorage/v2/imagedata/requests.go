@@ -4,7 +4,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 )
 
 // Upload uploads an image file.

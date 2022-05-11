@@ -1,6 +1,6 @@
 package tokens
 
-import "github.com/nttcom/eclcloud/v2"
+import "github.com/nttcom/eclcloud/v3"
 
 // Scope allows a created token to be limited to a specific domain or project.
 type Scope struct {

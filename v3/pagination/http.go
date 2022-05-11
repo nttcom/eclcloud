@@ -2,7 +2,7 @@ package pagination
 
 import (
 	"encoding/json"
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 	"io/ioutil"
 	"net/http"
 	"net/url"

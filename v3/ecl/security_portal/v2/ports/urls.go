@@ -3,7 +3,7 @@ package ports
 import (
 	"fmt"
 
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 )
 
 func updateURL(client *eclcloud.ServiceClient, deviceType string, hostName string) string {

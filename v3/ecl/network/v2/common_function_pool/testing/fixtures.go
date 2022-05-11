@@ -1,7 +1,7 @@
 package testing
 
 import (
-	"github.com/nttcom/eclcloud/v2/ecl/network/v2/common_function_pool"
+	"github.com/nttcom/eclcloud/v3/ecl/network/v2/common_function_pool"
 )
 
 const ListResponse = `

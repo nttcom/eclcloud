@@ -4,10 +4,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nttcom/eclcloud/v2/ecl/imagestorage/v2/members"
-	"github.com/nttcom/eclcloud/v2/pagination"
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
+	"github.com/nttcom/eclcloud/v3/ecl/imagestorage/v2/members"
+	"github.com/nttcom/eclcloud/v3/pagination"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 const createdAtString = "2013-09-20T19:22:19Z"

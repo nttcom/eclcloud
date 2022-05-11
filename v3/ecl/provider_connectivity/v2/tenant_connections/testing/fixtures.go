@@ -2,9 +2,9 @@ package testing
 
 import (
 	"fmt"
-	"github.com/nttcom/eclcloud/v2/ecl/provider_connectivity/v2/tenant_connections"
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	"github.com/nttcom/eclcloud/v2/testhelper/client"
+	"github.com/nttcom/eclcloud/v3/ecl/provider_connectivity/v2/tenant_connections"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	"github.com/nttcom/eclcloud/v3/testhelper/client"
 	"net/http"
 	"testing"
 )

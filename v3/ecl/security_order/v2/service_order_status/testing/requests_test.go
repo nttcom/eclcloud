@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"testing"
 
-	order "github.com/nttcom/eclcloud/v2/ecl/security_order/v2/service_order_status"
+	order "github.com/nttcom/eclcloud/v3/ecl/security_order/v2/service_order_status"
 
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 func TestGetOrder(t *testing.T) {

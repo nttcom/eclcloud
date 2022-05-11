@@ -1,6 +1,6 @@
 package subnets
 
-import "github.com/nttcom/eclcloud/v2"
+import "github.com/nttcom/eclcloud/v3"
 
 func resourceURL(c *eclcloud.ServiceClient, id string) string {
 	return c.ServiceURL("subnets", id)

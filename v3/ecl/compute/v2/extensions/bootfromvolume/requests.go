@@ -1,9 +1,9 @@
 package bootfromvolume
 
 import (
-	"github.com/nttcom/eclcloud/v2/ecl/compute/v2/servers"
+	"github.com/nttcom/eclcloud/v3/ecl/compute/v2/servers"
 
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 )
 
 type (

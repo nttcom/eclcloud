@@ -3,7 +3,7 @@ package testing
 import (
 	"testing"
 
-	th "github.com/nttcom/eclcloud/v2/testhelper"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
 )
 
 func TestBootFromNewVolume(t *testing.T) {

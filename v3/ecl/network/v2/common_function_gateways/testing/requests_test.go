@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"testing"
 
-	fake "github.com/nttcom/eclcloud/v2/ecl/network/v2/common"
-	"github.com/nttcom/eclcloud/v2/ecl/network/v2/common_function_gateways"
-	"github.com/nttcom/eclcloud/v2/pagination"
-	th "github.com/nttcom/eclcloud/v2/testhelper"
+	fake "github.com/nttcom/eclcloud/v3/ecl/network/v2/common"
+	"github.com/nttcom/eclcloud/v3/ecl/network/v2/common_function_gateways"
+	"github.com/nttcom/eclcloud/v3/pagination"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
 )
 
 func TestListCommonFunctionGatway(t *testing.T) {

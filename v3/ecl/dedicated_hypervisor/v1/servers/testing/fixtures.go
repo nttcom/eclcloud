@@ -6,10 +6,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nttcom/eclcloud/v2/ecl/dedicated_hypervisor/v1/servers"
+	"github.com/nttcom/eclcloud/v3/ecl/dedicated_hypervisor/v1/servers"
 
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	"github.com/nttcom/eclcloud/v2/testhelper/client"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	"github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 // ListResult provides a single page of Server results.

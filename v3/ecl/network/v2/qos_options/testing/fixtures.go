@@ -1,6 +1,6 @@
 package testing
 
-import "github.com/nttcom/eclcloud/v2/ecl/network/v2/qos_options"
+import "github.com/nttcom/eclcloud/v3/ecl/network/v2/qos_options"
 
 const ListResponse = `
 {

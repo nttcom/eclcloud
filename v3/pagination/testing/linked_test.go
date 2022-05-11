@@ -6,8 +6,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/nttcom/eclcloud/v2/pagination"
-	"github.com/nttcom/eclcloud/v2/testhelper"
+	"github.com/nttcom/eclcloud/v3/pagination"
+	"github.com/nttcom/eclcloud/v3/testhelper"
 )
 
 // LinkedPager sample and test cases.

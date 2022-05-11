@@ -1,6 +1,6 @@
 package internet_gateways
 
-import "github.com/nttcom/eclcloud/v2"
+import "github.com/nttcom/eclcloud/v3"
 
 func resourceURL(c *eclcloud.ServiceClient, id string) string {
 	return c.ServiceURL("internet_gateways", id)

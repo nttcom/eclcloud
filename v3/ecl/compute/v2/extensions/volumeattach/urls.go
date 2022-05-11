@@ -1,6 +1,6 @@
 package volumeattach
 
-import "github.com/nttcom/eclcloud/v2"
+import "github.com/nttcom/eclcloud/v3"
 
 const resourcePath = "os-volume_attachments"
 

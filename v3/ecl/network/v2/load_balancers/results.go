@@ -1,10 +1,10 @@
 package load_balancers
 
 import (
-	"github.com/nttcom/eclcloud/v2"
-	"github.com/nttcom/eclcloud/v2/ecl/network/v2/load_balancer_interfaces"
-	"github.com/nttcom/eclcloud/v2/ecl/network/v2/load_balancer_syslog_servers"
-	"github.com/nttcom/eclcloud/v2/pagination"
+	"github.com/nttcom/eclcloud/v3"
+	"github.com/nttcom/eclcloud/v3/ecl/network/v2/load_balancer_interfaces"
+	"github.com/nttcom/eclcloud/v3/ecl/network/v2/load_balancer_syslog_servers"
+	"github.com/nttcom/eclcloud/v3/pagination"
 )
 
 type commonResult struct {

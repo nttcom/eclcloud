@@ -3,8 +3,8 @@ package servers
 import (
 	"encoding/base64"
 
-	"github.com/nttcom/eclcloud/v2"
-	"github.com/nttcom/eclcloud/v2/pagination"
+	"github.com/nttcom/eclcloud/v3"
+	"github.com/nttcom/eclcloud/v3/pagination"
 )
 
 // Get retrieves the server with the provided ID.

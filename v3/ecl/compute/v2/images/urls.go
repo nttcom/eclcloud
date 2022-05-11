@@ -1,6 +1,6 @@
 package images
 
-import "github.com/nttcom/eclcloud/v2"
+import "github.com/nttcom/eclcloud/v3"
 
 func listDetailURL(client *eclcloud.ServiceClient) string {
 	return client.ServiceURL("images", "detail")

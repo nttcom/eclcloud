@@ -3,7 +3,7 @@ package testing
 import (
 	"fmt"
 
-	"github.com/nttcom/eclcloud/v2/ecl/baremetal/v2/flavors"
+	"github.com/nttcom/eclcloud/v3/ecl/baremetal/v2/flavors"
 )
 
 var listResponse = fmt.Sprintf(`

@@ -1,8 +1,8 @@
 package groups
 
 import (
-	"github.com/nttcom/eclcloud/v2"
-	"github.com/nttcom/eclcloud/v2/pagination"
+	"github.com/nttcom/eclcloud/v3"
+	"github.com/nttcom/eclcloud/v3/pagination"
 	"net/url"
 	"strings"
 )

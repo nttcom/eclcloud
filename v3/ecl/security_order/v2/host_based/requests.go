@@ -1,7 +1,7 @@
 package host_based
 
 import (
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 )
 
 // GetOptsBuilder allows extensions to add additional parameters to

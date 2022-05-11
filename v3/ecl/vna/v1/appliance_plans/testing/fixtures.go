@@ -1,7 +1,7 @@
 package testing
 
 import (
-	"github.com/nttcom/eclcloud/v2/ecl/vna/v1/appliance_plans"
+	"github.com/nttcom/eclcloud/v3/ecl/vna/v1/appliance_plans"
 )
 
 const ListResponse = `

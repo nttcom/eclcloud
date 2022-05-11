@@ -2,7 +2,7 @@ package pagination
 
 import (
 	"fmt"
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 	"reflect"
 )
 

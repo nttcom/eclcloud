@@ -1,8 +1,8 @@
 package testing
 
 import (
-	"github.com/nttcom/eclcloud/v2/ecl/compute/v2/extensions/bootfromvolume"
-	"github.com/nttcom/eclcloud/v2/ecl/compute/v2/servers"
+	"github.com/nttcom/eclcloud/v3/ecl/compute/v2/extensions/bootfromvolume"
+	"github.com/nttcom/eclcloud/v3/ecl/compute/v2/servers"
 )
 
 var baseCreateOpts = servers.CreateOpts{

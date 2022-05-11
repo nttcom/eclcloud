@@ -1,7 +1,7 @@
 package license_types
 
 import (
-	"github.com/nttcom/eclcloud/v2/pagination"
+	"github.com/nttcom/eclcloud/v3/pagination"
 )
 
 // LicenseType represents guest image license information.

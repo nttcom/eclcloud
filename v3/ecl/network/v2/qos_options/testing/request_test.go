@@ -2,14 +2,14 @@ package testing
 
 import (
 	"fmt"
-	"github.com/nttcom/eclcloud/v2/ecl/network/v2/qos_options"
-	"github.com/nttcom/eclcloud/v2/pagination"
+	"github.com/nttcom/eclcloud/v3/ecl/network/v2/qos_options"
+	"github.com/nttcom/eclcloud/v3/pagination"
 
 	"net/http"
 	"testing"
 
-	fake "github.com/nttcom/eclcloud/v2/ecl/network/v2/common"
-	th "github.com/nttcom/eclcloud/v2/testhelper"
+	fake "github.com/nttcom/eclcloud/v3/ecl/network/v2/common"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
 )
 
 func TestListQoS(t *testing.T) {

@@ -6,9 +6,9 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/nttcom/eclcloud/v2"
-	"github.com/nttcom/eclcloud/v2/internal"
-	"github.com/nttcom/eclcloud/v2/pagination"
+	"github.com/nttcom/eclcloud/v3"
+	"github.com/nttcom/eclcloud/v3/internal"
+	"github.com/nttcom/eclcloud/v3/pagination"
 )
 
 // Image represents an image found in the Enterprise Cloud Image service.

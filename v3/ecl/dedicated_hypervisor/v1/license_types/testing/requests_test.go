@@ -3,11 +3,11 @@ package testing
 import (
 	"testing"
 
-	"github.com/nttcom/eclcloud/v2/ecl/dedicated_hypervisor/v1/license_types"
+	"github.com/nttcom/eclcloud/v3/ecl/dedicated_hypervisor/v1/license_types"
 
-	"github.com/nttcom/eclcloud/v2/pagination"
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	"github.com/nttcom/eclcloud/v2/testhelper/client"
+	"github.com/nttcom/eclcloud/v3/pagination"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	"github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 func TestListLicenseTypes(t *testing.T) {

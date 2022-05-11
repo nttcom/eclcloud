@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"testing"
 
-	ar "github.com/nttcom/eclcloud/v2/ecl/sss/v1/approval_requests"
-	"github.com/nttcom/eclcloud/v2/pagination"
+	ar "github.com/nttcom/eclcloud/v3/ecl/sss/v1/approval_requests"
+	"github.com/nttcom/eclcloud/v3/pagination"
 
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	fakeclient "github.com/nttcom/eclcloud/v2/testhelper/client"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 func TestListApprovalRequest(t *testing.T) {

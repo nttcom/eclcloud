@@ -1,8 +1,8 @@
 package common
 
 import (
-	"github.com/nttcom/eclcloud/v2"
-	"github.com/nttcom/eclcloud/v2/testhelper/client"
+	"github.com/nttcom/eclcloud/v3"
+	"github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 const TokenID = client.TokenID

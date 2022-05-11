@@ -6,10 +6,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nttcom/eclcloud/v2/ecl/dedicated_hypervisor/v1/licenses"
+	"github.com/nttcom/eclcloud/v3/ecl/dedicated_hypervisor/v1/licenses"
 
-	th "github.com/nttcom/eclcloud/v2/testhelper"
-	"github.com/nttcom/eclcloud/v2/testhelper/client"
+	th "github.com/nttcom/eclcloud/v3/testhelper"
+	"github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
 // ListResult provides a single page of License results.

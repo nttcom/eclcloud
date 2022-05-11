@@ -3,7 +3,7 @@ package processes
 import (
 	"fmt"
 
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 )
 
 func getURL(client *eclcloud.ServiceClient, processID string) string {

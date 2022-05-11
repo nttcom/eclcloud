@@ -1,3 +1,3 @@
-module github.com/nttcom/eclcloud/v2
+module github.com/nttcom/eclcloud/v3
 
 go 1.13

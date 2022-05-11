@@ -1,7 +1,7 @@
 package load_balancer_actions
 
 import (
-	"github.com/nttcom/eclcloud/v2"
+	"github.com/nttcom/eclcloud/v3"
 )
 
 // RebootOpts represents the attributes used when rebooting a Load Balancer.

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/nttcom/eclcloud/v2/ecl/computevolume/v2/volumes"
+	"github.com/nttcom/eclcloud/v3/ecl/computevolume/v2/volumes"
 )
 
 const idVolume1 = "251df9eb-c088-4e71-808b-75a690e8814b"
