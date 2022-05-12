@@ -38,20 +38,25 @@ type UpdateResult struct {
 
 // User represents an ECL SSS User.
 type User struct {
-	LoginID             string    `json:"login_id"`
-	MailAddress         string    `json:"mail_address"`
-	UserID              string    `json:"user_id"`
-	ContractOwner       bool      `json:"contract_owner"`
-	KeystoneName        string    `json:"keystone_name"`
-	KeystonePassword    string    `json:"keystone_password"`
-	KeystoneEndpoint    string    `json:"keystone_endpoint"`
-	SSSEndpoint         string    `json:"sss_endpoint"`
-	ContractID          string    `json:"contract_id"`
-	LoginIntegration    string    `json:"login_integration"`
-	ExternalReferenceID string    `json:"external_reference_id"`
-	BrandID             string    `json:"brand_id"`
-	Password            string    `json:"password"`
-	StartTime           time.Time `json:"-"`
+	LoginID                string    `json:"login_id"`
+	MailAddress            string    `json:"mail_address"`
+	UserID                 string    `json:"user_id"`
+	ContractOwner          bool      `json:"contract_owner"`
+	Superuser              bool      `json:"super_user"`
+	ApiAvailability        bool      `json:"api_availability"`
+	KeystoneName           string    `json:"keystone_name"`
+	KeystonePassword       string    `json:"keystone_password"`
+	KeystoneEndpoint       string    `json:"keystone_endpoint"`
+	SSSEndpoint            string    `json:"sss_endpoint"`
+	ContractID             string    `json:"contract_id"`
+	LoginIntegration       string    `json:"login_integration"`
+	ExternalReferenceID    string    `json:"external_reference_id"`
+	BrandID                string    `json:"brand_id"`
+	AutoRoleAssignmentFlag bool      `json:"auto_role_assignment_flag"`
+	ExternalUserType       string    `json:"external_user_type"`
+	OtpActivation          bool      `json:"otp_activation"`
+	Password               string    `json:"password"`
+	StartTime              time.Time `json:"-"`
 }
 
 // UnmarshalJSON creates JSON format of user
@@ -109,7 +114,7 @@ func ExtractUsers(r pagination.Page) ([]User, error) {
 	// In list response case, each json element does not have contract_id.
 	// It is set at out layer of each element.
 	// So following logic set contract_id into inside of users slice forcibly.
-	// In "show(get with ID of tennat)" case, this does not occur.
+	// In "show(get with ID of tenant)" case, this does not occur.
 	err := (r.(UserPage)).ExtractInto(&s)
 	contractID := s.ContractID
 

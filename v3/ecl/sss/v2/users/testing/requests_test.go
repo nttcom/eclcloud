@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/v3/ecl/sss/v1/users"
+	"github.com/nttcom/eclcloud/v3/ecl/sss/v2/users"
 	"github.com/nttcom/eclcloud/v3/pagination"
 
 	th "github.com/nttcom/eclcloud/v3/testhelper"
