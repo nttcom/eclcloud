@@ -255,16 +255,20 @@ func NewComputeVolumeV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpt
 	return initClientOpts(client, eo, "volumev2")
 }
 
-// NewSSSV1 creates ServiceClient that may be used to access the v1
+// NewSSSV2 creates ServiceClient that may be used to access the v2
 // SSS API service.
-func NewSSSV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
-	return initClientOpts(client, eo, "sss")
+func NewSSSV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
+	sc, err := initClientOpts(client, eo, "sss")
+	sc.ResourceBase = sc.Endpoint + "v2/"
+	return sc, err
 }
 
-// NewSSSV1 creates ServiceClient that may be used to access the v1
+// NewSSSV2 creates ServiceClient that may be used to access the v2
 // SSS API service with Unscoped Token.
-func NewSSSV1Forced(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts, sssURL string) (*eclcloud.ServiceClient, error) {
-	return initSSSClientOptsForced(client, eo, "sss", sssURL)
+func NewSSSV2Forced(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts, sssURL string) (*eclcloud.ServiceClient, error) {
+	sc, err := initSSSClientOptsForced(client, eo, "sss", sssURL)
+	sc.ResourceBase = sc.Endpoint + "v2/"
+	return sc, err
 }
 
 // NewStorageV1 creates ServiceClient that may be used to access the v1
