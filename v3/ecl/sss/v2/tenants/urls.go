@@ -13,11 +13,3 @@ func getURL(client *eclcloud.ServiceClient, tenantID string) string {
 func createURL(client *eclcloud.ServiceClient) string {
 	return client.ServiceURL("tenants")
 }
-
-func deleteURL(client *eclcloud.ServiceClient, tenantID string) string {
-	return client.ServiceURL("tenants", tenantID)
-}
-
-func updateURL(client *eclcloud.ServiceClient, tenantID string) string {
-	return client.ServiceURL("tenants", tenantID)
-}

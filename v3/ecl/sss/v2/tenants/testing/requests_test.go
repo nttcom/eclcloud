@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nttcom/eclcloud/v3/ecl/sss/v1/tenants"
+	"github.com/nttcom/eclcloud/v3/ecl/sss/v2/tenants"
 	"github.com/nttcom/eclcloud/v3/pagination"
 
 	th "github.com/nttcom/eclcloud/v3/testhelper"
@@ -90,10 +90,8 @@ func TestCreateTenant(t *testing.T) {
 	})
 
 	createOpts := tenants.CreateOpts{
-		TenantName:   nameTenant1,
-		Description:  descriptionTenant1,
+		WorkspaceID:  workspaceID1,
 		TenantRegion: "jp1",
-		ContractID:   contractID,
 	}
 
 	// clone FirstTenant into createdTenant(Used as assertion target)
@@ -104,46 +102,4 @@ func TestCreateTenant(t *testing.T) {
 	actual, err := tenants.Create(fakeclient.ServiceClient(), createOpts).Extract()
 	th.AssertNoErr(t, err)
 	th.CheckDeepEquals(t, &createdTenant, actual)
-}
-
-func TestUpdateTenant(t *testing.T) {
-	th.SetupHTTP()
-	defer th.TeardownHTTP()
-
-	url := fmt.Sprintf("/tenants/%s", idTenant1)
-	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
-		th.TestMethod(t, r, "PUT")
-		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)
-		th.TestJSONRequest(t, r, UpdateRequest)
-
-		w.WriteHeader(http.StatusNoContent)
-	})
-
-	description := descriptionTenant1Update
-
-	updateOpts := tenants.UpdateOpts{
-		Description: &description,
-	}
-
-	// In ECL2.0 tennat update API returns
-	// - StatusNoContent
-	// - No response body as PUT response
-	res := tenants.Update(fakeclient.ServiceClient(), idTenant1, updateOpts)
-	th.AssertNoErr(t, res.Err)
-}
-
-func TestDeleteTenant(t *testing.T) {
-	th.SetupHTTP()
-	defer th.TeardownHTTP()
-
-	url := fmt.Sprintf("/tenants/%s", idTenant1)
-	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
-		th.TestMethod(t, r, "DELETE")
-		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)
-
-		w.WriteHeader(http.StatusNoContent)
-	})
-
-	res := tenants.Delete(fakeclient.ServiceClient(), idTenant1)
-	th.AssertNoErr(t, res.Err)
 }

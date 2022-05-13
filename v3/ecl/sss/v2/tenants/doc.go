@@ -32,26 +32,5 @@ Example to Create a Tenant
 	if err != nil {
 		panic(err)
 	}
-
-Example to Update a Tenant
-
-	tenantID := "966b3c7d36a24facaf20b7e458bf2192"
-
-	updateOpts := tenants.UpdateOpts{
-		Description: "Tenant Description - New",
-	}
-
-	tenant, err := tenants.Update(identityClient, tenantID, updateOpts).Extract()
-	if err != nil {
-		panic(err)
-	}
-
-Example to Delete a Tenant
-
-	tenantID := "966b3c7d36a24facaf20b7e458bf2192"
-	err := projects.Delete(identityClient, projectID).ExtractErr()
-	if err != nil {
-		panic(err)
-	}
 */
 package tenants

@@ -51,17 +51,10 @@ type CreateOptsBuilder interface {
 
 // CreateOpts represents parameters used to create a tenant.
 type CreateOpts struct {
-	// Name of this tenant.
-	TenantName string `json:"tenant_name" required:"true"`
-
-	// Description of the tenant.
-	Description string `json:"description" required:"true"`
-
+	// Workspace ID.
+	WorkspaceID string `json:"workspace_id" required:"true"`
 	// TenantRegion of the tenant.
 	TenantRegion string `json:"region" required:"true"`
-
-	// ID of contract which new tenant belongs.
-	ContractID string `json:"contract_id,omitempty"`
 }
 
 // ToTenantCreateMap formats a CreateOpts into a create request.
@@ -77,48 +70,5 @@ func Create(client *eclcloud.ServiceClient, opts CreateOptsBuilder) (r CreateRes
 		return
 	}
 	_, r.Err = client.Post(createURL(client), &b, &r.Body, nil)
-	return
-}
-
-// Delete deletes a tenant.
-func Delete(client *eclcloud.ServiceClient, tenantID string) (r DeleteResult) {
-	_, r.Err = client.Delete(deleteURL(client, tenantID), nil)
-	return
-}
-
-// UpdateOptsBuilder allows extensions to add additional parameters to
-// the Update request.
-type UpdateOptsBuilder interface {
-	ToTenantUpdateMap() (map[string]interface{}, error)
-}
-
-// UpdateOpts represents parameters to update a tenant.
-type UpdateOpts struct {
-	// Description of the tenant.
-	Description *string `json:"description,omitempty"`
-}
-
-// ToTenantUpdateMap formats a UpdateOpts into an update request.
-func (opts UpdateOpts) ToTenantUpdateMap() (map[string]interface{}, error) {
-	return eclcloud.BuildRequestBody(opts, "")
-}
-
-// Update modifies the attributes of a tenant.
-// SSS Tenant PUT API does not have response body,
-// so set JSONResponse option as nil.
-func Update(client *eclcloud.ServiceClient, id string, opts UpdateOptsBuilder) (r UpdateResult) {
-	b, err := opts.ToTenantUpdateMap()
-	if err != nil {
-		r.Err = err
-		return
-	}
-	_, r.Err = client.Put(
-		updateURL(client, id),
-		b,
-		nil,
-		&eclcloud.RequestOpts{
-			OkCodes: []int{204},
-		},
-	)
 	return
 }

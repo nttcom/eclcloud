@@ -24,18 +24,6 @@ type CreateResult struct {
 	tenantResult
 }
 
-// DeleteResult is the result of a Delete request. Call its ExtractErr method to
-// determine if the request succeeded or failed.
-type DeleteResult struct {
-	eclcloud.ErrResult
-}
-
-// UpdateResult is the result of an Update request. Call its Extract method to
-// interpret it as a Tenant.
-type UpdateResult struct {
-	tenantResult
-}
-
 // Tenant represents an ECL SSS Tenant.
 type Tenant struct {
 	// 	ID of contract which owns these tenants.
@@ -50,6 +38,8 @@ type Tenant struct {
 	TenantRegion string `json:"region"`
 	// Time that the tenant is created.
 	StartTime time.Time `json:"-"`
+	// Workspace ID of the tenant.
+	WorkspaceID string `json:"workspace_id"`
 }
 
 // UnmarshalJSON creates JSON format of tenant
