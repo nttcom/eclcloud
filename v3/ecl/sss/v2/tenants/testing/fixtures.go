@@ -106,7 +106,7 @@ var GetResponse = fmt.Sprintf(`
 		"contract_owner": true
 	}],
 	"brand_id": "ecl2",
-	"workspace_id": %s
+	"workspace_id": "%s"
 }`, idTenant1,
 	nameTenant1,
 	descriptionTenant1,
