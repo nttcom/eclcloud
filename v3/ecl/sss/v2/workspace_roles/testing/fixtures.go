@@ -9,7 +9,7 @@ const userID = "ecid1234567891"
 var createRequest = `
 {   
 　 "user_id": "ecid1234567891",
-   "workspace_id": "ws0000000001"
+   "workspace_id: "ws0000000001"
 }
 `
 
