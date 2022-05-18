@@ -67,35 +67,34 @@ var expectedWorkspacesSlice = []workspaces.Workspace{firstWorkspace, secondWorks
 
 var getResponse = fmt.Sprintf(`
 {
-    "contract_id": "%s",
-    "workspace_id": "%s",
-    "workspace_name": "%s",
-    "description": "%s",
-    "start_time": "%s",
-    "regions": [
-        {
-            "region_name": "jp1",
-            "tenant_id": "9a76dca6d8cd4391aac6f2ea052f10f4"
-        },
-        {
-            "region_name": "jp2",
-            "tenant_id" "27a58d42769141ff8e94920a99aeb44b"
-        }
-    ],
-    "users": [
-        {
-            "user_id": "ecid000000001",
-            "contract_id": "econ0000000001",
-            "contract_owner": true
-        },
-        {
-            "user_id": "ecid000000002",
-            "contract_id": "econ0000000002",
-            "contract_owner": false
-        }
-    ]
-}
-`,
+	"contract_id": "%s",
+	"workspace_id": "%s",
+	"workspace_name": "%s",
+	"description": "%s",
+	"start_time": "%s",
+	"regions": [
+		{
+			"region_name": "jp1",
+			"tenant_id": "9a76dca6d8cd4391aac6f2ea052f10f4"
+		},
+		{
+			"region_name": "jp2",
+			"tenant_id": "27a58d42769141ff8e94920a99aeb44b"
+		}
+	],
+	"users": [
+		{
+			"user_id": "ecid000000001",
+			"contract_id": "econ0000000001",
+			"contract_owner": true
+		},
+		{
+			"user_id": "ecid000000002",
+			"contract_id": "econ0000000002",
+			"contract_owner": false
+		}
+	]
+}`,
 	contractID, workspaceID1, nameWorkspace1, descriptionWorkspace1, startTime)
 
 var getResponseStruct = workspaces.Workspace{
