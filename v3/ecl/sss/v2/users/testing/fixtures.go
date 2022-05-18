@@ -96,7 +96,7 @@ var getResponseStruct = users.User{
 	MailAddress:            "user1@example.com",
 	ContractOwner:          false,
 	Superuser:              false,
-	ApiAvailability:        false,
+	ApiAvailability:        true,
 	SSSEndpoint:            "http://sss.com",
 	KeystoneEndpoint:       "http://keystone.com",
 	KeystoneName:           "keystonename1",
