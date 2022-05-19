@@ -123,7 +123,7 @@ func ExtractWorkspaces(r pagination.Page) ([]Workspace, error) {
 
 // Extract interprets any projectResults as a Workspace.
 func (r workspaceResult) Extract() (*Workspace, error) {
-	var s Workspace
+	var s *Workspace
 	err := r.ExtractInto(&s)
-	return &s, err
+	return s, err
 }
