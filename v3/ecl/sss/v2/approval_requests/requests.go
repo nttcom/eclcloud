@@ -58,7 +58,7 @@ type UpdateOpts struct {
 	Status string `json:"status" required:"true"`
 }
 
-// ToResourceUpdateCreateMap formats a UpdateOpts to update approval request.
+// ToResourceUpdateMap formats a UpdateOpts to update approval request.
 func (opts UpdateOpts) ToResourceUpdateMap() (map[string]interface{}, error) {
 	return eclcloud.BuildRequestBody(opts, "")
 }

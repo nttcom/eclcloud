@@ -34,7 +34,7 @@ type Tenant struct {
 	TenantName string `json:"tenant_name"`
 	// Description of the tenant.
 	Description string `json:"description"`
-	// TenantRegion the tenant blongs.
+	// TenantRegion the tenant belongs.
 	TenantRegion string `json:"region"`
 	// Time that the tenant is created.
 	StartTime time.Time `json:"-"`
@@ -97,7 +97,7 @@ func ExtractTenants(r pagination.Page) ([]Tenant, error) {
 	// In list response case, each json element does not have contract_id.
 	// It is set at out layer of each element.
 	// So following logic set contract_id into inside of tenants slice forcibly.
-	// In "show(get with ID of tennat)" case, this does not occur.
+	// In "show(get with ID of tenant)" case, this does not occur.
 	err := (r.(TenantPage)).ExtractInto(&s)
 	contractID := s.ContractID
 

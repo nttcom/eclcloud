@@ -113,7 +113,7 @@ var firstApprovalRequest = ar.ApprovalRequest{
 	Descriptions: []ar.Description{
 		{
 			Lang: "en",
-			Text: "approval resquest test",
+			Text: "approval request test",
 		},
 	},
 	RequestUser:      false,
@@ -144,7 +144,7 @@ var secondApprovalRequest = ar.ApprovalRequest{
 	Descriptions: []ar.Description{
 		{
 			Lang: "en",
-			Text: "approval resquest test",
+			Text: "approval request test",
 		},
 	},
 	RequestUser:      false,
