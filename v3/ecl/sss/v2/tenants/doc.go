@@ -1,5 +1,5 @@
 /*
-Package projects manages and retrieves Projects in the ECL SSS Service.
+Package tenants manages and retrieves Projects in the ECL SSS Service.
 
 Example to List Tenants
 
