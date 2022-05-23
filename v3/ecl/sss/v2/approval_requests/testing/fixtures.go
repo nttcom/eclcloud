@@ -36,7 +36,7 @@ var listResponse = fmt.Sprintf(`
 			"descriptions": [
 				{
 					"lang": "en",
-					"text": "approval resquest test"
+					"text": "approval request test"
 				}
 			],
 			"request_user": false,
@@ -66,7 +66,7 @@ var listResponse = fmt.Sprintf(`
 			"descriptions": [
 				{
 					"lang": "en",
-					"text": "approval resquest test"
+					"text": "approval request test"
 				}
 			],
 			"request_user": false,
@@ -181,7 +181,7 @@ var getResponse = fmt.Sprintf(`
 		"descriptions": [
 			{
 				"lang": "en",
-				"text": "approval resquest test"
+				"text": "approval request test"
 			}
 		],
 		"request_user": false,
