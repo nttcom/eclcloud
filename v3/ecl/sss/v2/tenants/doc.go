@@ -3,9 +3,7 @@ Package tenants manages and retrieves Projects in the ECL SSS Service.
 
 Example to List Tenants
 
-	listOpts := tenants.ListOpts{
-		Enabled: eclcloud.Enabled,
-	}
+	listOpts := tenants.ListOpts{}
 
 	allPages, err := tenants.List(identityClient, listOpts).AllPages()
 	if err != nil {
