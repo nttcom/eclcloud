@@ -91,24 +91,21 @@ var getResponse = fmt.Sprintf(`
 )
 
 var getResponseStruct = users.User{
-	UserID:                 idUser1,
-	LoginID:                "login_id_1",
-	MailAddress:            "user1@example.com",
-	ContractOwner:          false,
-	Superuser:              false,
-	ApiAvailability:        true,
-	SSSEndpoint:            "http://sss.com",
-	KeystoneEndpoint:       "http://keystone.com",
-	KeystoneName:           "keystonename1",
-	KeystonePassword:       "keystonepassword1",
-	StartTime:              userStartTime,
-	ContractID:             contractID,
-	LoginIntegration:       "",
-	ExternalReferenceID:    "econ0000009999",
-	BrandID:                "ecl2",
-	AutoRoleAssignmentFlag: false,
-	ExternalUserType:       "iop",
-	OtpActivation:          false,
+	UserID:              idUser1,
+	LoginID:             "login_id_1",
+	MailAddress:         "user1@example.com",
+	ContractOwner:       false,
+	Superuser:           false,
+	ApiAvailability:     true,
+	SSSEndpoint:         "http://sss.com",
+	KeystoneEndpoint:    "http://keystone.com",
+	KeystoneName:        "keystonename1",
+	StartTime:           userStartTime,
+	ContractID:          contractID,
+	LoginIntegration:    "",
+	ExternalReferenceID: "econ0000009999",
+	BrandID:             "ecl2",
+	OtpActivation:       false,
 }
 
 var createRequest = `{
@@ -138,7 +135,6 @@ var createdUser = users.User{
 	MailAddress:      "user1@example.com",
 	KeystoneEndpoint: "http://keystone.com",
 	SSSEndpoint:      "http://sss.com",
-	Password:         "Passw0rd",
 }
 
 var updateRequest = `{
