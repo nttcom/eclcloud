@@ -10,13 +10,13 @@ Example to List users
 		panic(err)
 	}
 
-	allRequests, err := users.ExtractUsers(allPages)
+	allUsers, err := users.ExtractUsers(allPages)
 	if err != nil {
 		panic(err)
 	}
 
-	for _, request := range allRequests {
-		fmt.Printf("%+v\n", request)
+	for _, user := range allUsers {
+		fmt.Printf("%+v\n", user)
 	}
 
 Example to Get a user

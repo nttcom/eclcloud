@@ -10,7 +10,7 @@ Example to List Tenants
 		panic(err)
 	}
 
-	allProjects, err := tenants.ExtractProjects(allPages)
+	allTenants, err := tenants.ExtractProjects(allPages)
 	if err != nil {
 		panic(err)
 	}

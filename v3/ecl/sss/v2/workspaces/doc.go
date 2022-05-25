@@ -10,13 +10,13 @@ Example to List workspaces
 		panic(err)
 	}
 
-	allRequests, err := workspaces.ExtractWorkspaces(allPages)
+	allWorkspaces, err := workspaces.ExtractWorkspaces(allPages)
 	if err != nil {
 		panic(err)
 	}
 
-	for _, request := range allRequests {
-		fmt.Printf("%+v\n", request)
+	for _, workspace := range allWorkspaces {
+		fmt.Printf("%+v\n", workspace)
 	}
 
 Example to Get a workspace
