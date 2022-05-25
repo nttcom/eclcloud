@@ -118,13 +118,22 @@ var GetResponse = fmt.Sprintf(`
 
 // GetResponseStruct mocked actual tenant
 var GetResponseStruct = tenants.Tenant{
-	ContractID:   contractID,
-	TenantID:     idTenant1,
-	TenantName:   nameTenant1,
-	Description:  descriptionTenant1,
-	TenantRegion: "jp1",
-	StartTime:    TenantStartTime,
-	WorkspaceID:  workspaceID1,
+	ContractID:        contractID,
+	TenantID:          idTenant1,
+	TenantName:        nameTenant1,
+	Description:       descriptionTenant1,
+	TenantRegion:      "jp1",
+	StartTime:         TenantStartTime,
+	RegionApiEndpoint: "https://example.com:443/api",
+	User: []tenants.User{
+		{
+			UserID:        "ecid8000008888",
+			ContractID:    contractID,
+			ContractOwner: true,
+		},
+	},
+	BrandID:     "ecl2",
+	WorkspaceID: workspaceID1,
 }
 
 // CreateRequest is a sample request to create a tenant.

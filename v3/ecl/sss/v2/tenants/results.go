@@ -38,8 +38,23 @@ type Tenant struct {
 	TenantRegion string `json:"region"`
 	// Time that the tenant is created.
 	StartTime time.Time `json:"-"`
+	// SSS API endpoint for the region.
+	RegionApiEndpoint string `json:"region_api_endpoint"`
+	// Users information who have access to this tenant.
+	User []User `json:"users"`
+	// Brand ID which this tenant belongs. (ex. ecl2)
+	BrandID string `json:"brand_id"`
 	// Workspace ID of the tenant.
 	WorkspaceID string `json:"workspace_id"`
+}
+
+type User struct {
+	// ID of the users who have access to this tenant.
+	UserID string `json:"user_id"`
+	// Contract which owns the tenant.
+	ContractID string `json:"contract_id"`
+	// This user is contract owner / or not.
+	ContractOwner bool `json:"contract_owner"`
 }
 
 // UnmarshalJSON creates JSON format of tenant
