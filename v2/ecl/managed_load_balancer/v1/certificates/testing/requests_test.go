@@ -47,12 +47,14 @@ func TestListCertificates(t *testing.T) {
 
 	err := certificates.List(cli, listOpts).EachPage(func(page pagination.Page) (bool, error) {
 		count++
-		_, err := certificates.ExtractCertificates(page)
+		actual, err := certificates.ExtractCertificates(page)
 		if err != nil {
 			t.Errorf("Failed to extract certificates: %v", err)
 
 			return false, err
 		}
+
+		th.CheckDeepEquals(t, listResult(), actual)
 
 		return true, nil
 	})
@@ -87,8 +89,9 @@ func TestCreateCertificate(t *testing.T) {
 		Tags:        map[string]string{"key": "value"},
 	}
 
-	_, err := certificates.Create(cli, createOpts).Extract()
+	actual, err := certificates.Create(cli, createOpts).Extract()
 
+	th.CheckDeepEquals(t, createResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -110,8 +113,9 @@ func TestShowCertificate(t *testing.T) {
 
 	cli := ServiceClient()
 
-	_, err := certificates.Show(cli, id).Extract()
+	actual, err := certificates.Show(cli, id).Extract()
 
+	th.CheckDeepEquals(t, showResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -144,8 +148,9 @@ func TestUpdateCertificate(t *testing.T) {
 		Tags:        &map[string]string{"key": "value"},
 	}
 
-	_, err := certificates.Update(cli, id, updateOpts).Extract()
+	actual, err := certificates.Update(cli, id, updateOpts).Extract()
 
+	th.CheckDeepEquals(t, updateResult(), actual)
 	th.AssertNoErr(t, err)
 }
 

@@ -47,12 +47,14 @@ func TestListTargetGroups(t *testing.T) {
 
 	err := target_groups.List(cli, listOpts).EachPage(func(page pagination.Page) (bool, error) {
 		count++
-		_, err := target_groups.ExtractTargetGroups(page)
+		actual, err := target_groups.ExtractTargetGroups(page)
 		if err != nil {
 			t.Errorf("Failed to extract target groups: %v", err)
 
 			return false, err
 		}
+
+		th.CheckDeepEquals(t, listResult(), actual)
 
 		return true, nil
 	})
@@ -94,8 +96,9 @@ func TestCreateTargetGroup(t *testing.T) {
 		Members:        &[]target_groups.CreateOptsMember{member1},
 	}
 
-	_, err := target_groups.Create(cli, createOpts).Extract()
+	actual, err := target_groups.Create(cli, createOpts).Extract()
 
+	th.CheckDeepEquals(t, createResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -118,8 +121,9 @@ func TestShowTargetGroup(t *testing.T) {
 	cli := ServiceClient()
 	showOpts := target_groups.ShowOpts{}
 
-	_, err := target_groups.Show(cli, id, showOpts).Extract()
+	actual, err := target_groups.Show(cli, id, showOpts).Extract()
 
+	th.CheckDeepEquals(t, showResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -152,8 +156,9 @@ func TestUpdateTargetGroup(t *testing.T) {
 		Tags:        &map[string]string{"key": "value"},
 	}
 
-	_, err := target_groups.Update(cli, id, updateOpts).Extract()
+	actual, err := target_groups.Update(cli, id, updateOpts).Extract()
 
+	th.CheckDeepEquals(t, updateResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -206,8 +211,9 @@ func TestCreateStagedTargetGroup(t *testing.T) {
 		Members: &[]target_groups.CreateStagedOptsMember{member1},
 	}
 
-	_, err := target_groups.CreateStaged(cli, id, createStagedOpts).Extract()
+	actual, err := target_groups.CreateStaged(cli, id, createStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, createStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -228,8 +234,9 @@ func TestShowStagedTargetGroup(t *testing.T) {
 		})
 
 	cli := ServiceClient()
-	_, err := target_groups.ShowStaged(cli, id).Extract()
+	actual, err := target_groups.ShowStaged(cli, id).Extract()
 
+	th.CheckDeepEquals(t, showStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -267,8 +274,9 @@ func TestUpdateStagedTargetGroup(t *testing.T) {
 		Members: &[]target_groups.UpdateStagedOptsMember{member1},
 	}
 
-	_, err := target_groups.UpdateStaged(cli, id, updateStagedOpts).Extract()
+	actual, err := target_groups.UpdateStaged(cli, id, updateStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, updateStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 

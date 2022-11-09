@@ -60,6 +60,13 @@ type CancelStagedResult struct {
 	eclcloud.ErrResult
 }
 
+// ConfigurationInResponse represents a configuration in a target group.
+type ConfigurationInResponse struct {
+
+	// - Members (real servers) of the target group
+	Members []MemberInResponse `json:"members,omitempty"`
+}
+
 // MemberInResponse represents a member in a target group.
 type MemberInResponse struct {
 
@@ -72,13 +79,6 @@ type MemberInResponse struct {
 	// - Weight for the member (real server)
 	// - Used when `policy.algorithm` is `"weighted-round-robin"` or `"weighted-least-connection"`
 	Weight int `json:"weight"`
-}
-
-// ConfigurationInResponse represents a configuration in a target group.
-type ConfigurationInResponse struct {
-
-	// - Members (real servers) of the target group
-	Members []MemberInResponse `json:"members,omitempty"`
 }
 
 // TargetGroup represents a target group.
@@ -133,8 +133,17 @@ type TargetGroup struct {
 	// - ID of the owner tenant of the target group
 	TenantID string `json:"tenant_id"`
 
+	// - Members (real servers) of the target group
+	Members []MemberInResponse `json:"members,omitempty"`
+
+	// - Running configurations of the target group
+	// - Return object when `changes` is `true`
+	// - Return `null` when current configuration does not exist
 	Current ConfigurationInResponse `json:"current"`
 
+	// - Added or changed configurations of the target group that waiting to be applied
+	// - Return object when `changes` is `true`
+	// - Return `null` when staged configuration does not exist
 	Staged ConfigurationInResponse `json:"staged"`
 }
 

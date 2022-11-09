@@ -47,12 +47,14 @@ func TestListHealthMonitors(t *testing.T) {
 
 	err := health_monitors.List(cli, listOpts).EachPage(func(page pagination.Page) (bool, error) {
 		count++
-		_, err := health_monitors.ExtractHealthMonitors(page)
+		actual, err := health_monitors.ExtractHealthMonitors(page)
 		if err != nil {
 			t.Errorf("Failed to extract health monitors: %v", err)
 
 			return false, err
 		}
+
+		th.CheckDeepEquals(t, listResult(), actual)
 
 		return true, nil
 	})
@@ -95,8 +97,9 @@ func TestCreateHealthMonitor(t *testing.T) {
 		LoadBalancerID: "67fea379-cff0-4191-9175-de7d6941a040",
 	}
 
-	_, err := health_monitors.Create(cli, createOpts).Extract()
+	actual, err := health_monitors.Create(cli, createOpts).Extract()
 
+	th.CheckDeepEquals(t, createResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -119,8 +122,9 @@ func TestShowHealthMonitor(t *testing.T) {
 	cli := ServiceClient()
 	showOpts := health_monitors.ShowOpts{}
 
-	_, err := health_monitors.Show(cli, id, showOpts).Extract()
+	actual, err := health_monitors.Show(cli, id, showOpts).Extract()
 
+	th.CheckDeepEquals(t, showResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -153,8 +157,9 @@ func TestUpdateHealthMonitor(t *testing.T) {
 		Tags:        &map[string]string{"key": "value"},
 	}
 
-	_, err := health_monitors.Update(cli, id, updateOpts).Extract()
+	actual, err := health_monitors.Update(cli, id, updateOpts).Extract()
 
+	th.CheckDeepEquals(t, updateResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -208,8 +213,9 @@ func TestCreateStagedHealthMonitor(t *testing.T) {
 		HttpStatusCode: "200-299",
 	}
 
-	_, err := health_monitors.CreateStaged(cli, id, createStagedOpts).Extract()
+	actual, err := health_monitors.CreateStaged(cli, id, createStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, createStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -230,8 +236,9 @@ func TestShowStagedHealthMonitor(t *testing.T) {
 		})
 
 	cli := ServiceClient()
-	_, err := health_monitors.ShowStaged(cli, id).Extract()
+	actual, err := health_monitors.ShowStaged(cli, id).Extract()
 
+	th.CheckDeepEquals(t, showStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -273,8 +280,9 @@ func TestUpdateStagedHealthMonitor(t *testing.T) {
 		HttpStatusCode: &httpStatusCode,
 	}
 
-	_, err := health_monitors.UpdateStaged(cli, id, updateStagedOpts).Extract()
+	actual, err := health_monitors.UpdateStaged(cli, id, updateStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, updateStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 

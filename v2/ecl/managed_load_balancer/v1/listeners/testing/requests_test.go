@@ -47,12 +47,14 @@ func TestListListeners(t *testing.T) {
 
 	err := listeners.List(cli, listOpts).EachPage(func(page pagination.Page) (bool, error) {
 		count++
-		_, err := listeners.ExtractListeners(page)
+		actual, err := listeners.ExtractListeners(page)
 		if err != nil {
 			t.Errorf("Failed to extract listeners: %v", err)
 
 			return false, err
 		}
+
+		th.CheckDeepEquals(t, listResult(), actual)
 
 		return true, nil
 	})
@@ -91,8 +93,9 @@ func TestCreateListener(t *testing.T) {
 		LoadBalancerID: "67fea379-cff0-4191-9175-de7d6941a040",
 	}
 
-	_, err := listeners.Create(cli, createOpts).Extract()
+	actual, err := listeners.Create(cli, createOpts).Extract()
 
+	th.CheckDeepEquals(t, createResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -115,8 +118,9 @@ func TestShowListener(t *testing.T) {
 	cli := ServiceClient()
 	showOpts := listeners.ShowOpts{}
 
-	_, err := listeners.Show(cli, id, showOpts).Extract()
+	actual, err := listeners.Show(cli, id, showOpts).Extract()
 
+	th.CheckDeepEquals(t, showResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -149,8 +153,9 @@ func TestUpdateListener(t *testing.T) {
 		Tags:        &map[string]string{"key": "value"},
 	}
 
-	_, err := listeners.Update(cli, id, updateOpts).Extract()
+	actual, err := listeners.Update(cli, id, updateOpts).Extract()
 
+	th.CheckDeepEquals(t, updateResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -200,8 +205,9 @@ func TestCreateStagedListener(t *testing.T) {
 		Protocol:  "https",
 	}
 
-	_, err := listeners.CreateStaged(cli, id, createStagedOpts).Extract()
+	actual, err := listeners.CreateStaged(cli, id, createStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, createStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -222,8 +228,9 @@ func TestShowStagedListener(t *testing.T) {
 		})
 
 	cli := ServiceClient()
-	_, err := listeners.ShowStaged(cli, id).Extract()
+	actual, err := listeners.ShowStaged(cli, id).Extract()
 
+	th.CheckDeepEquals(t, showStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -257,8 +264,9 @@ func TestUpdateStagedListener(t *testing.T) {
 		Protocol:  &protocol,
 	}
 
-	_, err := listeners.UpdateStaged(cli, id, updateStagedOpts).Extract()
+	actual, err := listeners.UpdateStaged(cli, id, updateStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, updateStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 

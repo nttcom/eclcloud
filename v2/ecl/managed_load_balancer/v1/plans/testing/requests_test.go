@@ -47,12 +47,14 @@ func TestListPlans(t *testing.T) {
 
 	err := plans.List(cli, listOpts).EachPage(func(page pagination.Page) (bool, error) {
 		count++
-		_, err := plans.ExtractPlans(page)
+		actual, err := plans.ExtractPlans(page)
 		if err != nil {
 			t.Errorf("Failed to extract plans: %v", err)
 
 			return false, err
 		}
+
+		th.CheckDeepEquals(t, listResult(), actual)
 
 		return true, nil
 	})
@@ -79,7 +81,8 @@ func TestShowPlan(t *testing.T) {
 
 	cli := ServiceClient()
 
-	_, err := plans.Show(cli, id).Extract()
+	actual, err := plans.Show(cli, id).Extract()
 
+	th.CheckDeepEquals(t, showResult(), actual)
 	th.AssertNoErr(t, err)
 }

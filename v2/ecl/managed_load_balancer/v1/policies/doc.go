@@ -35,7 +35,7 @@ Example to create a policy
 		HealthMonitorID: "dd7a96d6-4e66-4666-baca-a8555f0c472c",
 		ListenerID: "68633f4f-f52a-402f-8572-b8173418904f",
 		DefaultTargetGroupID: "a44c4072-ed90-4b50-a33a-6b38fb10c7db",
-		TlsPolicyID: "4ba79662-f2a1-41a4-a3d9-595799bbcd86",
+		TLSPolicyID: "4ba79662-f2a1-41a4-a3d9-595799bbcd86",
 		LoadBalancerID: "67fea379-cff0-4191-9175-de7d6941a040",
 	}
 
@@ -95,7 +95,7 @@ Example to create staged policy configurations
 		HealthMonitorID: "dd7a96d6-4e66-4666-baca-a8555f0c472c",
 		ListenerID: "68633f4f-f52a-402f-8572-b8173418904f",
 		DefaultTargetGroupID: "a44c4072-ed90-4b50-a33a-6b38fb10c7db",
-		TlsPolicyID: "4ba79662-f2a1-41a4-a3d9-595799bbcd86",
+		TLSPolicyID: "4ba79662-f2a1-41a4-a3d9-595799bbcd86",
 	}
 
 	id := "497f6eca-6276-4993-bfeb-53cbbbba6f08"
@@ -136,7 +136,7 @@ Example to update staged policy configurations
 		HealthMonitorID: &healthMonitorID,
 		ListenerID: &listenerID,
 		DefaultTargetGroupID: &defaultTargetGroupID,
-		TlsPolicyID: &tlsPolicyID,
+		TLSPolicyID: &tlsPolicyID,
 	}
 
 	id := "497f6eca-6276-4993-bfeb-53cbbbba6f08"

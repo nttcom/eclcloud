@@ -5,6 +5,8 @@ package testing
 
 import (
 	"fmt"
+
+	"github.com/nttcom/eclcloud/v2/ecl/managed_load_balancer/v1/load_balancers"
 )
 
 const id = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
@@ -59,6 +61,51 @@ var listResponse = fmt.Sprintf(`
         }
     ]
 }`)
+
+func listResult() []load_balancers.LoadBalancer {
+	var loadBalancer1 load_balancers.LoadBalancer
+	reservedFixedIP11 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.2",
+	}
+	reservedFixedIP12 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.3",
+	}
+	reservedFixedIP13 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.4",
+	}
+	reservedFixedIP14 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.5",
+	}
+	interface11 := load_balancers.InterfaceInResponse{
+		NetworkID:        "d6797cf4-42b9-4cad-8591-9dd91c3f0fc3",
+		VirtualIPAddress: "192.168.0.1",
+		ReservedFixedIPs: []load_balancers.ReservedFixedIPInResponse{reservedFixedIP11, reservedFixedIP12, reservedFixedIP13, reservedFixedIP14},
+	}
+	syslogServer11 := load_balancers.SyslogServerInResponse{
+		IPAddress: "192.168.0.6",
+		Port:      514,
+		Protocol:  "udp",
+	}
+
+	loadBalancer1.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	loadBalancer1.Name = "load_balancer"
+	loadBalancer1.Description = "description"
+	loadBalancer1.Tags = map[string]string{"key": "value"}
+	loadBalancer1.ConfigurationStatus = "ACTIVE"
+	loadBalancer1.MonitoringStatus = "ACTIVE"
+	loadBalancer1.OperationStatus = "COMPLETE"
+	loadBalancer1.PrimaryAvailabilityZone = "zone1_groupa"
+	loadBalancer1.SecondaryAvailabilityZone = "zone1_groupb"
+	loadBalancer1.ActiveAvailabilityZone = "zone1_groupa"
+	loadBalancer1.Revision = 1
+	loadBalancer1.PlanID = "00713021-9aea-41da-9a88-87760c08fa72"
+	loadBalancer1.PlanName = "50M_HA_4IF"
+	loadBalancer1.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	loadBalancer1.SyslogServers = []load_balancers.SyslogServerInResponse{syslogServer11}
+	loadBalancer1.Interfaces = []load_balancers.InterfaceInResponse{interface11}
+
+	return []load_balancers.LoadBalancer{loadBalancer1}
+}
 
 var createRequest = fmt.Sprintf(`
 {
@@ -122,6 +169,29 @@ var createResponse = fmt.Sprintf(`
         "interfaces": null
     }
 }`)
+
+func createResult() *load_balancers.LoadBalancer {
+	var loadBalancer load_balancers.LoadBalancer
+
+	loadBalancer.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	loadBalancer.Name = "load_balancer"
+	loadBalancer.Description = "description"
+	loadBalancer.Tags = map[string]string{"key": "value"}
+	loadBalancer.ConfigurationStatus = "CREATE_STAGED"
+	loadBalancer.MonitoringStatus = "INITIAL"
+	loadBalancer.OperationStatus = "NONE"
+	loadBalancer.PrimaryAvailabilityZone = ""
+	loadBalancer.SecondaryAvailabilityZone = ""
+	loadBalancer.ActiveAvailabilityZone = "UNDEFINED"
+	loadBalancer.Revision = 1
+	loadBalancer.PlanID = "00713021-9aea-41da-9a88-87760c08fa72"
+	loadBalancer.PlanName = "50M_HA_4IF"
+	loadBalancer.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	loadBalancer.SyslogServers = nil
+	loadBalancer.Interfaces = nil
+
+	return &loadBalancer
+}
 
 var showResponse = fmt.Sprintf(`
 {
@@ -202,6 +272,58 @@ var showResponse = fmt.Sprintf(`
     }
 }`)
 
+func showResult() *load_balancers.LoadBalancer {
+	var loadBalancer load_balancers.LoadBalancer
+	reservedFixedIP1 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.2",
+	}
+	reservedFixedIP2 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.3",
+	}
+	reservedFixedIP3 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.4",
+	}
+	reservedFixedIP4 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.5",
+	}
+	interface1 := load_balancers.InterfaceInResponse{
+		NetworkID:        "d6797cf4-42b9-4cad-8591-9dd91c3f0fc3",
+		VirtualIPAddress: "192.168.0.1",
+		ReservedFixedIPs: []load_balancers.ReservedFixedIPInResponse{reservedFixedIP1, reservedFixedIP2, reservedFixedIP3, reservedFixedIP4},
+	}
+	syslogServer1 := load_balancers.SyslogServerInResponse{
+		IPAddress: "192.168.0.6",
+		Port:      514,
+		Protocol:  "udp",
+	}
+	var staged load_balancers.ConfigurationInResponse
+	current := load_balancers.ConfigurationInResponse{
+		SyslogServers: []load_balancers.SyslogServerInResponse{syslogServer1},
+		Interfaces:    []load_balancers.InterfaceInResponse{interface1},
+	}
+
+	loadBalancer.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	loadBalancer.Name = "load_balancer"
+	loadBalancer.Description = "description"
+	loadBalancer.Tags = map[string]string{"key": "value"}
+	loadBalancer.ConfigurationStatus = "ACTIVE"
+	loadBalancer.MonitoringStatus = "ACTIVE"
+	loadBalancer.OperationStatus = "COMPLETE"
+	loadBalancer.PrimaryAvailabilityZone = "zone1_groupa"
+	loadBalancer.SecondaryAvailabilityZone = "zone1_groupb"
+	loadBalancer.ActiveAvailabilityZone = "zone1_groupa"
+	loadBalancer.Revision = 1
+	loadBalancer.PlanID = "00713021-9aea-41da-9a88-87760c08fa72"
+	loadBalancer.PlanName = "50M_HA_4IF"
+	loadBalancer.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	loadBalancer.SyslogServers = []load_balancers.SyslogServerInResponse{syslogServer1}
+	loadBalancer.Interfaces = []load_balancers.InterfaceInResponse{interface1}
+	loadBalancer.Current = current
+	loadBalancer.Staged = staged
+
+	return &loadBalancer
+}
+
 var updateRequest = fmt.Sprintf(`
 {
     "load_balancer": {
@@ -236,6 +358,29 @@ var updateResponse = fmt.Sprintf(`
         "interfaces": null
     }
 }`)
+
+func updateResult() *load_balancers.LoadBalancer {
+	var loadBalancer load_balancers.LoadBalancer
+
+	loadBalancer.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	loadBalancer.Name = "load_balancer"
+	loadBalancer.Description = "description"
+	loadBalancer.Tags = map[string]string{"key": "value"}
+	loadBalancer.ConfigurationStatus = "CREATE_STAGED"
+	loadBalancer.MonitoringStatus = "INITIAL"
+	loadBalancer.OperationStatus = "NONE"
+	loadBalancer.PrimaryAvailabilityZone = ""
+	loadBalancer.SecondaryAvailabilityZone = ""
+	loadBalancer.ActiveAvailabilityZone = "UNDEFINED"
+	loadBalancer.Revision = 1
+	loadBalancer.PlanID = "00713021-9aea-41da-9a88-87760c08fa72"
+	loadBalancer.PlanName = "50M_HA_4IF"
+	loadBalancer.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	loadBalancer.SyslogServers = nil
+	loadBalancer.Interfaces = nil
+
+	return &loadBalancer
+}
 
 var applyConfigurationsRequest = fmt.Sprintf(`
 {
@@ -320,6 +465,37 @@ var createStagedResponse = fmt.Sprintf(`
     }
 }`)
 
+func createStagedResult() *load_balancers.LoadBalancer {
+	var loadBalancer load_balancers.LoadBalancer
+	reservedFixedIP1 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.2",
+	}
+	reservedFixedIP2 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.3",
+	}
+	reservedFixedIP3 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.4",
+	}
+	reservedFixedIP4 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.5",
+	}
+	interface1 := load_balancers.InterfaceInResponse{
+		NetworkID:        "d6797cf4-42b9-4cad-8591-9dd91c3f0fc3",
+		VirtualIPAddress: "192.168.0.1",
+		ReservedFixedIPs: []load_balancers.ReservedFixedIPInResponse{reservedFixedIP1, reservedFixedIP2, reservedFixedIP3, reservedFixedIP4},
+	}
+	syslogServer1 := load_balancers.SyslogServerInResponse{
+		IPAddress: "192.168.0.6",
+		Port:      514,
+		Protocol:  "udp",
+	}
+
+	loadBalancer.SyslogServers = []load_balancers.SyslogServerInResponse{syslogServer1}
+	loadBalancer.Interfaces = []load_balancers.InterfaceInResponse{interface1}
+
+	return &loadBalancer
+}
+
 var showStagedResponse = fmt.Sprintf(`
 {
     "load_balancer": {
@@ -352,6 +528,37 @@ var showStagedResponse = fmt.Sprintf(`
         ]
     }
 }`)
+
+func showStagedResult() *load_balancers.LoadBalancer {
+	var loadBalancer load_balancers.LoadBalancer
+	reservedFixedIP1 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.2",
+	}
+	reservedFixedIP2 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.3",
+	}
+	reservedFixedIP3 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.4",
+	}
+	reservedFixedIP4 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.5",
+	}
+	interface1 := load_balancers.InterfaceInResponse{
+		NetworkID:        "d6797cf4-42b9-4cad-8591-9dd91c3f0fc3",
+		VirtualIPAddress: "192.168.0.1",
+		ReservedFixedIPs: []load_balancers.ReservedFixedIPInResponse{reservedFixedIP1, reservedFixedIP2, reservedFixedIP3, reservedFixedIP4},
+	}
+	syslogServer1 := load_balancers.SyslogServerInResponse{
+		IPAddress: "192.168.0.6",
+		Port:      514,
+		Protocol:  "udp",
+	}
+
+	loadBalancer.SyslogServers = []load_balancers.SyslogServerInResponse{syslogServer1}
+	loadBalancer.Interfaces = []load_balancers.InterfaceInResponse{interface1}
+
+	return &loadBalancer
+}
 
 var updateStagedRequest = fmt.Sprintf(`
 {
@@ -418,3 +625,34 @@ var updateStagedResponse = fmt.Sprintf(`
         ]
     }
 }`)
+
+func updateStagedResult() *load_balancers.LoadBalancer {
+	var loadBalancer load_balancers.LoadBalancer
+	reservedFixedIP1 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.2",
+	}
+	reservedFixedIP2 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.3",
+	}
+	reservedFixedIP3 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.4",
+	}
+	reservedFixedIP4 := load_balancers.ReservedFixedIPInResponse{
+		IPAddress: "192.168.0.5",
+	}
+	interface1 := load_balancers.InterfaceInResponse{
+		NetworkID:        "d6797cf4-42b9-4cad-8591-9dd91c3f0fc3",
+		VirtualIPAddress: "192.168.0.1",
+		ReservedFixedIPs: []load_balancers.ReservedFixedIPInResponse{reservedFixedIP1, reservedFixedIP2, reservedFixedIP3, reservedFixedIP4},
+	}
+	syslogServer1 := load_balancers.SyslogServerInResponse{
+		IPAddress: "192.168.0.6",
+		Port:      514,
+		Protocol:  "udp",
+	}
+
+	loadBalancer.SyslogServers = []load_balancers.SyslogServerInResponse{syslogServer1}
+	loadBalancer.Interfaces = []load_balancers.InterfaceInResponse{interface1}
+
+	return &loadBalancer
+}

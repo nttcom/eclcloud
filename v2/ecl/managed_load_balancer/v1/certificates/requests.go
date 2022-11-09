@@ -29,13 +29,13 @@ type ListOpts struct {
 	TenantID string `q:"tenant_id"`
 
 	// - CA certificate file upload status of the certificate
-	CaCertStatus string `q:"ca_cert_status"`
+	CACertStatus string `q:"ca_cert_status"`
 
 	// - SSL certificate file upload status of the certificate
-	SslCertStatus string `q:"ssl_cert_status"`
+	SSLCertStatus string `q:"ssl_cert_status"`
 
 	// - SSL key file upload status of the certificate
-	SslKeyStatus string `q:"ssl_key_status"`
+	SSLKeyStatus string `q:"ssl_key_status"`
 }
 
 // ToCertificateListQuery formats a ListOpts into a query string.

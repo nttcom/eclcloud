@@ -47,12 +47,14 @@ func TestListLoadBalancers(t *testing.T) {
 
 	err := load_balancers.List(cli, listOpts).EachPage(func(page pagination.Page) (bool, error) {
 		count++
-		_, err := load_balancers.ExtractLoadBalancers(page)
+		actual, err := load_balancers.ExtractLoadBalancers(page)
 		if err != nil {
 			t.Errorf("Failed to extract load balancers: %v", err)
 
 			return false, err
 		}
+
+		th.CheckDeepEquals(t, listResult(), actual)
 
 		return true, nil
 	})
@@ -112,8 +114,9 @@ func TestCreateLoadBalancer(t *testing.T) {
 		Interfaces:    &[]load_balancers.CreateOptsInterface{interface1},
 	}
 
-	_, err := load_balancers.Create(cli, createOpts).Extract()
+	actual, err := load_balancers.Create(cli, createOpts).Extract()
 
+	th.CheckDeepEquals(t, createResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -136,8 +139,9 @@ func TestShowLoadBalancer(t *testing.T) {
 	cli := ServiceClient()
 	showOpts := load_balancers.ShowOpts{}
 
-	_, err := load_balancers.Show(cli, id, showOpts).Extract()
+	actual, err := load_balancers.Show(cli, id, showOpts).Extract()
 
+	th.CheckDeepEquals(t, showResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -170,8 +174,9 @@ func TestUpdateLoadBalancer(t *testing.T) {
 		Tags:        &map[string]string{"key": "value"},
 	}
 
-	_, err := load_balancers.Update(cli, id, updateOpts).Extract()
+	actual, err := load_balancers.Update(cli, id, updateOpts).Extract()
 
+	th.CheckDeepEquals(t, updateResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -315,8 +320,9 @@ func TestCreateStagedLoadBalancer(t *testing.T) {
 		Interfaces:    &[]load_balancers.CreateStagedOptsInterface{interface1},
 	}
 
-	_, err := load_balancers.CreateStaged(cli, id, createStagedOpts).Extract()
+	actual, err := load_balancers.CreateStaged(cli, id, createStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, createStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -337,8 +343,9 @@ func TestShowStagedLoadBalancer(t *testing.T) {
 		})
 
 	cli := ServiceClient()
-	_, err := load_balancers.ShowStaged(cli, id).Extract()
+	actual, err := load_balancers.ShowStaged(cli, id).Extract()
 
+	th.CheckDeepEquals(t, showStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -405,8 +412,9 @@ func TestUpdateStagedLoadBalancer(t *testing.T) {
 		Interfaces:    &[]load_balancers.UpdateStagedOptsInterface{interface1},
 	}
 
-	_, err := load_balancers.UpdateStaged(cli, id, updateStagedOpts).Extract()
+	actual, err := load_balancers.UpdateStaged(cli, id, updateStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, updateStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 

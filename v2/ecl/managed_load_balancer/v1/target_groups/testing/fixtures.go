@@ -5,6 +5,8 @@ package testing
 
 import (
 	"fmt"
+
+	"github.com/nttcom/eclcloud/v2/ecl/managed_load_balancer/v1/target_groups"
 )
 
 const id = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
@@ -33,6 +35,27 @@ var listResponse = fmt.Sprintf(`
         }
     ]
 }`)
+
+func listResult() []target_groups.TargetGroup {
+	var targetGroup1 target_groups.TargetGroup
+	member11 := target_groups.MemberInResponse{
+		IPAddress: "192.168.0.7",
+		Port:      80,
+		Weight:    1,
+	}
+
+	targetGroup1.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	targetGroup1.Name = "target_group"
+	targetGroup1.Description = "description"
+	targetGroup1.Tags = map[string]string{"key": "value"}
+	targetGroup1.ConfigurationStatus = "ACTIVE"
+	targetGroup1.OperationStatus = "COMPLETE"
+	targetGroup1.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	targetGroup1.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	targetGroup1.Members = []target_groups.MemberInResponse{member11}
+
+	return []target_groups.TargetGroup{targetGroup1}
+}
 
 var createRequest = fmt.Sprintf(`
 {
@@ -70,6 +93,22 @@ var createResponse = fmt.Sprintf(`
     }
 }`)
 
+func createResult() *target_groups.TargetGroup {
+	var targetGroup target_groups.TargetGroup
+
+	targetGroup.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	targetGroup.Name = "target_group"
+	targetGroup.Description = "description"
+	targetGroup.Tags = map[string]string{"key": "value"}
+	targetGroup.ConfigurationStatus = "CREATE_STAGED"
+	targetGroup.OperationStatus = "NONE"
+	targetGroup.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	targetGroup.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	targetGroup.Members = nil
+
+	return &targetGroup
+}
+
 var showResponse = fmt.Sprintf(`
 {
     "target_group": {
@@ -103,6 +142,33 @@ var showResponse = fmt.Sprintf(`
     }
 }`)
 
+func showResult() *target_groups.TargetGroup {
+	var targetGroup target_groups.TargetGroup
+	member1 := target_groups.MemberInResponse{
+		IPAddress: "192.168.0.7",
+		Port:      80,
+		Weight:    1,
+	}
+	var staged target_groups.ConfigurationInResponse
+	current := target_groups.ConfigurationInResponse{
+		Members: []target_groups.MemberInResponse{member1},
+	}
+
+	targetGroup.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	targetGroup.Name = "target_group"
+	targetGroup.Description = "description"
+	targetGroup.Tags = map[string]string{"key": "value"}
+	targetGroup.ConfigurationStatus = "ACTIVE"
+	targetGroup.OperationStatus = "COMPLETE"
+	targetGroup.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	targetGroup.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	targetGroup.Members = []target_groups.MemberInResponse{member1}
+	targetGroup.Current = current
+	targetGroup.Staged = staged
+
+	return &targetGroup
+}
+
 var updateRequest = fmt.Sprintf(`
 {
     "target_group": {
@@ -131,6 +197,22 @@ var updateResponse = fmt.Sprintf(`
     }
 }`)
 
+func updateResult() *target_groups.TargetGroup {
+	var targetGroup target_groups.TargetGroup
+
+	targetGroup.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	targetGroup.Name = "target_group"
+	targetGroup.Description = "description"
+	targetGroup.Tags = map[string]string{"key": "value"}
+	targetGroup.ConfigurationStatus = "CREATE_STAGED"
+	targetGroup.OperationStatus = "NONE"
+	targetGroup.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	targetGroup.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	targetGroup.Members = nil
+
+	return &targetGroup
+}
+
 var createStagedRequest = fmt.Sprintf(`
 {
     "target_group": {
@@ -157,6 +239,19 @@ var createStagedResponse = fmt.Sprintf(`
     }
 }`)
 
+func createStagedResult() *target_groups.TargetGroup {
+	var targetGroup target_groups.TargetGroup
+	member1 := target_groups.MemberInResponse{
+		IPAddress: "192.168.0.7",
+		Port:      80,
+		Weight:    1,
+	}
+
+	targetGroup.Members = []target_groups.MemberInResponse{member1}
+
+	return &targetGroup
+}
+
 var showStagedResponse = fmt.Sprintf(`
 {
     "target_group": {
@@ -169,6 +264,19 @@ var showStagedResponse = fmt.Sprintf(`
         ]
     }
 }`)
+
+func showStagedResult() *target_groups.TargetGroup {
+	var targetGroup target_groups.TargetGroup
+	member1 := target_groups.MemberInResponse{
+		IPAddress: "192.168.0.7",
+		Port:      80,
+		Weight:    1,
+	}
+
+	targetGroup.Members = []target_groups.MemberInResponse{member1}
+
+	return &targetGroup
+}
 
 var updateStagedRequest = fmt.Sprintf(`
 {
@@ -195,3 +303,16 @@ var updateStagedResponse = fmt.Sprintf(`
         ]
     }
 }`)
+
+func updateStagedResult() *target_groups.TargetGroup {
+	var targetGroup target_groups.TargetGroup
+	member1 := target_groups.MemberInResponse{
+		IPAddress: "192.168.0.7",
+		Port:      80,
+		Weight:    1,
+	}
+
+	targetGroup.Members = []target_groups.MemberInResponse{member1}
+
+	return &targetGroup
+}

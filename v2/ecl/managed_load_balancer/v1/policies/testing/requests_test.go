@@ -47,12 +47,14 @@ func TestListPolicies(t *testing.T) {
 
 	err := policies.List(cli, listOpts).EachPage(func(page pagination.Page) (bool, error) {
 		count++
-		_, err := policies.ExtractPolicies(page)
+		actual, err := policies.ExtractPolicies(page)
 		if err != nil {
 			t.Errorf("Failed to extract policies: %v", err)
 
 			return false, err
 		}
+
+		th.CheckDeepEquals(t, listResult(), actual)
 
 		return true, nil
 	})
@@ -93,12 +95,13 @@ func TestCreatePolicy(t *testing.T) {
 		HealthMonitorID:      "dd7a96d6-4e66-4666-baca-a8555f0c472c",
 		ListenerID:           "68633f4f-f52a-402f-8572-b8173418904f",
 		DefaultTargetGroupID: "a44c4072-ed90-4b50-a33a-6b38fb10c7db",
-		TlsPolicyID:          "4ba79662-f2a1-41a4-a3d9-595799bbcd86",
+		TLSPolicyID:          "4ba79662-f2a1-41a4-a3d9-595799bbcd86",
 		LoadBalancerID:       "67fea379-cff0-4191-9175-de7d6941a040",
 	}
 
-	_, err := policies.Create(cli, createOpts).Extract()
+	actual, err := policies.Create(cli, createOpts).Extract()
 
+	th.CheckDeepEquals(t, createResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -121,8 +124,9 @@ func TestShowPolicy(t *testing.T) {
 	cli := ServiceClient()
 	showOpts := policies.ShowOpts{}
 
-	_, err := policies.Show(cli, id, showOpts).Extract()
+	actual, err := policies.Show(cli, id, showOpts).Extract()
 
+	th.CheckDeepEquals(t, showResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -155,8 +159,9 @@ func TestUpdatePolicy(t *testing.T) {
 		Tags:        &map[string]string{"key": "value"},
 	}
 
-	_, err := policies.Update(cli, id, updateOpts).Extract()
+	actual, err := policies.Update(cli, id, updateOpts).Extract()
 
+	th.CheckDeepEquals(t, updateResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -209,11 +214,12 @@ func TestCreateStagedPolicy(t *testing.T) {
 		HealthMonitorID:      "dd7a96d6-4e66-4666-baca-a8555f0c472c",
 		ListenerID:           "68633f4f-f52a-402f-8572-b8173418904f",
 		DefaultTargetGroupID: "a44c4072-ed90-4b50-a33a-6b38fb10c7db",
-		TlsPolicyID:          "4ba79662-f2a1-41a4-a3d9-595799bbcd86",
+		TLSPolicyID:          "4ba79662-f2a1-41a4-a3d9-595799bbcd86",
 	}
 
-	_, err := policies.CreateStaged(cli, id, createStagedOpts).Extract()
+	actual, err := policies.CreateStaged(cli, id, createStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, createStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -234,8 +240,9 @@ func TestShowStagedPolicy(t *testing.T) {
 		})
 
 	cli := ServiceClient()
-	_, err := policies.ShowStaged(cli, id).Extract()
+	actual, err := policies.ShowStaged(cli, id).Extract()
 
+	th.CheckDeepEquals(t, showStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -278,11 +285,12 @@ func TestUpdateStagedPolicy(t *testing.T) {
 		HealthMonitorID:      &healthMonitorID,
 		ListenerID:           &listenerID,
 		DefaultTargetGroupID: &defaultTargetGroupID,
-		TlsPolicyID:          &tlsPolicyID,
+		TLSPolicyID:          &tlsPolicyID,
 	}
 
-	_, err := policies.UpdateStaged(cli, id, updateStagedOpts).Extract()
+	actual, err := policies.UpdateStaged(cli, id, updateStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, updateStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 

@@ -42,22 +42,8 @@ type UploadFileResult struct {
 	eclcloud.ErrResult
 }
 
-// SslKeyInResponse represents a ssl key in a certificate.
-type SslKeyInResponse struct {
-
-	// - File upload status of the certificate
-	Status string `json:"status"`
-}
-
-// SslCertInResponse represents a ssl cert in a certificate.
-type SslCertInResponse struct {
-
-	// - File upload status of the certificate
-	Status string `json:"status"`
-}
-
-// CaCertInResponse represents a ca cert in a certificate.
-type CaCertInResponse struct {
+// FileInResponse represents a file in a certificate.
+type FileInResponse struct {
 
 	// - File upload status of the certificate
 	Status string `json:"status"`
@@ -81,11 +67,14 @@ type Certificate struct {
 	// - ID of the owner tenant of the certificate
 	TenantID string `json:"tenant_id"`
 
-	CaCert CaCertInResponse `json:"ca_cert"`
+	// - CA certificate file of the certificate
+	CACert FileInResponse `json:"ca_cert"`
 
-	SslCert SslCertInResponse `json:"ssl_cert"`
+	// - SSL certificate file of the certificate
+	SSLCert FileInResponse `json:"ssl_cert"`
 
-	SslKey SslKeyInResponse `json:"ssl_key"`
+	// - SSL key file of the certificate
+	SSLKey FileInResponse `json:"ssl_key"`
 }
 
 // ExtractInto interprets any commonResult as a certificate, if possible.

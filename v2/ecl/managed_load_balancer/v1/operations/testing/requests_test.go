@@ -47,12 +47,14 @@ func TestListOperations(t *testing.T) {
 
 	err := operations.List(cli, listOpts).EachPage(func(page pagination.Page) (bool, error) {
 		count++
-		_, err := operations.ExtractOperations(page)
+		actual, err := operations.ExtractOperations(page)
 		if err != nil {
 			t.Errorf("Failed to extract operations: %v", err)
 
 			return false, err
 		}
+
+		th.CheckDeepEquals(t, listResult(), actual)
 
 		return true, nil
 	})
@@ -79,7 +81,8 @@ func TestShowOperation(t *testing.T) {
 
 	cli := ServiceClient()
 
-	_, err := operations.Show(cli, id).Extract()
+	actual, err := operations.Show(cli, id).Extract()
 
+	th.CheckDeepEquals(t, showResult(), actual)
 	th.AssertNoErr(t, err)
 }

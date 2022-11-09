@@ -125,8 +125,23 @@ type Listener struct {
 	// - ID of the owner tenant of the listener
 	TenantID string `json:"tenant_id"`
 
+	// - IP address of the listener for listening
+	IPAddress string `json:"ip_address,omitempty"`
+
+	// - Port number of the listener for listening
+	Port int `json:"port,omitempty"`
+
+	// - Protocol of the listener for listening
+	Protocol string `json:"protocol,omitempty"`
+
+	// - Running configurations of the listener
+	// - Return object when `changes` is `true`
+	// - Return `null` when current configuration does not exist
 	Current ConfigurationInResponse `json:"current"`
 
+	// - Added or changed configurations of the listener that waiting to be applied
+	// - Return object when `changes` is `true`
+	// - Return `null` when staged configuration does not exist
 	Staged ConfigurationInResponse `json:"staged"`
 }
 

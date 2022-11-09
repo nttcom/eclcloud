@@ -74,6 +74,22 @@ type ReservedFixedIPInResponse struct {
 	IPAddress string `json:"ip_address"`
 }
 
+// ConfigurationInResponse represents a configuration in a load balancer.
+type ConfigurationInResponse struct {
+
+	// - Syslog servers to which access logs are transferred
+	// - Only access logs to listeners which `protocol` is either `"http"` or `"https"` are transferred
+	//   - When `protocol` of `syslog_servers` is `"tcp"`
+	//     - Access logs are transferred to all healthy syslog servers specified in `syslog_servers`
+	//   - When `protocol` of `syslog_servers` is `"udp"`
+	//     - Access logs are transferred to the syslog server specified first in `syslog_servers` as long as it is healthy
+	//     - Access logs are transferred to the syslog server specified second (last) in `syslog_servers` when the first syslog server is not healthy
+	SyslogServers []SyslogServerInResponse `json:"syslog_servers,omitempty"`
+
+	// - Interfaces that attached to the load balancer
+	Interfaces []InterfaceInResponse `json:"interfaces,omitempty"`
+}
+
 // InterfaceInResponse represents a interface in a load balancer.
 type InterfaceInResponse struct {
 
@@ -100,22 +116,6 @@ type SyslogServerInResponse struct {
 
 	// - Protocol of the syslog server
 	Protocol string `json:"protocol"`
-}
-
-// ConfigurationInResponse represents a configuration in a load balancer.
-type ConfigurationInResponse struct {
-
-	// - Syslog servers to which access logs are transferred
-	// - Only access logs to listeners which `protocol` is either `"http"` or `"https"` are transferred
-	//   - When `protocol` of `syslog_servers` is `"tcp"`
-	//     - Access logs are transferred to all healthy syslog servers specified in `syslog_servers`
-	//   - When `protocol` of `syslog_servers` is `"udp"`
-	//     - Access logs are transferred to the syslog server specified first in `syslog_servers` as long as it is healthy
-	//     - Access logs are transferred to the syslog server specified second (last) in `syslog_servers` when the first syslog server is not healthy
-	SyslogServers []SyslogServerInResponse `json:"syslog_servers,omitempty"`
-
-	// - Interfaces that attached to the load balancer
-	Interfaces []InterfaceInResponse `json:"interfaces,omitempty"`
 }
 
 // LoadBalancer represents a load balancer.
@@ -193,8 +193,26 @@ type LoadBalancer struct {
 	// - ID of the owner tenant of the load balancer
 	TenantID string `json:"tenant_id"`
 
+	// - Syslog servers to which access logs are transferred
+	// - Only access logs to listeners which `protocol` is either `"http"` or `"https"` are transferred
+	//   - When `protocol` of `syslog_servers` is `"tcp"`
+	//     - Access logs are transferred to all healthy syslog servers specified in `syslog_servers`
+	//   - When `protocol` of `syslog_servers` is `"udp"`
+	//     - Access logs are transferred to the syslog server specified first in `syslog_servers` as long as it is healthy
+	//     - Access logs are transferred to the syslog server specified second (last) in `syslog_servers` when the first syslog server is not healthy
+	SyslogServers []SyslogServerInResponse `json:"syslog_servers,omitempty"`
+
+	// - Interfaces that attached to the load balancer
+	Interfaces []InterfaceInResponse `json:"interfaces,omitempty"`
+
+	// - Running configurations of the load balancer
+	// - Return object when `changes` is `true`
+	// - Return `null` when current configuration does not exist
 	Current ConfigurationInResponse `json:"current"`
 
+	// - Added or changed configurations of the load balancer that waiting to be applied
+	// - Return object when `changes` is `true`
+	// - Return `null` when staged configuration does not exist
 	Staged ConfigurationInResponse `json:"staged"`
 }
 

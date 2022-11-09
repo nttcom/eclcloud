@@ -5,6 +5,8 @@ package testing
 
 import (
 	"fmt"
+
+	"github.com/nttcom/eclcloud/v2/ecl/managed_load_balancer/v1/listeners"
 )
 
 const id = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
@@ -29,6 +31,24 @@ var listResponse = fmt.Sprintf(`
         }
     ]
 }`)
+
+func listResult() []listeners.Listener {
+	var listener1 listeners.Listener
+
+	listener1.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	listener1.Name = "listener"
+	listener1.Description = "description"
+	listener1.Tags = map[string]string{"key": "value"}
+	listener1.ConfigurationStatus = "ACTIVE"
+	listener1.OperationStatus = "COMPLETE"
+	listener1.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	listener1.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	listener1.IPAddress = "10.0.0.1"
+	listener1.Port = 443
+	listener1.Protocol = "https"
+
+	return []listeners.Listener{listener1}
+}
 
 var createRequest = fmt.Sprintf(`
 {
@@ -64,6 +84,24 @@ var createResponse = fmt.Sprintf(`
     }
 }`)
 
+func createResult() *listeners.Listener {
+	var listener listeners.Listener
+
+	listener.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	listener.Name = "listener"
+	listener.Description = "description"
+	listener.Tags = map[string]string{"key": "value"}
+	listener.ConfigurationStatus = "CREATE_STAGED"
+	listener.OperationStatus = "NONE"
+	listener.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	listener.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	listener.IPAddress = ""
+	listener.Port = 0
+	listener.Protocol = ""
+
+	return &listener
+}
+
 var showResponse = fmt.Sprintf(`
 {
     "listener": {
@@ -88,6 +126,32 @@ var showResponse = fmt.Sprintf(`
         "staged": null
     }
 }`)
+
+func showResult() *listeners.Listener {
+	var listener listeners.Listener
+	var staged listeners.ConfigurationInResponse
+	current := listeners.ConfigurationInResponse{
+		IPAddress: "10.0.0.1",
+		Port:      443,
+		Protocol:  "https",
+	}
+
+	listener.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	listener.Name = "listener"
+	listener.Description = "description"
+	listener.Tags = map[string]string{"key": "value"}
+	listener.ConfigurationStatus = "ACTIVE"
+	listener.OperationStatus = "COMPLETE"
+	listener.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	listener.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	listener.IPAddress = "10.0.0.1"
+	listener.Port = 443
+	listener.Protocol = "https"
+	listener.Current = current
+	listener.Staged = staged
+
+	return &listener
+}
 
 var updateRequest = fmt.Sprintf(`
 {
@@ -119,6 +183,24 @@ var updateResponse = fmt.Sprintf(`
     }
 }`)
 
+func updateResult() *listeners.Listener {
+	var listener listeners.Listener
+
+	listener.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	listener.Name = "listener"
+	listener.Description = "description"
+	listener.Tags = map[string]string{"key": "value"}
+	listener.ConfigurationStatus = "CREATE_STAGED"
+	listener.OperationStatus = "NONE"
+	listener.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	listener.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	listener.IPAddress = ""
+	listener.Port = 0
+	listener.Protocol = ""
+
+	return &listener
+}
+
 var createStagedRequest = fmt.Sprintf(`
 {
     "listener": {
@@ -137,6 +219,16 @@ var createStagedResponse = fmt.Sprintf(`
     }
 }`)
 
+func createStagedResult() *listeners.Listener {
+	var listener listeners.Listener
+
+	listener.IPAddress = "10.0.0.1"
+	listener.Port = 443
+	listener.Protocol = "https"
+
+	return &listener
+}
+
 var showStagedResponse = fmt.Sprintf(`
 {
     "listener": {
@@ -145,6 +237,16 @@ var showStagedResponse = fmt.Sprintf(`
         "protocol": "https"
     }
 }`)
+
+func showStagedResult() *listeners.Listener {
+	var listener listeners.Listener
+
+	listener.IPAddress = "10.0.0.1"
+	listener.Port = 443
+	listener.Protocol = "https"
+
+	return &listener
+}
 
 var updateStagedRequest = fmt.Sprintf(`
 {
@@ -163,3 +265,13 @@ var updateStagedResponse = fmt.Sprintf(`
         "protocol": "https"
     }
 }`)
+
+func updateStagedResult() *listeners.Listener {
+	var listener listeners.Listener
+
+	listener.IPAddress = "10.0.0.1"
+	listener.Port = 443
+	listener.Protocol = "https"
+
+	return &listener
+}

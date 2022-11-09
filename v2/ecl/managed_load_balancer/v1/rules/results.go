@@ -60,13 +60,6 @@ type CancelStagedResult struct {
 	eclcloud.ErrResult
 }
 
-// ConditionInResponse represents a condition in a rule.
-type ConditionInResponse struct {
-
-	// - URL path patterns (regular expressions) of the condition
-	PathPatterns []string `json:"path_patterns"`
-}
-
 // ConfigurationInResponse represents a configuration in a rule.
 type ConfigurationInResponse struct {
 
@@ -76,7 +69,15 @@ type ConfigurationInResponse struct {
 	// - ID of the target group that assigned to the rule
 	TargetGroupID string `json:"target_group_id,omitempty"`
 
+	// - Conditions of the rules to distribute accesses to the target groups
 	Conditions ConditionInResponse `json:"conditions"`
+}
+
+// ConditionInResponse represents a condition in a rule.
+type ConditionInResponse struct {
+
+	// - URL path patterns (regular expressions) of the condition
+	PathPatterns []string `json:"path_patterns"`
 }
 
 // Rule represents a rule.
@@ -134,8 +135,23 @@ type Rule struct {
 	// - ID of the owner tenant of the rule
 	TenantID string `json:"tenant_id"`
 
+	// - Priority of the rule
+	Priority int `json:"priority,omitempty"`
+
+	// - ID of the target group that assigned to the rule
+	TargetGroupID string `json:"target_group_id,omitempty"`
+
+	// - Conditions of the rules to distribute accesses to the target groups
+	Conditions ConditionInResponse `json:"conditions"`
+
+	// - Running configurations of the rule
+	// - Return object when `changes` is `true`
+	// - Return `null` when current configuration does not exist
 	Current ConfigurationInResponse `json:"current"`
 
+	// - Added or changed configurations of the rule that waiting to be applied
+	// - Return object when `changes` is `true`
+	// - Return `null` when staged configuration does not exist
 	Staged ConfigurationInResponse `json:"staged"`
 }
 

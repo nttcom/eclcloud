@@ -122,8 +122,17 @@ type Route struct {
 	// - ID of the owner tenant of the (static) route
 	TenantID string `json:"tenant_id"`
 
+	// - IP address of next hop for the (static) route
+	NextHopIPAddress string `json:"next_hop_ip_address,omitempty"`
+
+	// - Running configurations of the (static) route
+	// - Return object when `changes` is `true`
+	// - Return `null` when current configuration does not exist
 	Current ConfigurationInResponse `json:"current"`
 
+	// - Added or changed configurations of the (static) route that waiting to be applied
+	// - Return object when `changes` is `true`
+	// - Return `null` when staged configuration does not exist
 	Staged ConfigurationInResponse `json:"staged"`
 }
 

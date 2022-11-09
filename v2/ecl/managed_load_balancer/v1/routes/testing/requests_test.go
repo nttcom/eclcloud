@@ -47,12 +47,14 @@ func TestListRoutes(t *testing.T) {
 
 	err := routes.List(cli, listOpts).EachPage(func(page pagination.Page) (bool, error) {
 		count++
-		_, err := routes.ExtractRoutes(page)
+		actual, err := routes.ExtractRoutes(page)
 		if err != nil {
 			t.Errorf("Failed to extract routes: %v", err)
 
 			return false, err
 		}
+
+		th.CheckDeepEquals(t, listResult(), actual)
 
 		return true, nil
 	})
@@ -90,8 +92,9 @@ func TestCreateRoute(t *testing.T) {
 		LoadBalancerID:   "67fea379-cff0-4191-9175-de7d6941a040",
 	}
 
-	_, err := routes.Create(cli, createOpts).Extract()
+	actual, err := routes.Create(cli, createOpts).Extract()
 
+	th.CheckDeepEquals(t, createResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -114,8 +117,9 @@ func TestShowRoute(t *testing.T) {
 	cli := ServiceClient()
 	showOpts := routes.ShowOpts{}
 
-	_, err := routes.Show(cli, id, showOpts).Extract()
+	actual, err := routes.Show(cli, id, showOpts).Extract()
 
+	th.CheckDeepEquals(t, showResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -148,8 +152,9 @@ func TestUpdateRoute(t *testing.T) {
 		Tags:        &map[string]string{"key": "value"},
 	}
 
-	_, err := routes.Update(cli, id, updateOpts).Extract()
+	actual, err := routes.Update(cli, id, updateOpts).Extract()
 
+	th.CheckDeepEquals(t, updateResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -197,8 +202,9 @@ func TestCreateStagedRoute(t *testing.T) {
 		NextHopIPAddress: "192.168.0.254",
 	}
 
-	_, err := routes.CreateStaged(cli, id, createStagedOpts).Extract()
+	actual, err := routes.CreateStaged(cli, id, createStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, createStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -219,8 +225,9 @@ func TestShowStagedRoute(t *testing.T) {
 		})
 
 	cli := ServiceClient()
-	_, err := routes.ShowStaged(cli, id).Extract()
+	actual, err := routes.ShowStaged(cli, id).Extract()
 
+	th.CheckDeepEquals(t, showStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -250,8 +257,9 @@ func TestUpdateStagedRoute(t *testing.T) {
 		NextHopIPAddress: &nextHopIPAddress,
 	}
 
-	_, err := routes.UpdateStaged(cli, id, updateStagedOpts).Extract()
+	actual, err := routes.UpdateStaged(cli, id, updateStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, updateStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 

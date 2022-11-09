@@ -95,7 +95,7 @@ type ConfigurationInResponse struct {
 
 	// - ID of the TLS policy that assigned to the policy
 	// - Returns `""` when protocol is not `"https"`
-	TlsPolicyID string `json:"tls_policy_id,omitempty"`
+	TLSPolicyID string `json:"tls_policy_id,omitempty"`
 }
 
 // Policy represents a policy.
@@ -150,8 +150,48 @@ type Policy struct {
 	// - ID of the owner tenant of the policy
 	TenantID string `json:"tenant_id"`
 
+	// - Load balancing algorithm (method) of the policy
+	Algorithm string `json:"algorithm,omitempty"`
+
+	// - Persistence setting of the policy
+	// - `"cookie"` is used when `listener.protocol` is `"http"` or `"https"`
+	Persistence string `json:"persistence,omitempty"`
+
+	// - URL of the sorry page to which accesses are redirected when all members in the target group are down
+	// - Returns `""` when protocol is not `"http"` or `"https"`
+	SorryPageUrl string `json:"sorry_page_url,omitempty"`
+
+	// - Source NAT setting of the policy
+	// - When `source_nat` is `"enable"` and `listener.protocol` is `"http"` or `"https"` ,
+	//   - The source IP address of the request is replaced with `virtual_ip_address` which is assigned to the interface from which the request was sent
+	//   - `X-Forwarded-For` header with the IP address of the client is added
+	SourceNat string `json:"source_nat,omitempty"`
+
+	// - ID of the certificate that assigned to the policy
+	// - Returns `""` when protocol is not `"https"`
+	CertificateID string `json:"certificate_id,omitempty"`
+
+	// - ID of the health monitor that assigned to the policy
+	HealthMonitorID string `json:"health_monitor_id,omitempty"`
+
+	// - ID of the listener that assigned to the policy
+	ListenerID string `json:"listener_id,omitempty"`
+
+	// - ID of the default target group that assigned to the policy
+	DefaultTargetGroupID string `json:"default_target_group_id,omitempty"`
+
+	// - ID of the TLS policy that assigned to the policy
+	// - Returns `""` when protocol is not `"https"`
+	TLSPolicyID string `json:"tls_policy_id,omitempty"`
+
+	// - Running configurations of the policy
+	// - Return object when `changes` is `true`
+	// - Return `null` when current configuration does not exist
 	Current ConfigurationInResponse `json:"current"`
 
+	// - Added or changed configurations of the policy that waiting to be applied
+	// - Return object when `changes` is `true`
+	// - Return `null` when staged configuration does not exist
 	Staged ConfigurationInResponse `json:"staged"`
 }
 

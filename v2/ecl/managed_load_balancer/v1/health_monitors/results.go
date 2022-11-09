@@ -143,8 +143,41 @@ type HealthMonitor struct {
 	// - ID of the owner tenant of the health monitor
 	TenantID string `json:"tenant_id"`
 
+	// - Port number of the health monitor for healthchecking
+	// - Returns `0` when `protocol` is `"icmp"`
+	Port int `json:"port,omitempty"`
+
+	// - Protocol of the health monitor for healthchecking
+	Protocol string `json:"protocol,omitempty"`
+
+	// - Interval of healthchecking (in seconds)
+	Interval int `json:"interval,omitempty"`
+
+	// - Retry count of healthchecking
+	// - Initial monitoring is not included
+	// - Retry is executed at the interval specified by `interval`
+	Retry int `json:"retry,omitempty"`
+
+	// - Timeout of healthchecking (in seconds)
+	Timeout int `json:"timeout,omitempty"`
+
+	// - URL path of healthchecking
+	// - Used when `protocol` is `"http"` or `"https"`
+	Path string `json:"path,omitempty"`
+
+	// - HTTP status codes expected in healthchecking
+	// - Used when `protocol` is `"http"` or `"https"`
+	// - Format: `"xxx"` or `"xxx-xxx"` ( `xxx` between [100, 599])
+	HttpStatusCode string `json:"http_status_code,omitempty"`
+
+	// - Running configurations of the health monitor
+	// - Return object when `changes` is `true`
+	// - Return `null` when current configuration does not exist
 	Current ConfigurationInResponse `json:"current"`
 
+	// - Added or changed configurations of the health monitor that waiting to be applied
+	// - Return object when `changes` is `true`
+	// - Return `null` when staged configuration does not exist
 	Staged ConfigurationInResponse `json:"staged"`
 }
 

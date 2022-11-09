@@ -47,12 +47,14 @@ func TestListRules(t *testing.T) {
 
 	err := rules.List(cli, listOpts).EachPage(func(page pagination.Page) (bool, error) {
 		count++
-		_, err := rules.ExtractRules(page)
+		actual, err := rules.ExtractRules(page)
 		if err != nil {
 			t.Errorf("Failed to extract rules: %v", err)
 
 			return false, err
 		}
+
+		th.CheckDeepEquals(t, listResult(), actual)
 
 		return true, nil
 	})
@@ -94,8 +96,9 @@ func TestCreateRule(t *testing.T) {
 		Conditions:    &condition,
 	}
 
-	_, err := rules.Create(cli, createOpts).Extract()
+	actual, err := rules.Create(cli, createOpts).Extract()
 
+	th.CheckDeepEquals(t, createResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -118,8 +121,9 @@ func TestShowRule(t *testing.T) {
 	cli := ServiceClient()
 	showOpts := rules.ShowOpts{}
 
-	_, err := rules.Show(cli, id, showOpts).Extract()
+	actual, err := rules.Show(cli, id, showOpts).Extract()
 
+	th.CheckDeepEquals(t, showResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -152,8 +156,9 @@ func TestUpdateRule(t *testing.T) {
 		Tags:        &map[string]string{"key": "value"},
 	}
 
-	_, err := rules.Update(cli, id, updateOpts).Extract()
+	actual, err := rules.Update(cli, id, updateOpts).Extract()
 
+	th.CheckDeepEquals(t, updateResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -206,8 +211,9 @@ func TestCreateStagedRule(t *testing.T) {
 		Conditions:    &condition,
 	}
 
-	_, err := rules.CreateStaged(cli, id, createStagedOpts).Extract()
+	actual, err := rules.CreateStaged(cli, id, createStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, createStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -228,8 +234,9 @@ func TestShowStagedRule(t *testing.T) {
 		})
 
 	cli := ServiceClient()
-	_, err := rules.ShowStaged(cli, id).Extract()
+	actual, err := rules.ShowStaged(cli, id).Extract()
 
+	th.CheckDeepEquals(t, showStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 
@@ -266,8 +273,9 @@ func TestUpdateStagedRule(t *testing.T) {
 		Conditions:    &condition,
 	}
 
-	_, err := rules.UpdateStaged(cli, id, updateStagedOpts).Extract()
+	actual, err := rules.UpdateStaged(cli, id, updateStagedOpts).Extract()
 
+	th.CheckDeepEquals(t, updateStagedResult(), actual)
 	th.AssertNoErr(t, err)
 }
 

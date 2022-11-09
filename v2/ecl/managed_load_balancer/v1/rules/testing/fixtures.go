@@ -5,6 +5,8 @@ package testing
 
 import (
 	"fmt"
+
+	"github.com/nttcom/eclcloud/v2/ecl/managed_load_balancer/v1/rules"
 )
 
 const id = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
@@ -34,6 +36,28 @@ var listResponse = fmt.Sprintf(`
         }
     ]
 }`)
+
+func listResult() []rules.Rule {
+	var rule1 rules.Rule
+	condition1 := rules.ConditionInResponse{
+		PathPatterns: []string{"^/statics/"},
+	}
+
+	rule1.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	rule1.Name = "rule"
+	rule1.Description = "description"
+	rule1.Tags = map[string]string{"key": "value"}
+	rule1.ConfigurationStatus = "ACTIVE"
+	rule1.OperationStatus = "COMPLETE"
+	rule1.PolicyID = "fcb520e5-858d-4f9f-bc6c-7bd225fe7cf4"
+	rule1.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	rule1.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	rule1.Priority = 1
+	rule1.TargetGroupID = "29527a3c-9e5d-48b7-868f-6442c7d21a95"
+	rule1.Conditions = condition1
+
+	return []rules.Rule{rule1}
+}
 
 var createRequest = fmt.Sprintf(`
 {
@@ -74,6 +98,26 @@ var createResponse = fmt.Sprintf(`
     }
 }`)
 
+func createResult() *rules.Rule {
+	var rule rules.Rule
+	var condition rules.ConditionInResponse
+
+	rule.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	rule.Name = "rule"
+	rule.Description = "description"
+	rule.Tags = map[string]string{"key": "value"}
+	rule.ConfigurationStatus = "CREATE_STAGED"
+	rule.OperationStatus = "NONE"
+	rule.PolicyID = "fcb520e5-858d-4f9f-bc6c-7bd225fe7cf4"
+	rule.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	rule.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	rule.Priority = 0
+	rule.TargetGroupID = ""
+	rule.Conditions = condition
+
+	return &rule
+}
+
 var showResponse = fmt.Sprintf(`
 {
     "rule": {
@@ -108,6 +152,36 @@ var showResponse = fmt.Sprintf(`
     }
 }`)
 
+func showResult() *rules.Rule {
+	var rule rules.Rule
+	condition := rules.ConditionInResponse{
+		PathPatterns: []string{"^/statics/"},
+	}
+	var staged rules.ConfigurationInResponse
+	current := rules.ConfigurationInResponse{
+		Priority:      1,
+		TargetGroupID: "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+		Conditions:    condition,
+	}
+
+	rule.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	rule.Name = "rule"
+	rule.Description = "description"
+	rule.Tags = map[string]string{"key": "value"}
+	rule.ConfigurationStatus = "ACTIVE"
+	rule.OperationStatus = "COMPLETE"
+	rule.PolicyID = "fcb520e5-858d-4f9f-bc6c-7bd225fe7cf4"
+	rule.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	rule.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	rule.Priority = 1
+	rule.TargetGroupID = "29527a3c-9e5d-48b7-868f-6442c7d21a95"
+	rule.Conditions = condition
+	rule.Current = current
+	rule.Staged = staged
+
+	return &rule
+}
+
 var updateRequest = fmt.Sprintf(`
 {
     "rule": {
@@ -139,6 +213,26 @@ var updateResponse = fmt.Sprintf(`
     }
 }`)
 
+func updateResult() *rules.Rule {
+	var rule rules.Rule
+	var condition rules.ConditionInResponse
+
+	rule.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	rule.Name = "rule"
+	rule.Description = "description"
+	rule.Tags = map[string]string{"key": "value"}
+	rule.ConfigurationStatus = "CREATE_STAGED"
+	rule.OperationStatus = "NONE"
+	rule.PolicyID = "fcb520e5-858d-4f9f-bc6c-7bd225fe7cf4"
+	rule.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	rule.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	rule.Priority = 0
+	rule.TargetGroupID = ""
+	rule.Conditions = condition
+
+	return &rule
+}
+
 var createStagedRequest = fmt.Sprintf(`
 {
     "rule": {
@@ -165,6 +259,19 @@ var createStagedResponse = fmt.Sprintf(`
     }
 }`)
 
+func createStagedResult() *rules.Rule {
+	var rule rules.Rule
+	condition := rules.ConditionInResponse{
+		PathPatterns: []string{"^/statics/"},
+	}
+
+	rule.Priority = 1
+	rule.TargetGroupID = "29527a3c-9e5d-48b7-868f-6442c7d21a95"
+	rule.Conditions = condition
+
+	return &rule
+}
+
 var showStagedResponse = fmt.Sprintf(`
 {
     "rule": {
@@ -177,6 +284,19 @@ var showStagedResponse = fmt.Sprintf(`
         }
     }
 }`)
+
+func showStagedResult() *rules.Rule {
+	var rule rules.Rule
+	condition := rules.ConditionInResponse{
+		PathPatterns: []string{"^/statics/"},
+	}
+
+	rule.Priority = 1
+	rule.TargetGroupID = "29527a3c-9e5d-48b7-868f-6442c7d21a95"
+	rule.Conditions = condition
+
+	return &rule
+}
 
 var updateStagedRequest = fmt.Sprintf(`
 {
@@ -203,3 +323,16 @@ var updateStagedResponse = fmt.Sprintf(`
         }
     }
 }`)
+
+func updateStagedResult() *rules.Rule {
+	var rule rules.Rule
+	condition := rules.ConditionInResponse{
+		PathPatterns: []string{"^/statics/"},
+	}
+
+	rule.Priority = 1
+	rule.TargetGroupID = "29527a3c-9e5d-48b7-868f-6442c7d21a95"
+	rule.Conditions = condition
+
+	return &rule
+}

@@ -57,7 +57,7 @@ type ListOpts struct {
 	DefaultTargetGroupID string `q:"default_target_group_id"`
 
 	// - ID of the TLS policy that assigned to the policy
-	TlsPolicyID string `q:"tls_policy_id"`
+	TLSPolicyID string `q:"tls_policy_id"`
 
 	// - ID of the load balancer which the resource belongs to
 	LoadBalancerID string `q:"load_balancer_id"`
@@ -155,7 +155,7 @@ type CreateOpts struct {
 	// - ID of the TLS policy that assigned to the policy
 	// - Can be specified or will be set `tls_policy.id` which `default` is `true` when `listener.protocol` is `"https"`
 	// - Must not be specified or be specified as `""` when `listener.protocol` is not `"https"`
-	TlsPolicyID string `json:"tls_policy_id,omitempty"`
+	TLSPolicyID string `json:"tls_policy_id,omitempty"`
 
 	// - ID of the load balancer which the policy belongs to
 	LoadBalancerID string `json:"load_balancer_id"`
@@ -334,7 +334,7 @@ type CreateStagedOpts struct {
 	// - Can be specified or will be set `tls_policy.id` which `default` is `true` when `listener.protocol` is `"https"`
 	// - Must not be specified or be specified as `""` when `listener.protocol` is not `"https"`
 	//   - Must be specified as `""` when changing `listener.protocol` from `"https"` to others
-	TlsPolicyID string `json:"tls_policy_id,omitempty"`
+	TLSPolicyID string `json:"tls_policy_id,omitempty"`
 }
 
 // ToPolicyCreateStagedMap builds a request body from CreateStagedOpts.
@@ -427,7 +427,7 @@ type UpdateStagedOpts struct {
 	// - Can be specified or will be set `tls_policy.id` which `default` is `true` when `listener.protocol` is `"https"`
 	// - Must not be specified or be specified as `""` when `listener.protocol` is not `"https"`
 	//   - Must be specified as `""` when changing `listener.protocol` from `"https"` to others
-	TlsPolicyID *string `json:"tls_policy_id,omitempty"`
+	TLSPolicyID *string `json:"tls_policy_id,omitempty"`
 }
 
 // ToPolicyUpdateStagedMap builds a request body from UpdateStagedOpts.

@@ -34,10 +34,10 @@ type TLSPolicy struct {
 	Default bool `json:"default"`
 
 	// - The list of acceptable TLS protocols in the policy that specifed this TLS policty
-	TlsProtocols []string `json:"tls_protocols"`
+	TLSProtocols []string `json:"tls_protocols"`
 
 	// - The list of acceptable TLS ciphers in the policy that specifed this TLS policty
-	TlsCiphers []string `json:"tls_ciphers"`
+	TLSCiphers []string `json:"tls_ciphers"`
 }
 
 // ExtractInto interprets any commonResult as a tls policy, if possible.

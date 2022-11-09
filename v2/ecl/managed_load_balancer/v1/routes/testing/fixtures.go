@@ -5,6 +5,8 @@ package testing
 
 import (
 	"fmt"
+
+	"github.com/nttcom/eclcloud/v2/ecl/managed_load_balancer/v1/routes"
 )
 
 const id = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
@@ -28,6 +30,23 @@ var listResponse = fmt.Sprintf(`
         }
     ]
 }`)
+
+func listResult() []routes.Route {
+	var route1 routes.Route
+
+	route1.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	route1.Name = "route"
+	route1.Description = "description"
+	route1.Tags = map[string]string{"key": "value"}
+	route1.ConfigurationStatus = "ACTIVE"
+	route1.OperationStatus = "COMPLETE"
+	route1.DestinationCidr = "172.16.0.0/24"
+	route1.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	route1.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	route1.NextHopIPAddress = "192.168.0.254"
+
+	return []routes.Route{route1}
+}
 
 var createRequest = fmt.Sprintf(`
 {
@@ -61,6 +80,23 @@ var createResponse = fmt.Sprintf(`
     }
 }`)
 
+func createResult() *routes.Route {
+	var route routes.Route
+
+	route.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	route.Name = "route"
+	route.Description = "description"
+	route.Tags = map[string]string{"key": "value"}
+	route.ConfigurationStatus = "CREATE_STAGED"
+	route.OperationStatus = "NONE"
+	route.DestinationCidr = "172.16.0.0/24"
+	route.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	route.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	route.NextHopIPAddress = ""
+
+	return &route
+}
+
 var showResponse = fmt.Sprintf(`
 {
     "route": {
@@ -82,6 +118,29 @@ var showResponse = fmt.Sprintf(`
         "staged": null
     }
 }`)
+
+func showResult() *routes.Route {
+	var route routes.Route
+	var staged routes.ConfigurationInResponse
+	current := routes.ConfigurationInResponse{
+		NextHopIPAddress: "192.168.0.254",
+	}
+
+	route.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	route.Name = "route"
+	route.Description = "description"
+	route.Tags = map[string]string{"key": "value"}
+	route.ConfigurationStatus = "ACTIVE"
+	route.OperationStatus = "COMPLETE"
+	route.DestinationCidr = "172.16.0.0/24"
+	route.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	route.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	route.NextHopIPAddress = "192.168.0.254"
+	route.Current = current
+	route.Staged = staged
+
+	return &route
+}
 
 var updateRequest = fmt.Sprintf(`
 {
@@ -112,6 +171,23 @@ var updateResponse = fmt.Sprintf(`
     }
 }`)
 
+func updateResult() *routes.Route {
+	var route routes.Route
+
+	route.ID = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+	route.Name = "route"
+	route.Description = "description"
+	route.Tags = map[string]string{"key": "value"}
+	route.ConfigurationStatus = "CREATE_STAGED"
+	route.OperationStatus = "NONE"
+	route.DestinationCidr = "172.16.0.0/24"
+	route.LoadBalancerID = "67fea379-cff0-4191-9175-de7d6941a040"
+	route.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
+	route.NextHopIPAddress = ""
+
+	return &route
+}
+
 var createStagedRequest = fmt.Sprintf(`
 {
     "route": {
@@ -126,12 +202,28 @@ var createStagedResponse = fmt.Sprintf(`
     }
 }`)
 
+func createStagedResult() *routes.Route {
+	var route routes.Route
+
+	route.NextHopIPAddress = "192.168.0.254"
+
+	return &route
+}
+
 var showStagedResponse = fmt.Sprintf(`
 {
     "route": {
         "next_hop_ip_address": "192.168.0.254"
     }
 }`)
+
+func showStagedResult() *routes.Route {
+	var route routes.Route
+
+	route.NextHopIPAddress = "192.168.0.254"
+
+	return &route
+}
 
 var updateStagedRequest = fmt.Sprintf(`
 {
@@ -146,3 +238,11 @@ var updateStagedResponse = fmt.Sprintf(`
         "next_hop_ip_address": "192.168.0.254"
     }
 }`)
+
+func updateStagedResult() *routes.Route {
+	var route routes.Route
+
+	route.NextHopIPAddress = "192.168.0.254"
+
+	return &route
+}

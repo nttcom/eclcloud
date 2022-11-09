@@ -47,12 +47,14 @@ func TestListSystemUpdates(t *testing.T) {
 
 	err := system_updates.List(cli, listOpts).EachPage(func(page pagination.Page) (bool, error) {
 		count++
-		_, err := system_updates.ExtractSystemUpdates(page)
+		actual, err := system_updates.ExtractSystemUpdates(page)
 		if err != nil {
 			t.Errorf("Failed to extract system updates: %v", err)
 
 			return false, err
 		}
+
+		th.CheckDeepEquals(t, listResult(), actual)
 
 		return true, nil
 	})
@@ -79,7 +81,8 @@ func TestShowSystemUpdate(t *testing.T) {
 
 	cli := ServiceClient()
 
-	_, err := system_updates.Show(cli, id).Extract()
+	actual, err := system_updates.Show(cli, id).Extract()
 
+	th.CheckDeepEquals(t, showResult(), actual)
 	th.AssertNoErr(t, err)
 }

@@ -47,12 +47,14 @@ func TestListTLSPolicies(t *testing.T) {
 
 	err := tls_policies.List(cli, listOpts).EachPage(func(page pagination.Page) (bool, error) {
 		count++
-		_, err := tls_policies.ExtractTLSPolicies(page)
+		actual, err := tls_policies.ExtractTLSPolicies(page)
 		if err != nil {
 			t.Errorf("Failed to extract tls policies: %v", err)
 
 			return false, err
 		}
+
+		th.CheckDeepEquals(t, listResult(), actual)
 
 		return true, nil
 	})
@@ -79,7 +81,8 @@ func TestShowTLSPolicy(t *testing.T) {
 
 	cli := ServiceClient()
 
-	_, err := tls_policies.Show(cli, id).Extract()
+	actual, err := tls_policies.Show(cli, id).Extract()
 
+	th.CheckDeepEquals(t, showResult(), actual)
 	th.AssertNoErr(t, err)
 }
