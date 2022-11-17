@@ -23,10 +23,18 @@ Example to list health monitors
 
 Example to create a health monitor
 
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	createOpts := health_monitors.CreateOpts{
 		Name: "health_monitor",
 		Description: "description",
-		Tags: map[string]string{"key": "value"},
+		Tags: tags,
 		Port: 80,
 		Protocol: "http",
 		Interval: 5,
@@ -60,10 +68,18 @@ Example to update a health monitor
 
 	name := "health_monitor"
 	description := "description"
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	updateOpts := health_monitors.UpdateOpts{
 		Name: &name,
 		Description: &description,
-		Tags: &map[string]string{"key": "value"},
+		Tags: &tags,
 	}
 
 	id := "497f6eca-6276-4993-bfeb-53cbbbba6f08"

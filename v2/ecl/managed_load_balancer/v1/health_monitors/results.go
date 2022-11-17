@@ -104,7 +104,7 @@ type HealthMonitor struct {
 	Description string `json:"description"`
 
 	// - Tags of the health monitor (JSON object format)
-	Tags map[string]string `json:"tags"`
+	Tags map[string]interface{} `json:"tags"`
 
 	// - Configuration status of the health monitor
 	//   - `"ACTIVE"`
@@ -173,12 +173,12 @@ type HealthMonitor struct {
 	// - Running configurations of the health monitor
 	// - Return object when `changes` is `true`
 	// - Return `null` when current configuration does not exist
-	Current ConfigurationInResponse `json:"current"`
+	Current ConfigurationInResponse `json:"current,omitempty"`
 
 	// - Added or changed configurations of the health monitor that waiting to be applied
 	// - Return object when `changes` is `true`
 	// - Return `null` when staged configuration does not exist
-	Staged ConfigurationInResponse `json:"staged"`
+	Staged ConfigurationInResponse `json:"staged,omitempty"`
 }
 
 // ExtractInto interprets any commonResult as a health monitor, if possible.

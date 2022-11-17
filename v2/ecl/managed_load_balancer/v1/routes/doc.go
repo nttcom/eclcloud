@@ -23,10 +23,18 @@ Example to list routes
 
 Example to create a route
 
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	createOpts := routes.CreateOpts{
 		Name: "route",
 		Description: "description",
-		Tags: map[string]string{"key": "value"},
+		Tags: tags,
 		DestinationCidr: "172.16.0.0/24",
 		NextHopIPAddress: "192.168.0.254",
 		LoadBalancerID: "67fea379-cff0-4191-9175-de7d6941a040",
@@ -55,10 +63,18 @@ Example to update a route
 
 	name := "route"
 	description := "description"
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	updateOpts := routes.UpdateOpts{
 		Name: &name,
 		Description: &description,
-		Tags: &map[string]string{"key": "value"},
+		Tags: &tags,
 	}
 
 	id := "497f6eca-6276-4993-bfeb-53cbbbba6f08"

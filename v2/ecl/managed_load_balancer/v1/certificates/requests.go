@@ -84,7 +84,7 @@ type CreateOpts struct {
 
 	// - Tags of the certificate
 	// - Must be specified as JSON object
-	Tags map[string]string `json:"tags,omitempty"`
+	Tags map[string]interface{} `json:"tags,omitempty"`
 }
 
 // ToCertificateCreateMap builds a request body from CreateOpts.
@@ -141,7 +141,7 @@ type UpdateOpts struct {
 
 	// - Tags of the certificate
 	// - Must be specified as JSON object
-	Tags *map[string]string `json:"tags,omitempty"`
+	Tags *map[string]interface{} `json:"tags,omitempty"`
 }
 
 // ToCertificateUpdateMap builds a request body from UpdateOpts.

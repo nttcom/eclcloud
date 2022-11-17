@@ -23,10 +23,18 @@ Example to list listeners
 
 Example to create a listener
 
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	createOpts := listeners.CreateOpts{
 		Name: "listener",
 		Description: "description",
-		Tags: map[string]string{"key": "value"},
+		Tags: tags,
 		IPAddress: "10.0.0.1",
 		Port: 443,
 		Protocol: "https",
@@ -56,10 +64,18 @@ Example to update a listener
 
 	name := "listener"
 	description := "description"
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	updateOpts := listeners.UpdateOpts{
 		Name: &name,
 		Description: &description,
-		Tags: &map[string]string{"key": "value"},
+		Tags: &tags,
 	}
 
 	id := "497f6eca-6276-4993-bfeb-53cbbbba6f08"

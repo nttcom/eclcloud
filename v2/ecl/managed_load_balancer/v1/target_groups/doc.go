@@ -28,10 +28,18 @@ Example to create a target group
 		Port: 80,
 		Weight: 1,
 	}
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	createOpts := target_groups.CreateOpts{
 		Name: "target_group",
 		Description: "description",
-		Tags: map[string]string{"key": "value"},
+		Tags: tags,
 		LoadBalancerID: "67fea379-cff0-4191-9175-de7d6941a040",
 		Members: &[]target_groups.CreateOptsMember{member1},
 	}
@@ -59,10 +67,18 @@ Example to update a target group
 
 	name := "target_group"
 	description := "description"
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	updateOpts := target_groups.UpdateOpts{
 		Name: &name,
 		Description: &description,
-		Tags: &map[string]string{"key": "value"},
+		Tags: &tags,
 	}
 
 	id := "497f6eca-6276-4993-bfeb-53cbbbba6f08"

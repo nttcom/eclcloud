@@ -23,10 +23,18 @@ Example to list certificates
 
 Example to create a certificate
 
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	createOpts := certificates.CreateOpts{
 		Name: "certificate",
 		Description: "description",
-		Tags: map[string]string{"key": "value"},
+		Tags: tags,
 	}
 
 	certificate, err := certificates.Create(managedLoadBalancerClient, createOpts).Extract()
@@ -50,10 +58,18 @@ Example to update a certificate
 
 	name := "certificate"
 	description := "description"
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	updateOpts := certificates.UpdateOpts{
 		Name: &name,
 		Description: &description,
-		Tags: &map[string]string{"key": "value"},
+		Tags: &tags,
 	}
 
 	id := "497f6eca-6276-4993-bfeb-53cbbbba6f08"

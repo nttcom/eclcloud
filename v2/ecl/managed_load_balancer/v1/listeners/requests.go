@@ -93,7 +93,7 @@ type CreateOpts struct {
 
 	// - Tags of the listener
 	// - Must be specified as JSON object
-	Tags map[string]string `json:"tags,omitempty"`
+	Tags map[string]interface{} `json:"tags,omitempty"`
 
 	// - IP address of the listener for listening
 	// - Must be specified the unique combination of ip address and port in all listeners belongs to the same load balancer
@@ -191,7 +191,7 @@ type UpdateOpts struct {
 
 	// - Tags of the listener
 	// - Must be specified as JSON object
-	Tags *map[string]string `json:"tags,omitempty"`
+	Tags *map[string]interface{} `json:"tags,omitempty"`
 }
 
 // ToListenerUpdateMap builds a request body from UpdateOpts.

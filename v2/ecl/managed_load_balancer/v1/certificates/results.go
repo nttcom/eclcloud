@@ -62,7 +62,7 @@ type Certificate struct {
 	Description string `json:"description"`
 
 	// - Tags of the certificate (JSON object format)
-	Tags map[string]string `json:"tags"`
+	Tags map[string]interface{} `json:"tags"`
 
 	// - ID of the owner tenant of the certificate
 	TenantID string `json:"tenant_id"`

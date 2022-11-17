@@ -107,7 +107,7 @@ type CreateOpts struct {
 
 	// - Tags of the health monitor
 	// - Must be specified as JSON object
-	Tags map[string]string `json:"tags,omitempty"`
+	Tags map[string]interface{} `json:"tags,omitempty"`
 
 	// - Port number of the health monitor for healthchecking
 	// - Must be specified `0` when `protocol` is `"icmp"`
@@ -222,7 +222,7 @@ type UpdateOpts struct {
 
 	// - Tags of the health monitor
 	// - Must be specified as JSON object
-	Tags *map[string]string `json:"tags,omitempty"`
+	Tags *map[string]interface{} `json:"tags,omitempty"`
 }
 
 // ToHealthMonitorUpdateMap builds a request body from UpdateOpts.

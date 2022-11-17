@@ -45,10 +45,18 @@ Example to create a load balancer
 		Port: 514,
 		Protocol: "udp",
 	}
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	createOpts := load_balancers.CreateOpts{
 		Name: "load_balancer",
 		Description: "description",
-		Tags: map[string]string{"key": "value"},
+		Tags: tags,
 		PlanID: "00713021-9aea-41da-9a88-87760c08fa72",
 		SyslogServers: &[]load_balancers.CreateOptsSyslogServer{syslogServer1},
 		Interfaces: &[]load_balancers.CreateOptsInterface{interface1},
@@ -77,10 +85,18 @@ Example to update a load balancer
 
 	name := "load_balancer"
 	description := "description"
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	updateOpts := load_balancers.UpdateOpts{
 		Name: &name,
 		Description: &description,
-		Tags: &map[string]string{"key": "value"},
+		Tags: &tags,
 	}
 
 	id := "497f6eca-6276-4993-bfeb-53cbbbba6f08"

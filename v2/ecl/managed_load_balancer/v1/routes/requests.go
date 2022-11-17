@@ -90,7 +90,7 @@ type CreateOpts struct {
 
 	// - Tags of the (static) route
 	// - Must be specified as JSON object
-	Tags map[string]string `json:"tags,omitempty"`
+	Tags map[string]interface{} `json:"tags,omitempty"`
 
 	// - CIDR of destination for the (static) route
 	// - Can be specified as `0.0.0.0/0` to configure default gateway
@@ -189,7 +189,7 @@ type UpdateOpts struct {
 
 	// - Tags of the (static) route
 	// - Must be specified as JSON object
-	Tags *map[string]string `json:"tags,omitempty"`
+	Tags *map[string]interface{} `json:"tags,omitempty"`
 }
 
 // ToRouteUpdateMap builds a request body from UpdateOpts.

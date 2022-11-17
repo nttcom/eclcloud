@@ -26,10 +26,18 @@ Example to create a rule
 	condition := rules.CreateOptsCondition{
 		PathPatterns: []string{"^/statics/"},
 	}
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	createOpts := rules.CreateOpts{
 		Name: "rule",
 		Description: "description",
-		Tags: map[string]string{"key": "value"},
+		Tags: tags,
 		Priority: 1,
 		TargetGroupID: "29527a3c-9e5d-48b7-868f-6442c7d21a95",
 		PolicyID: "fcb520e5-858d-4f9f-bc6c-7bd225fe7cf4",
@@ -59,10 +67,18 @@ Example to update a rule
 
 	name := "rule"
 	description := "description"
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	updateOpts := rules.UpdateOpts{
 		Name: &name,
 		Description: &description,
-		Tags: &map[string]string{"key": "value"},
+		Tags: &tags,
 	}
 
 	id := "497f6eca-6276-4993-bfeb-53cbbbba6f08"
