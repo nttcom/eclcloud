@@ -23,10 +23,18 @@ Example to list policies
 
 Example to create a policy
 
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	createOpts := policies.CreateOpts{
 		Name: "policy",
 		Description: "description",
-		Tags: map[string]string{"key": "value"},
+		Tags: tags,
 		Algorithm: "round-robin",
 		Persistence: "cookie",
 		SorryPageUrl: "https://example.com/sorry",
@@ -62,10 +70,18 @@ Example to update a policy
 
 	name := "policy"
 	description := "description"
+
+	var tags map[string]interface{}
+	tagsJson := `{"key":"value"}`
+	err := json.Unmarshal([]byte(tagsJson), &tags)
+	if err != nil {
+		panic(err)
+	}
+
 	updateOpts := policies.UpdateOpts{
 		Name: &name,
 		Description: &description,
-		Tags: &map[string]string{"key": "value"},
+		Tags: &tags,
 	}
 
 	id := "497f6eca-6276-4993-bfeb-53cbbbba6f08"

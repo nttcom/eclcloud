@@ -145,7 +145,7 @@ type CreateOpts struct {
 
 	// - Tags of the load balancer
 	// - Must be specified as JSON object
-	Tags map[string]string `json:"tags,omitempty"`
+	Tags map[string]interface{} `json:"tags,omitempty"`
 
 	// - ID of the plan
 	PlanID string `json:"plan_id,omitempty"`
@@ -245,7 +245,7 @@ type UpdateOpts struct {
 
 	// - Tags of the load balancer
 	// - Must be specified as JSON object
-	Tags *map[string]string `json:"tags,omitempty"`
+	Tags *map[string]interface{} `json:"tags,omitempty"`
 }
 
 // ToLoadBalancerUpdateMap builds a request body from UpdateOpts.

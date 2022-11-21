@@ -80,7 +80,7 @@ type Route struct {
 	Description string `json:"description"`
 
 	// - Tags of the (static) route (JSON object format)
-	Tags map[string]string `json:"tags"`
+	Tags map[string]interface{} `json:"tags"`
 
 	// - Configuration status of the (static) route
 	//   - `"ACTIVE"`
@@ -128,12 +128,12 @@ type Route struct {
 	// - Running configurations of the (static) route
 	// - Return object when `changes` is `true`
 	// - Return `null` when current configuration does not exist
-	Current ConfigurationInResponse `json:"current"`
+	Current ConfigurationInResponse `json:"current,omitempty"`
 
 	// - Added or changed configurations of the (static) route that waiting to be applied
 	// - Return object when `changes` is `true`
 	// - Return `null` when staged configuration does not exist
-	Staged ConfigurationInResponse `json:"staged"`
+	Staged ConfigurationInResponse `json:"staged,omitempty"`
 }
 
 // ExtractInto interprets any commonResult as a route, if possible.

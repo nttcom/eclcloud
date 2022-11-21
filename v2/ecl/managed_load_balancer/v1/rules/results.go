@@ -70,7 +70,7 @@ type ConfigurationInResponse struct {
 	TargetGroupID string `json:"target_group_id,omitempty"`
 
 	// - Conditions of the rules to distribute accesses to the target groups
-	Conditions ConditionInResponse `json:"conditions"`
+	Conditions ConditionInResponse `json:"conditions,omitempty"`
 }
 
 // ConditionInResponse represents a condition in a rule.
@@ -93,7 +93,7 @@ type Rule struct {
 	Description string `json:"description"`
 
 	// - Tags of the rule (JSON object format)
-	Tags map[string]string `json:"tags"`
+	Tags map[string]interface{} `json:"tags"`
 
 	// - Configuration status of the rule
 	//   - `"ACTIVE"`
@@ -142,17 +142,17 @@ type Rule struct {
 	TargetGroupID string `json:"target_group_id,omitempty"`
 
 	// - Conditions of the rules to distribute accesses to the target groups
-	Conditions ConditionInResponse `json:"conditions"`
+	Conditions ConditionInResponse `json:"conditions,omitempty"`
 
 	// - Running configurations of the rule
 	// - Return object when `changes` is `true`
 	// - Return `null` when current configuration does not exist
-	Current ConfigurationInResponse `json:"current"`
+	Current ConfigurationInResponse `json:"current,omitempty"`
 
 	// - Added or changed configurations of the rule that waiting to be applied
 	// - Return object when `changes` is `true`
 	// - Return `null` when staged configuration does not exist
-	Staged ConfigurationInResponse `json:"staged"`
+	Staged ConfigurationInResponse `json:"staged,omitempty"`
 }
 
 // ExtractInto interprets any commonResult as a rule, if possible.

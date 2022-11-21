@@ -101,7 +101,7 @@ type CreateOpts struct {
 
 	// - Tags of the target group
 	// - Must be specified as JSON object
-	Tags map[string]string `json:"tags,omitempty"`
+	Tags map[string]interface{} `json:"tags,omitempty"`
 
 	// - ID of the load balancer which the target group belongs to
 	LoadBalancerID string `json:"load_balancer_id,omitempty"`
@@ -190,7 +190,7 @@ type UpdateOpts struct {
 
 	// - Tags of the target group
 	// - Must be specified as JSON object
-	Tags *map[string]string `json:"tags,omitempty"`
+	Tags *map[string]interface{} `json:"tags,omitempty"`
 }
 
 // ToTargetGroupUpdateMap builds a request body from UpdateOpts.

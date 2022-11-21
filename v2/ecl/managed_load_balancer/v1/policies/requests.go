@@ -112,7 +112,7 @@ type CreateOpts struct {
 
 	// - Tags of the policy
 	// - Must be specified as JSON object
-	Tags map[string]string `json:"tags,omitempty"`
+	Tags map[string]interface{} `json:"tags,omitempty"`
 
 	// - Load balancing algorithm (method) of the policy
 	Algorithm string `json:"algorithm,omitempty"`
@@ -241,7 +241,7 @@ type UpdateOpts struct {
 
 	// - Tags of the policy
 	// - Must be specified as JSON object
-	Tags *map[string]string `json:"tags,omitempty"`
+	Tags *map[string]interface{} `json:"tags,omitempty"`
 }
 
 // ToPolicyUpdateMap builds a request body from UpdateOpts.

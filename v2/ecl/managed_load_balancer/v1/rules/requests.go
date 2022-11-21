@@ -103,7 +103,7 @@ type CreateOpts struct {
 
 	// - Tags of the rule
 	// - Must be specified as JSON object
-	Tags map[string]string `json:"tags,omitempty"`
+	Tags map[string]interface{} `json:"tags,omitempty"`
 
 	// - Priority of the rule
 	// - Must be specified the unique number in all rules belongs to the same policy
@@ -202,7 +202,7 @@ type UpdateOpts struct {
 
 	// - Tags of the rule
 	// - Must be specified as JSON object
-	Tags *map[string]string `json:"tags,omitempty"`
+	Tags *map[string]interface{} `json:"tags,omitempty"`
 }
 
 // ToRuleUpdateMap builds a request body from UpdateOpts.
