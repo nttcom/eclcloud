@@ -348,19 +348,19 @@ func NewWorkflowV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*
 	return initClientOpts(client, eo, "workflowv2")
 }
 
-// NewSecurityOrderV1 creates a ServiceClient that may be used to access the v1 Security
+// NewSecurityOrderV2 creates a ServiceClient that may be used to access the v2 Security
 // Order API service.
-func NewSecurityOrderV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
-	sc, err := initClientOpts(client, eo, "mss-rfg")
-	// sc.ResourceBase = sc.Endpoint + "v2/"
+func NewSecurityOrderV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
+	sc, err := initClientOpts(client, eo, "security-order")
+	// sc.ResourceBase = sc.Endpoint + "v3/"
 	return sc, err
 }
 
-// NewSecurityPortalV1 creates a ServiceClient that may be used to access the v1 Security
+// NewSecurityPortalV2 creates a ServiceClient that may be used to access the v2 Security
 // Portal API service.
-func NewSecurityPortalV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
-	sc, err := initClientOpts(client, eo, "mss-msa")
-	// sc.ResourceBase = sc.Endpoint + "v2/"
+func NewSecurityPortalV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
+	sc, err := initClientOpts(client, eo, "security-operation")
+	// sc.ResourceBase = sc.Endpoint + "v3/"
 	return sc, err
 }
 
