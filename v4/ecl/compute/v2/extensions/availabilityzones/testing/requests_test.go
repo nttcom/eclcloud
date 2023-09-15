@@ -8,7 +8,7 @@ import (
 	az "github.com/nttcom/eclcloud/v4/ecl/compute/v2/extensions/availabilityzones"
 	th "github.com/nttcom/eclcloud/v4/testhelper"
 
-	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
+	fakeclient "github.com/nttcom/eclcloud/v4/testhelper/client"
 )
 
 func TestListAvailabilityZone(t *testing.T) {

@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"testing"
 
-	fake "github.com/nttcom/eclcloud/v3/ecl/network/v2/common"
-	th "github.com/nttcom/eclcloud/v3/testhelper"
+	fake "github.com/nttcom/eclcloud/v4/ecl/network/v2/common"
+	th "github.com/nttcom/eclcloud/v4/testhelper"
 )
 
 func TestListQoS(t *testing.T) {
