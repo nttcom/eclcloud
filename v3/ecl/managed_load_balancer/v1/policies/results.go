@@ -67,21 +67,21 @@ type ConfigurationInResponse struct {
 	Algorithm string `json:"algorithm,omitempty"`
 
 	// - Persistence setting of the policy
-	// - `"cookie"` is used when `listener.protocol` is `"http"` or `"https"`
+	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence string `json:"persistence,omitempty"`
 
-	// - URL of the sorry page to which accesses are redirected when all members in the target group are down
-	// - Returns `""` when protocol is not `"http"` or `"https"`
+	// - URL of the sorry page to which accesses are redirected if all members in the target group are down
+	// - If protocol is not `"http"` or `"https"`, returns `""`
 	SorryPageUrl string `json:"sorry_page_url,omitempty"`
 
 	// - Source NAT setting of the policy
-	// - When `source_nat` is `"enable"` and `listener.protocol` is `"http"` or `"https"` ,
+	// - If `source_nat` is `"enable"` and `listener.protocol` is `"http"` or `"https"` ,
 	//   - The source IP address of the request is replaced with `virtual_ip_address` which is assigned to the interface from which the request was sent
 	//   - `X-Forwarded-For` header with the IP address of the client is added
 	SourceNat string `json:"source_nat,omitempty"`
 
 	// - ID of the certificate that assigned to the policy
-	// - Returns `""` when protocol is not `"https"`
+	// - If protocol is not `"https"`, returns `""`
 	CertificateID string `json:"certificate_id,omitempty"`
 
 	// - ID of the health monitor that assigned to the policy
@@ -94,7 +94,7 @@ type ConfigurationInResponse struct {
 	DefaultTargetGroupID string `json:"default_target_group_id,omitempty"`
 
 	// - ID of the TLS policy that assigned to the policy
-	// - Returns `""` when protocol is not `"https"`
+	// - If protocol is not `"https"`, returns `""`
 	TLSPolicyID string `json:"tls_policy_id,omitempty"`
 }
 
@@ -154,21 +154,21 @@ type Policy struct {
 	Algorithm string `json:"algorithm,omitempty"`
 
 	// - Persistence setting of the policy
-	// - `"cookie"` is used when `listener.protocol` is `"http"` or `"https"`
+	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence string `json:"persistence,omitempty"`
 
-	// - URL of the sorry page to which accesses are redirected when all members in the target group are down
-	// - Returns `""` when protocol is not `"http"` or `"https"`
+	// - URL of the sorry page to which accesses are redirected if all members in the target group are down
+	// - If protocol is not `"http"` or `"https"`, returns `""`
 	SorryPageUrl string `json:"sorry_page_url,omitempty"`
 
 	// - Source NAT setting of the policy
-	// - When `source_nat` is `"enable"` and `listener.protocol` is `"http"` or `"https"` ,
+	// - If `source_nat` is `"enable"` and `listener.protocol` is `"http"` or `"https"` ,
 	//   - The source IP address of the request is replaced with `virtual_ip_address` which is assigned to the interface from which the request was sent
 	//   - `X-Forwarded-For` header with the IP address of the client is added
 	SourceNat string `json:"source_nat,omitempty"`
 
 	// - ID of the certificate that assigned to the policy
-	// - Returns `""` when protocol is not `"https"`
+	// - If protocol is not `"https"`, returns `""`
 	CertificateID string `json:"certificate_id,omitempty"`
 
 	// - ID of the health monitor that assigned to the policy
@@ -181,17 +181,17 @@ type Policy struct {
 	DefaultTargetGroupID string `json:"default_target_group_id,omitempty"`
 
 	// - ID of the TLS policy that assigned to the policy
-	// - Returns `""` when protocol is not `"https"`
+	// - If protocol is not `"https"`, returns `""`
 	TLSPolicyID string `json:"tls_policy_id,omitempty"`
 
 	// - Running configurations of the policy
-	// - Return object when `changes` is `true`
-	// - Return `null` when current configuration does not exist
+	// - If `changes` is `true`, return object
+	// - If current configuration does not exist, return `null`
 	Current ConfigurationInResponse `json:"current,omitempty"`
 
 	// - Added or changed configurations of the policy that waiting to be applied
-	// - Return object when `changes` is `true`
-	// - Return `null` when staged configuration does not exist
+	// - If `changes` is `true`, return object
+	// - If staged configuration does not exist, return `null`
 	Staged ConfigurationInResponse `json:"staged,omitempty"`
 }
 
