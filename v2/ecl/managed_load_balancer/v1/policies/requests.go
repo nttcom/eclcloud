@@ -39,6 +39,9 @@ type ListOpts struct {
 	// - Persistence setting of the policy
 	Persistence string `q:"persistence"`
 
+	// - The duration (in seconds) during which a session is allowed to remain inactive
+	IdleTimeout int `q:"idle_timeout"`
+
 	// - URL of the sorry page to which accesses are redirected if all members in the target group are down
 	SorryPageUrl string `q:"sorry_page_url"`
 
@@ -125,6 +128,15 @@ type CreateOpts struct {
 	// - Persistence setting of the policy
 	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence string `json:"persistence,omitempty"`
+
+	// - The duration (in seconds) during which a session is allowed to remain inactive
+	// - There may be a time difference up to 60 seconds, between the set value and the actual timeout
+	// - If `listener.protocol` is `"tcp"` or `"udp"`
+	//   - Default value is 120
+	// - If `listener.protocol` is `"http"` or `"https"`
+	//   - Default value is 600
+	//   - On session timeout, the load balancer sends TCP RST packets to both the client and the real server
+	IdleTimeout int `json:"idle_timeout,omitempty"`
 
 	// - URL of the sorry page to which accesses are redirected if all members in the target group are down
 	// - If `listener.protocol` is `"http"` or `"https"`, this parameter can be set
@@ -306,6 +318,15 @@ type CreateStagedOpts struct {
 	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence string `json:"persistence,omitempty"`
 
+	// - The duration (in seconds) during which a session is allowed to remain inactive
+	// - There may be a time difference up to 60 seconds, between the set value and the actual timeout
+	// - If `listener.protocol` is `"tcp"` or `"udp"`
+	//   - Default value is 120
+	// - If `listener.protocol` is `"http"` or `"https"`
+	//   - Default value is 600
+	//   - On session timeout, the load balancer sends TCP RST packets to both the client and the real server
+	IdleTimeout int `json:"idle_timeout,omitempty"`
+
 	// - URL of the sorry page to which accesses are redirected if all members in the target group are down
 	// - If `listener.protocol` is `"http"` or `"https"`, this parameter can be set
 	// - If `listener.protocol` is neither `"http"` nor `"https"`, must not set this parameter or set `""`
@@ -398,6 +419,15 @@ type UpdateStagedOpts struct {
 	// - Persistence setting of the policy
 	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence *string `json:"persistence,omitempty"`
+
+	// - The duration (in seconds) during which a session is allowed to remain inactive
+	// - There may be a time difference up to 60 seconds, between the set value and the actual timeout
+	// - If `listener.protocol` is `"tcp"` or `"udp"`
+	//   - Default value is 120
+	// - If `listener.protocol` is `"http"` or `"https"`
+	//   - Default value is 600
+	//   - On session timeout, the load balancer sends TCP RST packets to both the client and the real server
+	IdleTimeout *int `json:"idle_timeout,omitempty"`
 
 	// - URL of the sorry page to which accesses are redirected if all members in the target group are down
 	// - If `listener.protocol` is `"http"` or `"https"`, this parameter can be set

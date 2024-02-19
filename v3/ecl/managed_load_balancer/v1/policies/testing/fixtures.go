@@ -28,6 +28,7 @@ var listResponse = fmt.Sprintf(`
             "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
             "algorithm": "round-robin",
             "persistence": "cookie",
+            "idle_timeout": 600,
             "sorry_page_url": "https://example.com/sorry",
             "source_nat": "enable",
             "certificate_id": "f57a98fe-d63e-4048-93a0-51fe163f30d7",
@@ -59,6 +60,7 @@ func listResult() []policies.Policy {
 	policy1.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
 	policy1.Algorithm = "round-robin"
 	policy1.Persistence = "cookie"
+	policy1.IdleTimeout = 600
 	policy1.SorryPageUrl = "https://example.com/sorry"
 	policy1.SourceNat = "enable"
 	policy1.CertificateID = "f57a98fe-d63e-4048-93a0-51fe163f30d7"
@@ -80,6 +82,7 @@ var createRequest = fmt.Sprintf(`
         },
         "algorithm": "round-robin",
         "persistence": "cookie",
+        "idle_timeout": 600,
         "sorry_page_url": "https://example.com/sorry",
         "source_nat": "enable",
         "certificate_id": "f57a98fe-d63e-4048-93a0-51fe163f30d7",
@@ -106,6 +109,7 @@ var createResponse = fmt.Sprintf(`
         "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
         "algorithm": null,
         "persistence": null,
+        "idle_timeout": null,
         "sorry_page_url": null,
         "source_nat": null,
         "certificate_id": null,
@@ -136,6 +140,7 @@ func createResult() *policies.Policy {
 	policy.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
 	policy.Algorithm = ""
 	policy.Persistence = ""
+	policy.IdleTimeout = 0
 	policy.SorryPageUrl = ""
 	policy.SourceNat = ""
 	policy.CertificateID = ""
@@ -162,6 +167,7 @@ var showResponse = fmt.Sprintf(`
         "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
         "algorithm": "round-robin",
         "persistence": "cookie",
+        "idle_timeout": 600,
         "sorry_page_url": "https://example.com/sorry",
         "source_nat": "enable",
         "certificate_id": "f57a98fe-d63e-4048-93a0-51fe163f30d7",
@@ -172,6 +178,7 @@ var showResponse = fmt.Sprintf(`
         "current": {
             "algorithm": "round-robin",
             "persistence": "cookie",
+            "idle_timeout": 600,
             "sorry_page_url": "https://example.com/sorry",
             "source_nat": "enable",
             "certificate_id": "f57a98fe-d63e-4048-93a0-51fe163f30d7",
@@ -191,6 +198,7 @@ func showResult() *policies.Policy {
 	current := policies.ConfigurationInResponse{
 		Algorithm:            "round-robin",
 		Persistence:          "cookie",
+		IdleTimeout:          600,
 		SorryPageUrl:         "https://example.com/sorry",
 		SourceNat:            "enable",
 		CertificateID:        "f57a98fe-d63e-4048-93a0-51fe163f30d7",
@@ -217,6 +225,7 @@ func showResult() *policies.Policy {
 	policy.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
 	policy.Algorithm = "round-robin"
 	policy.Persistence = "cookie"
+	policy.IdleTimeout = 600
 	policy.SorryPageUrl = "https://example.com/sorry"
 	policy.SourceNat = "enable"
 	policy.CertificateID = "f57a98fe-d63e-4048-93a0-51fe163f30d7"
@@ -256,6 +265,7 @@ var updateResponse = fmt.Sprintf(`
         "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
         "algorithm": null,
         "persistence": null,
+        "idle_timeout": null,
         "sorry_page_url": null,
         "source_nat": null,
         "certificate_id": null,
@@ -286,6 +296,7 @@ func updateResult() *policies.Policy {
 	policy.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
 	policy.Algorithm = ""
 	policy.Persistence = ""
+	policy.IdleTimeout = 0
 	policy.SorryPageUrl = ""
 	policy.SourceNat = ""
 	policy.CertificateID = ""
@@ -302,6 +313,7 @@ var createStagedRequest = fmt.Sprintf(`
     "policy": {
         "algorithm": "round-robin",
         "persistence": "cookie",
+        "idle_timeout": 600,
         "sorry_page_url": "https://example.com/sorry",
         "source_nat": "enable",
         "certificate_id": "f57a98fe-d63e-4048-93a0-51fe163f30d7",
@@ -317,6 +329,7 @@ var createStagedResponse = fmt.Sprintf(`
     "policy": {
         "algorithm": "round-robin",
         "persistence": "cookie",
+        "idle_timeout": 600,
         "sorry_page_url": "https://example.com/sorry",
         "source_nat": "enable",
         "certificate_id": "f57a98fe-d63e-4048-93a0-51fe163f30d7",
@@ -332,6 +345,7 @@ func createStagedResult() *policies.Policy {
 
 	policy.Algorithm = "round-robin"
 	policy.Persistence = "cookie"
+	policy.IdleTimeout = 600
 	policy.SorryPageUrl = "https://example.com/sorry"
 	policy.SourceNat = "enable"
 	policy.CertificateID = "f57a98fe-d63e-4048-93a0-51fe163f30d7"
@@ -348,6 +362,7 @@ var showStagedResponse = fmt.Sprintf(`
     "policy": {
         "algorithm": "round-robin",
         "persistence": "cookie",
+        "idle_timeout": 600,
         "sorry_page_url": "https://example.com/sorry",
         "source_nat": "enable",
         "certificate_id": "f57a98fe-d63e-4048-93a0-51fe163f30d7",
@@ -363,6 +378,7 @@ func showStagedResult() *policies.Policy {
 
 	policy.Algorithm = "round-robin"
 	policy.Persistence = "cookie"
+	policy.IdleTimeout = 600
 	policy.SorryPageUrl = "https://example.com/sorry"
 	policy.SourceNat = "enable"
 	policy.CertificateID = "f57a98fe-d63e-4048-93a0-51fe163f30d7"
@@ -379,6 +395,7 @@ var updateStagedRequest = fmt.Sprintf(`
     "policy": {
         "algorithm": "round-robin",
         "persistence": "cookie",
+        "idle_timeout": 600,
         "sorry_page_url": "https://example.com/sorry",
         "source_nat": "enable",
         "certificate_id": "f57a98fe-d63e-4048-93a0-51fe163f30d7",
@@ -394,6 +411,7 @@ var updateStagedResponse = fmt.Sprintf(`
     "policy": {
         "algorithm": "round-robin",
         "persistence": "cookie",
+        "idle_timeout": 600,
         "sorry_page_url": "https://example.com/sorry",
         "source_nat": "enable",
         "certificate_id": "f57a98fe-d63e-4048-93a0-51fe163f30d7",
@@ -409,6 +427,7 @@ func updateStagedResult() *policies.Policy {
 
 	policy.Algorithm = "round-robin"
 	policy.Persistence = "cookie"
+	policy.IdleTimeout = 600
 	policy.SorryPageUrl = "https://example.com/sorry"
 	policy.SourceNat = "enable"
 	policy.CertificateID = "f57a98fe-d63e-4048-93a0-51fe163f30d7"
