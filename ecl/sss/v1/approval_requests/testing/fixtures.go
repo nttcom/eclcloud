@@ -36,7 +36,7 @@ var listResponse = fmt.Sprintf(`
 			"descriptions": [
 				{
 					"lang": "en",
-					"text": "approval request test"
+					"text": "approval resquest test"
 				}
 			],
 			"request_user": false,
@@ -66,7 +66,7 @@ var listResponse = fmt.Sprintf(`
 			"descriptions": [
 				{
 					"lang": "en",
-					"text": "approval request test"
+					"text": "approval resquest test"
 				}
 			],
 			"request_user": false,
@@ -113,7 +113,7 @@ var firstApprovalRequest = ar.ApprovalRequest{
 	Descriptions: []ar.Description{
 		{
 			Lang: "en",
-			Text: "approval request test",
+			Text: "approval resquest test",
 		},
 	},
 	RequestUser:      false,
@@ -144,7 +144,7 @@ var secondApprovalRequest = ar.ApprovalRequest{
 	Descriptions: []ar.Description{
 		{
 			Lang: "en",
-			Text: "approval request test",
+			Text: "approval resquest test",
 		},
 	},
 	RequestUser:      false,
@@ -181,7 +181,7 @@ var getResponse = fmt.Sprintf(`
 		"descriptions": [
 			{
 				"lang": "en",
-				"text": "approval request test"
+				"text": "approval resquest test"
 			}
 		],
 		"request_user": false,
