@@ -97,6 +97,7 @@ func TestCreatePolicy(t *testing.T) {
 		Tags:                 tags,
 		Algorithm:            "round-robin",
 		Persistence:          "cookie",
+		IdleTimeout:          600,
 		SorryPageUrl:         "https://example.com/sorry",
 		SourceNat:            "enable",
 		CertificateID:        "f57a98fe-d63e-4048-93a0-51fe163f30d7",
@@ -223,6 +224,7 @@ func TestCreateStagedPolicy(t *testing.T) {
 	createStagedOpts := policies.CreateStagedOpts{
 		Algorithm:            "round-robin",
 		Persistence:          "cookie",
+		IdleTimeout:          600,
 		SorryPageUrl:         "https://example.com/sorry",
 		SourceNat:            "enable",
 		CertificateID:        "f57a98fe-d63e-4048-93a0-51fe163f30d7",
@@ -284,6 +286,7 @@ func TestUpdateStagedPolicy(t *testing.T) {
 
 	algorithm := "round-robin"
 	persistence := "cookie"
+	idleTimeout := 600
 	sorryPageUrl := "https://example.com/sorry"
 	sourceNat := "enable"
 	certificateID := "f57a98fe-d63e-4048-93a0-51fe163f30d7"
@@ -294,6 +297,7 @@ func TestUpdateStagedPolicy(t *testing.T) {
 	updateStagedOpts := policies.UpdateStagedOpts{
 		Algorithm:            &algorithm,
 		Persistence:          &persistence,
+		IdleTimeout:          &idleTimeout,
 		SorryPageUrl:         &sorryPageUrl,
 		SourceNat:            &sourceNat,
 		CertificateID:        &certificateID,
