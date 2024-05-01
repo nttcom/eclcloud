@@ -1,4 +1,4 @@
-# eclcloud: an Enterprise Cloud SDK for Go
+# eclcloud: an Enterprise Cloud SDK for Go (GitHub Actions verification)
 
 eclcloud is an Enterprise Cloud Go SDK.
 
