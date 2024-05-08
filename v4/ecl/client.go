@@ -359,7 +359,7 @@ func NewWorkflowV2(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*
 // NewSecurityOrderV3 creates a ServiceClient that may be used to access the v3 Security
 // Order API service.
 func NewSecurityOrderV3(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
-	sc, err := initClientOpts(client, eo, "security-order")
+	sc, err := initClientOpts(client, eo, "security-order-th")
 	// sc.ResourceBase = sc.Endpoint + "v3/"
 	return sc, err
 }
