@@ -367,7 +367,7 @@ func NewSecurityOrderV3(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpt
 // NewSecurityPortalV3 creates a ServiceClient that may be used to access the v3 Security
 // Portal API service.
 func NewSecurityPortalV3(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
-	sc, err := initClientOpts(client, eo, "security-operation")
+	sc, err := initClientOpts(client, eo, "security-operation-th")
 	// sc.ResourceBase = sc.Endpoint + "v3/"
 	return sc, err
 }
