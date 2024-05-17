@@ -40,9 +40,9 @@ explicitly, or tell eclcloud to use environment variables:
 
 ```go
 import (
-  "github.com/nttcom/eclcloud/v2"
-  "github.com/nttcom/eclcloud/v2"
-  "github.com/nttcom/eclcloud/v2/utils"
+  "github.com/nttcom/eclcloud/v3"
+  "github.com/nttcom/eclcloud/v3"
+  "github.com/nttcom/eclcloud/v3/utils"
 )
 
 // Option 1: Pass in the values yourself
@@ -82,7 +82,7 @@ in the flavor ID (hardware specification) and image ID (operating system) we're
 interested in:
 
 ```go
-import "github.com/nttcom/eclcloud/v2/compute/v2/servers"
+import "github.com/nttcom/eclcloud/v3/compute/v2/servers"
 
 server, err := servers.Create(client, servers.CreateOpts{
   Name:      "My new server!",
