@@ -118,6 +118,10 @@ func TestCreateAppliance(t *testing.T) {
 				},
 			},
 		},
+		InitialConfig: &appliances.CreateOptsInitialConfig{
+			Format: "set",
+			Data:   "c2V0IGludGVyZmFjZXMgZ2UtMC8wLzAgZGVzY3JpcHRpb24gc2FtcGxl",
+		},
 	}
 	ap, err := appliances.Create(ServiceClient(), createOpts).Extract()
 	th.AssertNoErr(t, err)
