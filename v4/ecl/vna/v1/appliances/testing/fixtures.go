@@ -514,6 +514,10 @@ var createRequest = fmt.Sprintf(`
     				"network_id": "dummyNetworkID"
     			}
     		},
+    		"initial_config": {
+    			"format": "set",
+    			"data": "c2V0IGludGVyZmFjZXMgZ2UtMC8wLzAgZGVzY3JpcHRpb24gc2FtcGxl"
+    		},
     		"tags": {
     			"k1": "v1"
     		},
