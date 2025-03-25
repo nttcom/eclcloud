@@ -27,6 +27,9 @@ type ListOpts struct {
 	// - ID of the owner tenant of the resource
 	TenantID string `q:"tenant_id"`
 
+	// - If `true` is set, information of the certificate file are displayed
+	Details bool `q:"details"`
+
 	// - CA certificate file upload status of the certificate
 	CACertStatus string `q:"ca_cert_status"`
 
@@ -213,6 +216,10 @@ type UploadFileOpts struct {
 	//   - ECDSA P-256 (prime256v1, secp256r1), P-384 (secp384r1) and P-521 (secp521r1)
 	// - The content of `"ssl-cert"` and the content of `"ssl-key"` must be a pair (must be matched correctly)
 	Content string `json:"content"`
+
+	// - Passphrase of the certificate file to be uploaded
+	// - This parameter can be set when 'type' is `"ssl-key"`
+	Passphrase string `json:"passphrase,omitempty"`
 }
 
 // ToCertificateUploadFileMap builds a request body from UploadFileOpts.

@@ -57,6 +57,9 @@ type ListOpts struct {
 	// - Maximum number of conditions in the rule of the plan
 	MaxNumberOfConditions int `q:"max_number_of_conditions"`
 
+	// - Maximum number of Server Name Indications (SNIs) for the policy of the plan
+	MaxNumberOfServerNameInidications int `q:"max_number_of_server_name_inidications"`
+
 	// - Whether a new load balancer can be created with this plan
 	Enabled bool `q:"enabled"`
 }

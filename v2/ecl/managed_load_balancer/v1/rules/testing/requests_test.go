@@ -92,13 +92,14 @@ func TestCreateRule(t *testing.T) {
 	th.AssertNoErr(t, err)
 
 	createOpts := rules.CreateOpts{
-		Name:          "rule",
-		Description:   "description",
-		Tags:          tags,
-		Priority:      1,
-		TargetGroupID: "29527a3c-9e5d-48b7-868f-6442c7d21a95",
-		PolicyID:      "fcb520e5-858d-4f9f-bc6c-7bd225fe7cf4",
-		Conditions:    &condition,
+		Name:                "rule",
+		Description:         "description",
+		Tags:                tags,
+		Priority:            1,
+		TargetGroupID:       "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+		BackupTargetGroupID: "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52",
+		PolicyID:            "fcb520e5-858d-4f9f-bc6c-7bd225fe7cf4",
+		Conditions:          &condition,
 	}
 
 	actual, err := rules.Create(cli, createOpts).Extract()
@@ -218,9 +219,10 @@ func TestCreateStagedRule(t *testing.T) {
 		PathPatterns: []string{"^/statics/"},
 	}
 	createStagedOpts := rules.CreateStagedOpts{
-		Priority:      1,
-		TargetGroupID: "29527a3c-9e5d-48b7-868f-6442c7d21a95",
-		Conditions:    &condition,
+		Priority:            1,
+		TargetGroupID:       "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+		BackupTargetGroupID: "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52",
+		Conditions:          &condition,
 	}
 
 	actual, err := rules.CreateStaged(cli, id, createStagedOpts).Extract()
@@ -279,10 +281,12 @@ func TestUpdateStagedRule(t *testing.T) {
 
 	priority := 1
 	targetGroupID := "29527a3c-9e5d-48b7-868f-6442c7d21a95"
+	backupTargetGroupID := "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52"
 	updateStagedOpts := rules.UpdateStagedOpts{
-		Priority:      &priority,
-		TargetGroupID: &targetGroupID,
-		Conditions:    &condition,
+		Priority:            &priority,
+		TargetGroupID:       &targetGroupID,
+		BackupTargetGroupID: &backupTargetGroupID,
+		Conditions:          &condition,
 	}
 
 	actual, err := rules.UpdateStaged(cli, id, updateStagedOpts).Extract()

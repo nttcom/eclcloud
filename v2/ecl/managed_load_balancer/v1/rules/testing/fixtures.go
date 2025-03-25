@@ -26,6 +26,7 @@ var listResponse = fmt.Sprintf(`
             "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
             "priority": 1,
             "target_group_id": "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+            "backup_target_group_id": "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52",
             "conditions": {
                 "path_patterns": [
                     "^/statics/"
@@ -60,6 +61,7 @@ func listResult() []rules.Rule {
 	rule1.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
 	rule1.Priority = 1
 	rule1.TargetGroupID = "29527a3c-9e5d-48b7-868f-6442c7d21a95"
+	rule1.BackupTargetGroupID = "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52"
 	rule1.Conditions = condition1
 
 	return []rules.Rule{rule1}
@@ -76,6 +78,7 @@ var createRequest = fmt.Sprintf(`
         "policy_id": "fcb520e5-858d-4f9f-bc6c-7bd225fe7cf4",
         "priority": 1,
         "target_group_id": "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+        "backup_target_group_id": "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52",
         "conditions": {
             "path_patterns": [
                 "^/statics/"
@@ -100,6 +103,7 @@ var createResponse = fmt.Sprintf(`
         "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
         "priority": null,
         "target_group_id": null,
+        "backup_target_group_id": null,
         "conditions": null
     }
 }`)
@@ -127,6 +131,7 @@ func createResult() *rules.Rule {
 	rule.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
 	rule.Priority = 0
 	rule.TargetGroupID = ""
+	rule.BackupTargetGroupID = ""
 	rule.Conditions = condition
 
 	return &rule
@@ -148,6 +153,7 @@ var showResponse = fmt.Sprintf(`
         "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
         "priority": 1,
         "target_group_id": "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+        "backup_target_group_id": "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52",
         "conditions": {
             "path_patterns": [
                 "^/statics/"
@@ -156,6 +162,7 @@ var showResponse = fmt.Sprintf(`
         "current": {
             "priority": 1,
             "target_group_id": "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+            "backup_target_group_id": "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52",
             "conditions": {
                 "path_patterns": [
                     "^/statics/"
@@ -174,9 +181,10 @@ func showResult() *rules.Rule {
 	}
 	var staged rules.ConfigurationInResponse
 	current := rules.ConfigurationInResponse{
-		Priority:      1,
-		TargetGroupID: "29527a3c-9e5d-48b7-868f-6442c7d21a95",
-		Conditions:    condition,
+		Priority:            1,
+		TargetGroupID:       "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+		BackupTargetGroupID: "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52",
+		Conditions:          condition,
 	}
 
 	var tags map[string]interface{}
@@ -197,6 +205,7 @@ func showResult() *rules.Rule {
 	rule.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
 	rule.Priority = 1
 	rule.TargetGroupID = "29527a3c-9e5d-48b7-868f-6442c7d21a95"
+	rule.BackupTargetGroupID = "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52"
 	rule.Conditions = condition
 	rule.Current = current
 	rule.Staged = staged
@@ -231,6 +240,7 @@ var updateResponse = fmt.Sprintf(`
         "tenant_id": "34f5c98ef430457ba81292637d0c6fd0",
         "priority": null,
         "target_group_id": null,
+        "backup_target_group_id": null,
         "conditions": null
     }
 }`)
@@ -258,6 +268,7 @@ func updateResult() *rules.Rule {
 	rule.TenantID = "34f5c98ef430457ba81292637d0c6fd0"
 	rule.Priority = 0
 	rule.TargetGroupID = ""
+	rule.BackupTargetGroupID = ""
 	rule.Conditions = condition
 
 	return &rule
@@ -268,6 +279,7 @@ var createStagedRequest = fmt.Sprintf(`
     "rule": {
         "priority": 1,
         "target_group_id": "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+        "backup_target_group_id": "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52",
         "conditions": {
             "path_patterns": [
                 "^/statics/"
@@ -281,6 +293,7 @@ var createStagedResponse = fmt.Sprintf(`
     "rule": {
         "priority": 1,
         "target_group_id": "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+        "backup_target_group_id": "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52",
         "conditions": {
             "path_patterns": [
                 "^/statics/"
@@ -298,6 +311,7 @@ func createStagedResult() *rules.Rule {
 
 	rule.Priority = 1
 	rule.TargetGroupID = "29527a3c-9e5d-48b7-868f-6442c7d21a95"
+	rule.BackupTargetGroupID = "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52"
 	rule.Conditions = condition
 
 	return &rule
@@ -308,6 +322,7 @@ var showStagedResponse = fmt.Sprintf(`
     "rule": {
         "priority": 1,
         "target_group_id": "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+        "backup_target_group_id": "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52",
         "conditions": {
             "path_patterns": [
                 "^/statics/"
@@ -325,6 +340,7 @@ func showStagedResult() *rules.Rule {
 
 	rule.Priority = 1
 	rule.TargetGroupID = "29527a3c-9e5d-48b7-868f-6442c7d21a95"
+	rule.BackupTargetGroupID = "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52"
 	rule.Conditions = condition
 
 	return &rule
@@ -335,6 +351,7 @@ var updateStagedRequest = fmt.Sprintf(`
     "rule": {
         "priority": 1,
         "target_group_id": "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+        "backup_target_group_id": "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52",
         "conditions": {
             "path_patterns": [
                 "^/statics/"
@@ -348,6 +365,7 @@ var updateStagedResponse = fmt.Sprintf(`
     "rule": {
         "priority": 1,
         "target_group_id": "29527a3c-9e5d-48b7-868f-6442c7d21a95",
+        "backup_target_group_id": "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52",
         "conditions": {
             "path_patterns": [
                 "^/statics/"
@@ -365,6 +383,7 @@ func updateStagedResult() *rules.Rule {
 
 	rule.Priority = 1
 	rule.TargetGroupID = "29527a3c-9e5d-48b7-868f-6442c7d21a95"
+	rule.BackupTargetGroupID = "dfa2dbb6-e2f8-4a9d-a8c1-e1a578ea0a52"
 	rule.Conditions = condition
 
 	return &rule

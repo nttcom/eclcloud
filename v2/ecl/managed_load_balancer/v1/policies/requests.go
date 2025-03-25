@@ -36,7 +36,13 @@ type ListOpts struct {
 	// - Persistence setting of the policy
 	Persistence string `q:"persistence"`
 
-	// - The duration (in seconds) during which a session is allowed to remain inactive
+	// - If `persistence` is `"source-ip"`
+	//   - The timeout (in minutes) during which the persistence remain after the latest traffic from the client is sent to the load balancer
+	// - If `persistence` is `"cookie"`
+	//   - The expiration (in minutes) of the persistence set in the cookie that the load balancer returns to the client
+	PersistenceTimeout int `q:"persistence_timeout"`
+
+	// - The timeout (in seconds) during which a session is allowed to remain inactive
 	IdleTimeout int `q:"idle_timeout"`
 
 	// - URL of the sorry page to which accesses are redirected if all members in the target group are down
@@ -57,6 +63,10 @@ type ListOpts struct {
 
 	// - ID of the default target group that assigned to the policy
 	DefaultTargetGroupID string `q:"default_target_group_id"`
+
+	// - ID of the backup target group that assigned to the policy
+	// - If all members of the default target group are down, traffic is routed to the backup target group
+	BackupTargetGroupID string `q:"backup_target_group_id"`
 
 	// - ID of the TLS policy that assigned to the policy
 	TLSPolicyID string `q:"tls_policy_id"`
@@ -103,6 +113,29 @@ func List(c *eclcloud.ServiceClient, opts ListOptsBuilder) pagination.Pager {
 Create Policy
 */
 
+// CreateOptsServerNameIndication represents server_name_indication information in the policy creation.
+type CreateOptsServerNameIndication struct {
+
+	// - The server name of Server Name Indication (SNI)
+	// - Must be unique in a policy
+	// - If `input_type` is `"fixed"` , the following restrictions apply
+	//   - Only `a-z A-Z 0-9 - . *` are allowed
+	//   - `"*"` and `"."` are count as double (2 characters)
+	ServerName string `json:"server_name"`
+
+	// - You can choice the input type of the server name
+	InputType string `json:"input_type,omitempty"`
+
+	// - Priority of Server Name Indication (SNI)
+	// - Must be unique in a policy
+	Priority int `json:"priority"`
+
+	// - ID of the certificate that assigned to Server Name Indication (SNI)
+	// - The certificate need to be in `"UPLOADED"` state before used in a policy
+	// - The load balancer can be configured with up to 50 unique certificates, combining `policy.certificate_id` and `policy.server_name_indications.certificate_id`
+	CertificateID string `json:"certificate_id"`
+}
+
 // CreateOpts represents options used to create a new policy.
 type CreateOpts struct {
 
@@ -128,6 +161,19 @@ type CreateOpts struct {
 	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence string `json:"persistence,omitempty"`
 
+	// - If `persistence` is `"none"`
+	//   - Must not set this parameter or set `0`
+	// - If `persistence` is `"source-ip"`
+	//   - The timeout (in minutes) during which the persistence remain after the latest traffic from the client is sent to the load balancer
+	//   - Default value is `5`
+	//   - This parameter can be set between `1` to `2000`
+	// - If `persistence` is `"cookie"`
+	//   - The expiration (in minutes) of the persistence set in the cookie that the load balancer returns to the client
+	//     - If you specify `0` , the cookie persists only for the current session
+	//   - Default value is `525600`
+	//   - This parameter can be set between `0` to `525600`
+	PersistenceTimeout int `json:"persistence_timeout,omitempty"`
+
 	// - The timeout (in seconds) during which a session is allowed to remain inactive
 	// - There may be a time difference up to 60 seconds, between the set value and the actual timeout
 	// - If `listener.protocol` is `"tcp"` or `"udp"`
@@ -147,6 +193,12 @@ type CreateOpts struct {
 	//   - The source IP address of the request is replaced with `virtual_ip_address` which is assigned to the interface from which the request was sent
 	//   - `X-Forwarded-For` header with the IP address of the client is added
 	SourceNat string `json:"source_nat,omitempty"`
+
+	// - The list of Server Name Indications (SNIs) allows the policy to presents multiple certificates on the same listener
+	// - The SNI with the highest priority value will be used when multiple SNIs match
+	// - If `listener.protocol` is not `"https"`, must not set this parameter or set `[]`
+	//   - If you change `listener.protocol` from `"https"` to others, set `[]`
+	ServerNameIndications *[]CreateOptsServerNameIndication `json:"server_name_indications,omitempty"`
 
 	// - ID of the certificate that assigned to the policy
 	// - The certificate need to be in `"UPLOADED"` state before used in a policy
@@ -172,6 +224,16 @@ type CreateOpts struct {
 	// - The same member cannot be specified for the default target group and the backup target group
 	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
 	DefaultTargetGroupID string `json:"default_target_group_id"`
+
+	// - ID of the backup target group that assigned to the policy
+	// - If all members of the default target group are down, traffic is routed to the backup target group
+	// - If all members of the backup target group are down:
+	//   - When `sorry_page_url` is set, accesses are redirected to URL of the sorry page
+	//   - When `sorry_page_url` is not set, the load balancer does not respond
+	// - Set a different ID of the target group from `default_target_group_id`
+	// - The same member cannot be specified for the default target group and the backup target group
+	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
+	BackupTargetGroupID string `json:"backup_target_group_id,omitempty"`
 
 	// - ID of the TLS policy that assigned to the policy
 	// - If `listener.protocol` is `"https"`, you can set this parameter explicitly
@@ -314,6 +376,29 @@ func Delete(c *eclcloud.ServiceClient, id string) (r DeleteResult) {
 Create Staged Policy Configurations
 */
 
+// CreateStagedOptsServerNameIndication represents server_name_indication information in the policy configurations creation.
+type CreateStagedOptsServerNameIndication struct {
+
+	// - The server name of Server Name Indication (SNI)
+	// - Must be unique in a policy
+	// - If `input_type` is `"fixed"` , the following restrictions apply
+	//   - Only `a-z A-Z 0-9 - . *` are allowed
+	//   - `"*"` and `"."` are count as double (2 characters)
+	ServerName string `json:"server_name"`
+
+	// - You can choice the input type of the server name
+	InputType string `json:"input_type,omitempty"`
+
+	// - Priority of Server Name Indication (SNI)
+	// - Must be unique in a policy
+	Priority int `json:"priority"`
+
+	// - ID of the certificate that assigned to Server Name Indication (SNI)
+	// - The certificate need to be in `"UPLOADED"` state before used in a policy
+	// - The load balancer can be configured with up to 50 unique certificates, combining `policy.certificate_id` and `policy.server_name_indications.certificate_id`
+	CertificateID string `json:"certificate_id"`
+}
+
 // CreateStagedOpts represents options used to create new policy configurations.
 type CreateStagedOpts struct {
 
@@ -323,6 +408,19 @@ type CreateStagedOpts struct {
 	// - Persistence setting of the policy
 	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence string `json:"persistence,omitempty"`
+
+	// - If `persistence` is `"none"`
+	//   - Must not set this parameter or set `0`
+	// - If `persistence` is `"source-ip"`
+	//   - The timeout (in minutes) during which the persistence remain after the latest traffic from the client is sent to the load balancer
+	//   - Default value is `5`
+	//   - This parameter can be set between `1` to `2000`
+	// - If `persistence` is `"cookie"`
+	//   - The expiration (in minutes) of the persistence set in the cookie that the load balancer returns to the client
+	//     - If you specify `0` , the cookie persists only for the current session
+	//   - Default value is `525600`
+	//   - This parameter can be set between `0` to `525600`
+	PersistenceTimeout int `json:"persistence_timeout,omitempty"`
 
 	// - The timeout (in seconds) during which a session is allowed to remain inactive
 	// - There may be a time difference up to 60 seconds, between the set value and the actual timeout
@@ -344,6 +442,12 @@ type CreateStagedOpts struct {
 	//   - The source IP address of the request is replaced with `virtual_ip_address` which is assigned to the interface from which the request was sent
 	//   - `X-Forwarded-For` header with the IP address of the client is added
 	SourceNat string `json:"source_nat,omitempty"`
+
+	// - The list of Server Name Indications (SNIs) allows the policy to presents multiple certificates on the same listener
+	// - The SNI with the highest priority value will be used when multiple SNIs match
+	// - If `listener.protocol` is not `"https"`, must not set this parameter or set `[]`
+	//   - If you change `listener.protocol` from `"https"` to others, set `[]`
+	ServerNameIndications *[]CreateStagedOptsServerNameIndication `json:"server_name_indications,omitempty"`
 
 	// - ID of the certificate that assigned to the policy
 	// - The certificate need to be in `"UPLOADED"` state before used in a policy
@@ -370,6 +474,16 @@ type CreateStagedOpts struct {
 	// - The same member cannot be specified for the default target group and the backup target group
 	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
 	DefaultTargetGroupID string `json:"default_target_group_id,omitempty"`
+
+	// - ID of the backup target group that assigned to the policy
+	// - If all members of the default target group are down, traffic is routed to the backup target group
+	// - If all members of the backup target group are down:
+	//   - When `sorry_page_url` is set, accesses are redirected to URL of the sorry page
+	//   - When `sorry_page_url` is not set, the load balancer does not respond
+	// - Set a different ID of the target group from `default_target_group_id`
+	// - The same member cannot be specified for the default target group and the backup target group
+	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
+	BackupTargetGroupID string `json:"backup_target_group_id,omitempty"`
 
 	// - ID of the TLS policy that assigned to the policy
 	// - If `listener.protocol` is `"https"`, you can set this parameter explicitly
@@ -422,6 +536,29 @@ func ShowStaged(c *eclcloud.ServiceClient, id string) (r ShowStagedResult) {
 Update Staged Policy Configurations
 */
 
+// UpdateStagedOptsServerNameIndication represents server_name_indication information in policy configurations updation.
+type UpdateStagedOptsServerNameIndication struct {
+
+	// - The server name of Server Name Indication (SNI)
+	// - Must be unique in a policy
+	// - If `input_type` is `"fixed"` , the following restrictions apply
+	//   - Only `a-z A-Z 0-9 - . *` are allowed
+	//   - `"*"` and `"."` are count as double (2 characters)
+	ServerName *string `json:"server_name"`
+
+	// - You can choice the input type of the server name
+	InputType *string `json:"input_type,omitempty"`
+
+	// - Priority of Server Name Indication (SNI)
+	// - Must be unique in a policy
+	Priority *int `json:"priority"`
+
+	// - ID of the certificate that assigned to Server Name Indication (SNI)
+	// - The certificate need to be in `"UPLOADED"` state before used in a policy
+	// - The load balancer can be configured with up to 50 unique certificates, combining `policy.certificate_id` and `policy.server_name_indications.certificate_id`
+	CertificateID *string `json:"certificate_id"`
+}
+
 // UpdateStagedOpts represents options used to update existing Policy configurations.
 type UpdateStagedOpts struct {
 
@@ -431,6 +568,19 @@ type UpdateStagedOpts struct {
 	// - Persistence setting of the policy
 	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence *string `json:"persistence,omitempty"`
+
+	// - If `persistence` is `"none"`
+	//   - Must not set this parameter or set `0`
+	// - If `persistence` is `"source-ip"`
+	//   - The timeout (in minutes) during which the persistence remain after the latest traffic from the client is sent to the load balancer
+	//   - Default value is `5`
+	//   - This parameter can be set between `1` to `2000`
+	// - If `persistence` is `"cookie"`
+	//   - The expiration (in minutes) of the persistence set in the cookie that the load balancer returns to the client
+	//     - If you specify `0` , the cookie persists only for the current session
+	//   - Default value is `525600`
+	//   - This parameter can be set between `0` to `525600`
+	PersistenceTimeout *int `json:"persistence_timeout,omitempty"`
 
 	// - The timeout (in seconds) during which a session is allowed to remain inactive
 	// - There may be a time difference up to 60 seconds, between the set value and the actual timeout
@@ -452,6 +602,12 @@ type UpdateStagedOpts struct {
 	//   - The source IP address of the request is replaced with `virtual_ip_address` which is assigned to the interface from which the request was sent
 	//   - `X-Forwarded-For` header with the IP address of the client is added
 	SourceNat *string `json:"source_nat,omitempty"`
+
+	// - The list of Server Name Indications (SNIs) allows the policy to presents multiple certificates on the same listener
+	// - The SNI with the highest priority value will be used when multiple SNIs match
+	// - If `listener.protocol` is not `"https"`, must not set this parameter or set `[]`
+	//   - If you change `listener.protocol` from `"https"` to others, set `[]`
+	ServerNameIndications *[]UpdateStagedOptsServerNameIndication `json:"server_name_indications,omitempty"`
 
 	// - ID of the certificate that assigned to the policy
 	// - The certificate need to be in `"UPLOADED"` state before used in a policy
@@ -478,6 +634,16 @@ type UpdateStagedOpts struct {
 	// - The same member cannot be specified for the default target group and the backup target group
 	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
 	DefaultTargetGroupID *string `json:"default_target_group_id,omitempty"`
+
+	// - ID of the backup target group that assigned to the policy
+	// - If all members of the default target group are down, traffic is routed to the backup target group
+	// - If all members of the backup target group are down:
+	//   - When `sorry_page_url` is set, accesses are redirected to URL of the sorry page
+	//   - When `sorry_page_url` is not set, the load balancer does not respond
+	// - Set a different ID of the target group from `default_target_group_id`
+	// - The same member cannot be specified for the default target group and the backup target group
+	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
+	BackupTargetGroupID *string `json:"backup_target_group_id,omitempty"`
 
 	// - ID of the TLS policy that assigned to the policy
 	// - If `listener.protocol` is `"https"`, you can set this parameter explicitly

@@ -69,6 +69,11 @@ type ConfigurationInResponse struct {
 	//   - When `backup_target_group_id` of the rule is not set, traffic is routed to the target groups specified in the policy
 	TargetGroupID string `json:"target_group_id,omitempty"`
 
+	// - ID of the backup target group that assigned to the rule
+	// - If all members of the target group specified in the rule are down, traffic is routed to the backup target group specified in the rule
+	// - If all members of the backup target group specified in the rule are down, traffic is routed to the target groups specified in the policy
+	BackupTargetGroupID string `json:"backup_target_group_id,omitempty"`
+
 	// - Conditions of the rules to distribute accesses to the target groups
 	Conditions ConditionInResponse `json:"conditions,omitempty"`
 }
@@ -147,6 +152,11 @@ type Rule struct {
 	//   - When `backup_target_group_id` of the rule is set, traffic is routed to it
 	//   - When `backup_target_group_id` of the rule is not set, traffic is routed to the target groups specified in the policy
 	TargetGroupID string `json:"target_group_id,omitempty"`
+
+	// - ID of the backup target group that assigned to the rule
+	// - If all members of the target group specified in the rule are down, traffic is routed to the backup target group specified in the rule
+	// - If all members of the backup target group specified in the rule are down, traffic is routed to the target groups specified in the policy
+	BackupTargetGroupID string `json:"backup_target_group_id,omitempty"`
 
 	// - Conditions of the rules to distribute accesses to the target groups
 	Conditions ConditionInResponse `json:"conditions,omitempty"`

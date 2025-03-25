@@ -60,6 +60,9 @@ type Plan struct {
 	// - Maximum number of conditions in a rule
 	MaxNumberOfConditions int `json:"max_number_of_conditions"`
 
+	// - Maximum number of Server Name Indications (SNIs) in a policy
+	MaxNumberOfServerNameIndications int `json:"max_number_of_server_name_indications"`
+
 	// - Whether a new load balancer can be created with this plan
 	Enabled bool `json:"enabled"`
 }

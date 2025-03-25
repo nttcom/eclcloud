@@ -37,6 +37,11 @@ type ListOpts struct {
 	// - If all members of the target groups specified in the rule are down, traffic is routed to the target groups specified in the policy
 	TargetGroupID string `q:"target_group_id"`
 
+	// - ID of the backup target group that assigned to the rule
+	// - If all members of the target group are down, traffic is routed to the backup target group
+	// - If all members of the target groups specified in the rule are down, traffic is routed to the target groups specified in the policy
+	BackupTargetGroupID string `q:"backup_target_group_id"`
+
 	// - ID of the policy which the rule belongs to
 	PolicyID string `q:"policy_id"`
 
@@ -121,6 +126,14 @@ type CreateOpts struct {
 	// - The same member cannot be specified for the target group and the backup target group
 	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
 	TargetGroupID string `json:"target_group_id"`
+
+	// - ID of the backup target group that assigned to the rule
+	// - If all members of the target group specified in the rule are down, traffic is routed to the backup target group specified in the rule
+	// - If all members of the backup target group specified in the rule are down, traffic is routed to the target groups specified in the policy
+	// - Set a different ID of the target group from `target_group_id`
+	// - The same member cannot be specified for the target group and the backup target group
+	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
+	BackupTargetGroupID string `json:"backup_target_group_id,omitempty"`
 
 	// - ID of the policy which the rule belongs to
 	// - Set ID of the policy which has a listener in which protocol is either `"http"` or `"https"`
@@ -287,6 +300,14 @@ type CreateStagedOpts struct {
 	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
 	TargetGroupID string `json:"target_group_id,omitempty"`
 
+	// - ID of the backup target group that assigned to the rule
+	// - If all members of the target group specified in the rule are down, traffic is routed to the backup target group specified in the rule
+	// - If all members of the backup target group specified in the rule are down, traffic is routed to the target groups specified in the policy
+	// - Set a different ID of the target group from `target_group_id`
+	// - The same member cannot be specified for the target group and the backup target group
+	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
+	BackupTargetGroupID string `json:"backup_target_group_id,omitempty"`
+
 	// - Conditions of the rules to distribute accesses to the target groups
 	// - Set one or more condition
 	Conditions *CreateStagedOptsCondition `json:"conditions,omitempty"`
@@ -359,6 +380,14 @@ type UpdateStagedOpts struct {
 	// - The same member cannot be specified for the target group and the backup target group
 	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
 	TargetGroupID *string `json:"target_group_id,omitempty"`
+
+	// - ID of the backup target group that assigned to the rule
+	// - If all members of the target group specified in the rule are down, traffic is routed to the backup target group specified in the rule
+	// - If all members of the backup target group specified in the rule are down, traffic is routed to the target groups specified in the policy
+	// - Set a different ID of the target group from `target_group_id`
+	// - The same member cannot be specified for the target group and the backup target group
+	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
+	BackupTargetGroupID *string `json:"backup_target_group_id,omitempty"`
 
 	// - Conditions of the rules to distribute accesses to the target groups
 	// - Set one or more condition

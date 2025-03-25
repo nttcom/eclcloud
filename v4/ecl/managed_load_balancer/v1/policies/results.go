@@ -67,6 +67,17 @@ type ConfigurationInResponse struct {
 	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence string `json:"persistence,omitempty"`
 
+	// - If `persistence` is `"none"`
+	//   - Returns `0`
+	// - If `persistence` is `"source-ip"`
+	//   - The timeout (in minutes) during which the persistence remain after the latest traffic from the client is sent to the load balancer
+	//   - Default value is `5`
+	// - If `persistence` is `"cookie"`
+	//   - The expiration (in minutes) of the persistence set in the cookie that the load balancer returns to the client
+	//     - If you specify `0` , the cookie persists only for the current session
+	//   - Default value is `525600`
+	PersistenceTimeout int `json:"persistence_timeout,omitempty"`
+
 	// - The timeout (in seconds) during which a session is allowed to remain inactive
 	// - There may be a time difference up to 60 seconds, between the set value and the actual timeout
 	// - If `listener.protocol` is `"tcp"` or `"udp"`
@@ -86,6 +97,11 @@ type ConfigurationInResponse struct {
 	//   - `X-Forwarded-For` header with the IP address of the client is added
 	SourceNat string `json:"source_nat,omitempty"`
 
+	// - The list of Server Name Indications (SNIs) allows the policy to presents multiple certificates on the same listener
+	// - The SNI with the highest priority value will be used when multiple SNIs match
+	// - If protocol is not `"https"`, returns `[]`
+	ServerNameIndications []ServerNameIndicationInResponse `json:"server_name_indications,omitempty"`
+
 	// - ID of the certificate that assigned to the policy
 	// - If protocol is not `"https"`, returns `""`
 	CertificateID string `json:"certificate_id,omitempty"`
@@ -103,9 +119,33 @@ type ConfigurationInResponse struct {
 	//   - When both `backup_target_group_id` and `sorry_page_url` are not set, the load balancer does not respond
 	DefaultTargetGroupID string `json:"default_target_group_id,omitempty"`
 
+	// - ID of the backup target group that assigned to the policy
+	// - If all members of the default target group are down, traffic is routed to the backup target group
+	// - If all members of the backup target group are down:
+	//   - When `sorry_page_url` is set, accesses are redirected to URL of the sorry page
+	//   - When `sorry_page_url` is not set, the load balancer does not respond
+	BackupTargetGroupID string `json:"backup_target_group_id,omitempty"`
+
 	// - ID of the TLS policy that assigned to the policy
 	// - If protocol is not `"https"`, returns `""`
 	TLSPolicyID string `json:"tls_policy_id,omitempty"`
+}
+
+// ServerNameIndicationInResponse represents a server name indication in a policy.
+type ServerNameIndicationInResponse struct {
+
+	// - The server name of Server Name Indication (SNI)
+	ServerName string `json:"server_name"`
+
+	// - Input type of the server name
+	// - Default value is `"fixed"`
+	InputType string `json:"input_type"`
+
+	// - Priority of Server Name Indication (SNI)
+	Priority int `json:"priority"`
+
+	// - ID of the certificate that assigned to Server Name Indication (SNI)
+	CertificateID string `json:"certificate_id"`
 }
 
 // Policy represents a policy.
@@ -171,6 +211,17 @@ type Policy struct {
 	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence string `json:"persistence,omitempty"`
 
+	// - If `persistence` is `"none"`
+	//   - Returns `0`
+	// - If `persistence` is `"source-ip"`
+	//   - The timeout (in minutes) during which the persistence remain after the latest traffic from the client is sent to the load balancer
+	//   - Default value is `5`
+	// - If `persistence` is `"cookie"`
+	//   - The expiration (in minutes) of the persistence set in the cookie that the load balancer returns to the client
+	//     - If you specify `0` , the cookie persists only for the current session
+	//   - Default value is `525600`
+	PersistenceTimeout int `json:"persistence_timeout,omitempty"`
+
 	// - The timeout (in seconds) during which a session is allowed to remain inactive
 	// - There may be a time difference up to 60 seconds, between the set value and the actual timeout
 	// - If `listener.protocol` is `"tcp"` or `"udp"`
@@ -190,6 +241,11 @@ type Policy struct {
 	//   - `X-Forwarded-For` header with the IP address of the client is added
 	SourceNat string `json:"source_nat,omitempty"`
 
+	// - The list of Server Name Indications (SNIs) allows the policy to presents multiple certificates on the same listener
+	// - The SNI with the highest priority value will be used when multiple SNIs match
+	// - If protocol is not `"https"`, returns `[]`
+	ServerNameIndications []ServerNameIndicationInResponse `json:"server_name_indications,omitempty"`
+
 	// - ID of the certificate that assigned to the policy
 	// - If protocol is not `"https"`, returns `""`
 	CertificateID string `json:"certificate_id,omitempty"`
@@ -206,6 +262,13 @@ type Policy struct {
 	//   - When `sorry_page_url` is set, accesses are redirected to URL of the sorry page
 	//   - When both `backup_target_group_id` and `sorry_page_url` are not set, the load balancer does not respond
 	DefaultTargetGroupID string `json:"default_target_group_id,omitempty"`
+
+	// - ID of the backup target group that assigned to the policy
+	// - If all members of the default target group are down, traffic is routed to the backup target group
+	// - If all members of the backup target group are down:
+	//   - When `sorry_page_url` is set, accesses are redirected to URL of the sorry page
+	//   - When `sorry_page_url` is not set, the load balancer does not respond
+	BackupTargetGroupID string `json:"backup_target_group_id,omitempty"`
 
 	// - ID of the TLS policy that assigned to the policy
 	// - If protocol is not `"https"`, returns `""`
