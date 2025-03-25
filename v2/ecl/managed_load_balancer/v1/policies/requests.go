@@ -17,11 +17,11 @@ type ListOpts struct {
 	ID string `q:"id"`
 
 	// - Name of the resource
-	// - This field accepts single-byte characters only
+	// - This field accepts UTF-8 characters up to 3 bytes
 	Name string `q:"name"`
 
 	// - Description of the resource
-	// - This field accepts single-byte characters only
+	// - This field accepts UTF-8 characters up to 3 bytes
 	Description string `q:"description"`
 
 	// - Configuration status of the resource
@@ -46,6 +46,7 @@ type ListOpts struct {
 	SourceNat string `q:"source_nat"`
 
 	// - ID of the certificate that assigned to the policy
+	// - Also includes certificate contained in `server_name_indications`
 	CertificateID string `q:"certificate_id"`
 
 	// - ID of the health monitor that assigned to the policy
@@ -106,17 +107,18 @@ Create Policy
 type CreateOpts struct {
 
 	// - Name of the policy
-	// - This field accepts single-byte characters only
+	// - This field accepts UTF-8 characters up to 3 bytes
 	Name string `json:"name,omitempty"`
 
 	// - Description of the policy
-	// - This field accepts single-byte characters only
+	// - This field accepts UTF-8 characters up to 3 bytes
 	Description string `json:"description,omitempty"`
 
 	// - Tags of the policy
-	// - Set JSON object up to 32,768 characters
+	// - Set JSON object up to 32,767 characters
 	//   - Nested structure is permitted
-	// - This field accepts single-byte characters only
+	//   - The whitespace around separators ( `","` and `":"` ) are ignored
+	// - This field accepts UTF-8 characters up to 3 bytes
 	Tags map[string]interface{} `json:"tags,omitempty"`
 
 	// - Load balancing algorithm (method) of the policy
@@ -126,16 +128,16 @@ type CreateOpts struct {
 	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence string `json:"persistence,omitempty"`
 
-	// - The duration (in seconds) during which a session is allowed to remain inactive
+	// - The timeout (in seconds) during which a session is allowed to remain inactive
 	// - There may be a time difference up to 60 seconds, between the set value and the actual timeout
 	// - If `listener.protocol` is `"tcp"` or `"udp"`
-	//   - Default value is 120
+	//   - Default value is `120`
 	// - If `listener.protocol` is `"http"` or `"https"`
-	//   - Default value is 600
+	//   - Default value is `600`
 	//   - On session timeout, the load balancer sends TCP RST packets to both the client and the real server
 	IdleTimeout int `json:"idle_timeout,omitempty"`
 
-	// - URL of the sorry page to which accesses are redirected if all members in the target group are down
+	// - URL of the sorry page to which accesses are redirected if all members in the target groups are down
 	// - If `listener.protocol` is `"http"` or `"https"`, this parameter can be set
 	// - If `listener.protocol` is neither `"http"` nor `"https"`, must not set this parameter or set `""`
 	SorryPageUrl string `json:"sorry_page_url,omitempty"`
@@ -147,9 +149,10 @@ type CreateOpts struct {
 	SourceNat string `json:"source_nat,omitempty"`
 
 	// - ID of the certificate that assigned to the policy
-	// - You can set a ID of the certificate in which `ca_cert.status`, `ssl_cert.status` and `ssl_key.status` are all `"UPLOADED"`
+	// - The certificate need to be in `"UPLOADED"` state before used in a policy
 	// - If `listener.protocol` is `"https"`, set `certificate.id`
 	// - If `listener.protocol` is not `"https"`, must not set this parameter or set `""`
+	// - The load balancer can be configured with up to 50 unique certificates, combining `policy.certificate_id` and `policy.server_name_indications.certificate_id`
 	CertificateID string `json:"certificate_id,omitempty"`
 
 	// - ID of the health monitor that assigned to the policy
@@ -162,6 +165,11 @@ type CreateOpts struct {
 	ListenerID string `json:"listener_id"`
 
 	// - ID of the default target group that assigned to the policy
+	// - If all members of the default target group are down:
+	//   - When `backup_target_group_id` is set, traffic is routed to it
+	//   - When `sorry_page_url` is set, accesses are redirected to URL of the sorry page
+	//   - When both `backup_target_group_id` and `sorry_page_url` are not set, the load balancer does not respond
+	// - The same member cannot be specified for the default target group and the backup target group
 	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
 	DefaultTargetGroupID string `json:"default_target_group_id"`
 
@@ -248,17 +256,18 @@ Update Policy Attributes
 type UpdateOpts struct {
 
 	// - Name of the policy
-	// - This field accepts single-byte characters only
+	// - This field accepts UTF-8 characters up to 3 bytes
 	Name *string `json:"name,omitempty"`
 
 	// - Description of the policy
-	// - This field accepts single-byte characters only
+	// - This field accepts UTF-8 characters up to 3 bytes
 	Description *string `json:"description,omitempty"`
 
 	// - Tags of the policy
-	// - Set JSON object up to 32,768 characters
+	// - Set JSON object up to 32,767 characters
 	//   - Nested structure is permitted
-	// - This field accepts single-byte characters only
+	//   - The whitespace around separators ( `","` and `":"` ) are ignored
+	// - This field accepts UTF-8 characters up to 3 bytes
 	Tags *map[string]interface{} `json:"tags,omitempty"`
 }
 
@@ -315,16 +324,16 @@ type CreateStagedOpts struct {
 	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence string `json:"persistence,omitempty"`
 
-	// - The duration (in seconds) during which a session is allowed to remain inactive
+	// - The timeout (in seconds) during which a session is allowed to remain inactive
 	// - There may be a time difference up to 60 seconds, between the set value and the actual timeout
 	// - If `listener.protocol` is `"tcp"` or `"udp"`
-	//   - Default value is 120
+	//   - Default value is `120`
 	// - If `listener.protocol` is `"http"` or `"https"`
-	//   - Default value is 600
+	//   - Default value is `600`
 	//   - On session timeout, the load balancer sends TCP RST packets to both the client and the real server
 	IdleTimeout int `json:"idle_timeout,omitempty"`
 
-	// - URL of the sorry page to which accesses are redirected if all members in the target group are down
+	// - URL of the sorry page to which accesses are redirected if all members in the target groups are down
 	// - If `listener.protocol` is `"http"` or `"https"`, this parameter can be set
 	// - If `listener.protocol` is neither `"http"` nor `"https"`, must not set this parameter or set `""`
 	//   - If you change `listener.protocol` from `"http"` or `"https"` to others, set `""`
@@ -337,10 +346,11 @@ type CreateStagedOpts struct {
 	SourceNat string `json:"source_nat,omitempty"`
 
 	// - ID of the certificate that assigned to the policy
-	// - You can set a ID of the certificate in which `ca_cert.status`, `ssl_cert.status` and `ssl_key.status` are all `"UPLOADED"`
+	// - The certificate need to be in `"UPLOADED"` state before used in a policy
 	// - If `listener.protocol` is `"https"`, set `certificate.id`
 	// - If `listener.protocol` is not `"https"`, must not set this parameter or set `""`
 	//   - If you change `listener.protocol` from `"https"` to others, set `""`
+	// - The load balancer can be configured with up to 50 unique certificates, combining `policy.certificate_id` and `policy.server_name_indications.certificate_id`
 	CertificateID string `json:"certificate_id,omitempty"`
 
 	// - ID of the health monitor that assigned to the policy
@@ -353,6 +363,11 @@ type CreateStagedOpts struct {
 	ListenerID string `json:"listener_id,omitempty"`
 
 	// - ID of the default target group that assigned to the policy
+	// - If all members of the default target group are down:
+	//   - When `backup_target_group_id` is set, traffic is routed to it
+	//   - When `sorry_page_url` is set, accesses are redirected to URL of the sorry page
+	//   - When both `backup_target_group_id` and `sorry_page_url` are not set, the load balancer does not respond
+	// - The same member cannot be specified for the default target group and the backup target group
 	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
 	DefaultTargetGroupID string `json:"default_target_group_id,omitempty"`
 
@@ -417,16 +432,16 @@ type UpdateStagedOpts struct {
 	// - If `listener.protocol` is `"http"` or `"https"`, `"cookie"` is available
 	Persistence *string `json:"persistence,omitempty"`
 
-	// - The duration (in seconds) during which a session is allowed to remain inactive
+	// - The timeout (in seconds) during which a session is allowed to remain inactive
 	// - There may be a time difference up to 60 seconds, between the set value and the actual timeout
 	// - If `listener.protocol` is `"tcp"` or `"udp"`
-	//   - Default value is 120
+	//   - Default value is `120`
 	// - If `listener.protocol` is `"http"` or `"https"`
-	//   - Default value is 600
+	//   - Default value is `600`
 	//   - On session timeout, the load balancer sends TCP RST packets to both the client and the real server
 	IdleTimeout *int `json:"idle_timeout,omitempty"`
 
-	// - URL of the sorry page to which accesses are redirected if all members in the target group are down
+	// - URL of the sorry page to which accesses are redirected if all members in the target groups are down
 	// - If `listener.protocol` is `"http"` or `"https"`, this parameter can be set
 	// - If `listener.protocol` is neither `"http"` nor `"https"`, must not set this parameter or set `""`
 	//   - If you change `listener.protocol` from `"http"` or `"https"` to others, set `""`
@@ -439,10 +454,11 @@ type UpdateStagedOpts struct {
 	SourceNat *string `json:"source_nat,omitempty"`
 
 	// - ID of the certificate that assigned to the policy
-	// - You can set a ID of the certificate in which `ca_cert.status`, `ssl_cert.status` and `ssl_key.status` are all `"UPLOADED"`
+	// - The certificate need to be in `"UPLOADED"` state before used in a policy
 	// - If `listener.protocol` is `"https"`, set `certificate.id`
 	// - If `listener.protocol` is not `"https"`, must not set this parameter or set `""`
 	//   - If you change `listener.protocol` from `"https"` to others, set `""`
+	// - The load balancer can be configured with up to 50 unique certificates, combining `policy.certificate_id` and `policy.server_name_indications.certificate_id`
 	CertificateID *string `json:"certificate_id,omitempty"`
 
 	// - ID of the health monitor that assigned to the policy
@@ -455,6 +471,11 @@ type UpdateStagedOpts struct {
 	ListenerID *string `json:"listener_id,omitempty"`
 
 	// - ID of the default target group that assigned to the policy
+	// - If all members of the default target group are down:
+	//   - When `backup_target_group_id` is set, traffic is routed to it
+	//   - When `sorry_page_url` is set, accesses are redirected to URL of the sorry page
+	//   - When both `backup_target_group_id` and `sorry_page_url` are not set, the load balancer does not respond
+	// - The same member cannot be specified for the default target group and the backup target group
 	// - Must not set ID of the target group that `configuration_status` is `"DELETE_STAGED"`
 	DefaultTargetGroupID *string `json:"default_target_group_id,omitempty"`
 
