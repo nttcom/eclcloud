@@ -81,6 +81,12 @@ func TestCreatePolicy(t *testing.T) {
 		})
 
 	cli := ServiceClient()
+	serverNameIndication1 := policies.CreateOptsServerNameIndication{
+		ServerName:    "*.example.com",
+		InputType:     "fixed",
+		Priority:      1,
+		CertificateID: "fdfed344-e8ab-4f20-bd62-a4039453a389",
+	}
 
 	var tags map[string]interface{}
 	tagsJson := `{"key":"value"}`
@@ -89,20 +95,23 @@ func TestCreatePolicy(t *testing.T) {
 	th.AssertNoErr(t, err)
 
 	createOpts := policies.CreateOpts{
-		Name:                 "policy",
-		Description:          "description",
-		Tags:                 tags,
-		Algorithm:            "round-robin",
-		Persistence:          "cookie",
-		IdleTimeout:          600,
-		SorryPageUrl:         "https://example.com/sorry",
-		SourceNat:            "enable",
-		CertificateID:        "f57a98fe-d63e-4048-93a0-51fe163f30d7",
-		HealthMonitorID:      "dd7a96d6-4e66-4666-baca-a8555f0c472c",
-		ListenerID:           "68633f4f-f52a-402f-8572-b8173418904f",
-		DefaultTargetGroupID: "a44c4072-ed90-4b50-a33a-6b38fb10c7db",
-		TLSPolicyID:          "4ba79662-f2a1-41a4-a3d9-595799bbcd86",
-		LoadBalancerID:       "67fea379-cff0-4191-9175-de7d6941a040",
+		Name:                  "policy",
+		Description:           "description",
+		Tags:                  tags,
+		Algorithm:             "round-robin",
+		Persistence:           "cookie",
+		PersistenceTimeout:    525600,
+		IdleTimeout:           600,
+		SorryPageUrl:          "https://example.com/sorry",
+		SourceNat:             "enable",
+		ServerNameIndications: &[]policies.CreateOptsServerNameIndication{serverNameIndication1},
+		CertificateID:         "f57a98fe-d63e-4048-93a0-51fe163f30d7",
+		HealthMonitorID:       "dd7a96d6-4e66-4666-baca-a8555f0c472c",
+		ListenerID:            "68633f4f-f52a-402f-8572-b8173418904f",
+		DefaultTargetGroupID:  "a44c4072-ed90-4b50-a33a-6b38fb10c7db",
+		BackupTargetGroupID:   "f1a117f1-f8df-ce07-6c8c-4bbf103059b6",
+		TLSPolicyID:           "4ba79662-f2a1-41a4-a3d9-595799bbcd86",
+		LoadBalancerID:        "67fea379-cff0-4191-9175-de7d6941a040",
 	}
 
 	actual, err := policies.Create(cli, createOpts).Extract()
@@ -218,17 +227,26 @@ func TestCreateStagedPolicy(t *testing.T) {
 		})
 
 	cli := ServiceClient()
+	serverNameIndication1 := policies.CreateStagedOptsServerNameIndication{
+		ServerName:    "*.example.com",
+		InputType:     "fixed",
+		Priority:      1,
+		CertificateID: "fdfed344-e8ab-4f20-bd62-a4039453a389",
+	}
 	createStagedOpts := policies.CreateStagedOpts{
-		Algorithm:            "round-robin",
-		Persistence:          "cookie",
-		IdleTimeout:          600,
-		SorryPageUrl:         "https://example.com/sorry",
-		SourceNat:            "enable",
-		CertificateID:        "f57a98fe-d63e-4048-93a0-51fe163f30d7",
-		HealthMonitorID:      "dd7a96d6-4e66-4666-baca-a8555f0c472c",
-		ListenerID:           "68633f4f-f52a-402f-8572-b8173418904f",
-		DefaultTargetGroupID: "a44c4072-ed90-4b50-a33a-6b38fb10c7db",
-		TLSPolicyID:          "4ba79662-f2a1-41a4-a3d9-595799bbcd86",
+		Algorithm:             "round-robin",
+		Persistence:           "cookie",
+		PersistenceTimeout:    525600,
+		IdleTimeout:           600,
+		SorryPageUrl:          "https://example.com/sorry",
+		SourceNat:             "enable",
+		ServerNameIndications: &[]policies.CreateStagedOptsServerNameIndication{serverNameIndication1},
+		CertificateID:         "f57a98fe-d63e-4048-93a0-51fe163f30d7",
+		HealthMonitorID:       "dd7a96d6-4e66-4666-baca-a8555f0c472c",
+		ListenerID:            "68633f4f-f52a-402f-8572-b8173418904f",
+		DefaultTargetGroupID:  "a44c4072-ed90-4b50-a33a-6b38fb10c7db",
+		BackupTargetGroupID:   "f1a117f1-f8df-ce07-6c8c-4bbf103059b6",
+		TLSPolicyID:           "4ba79662-f2a1-41a4-a3d9-595799bbcd86",
 	}
 
 	actual, err := policies.CreateStaged(cli, id, createStagedOpts).Extract()
@@ -281,8 +299,20 @@ func TestUpdateStagedPolicy(t *testing.T) {
 
 	cli := ServiceClient()
 
+	serverNameIndication1ServerName := "*.example.com"
+	serverNameIndication1InputType := "fixed"
+	serverNameIndication1Priority := 1
+	serverNameIndication1CertificateID := "fdfed344-e8ab-4f20-bd62-a4039453a389"
+	serverNameIndication1 := policies.UpdateStagedOptsServerNameIndication{
+		ServerName:    &serverNameIndication1ServerName,
+		InputType:     &serverNameIndication1InputType,
+		Priority:      &serverNameIndication1Priority,
+		CertificateID: &serverNameIndication1CertificateID,
+	}
+
 	algorithm := "round-robin"
 	persistence := "cookie"
+	persistenceTimeout := 525600
 	idleTimeout := 600
 	sorryPageUrl := "https://example.com/sorry"
 	sourceNat := "enable"
@@ -290,18 +320,22 @@ func TestUpdateStagedPolicy(t *testing.T) {
 	healthMonitorID := "dd7a96d6-4e66-4666-baca-a8555f0c472c"
 	listenerID := "68633f4f-f52a-402f-8572-b8173418904f"
 	defaultTargetGroupID := "a44c4072-ed90-4b50-a33a-6b38fb10c7db"
+	backupTargetGroupID := "f1a117f1-f8df-ce07-6c8c-4bbf103059b6"
 	tlsPolicyID := "4ba79662-f2a1-41a4-a3d9-595799bbcd86"
 	updateStagedOpts := policies.UpdateStagedOpts{
-		Algorithm:            &algorithm,
-		Persistence:          &persistence,
-		IdleTimeout:          &idleTimeout,
-		SorryPageUrl:         &sorryPageUrl,
-		SourceNat:            &sourceNat,
-		CertificateID:        &certificateID,
-		HealthMonitorID:      &healthMonitorID,
-		ListenerID:           &listenerID,
-		DefaultTargetGroupID: &defaultTargetGroupID,
-		TLSPolicyID:          &tlsPolicyID,
+		Algorithm:             &algorithm,
+		Persistence:           &persistence,
+		PersistenceTimeout:    &persistenceTimeout,
+		IdleTimeout:           &idleTimeout,
+		SorryPageUrl:          &sorryPageUrl,
+		SourceNat:             &sourceNat,
+		ServerNameIndications: &[]policies.UpdateStagedOptsServerNameIndication{serverNameIndication1},
+		CertificateID:         &certificateID,
+		HealthMonitorID:       &healthMonitorID,
+		ListenerID:            &listenerID,
+		DefaultTargetGroupID:  &defaultTargetGroupID,
+		BackupTargetGroupID:   &backupTargetGroupID,
+		TLSPolicyID:           &tlsPolicyID,
 	}
 
 	actual, err := policies.UpdateStaged(cli, id, updateStagedOpts).Extract()

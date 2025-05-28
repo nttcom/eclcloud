@@ -26,6 +26,7 @@ var listResponse = fmt.Sprintf(`
             "max_number_of_members": 100,
             "max_number_of_rules": 50,
             "max_number_of_conditions": 5,
+            "max_number_of_server_name_indications": 50,
             "enabled": true
         }
     ]
@@ -48,6 +49,7 @@ func listResult() []plans.Plan {
 	plan1.MaxNumberOfMembers = 100
 	plan1.MaxNumberOfRules = 50
 	plan1.MaxNumberOfConditions = 5
+	plan1.MaxNumberOfServerNameIndications = 50
 	plan1.Enabled = true
 
 	return []plans.Plan{plan1}
@@ -70,6 +72,7 @@ var showResponse = fmt.Sprintf(`
         "max_number_of_members": 100,
         "max_number_of_rules": 50,
         "max_number_of_conditions": 5,
+        "max_number_of_server_name_indications": 50,
         "enabled": true
     }
 }`)
@@ -91,6 +94,7 @@ func showResult() *plans.Plan {
 	plan.MaxNumberOfMembers = 100
 	plan.MaxNumberOfRules = 50
 	plan.MaxNumberOfConditions = 5
+	plan.MaxNumberOfServerNameIndications = 50
 	plan.Enabled = true
 
 	return &plan
