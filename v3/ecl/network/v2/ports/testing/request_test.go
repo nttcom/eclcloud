@@ -287,4 +287,3 @@ func TestUpdatePortWithSecurityGroups(t *testing.T) {
 	th.CheckEquals(t, name, p.Name)
 	th.CheckDeepEquals(t, securityGroups, p.SecurityGroups)
 }
-

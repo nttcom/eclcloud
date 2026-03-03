@@ -37,17 +37,17 @@ type DeleteResult struct {
 
 // SecurityGroupRule represents a rule within a security group
 type SecurityGroupRule struct {
-	Description      string  `json:"description"`
-	Direction        string  `json:"direction"`
-	Ethertype        string  `json:"ethertype"`
-	ID               string  `json:"id"`
-	PortRangeMax     *int    `json:"port_range_max"`
-	PortRangeMin     *int    `json:"port_range_min"`
-	Protocol         string  `json:"protocol"`
-	RemoteGroupID    *string `json:"remote_group_id"`
-	RemoteIPPrefix   *string `json:"remote_ip_prefix"`
-	SecurityGroupID  string  `json:"security_group_id"`
-	TenantID         string  `json:"tenant_id"`
+	Description     string  `json:"description"`
+	Direction       string  `json:"direction"`
+	Ethertype       string  `json:"ethertype"`
+	ID              string  `json:"id"`
+	PortRangeMax    *int    `json:"port_range_max"`
+	PortRangeMin    *int    `json:"port_range_min"`
+	Protocol        string  `json:"protocol"`
+	RemoteGroupID   *string `json:"remote_group_id"`
+	RemoteIPPrefix  *string `json:"remote_ip_prefix"`
+	SecurityGroupID string  `json:"security_group_id"`
+	TenantID        string  `json:"tenant_id"`
 }
 
 // SecurityGroup represents a security group
