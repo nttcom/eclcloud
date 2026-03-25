@@ -288,3 +288,83 @@ var Port2 = ports.Port{
 }
 
 var ExpectedPortSlice = []ports.Port{Port1, Port2}
+
+const CreateWithSecurityGroupsRequest = `
+{
+	"port":
+	{
+		"admin_state_up": true,
+		"fixed_ips": [
+		{
+			"ip_address": "192.168.2.40",
+			"subnet_id": "ab49eb24-667f-4a4e-9421-b4d915bff416"
+		}
+		],
+		"name": "port_with_sg",
+		"network_id": "8f36b88a-443f-4d97-9751-34d34af9e782",
+		"security_groups": ["85cc3048-abc3-43cc-89b3-377341426ac5"],
+		"tenant_id": "dcb2d589c0c646d0bad45c0cf9f90cf1"
+	}
+}`
+
+const CreateWithSecurityGroupsResponse = `
+{
+	"port": {
+	  "admin_state_up": true,
+	  "allowed_address_pairs": [],
+	  "description": "",
+	  "device_id": "",
+	  "device_owner": "",
+	  "fixed_ips": [
+		{
+		  "ip_address": "192.168.2.40",
+		  "subnet_id": "ab49eb24-667f-4a4e-9421-b4d915bff416"
+		}
+	  ],
+	  "id": "port-with-sg-id",
+	  "mac_address": "fa:16:3e:b0:ca:f2",
+	  "name": "port_with_sg",
+	  "network_id": "8f36b88a-443f-4d97-9751-34d34af9e782",
+	  "security_groups": ["85cc3048-abc3-43cc-89b3-377341426ac5"],
+	  "segmentation_id": null,
+	  "segmentation_type": null,
+	  "status": "PENDING_CREATE",
+	  "tags": {},
+	  "tenant_id": "dcb2d589c0c646d0bad45c0cf9f90cf1"
+	}
+}`
+
+const UpdateWithSecurityGroupsRequest = `
+{
+	"port": {
+	  "name": "port_with_updated_sg",
+	  "security_groups": ["85cc3048-abc3-43cc-89b3-377341426ac5", "c0e1482e-2e3c-497e-8964-e4f818071700"]
+	}
+}`
+
+const UpdateWithSecurityGroupsResponse = `
+{
+	"port": {
+	  "admin_state_up": true,
+	  "allowed_address_pairs": [],
+	  "description": "",
+	  "device_id": "",
+	  "device_owner": "",
+	  "fixed_ips": [
+		{
+		  "ip_address": "192.168.2.40",
+		  "subnet_id": "ab49eb24-667f-4a4e-9421-b4d915bff416"
+		}
+	  ],
+	  "id": "port-with-sg-id",
+	  "mac_address": "fa:16:3e:b0:ca:f2",
+	  "name": "port_with_updated_sg",
+	  "network_id": "8f36b88a-443f-4d97-9751-34d34af9e782",
+	  "security_groups": ["85cc3048-abc3-43cc-89b3-377341426ac5", "c0e1482e-2e3c-497e-8964-e4f818071700"],
+	  "segmentation_id": null,
+	  "segmentation_type": null,
+	  "status": "PENDING_CREATE",
+	  "tags": {},
+	  "tenant_id": "dcb2d589c0c646d0bad45c0cf9f90cf1"
+	}
+}`

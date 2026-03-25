@@ -219,3 +219,71 @@ func TestDeletePort(t *testing.T) {
 	res := ports.Delete(fake.ServiceClient(), "ac57c5c9-aaf4-4ffc-b8b8-f1ef84656730")
 	th.AssertNoErr(t, res.Err)
 }
+
+func TestCreatePortWithSecurityGroups(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc("/v2.0/ports", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "POST")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+		th.TestHeader(t, r, "Content-Type", "application/json")
+		th.TestHeader(t, r, "Accept", "application/json")
+		th.TestJSONRequest(t, r, CreateWithSecurityGroupsRequest)
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusCreated)
+
+		fmt.Fprintf(w, CreateWithSecurityGroupsResponse)
+	})
+
+	asu := true
+	securityGroups := []string{"85cc3048-abc3-43cc-89b3-377341426ac5"}
+
+	options := &ports.CreateOpts{
+		AdminStateUp: &asu,
+		FixedIPs: []ports.IP{{
+			IPAddress: "192.168.2.40",
+			SubnetID:  "ab49eb24-667f-4a4e-9421-b4d915bff416",
+		}},
+		Name:           "port_with_sg",
+		NetworkID:      "8f36b88a-443f-4d97-9751-34d34af9e782",
+		SecurityGroups: &securityGroups,
+		TenantID:       "dcb2d589c0c646d0bad45c0cf9f90cf1",
+	}
+	p, err := ports.Create(fake.ServiceClient(), options).Extract()
+	th.AssertNoErr(t, err)
+
+	th.CheckEquals(t, "port_with_sg", p.Name)
+	th.CheckDeepEquals(t, securityGroups, p.SecurityGroups)
+}
+
+func TestUpdatePortWithSecurityGroups(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc("/v2.0/ports/port-with-sg-id", func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "PUT")
+		th.TestHeader(t, r, "X-Auth-Token", fake.TokenID)
+		th.TestHeader(t, r, "Content-Type", "application/json")
+		th.TestHeader(t, r, "Accept", "application/json")
+		th.TestJSONRequest(t, r, UpdateWithSecurityGroupsRequest)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprintf(w, UpdateWithSecurityGroupsResponse)
+	})
+
+	name := "port_with_updated_sg"
+	securityGroups := []string{"85cc3048-abc3-43cc-89b3-377341426ac5", "c0e1482e-2e3c-497e-8964-e4f818071700"}
+
+	options := ports.UpdateOpts{
+		Name:           &name,
+		SecurityGroups: &securityGroups,
+	}
+	p, err := ports.Update(fake.ServiceClient(), "port-with-sg-id", options).Extract()
+	th.AssertNoErr(t, err)
+
+	th.CheckEquals(t, name, p.Name)
+	th.CheckDeepEquals(t, securityGroups, p.SecurityGroups)
+}
