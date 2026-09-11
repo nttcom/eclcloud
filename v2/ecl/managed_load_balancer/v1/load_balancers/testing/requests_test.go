@@ -268,6 +268,68 @@ func TestSystemUpdateLoadBalancer(t *testing.T) {
 	th.AssertNoErr(t, err)
 }
 
+func TestSystemUpdateWithRollbackLoadBalancer(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc(
+		fmt.Sprintf("/v1.0/load_balancers/%s/action", id),
+		func(w http.ResponseWriter, r *http.Request) {
+			th.TestMethod(t, r, "POST")
+			th.TestHeader(t, r, "X-Auth-Token", TokenID)
+			th.TestHeader(t, r, "Content-Type", "application/json")
+			th.TestHeader(t, r, "Accept", "application/json")
+			th.TestJSONRequest(t, r, systemUpdateWithRollbackRequest)
+
+			w.Header().Add("Content-Type", "application/json")
+			w.WriteHeader(http.StatusNoContent)
+		})
+
+	cli := ServiceClient()
+	rollback := true
+	systemUpdate := load_balancers.ActionOptsSystemUpdate{
+		SystemUpdateID: "31746df7-92f9-4b5e-ad05-59f6684a54eb",
+		Rollback:       &rollback,
+	}
+	actionOpts := load_balancers.ActionOpts{
+		SystemUpdate: &systemUpdate,
+	}
+
+	err := load_balancers.Action(cli, id, actionOpts).ExtractErr()
+
+	th.AssertNoErr(t, err)
+}
+
+func TestChangePlanLoadBalancer(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	th.Mux.HandleFunc(
+		fmt.Sprintf("/v1.0/load_balancers/%s/action", id),
+		func(w http.ResponseWriter, r *http.Request) {
+			th.TestMethod(t, r, "POST")
+			th.TestHeader(t, r, "X-Auth-Token", TokenID)
+			th.TestHeader(t, r, "Content-Type", "application/json")
+			th.TestHeader(t, r, "Accept", "application/json")
+			th.TestJSONRequest(t, r, changePlanRequest)
+
+			w.Header().Add("Content-Type", "application/json")
+			w.WriteHeader(http.StatusNoContent)
+		})
+
+	cli := ServiceClient()
+	changePlan := load_balancers.ActionOptsChangePlan{
+		PlanID: "00713021-9aea-41da-9a88-87760c08fa72",
+	}
+	actionOpts := load_balancers.ActionOpts{
+		ChangePlan: &changePlan,
+	}
+
+	err := load_balancers.Action(cli, id, actionOpts).ExtractErr()
+
+	th.AssertNoErr(t, err)
+}
+
 func TestApplyConfigurationsAndSystemUpdateLoadBalancer(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()

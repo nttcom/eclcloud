@@ -20,7 +20,8 @@ var listResponse = fmt.Sprintf(`
             "limit_datetime": "2022-10-11 12:59:59",
             "current_revision": 1,
             "next_revision": 2,
-            "applicable": true
+            "applicable": true,
+            "is_rollback_allowed": true
         }
     ]
 }`)
@@ -37,6 +38,7 @@ func listResult() []system_updates.SystemUpdate {
 	systemUpdate1.CurrentRevision = 1
 	systemUpdate1.NextRevision = 2
 	systemUpdate1.Applicable = true
+	systemUpdate1.IsRollbackAllowed = true
 
 	return []system_updates.SystemUpdate{systemUpdate1}
 }
@@ -52,7 +54,8 @@ var showResponse = fmt.Sprintf(`
         "limit_datetime": "2022-10-11 12:59:59",
         "current_revision": 1,
         "next_revision": 2,
-        "applicable": true
+        "applicable": true,
+        "is_rollback_allowed": true
     }
 }`)
 
@@ -68,6 +71,7 @@ func showResult() *system_updates.SystemUpdate {
 	systemUpdate.CurrentRevision = 1
 	systemUpdate.NextRevision = 2
 	systemUpdate.Applicable = true
+	systemUpdate.IsRollbackAllowed = true
 
 	return &systemUpdate
 }

@@ -422,11 +422,26 @@ var systemUpdateRequest = fmt.Sprintf(`
     }
 }`)
 
+var systemUpdateWithRollbackRequest = fmt.Sprintf(`
+{
+    "system-update": {
+        "system_update_id": "31746df7-92f9-4b5e-ad05-59f6684a54eb",
+        "rollback": true
+    }
+}`)
+
 var applyConfigurationsAndSystemUpdateRequest = fmt.Sprintf(`
 {
     "apply-configurations": null,
     "system-update": {
         "system_update_id": "31746df7-92f9-4b5e-ad05-59f6684a54eb"
+    }
+}`)
+
+var changePlanRequest = fmt.Sprintf(`
+{
+    "change-plan": {
+        "plan_id": "00713021-9aea-41da-9a88-87760c08fa72"
     }
 }`)
 
