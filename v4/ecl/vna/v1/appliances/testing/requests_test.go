@@ -315,3 +315,37 @@ func TestUpdateApplianceAllowedAddressPairs(t *testing.T) {
 
 	th.AssertEquals(t, ap.ID, idAppliance1)
 }
+
+func TestExportConfigAppliance(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
+	url := fmt.Sprintf("/v1.0/virtual_network_appliances/%s/export-config", idAppliance1)
+	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
+		th.TestMethod(t, r, "POST")
+		th.TestHeader(t, r, "X-Auth-Token", TokenID)
+		th.TestHeader(t, r, "Content-Type", "application/json")
+		th.TestHeader(t, r, "Accept", "application/json")
+		th.TestJSONRequest(t, r, exportConfigRequest)
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		fmt.Fprint(w, exportConfigResponse)
+	})
+
+	exportConfigOpts := appliances.ExportConfigOpts{
+		Format: "set",
+	}
+
+	actual, err := appliances.ExportConfig(ServiceClient(), idAppliance1, exportConfigOpts).Extract()
+	th.AssertNoErr(t, err)
+	th.CheckDeepEquals(t, &expectedExportConfig, actual)
+}
+
+func TestExportConfigApplianceWithoutFormat(t *testing.T) {
+	res := appliances.ExportConfig(ServiceClient(), idAppliance1, appliances.ExportConfigOpts{})
+	if res.Err == nil {
+		t.Fatal("expected error when format is not specified")
+	}
+}
