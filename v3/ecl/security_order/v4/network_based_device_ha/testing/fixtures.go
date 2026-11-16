@@ -1,7 +1,7 @@
 package testing
 
 import (
-	security "github.com/nttcom/eclcloud/v3/ecl/security_order/v3/network_based_device_ha"
+	security "github.com/nttcom/eclcloud/v3/ecl/security_order/v4/network_based_device_ha"
 )
 
 const listResponse = `

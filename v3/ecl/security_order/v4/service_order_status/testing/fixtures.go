@@ -1,7 +1,7 @@
 package testing
 
 import (
-	order "github.com/nttcom/eclcloud/v3/ecl/security_order/v3/service_order_status"
+	order "github.com/nttcom/eclcloud/v3/ecl/security_order/v4/service_order_status"
 )
 
 const getResponse = `

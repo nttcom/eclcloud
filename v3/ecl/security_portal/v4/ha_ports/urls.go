@@ -7,6 +7,6 @@ import (
 )
 
 func updateURL(client *eclcloud.ServiceClient, hostName string) string {
-	url := fmt.Sprintf("ecl-api/ports/utm/ha/%s", hostName)
+	url := fmt.Sprintf("ecl-api/v4/ports/utm/ha/%s", hostName)
 	return client.ServiceURL(url)
 }

@@ -44,7 +44,7 @@ type UpdateQueryOptsBuilder interface {
 
 // UpdateQueryOpts represents query strings for updating port.
 type UpdateQueryOpts struct {
-	TenantID  string `q:"tenantid"`
+	TenantID  string `q:"tenant_id"`
 	UserToken string `q:"usertoken"`
 }
 

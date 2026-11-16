@@ -5,5 +5,5 @@ import (
 )
 
 func listURL(client *eclcloud.ServiceClient) string {
-	return client.ServiceURL("ecl-api/devices")
+	return client.ServiceURL("ecl-api/v4/devices")
 }

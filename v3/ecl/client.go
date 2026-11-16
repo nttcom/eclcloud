@@ -372,6 +372,22 @@ func NewSecurityPortalV3(client *eclcloud.ProviderClient, eo eclcloud.EndpointOp
 	return sc, err
 }
 
+// NewSecurityOrderV4 creates a ServiceClient that may be used to access the v4 Security
+// Order API service.
+func NewSecurityOrderV4(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
+	sc, err := initClientOpts(client, eo, "security-order-fo")
+	// sc.ResourceBase = sc.Endpoint + "v4/"
+	return sc, err
+}
+
+// NewSecurityPortalV4 creates a ServiceClient that may be used to access the v4 Security
+// Portal API service.
+func NewSecurityPortalV4(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
+	sc, err := initClientOpts(client, eo, "security-operation-fo")
+	// sc.ResourceBase = sc.Endpoint + "v4/"
+	return sc, err
+}
+
 // NewDedicatedHypervisorV1 creates a ServiceClient that may be used to access the v1 Dedicated Hypervisor service.
 func NewDedicatedHypervisorV1(client *eclcloud.ProviderClient, eo eclcloud.EndpointOpts) (*eclcloud.ServiceClient, error) {
 	return initClientOpts(client, eo, "dedicated-hypervisor")

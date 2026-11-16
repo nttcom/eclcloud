@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	order "github.com/nttcom/eclcloud/v3/ecl/security_order/v3/service_order_status"
+	order "github.com/nttcom/eclcloud/v3/ecl/security_order/v4/service_order_status"
 
 	th "github.com/nttcom/eclcloud/v3/testhelper"
 	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
@@ -15,7 +15,7 @@ func TestGetOrder(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := "/API/ScreenEventFGSOrderProgressRate"
+	url := "/API/v4/ScreenEventFGSOrderProgressRate"
 	fmt.Println(url)
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")

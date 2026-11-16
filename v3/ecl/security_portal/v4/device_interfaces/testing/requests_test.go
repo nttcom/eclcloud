@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v3/device_interfaces"
+	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v4/device_interfaces"
 	"github.com/nttcom/eclcloud/v3/pagination"
 
 	th "github.com/nttcom/eclcloud/v3/testhelper"
@@ -16,7 +16,7 @@ func TestListDeviceInterfaces(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := fmt.Sprintf("/ecl-api/devices/%s/interfaces", deviceUUID)
+	url := fmt.Sprintf("/ecl-api/v4/devices/%s/interfaces", deviceUUID)
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 
@@ -41,7 +41,7 @@ func TestListDeviceInterfaceAllPages(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := fmt.Sprintf("/ecl-api/devices/%s/interfaces", deviceUUID)
+	url := fmt.Sprintf("/ecl-api/v4/devices/%s/interfaces", deviceUUID)
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 

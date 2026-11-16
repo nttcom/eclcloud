@@ -19,6 +19,6 @@ func getURL(client *eclcloud.ServiceClient, deviceType string) string {
 		part = "FGS"
 	}
 
-	url := fmt.Sprintf("API/ScreenEvent%sOrderProgressRate", part)
+	url := fmt.Sprintf("API/v4/ScreenEvent%sOrderProgressRate", part)
 	return client.ServiceURL(url)
 }

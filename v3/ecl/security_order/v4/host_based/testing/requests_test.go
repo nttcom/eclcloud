@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	security "github.com/nttcom/eclcloud/v3/ecl/security_order/v3/host_based"
+	security "github.com/nttcom/eclcloud/v3/ecl/security_order/v4/host_based"
 
 	th "github.com/nttcom/eclcloud/v3/testhelper"
 	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
@@ -15,7 +15,7 @@ func TestGetHostBasedSecurity(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := "/API/ScreenEventHBSOrderInfoGet"
+	url := "/API/v4/ScreenEventHBSOrderInfoGet"
 	fmt.Println(url)
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
@@ -34,7 +34,7 @@ func TestCreateHostBasedSecurity(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/API/SoEntryHBS", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/API/v4/SoEntryHBS", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "POST")
 		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)
 		th.TestJSONRequest(t, r, createRequest)
@@ -64,7 +64,7 @@ func TestUpdateHostBasedSecurityTypeM1(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := "/API/SoEntryHBS"
+	url := "/API/v4/SoEntryHBS"
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "POST")
 		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)
@@ -93,7 +93,7 @@ func TestUpdateHostBasedSecurityTypeM2(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := "/API/SoEntryHBS"
+	url := "/API/v4/SoEntryHBS"
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "POST")
 		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)
@@ -122,7 +122,7 @@ func TestDeleteDevice(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := "/API/SoEntryHBS"
+	url := "/API/v4/SoEntryHBS"
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "POST")
 		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)

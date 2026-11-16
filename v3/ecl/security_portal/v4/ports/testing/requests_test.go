@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v3/ports"
+	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v4/ports"
 
 	th "github.com/nttcom/eclcloud/v3/testhelper"
 	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
@@ -15,7 +15,7 @@ func TestUpdatePort(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := "/ecl-api/ports/utm/CES11995"
+	url := "/ecl-api/v4/ports/utm/CES11995"
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "PUT")
 		th.TestJSONRequest(t, r, updateRequest)

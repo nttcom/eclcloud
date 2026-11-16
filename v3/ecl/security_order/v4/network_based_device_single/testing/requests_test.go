@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	security "github.com/nttcom/eclcloud/v3/ecl/security_order/v3/network_based_device_single"
+	security "github.com/nttcom/eclcloud/v3/ecl/security_order/v4/network_based_device_single"
 	"github.com/nttcom/eclcloud/v3/pagination"
 
 	th "github.com/nttcom/eclcloud/v3/testhelper"
@@ -16,7 +16,7 @@ func TestListDevice(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/API/ScreenEventFGSDeviceGet", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/API/v4/ScreenEventFGSDeviceGet", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)
 
@@ -41,7 +41,7 @@ func TestListDeviceZoneAllPages(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/API/ScreenEventFGSDeviceGet", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/API/v4/ScreenEventFGSDeviceGet", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)
 
@@ -60,7 +60,7 @@ func TestCreateDevice(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/API/SoEntryFGS", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/API/v4/SoEntryFGS", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "POST")
 		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)
 		th.TestJSONRequest(t, r, createRequest)
@@ -91,7 +91,7 @@ func TestUpdateDevice(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := "/API/SoEntryFGS"
+	url := "/API/v4/SoEntryFGS"
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "POST")
 		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)
@@ -123,7 +123,7 @@ func TestDeleteDevice(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := "/API/SoEntryFGS"
+	url := "/API/v4/SoEntryFGS"
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "POST")
 		th.TestHeader(t, r, "X-Auth-Token", fakeclient.TokenID)

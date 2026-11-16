@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v3/processes"
+	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v4/processes"
 
 	th "github.com/nttcom/eclcloud/v3/testhelper"
 	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
@@ -15,7 +15,7 @@ func TestGetProcess(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := fmt.Sprintf("/ecl-api/process/%s/status", processID)
+	url := fmt.Sprintf("/ecl-api/v4/process/%s/status", processID)
 	fmt.Println(url)
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")

@@ -13,7 +13,7 @@ type commonResult struct {
 // response of device interface api result.
 type DeviceInterface struct {
 	OSIPAddress  string `json:"os_ip_address"`
-	MSAPortID    string `json:"msa_port_id"`
+	PortID       string `json:"port_id"`
 	OSPortName   string `json:"os_port_name"`
 	OSPortID     string `json:"os_port_id"`
 	OSNetworkID  string `json:"os_network_id"`

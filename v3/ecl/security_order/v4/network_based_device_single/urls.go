@@ -15,24 +15,24 @@ func getURLPartFromDeviceType(deviceType string) string {
 
 func listURL(client *eclcloud.ServiceClient, deviceType string) string {
 	part := getURLPartFromDeviceType(deviceType)
-	url := fmt.Sprintf("API/ScreenEventFG%sDeviceGet", part)
+	url := fmt.Sprintf("API/v4/ScreenEventFG%sDeviceGet", part)
 	return client.ServiceURL(url)
 }
 
 func createURL(client *eclcloud.ServiceClient, deviceType string) string {
 	part := getURLPartFromDeviceType(deviceType)
-	url := fmt.Sprintf("API/SoEntryFG%s", part)
+	url := fmt.Sprintf("API/v4/SoEntryFG%s", part)
 	return client.ServiceURL(url)
 }
 
 func deleteURL(client *eclcloud.ServiceClient, deviceType string) string {
 	part := getURLPartFromDeviceType(deviceType)
-	url := fmt.Sprintf("API/SoEntryFG%s", part)
+	url := fmt.Sprintf("API/v4/SoEntryFG%s", part)
 	return client.ServiceURL(url)
 }
 
 func updateURL(client *eclcloud.ServiceClient, deviceType string) string {
 	part := getURLPartFromDeviceType(deviceType)
-	url := fmt.Sprintf("API/SoEntryFG%s", part)
+	url := fmt.Sprintf("API/v4/SoEntryFG%s", part)
 	return client.ServiceURL(url)
 }

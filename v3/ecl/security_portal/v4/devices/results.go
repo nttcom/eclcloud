@@ -12,12 +12,11 @@ type commonResult struct {
 // Device represents the result of a each element in
 // response of device api result.
 type Device struct {
-	MSADeviceID        string `json:"msa_device_id"`
+	DeviceID           string `json:"device_id"`
 	OSServerID         string `json:"os_server_id"`
 	OSServerName       string `json:"os_server_name"`
 	OSAvailabilityZone string `json:"os_availability_zone"`
-	OSAdminUserName    string `json:"os_admin_username"`
-	MSADeviceType      string `json:"msa_device_type"`
+	DeviceType         string `json:"device_type"`
 	OSServerStatus     string `json:"os_server_status"`
 }
 

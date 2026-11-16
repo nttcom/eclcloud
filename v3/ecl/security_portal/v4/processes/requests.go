@@ -12,7 +12,7 @@ type GetOptsBuilder interface {
 
 // GetOpts represents result of order API response.
 type GetOpts struct {
-	TenantID  string `q:"tenantid"`
+	TenantID  string `q:"tenant_id"`
 	UserToken string `q:"usertoken"`
 }
 

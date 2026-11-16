@@ -1,7 +1,7 @@
 package testing
 
 import (
-	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v3/device_interfaces"
+	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v4/device_interfaces"
 )
 
 const deviceUUID = "cad6e00a-2af9-491c-b732-ca5688d147f5"
@@ -11,7 +11,7 @@ const listResponse = `
     "device_interfaces": [
         {
             "os_ip_address": "192.168.1.50",
-            "msa_port_id": "port4",
+            "port_id": "port4",
             "os_port_name": "port4-CES11892",
             "os_port_id": "82ebe045-9c9a-4088-8b33-cb0d590079aa",
             "os_network_id": "5ef9c597-15fe-431c-84b9-88d00d567202",
@@ -21,7 +21,7 @@ const listResponse = `
         },
         {
             "os_ip_address": "192.168.2.50",
-            "msa_port_id": "port7",
+            "port_id": "port7",
             "os_port_name": "port7-CES11892",
             "os_port_id": "82ebe045-9c9a-4088-8b33-cb0d590079aa",
             "os_network_id": "5ef9c597-15fe-431c-84b9-88d00d567203",
@@ -39,7 +39,7 @@ var expectedDeviceInterfacesSlice = []device_interfaces.DeviceInterface{
 
 var firstDeviceInterface = device_interfaces.DeviceInterface{
 	OSIPAddress:  "192.168.1.50",
-	MSAPortID:    "port4",
+	PortID:       "port4",
 	OSPortName:   "port4-CES11892",
 	OSPortID:     "82ebe045-9c9a-4088-8b33-cb0d590079aa",
 	OSNetworkID:  "5ef9c597-15fe-431c-84b9-88d00d567202",
@@ -50,7 +50,7 @@ var firstDeviceInterface = device_interfaces.DeviceInterface{
 
 var secondDeviceInterface = device_interfaces.DeviceInterface{
 	OSIPAddress:  "192.168.2.50",
-	MSAPortID:    "port7",
+	PortID:       "port7",
 	OSPortName:   "port7-CES11892",
 	OSPortID:     "82ebe045-9c9a-4088-8b33-cb0d590079aa",
 	OSNetworkID:  "5ef9c597-15fe-431c-84b9-88d00d567203",

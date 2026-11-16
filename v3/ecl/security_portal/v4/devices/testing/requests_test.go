@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v3/devices"
+	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v4/devices"
 	"github.com/nttcom/eclcloud/v3/pagination"
 
 	th "github.com/nttcom/eclcloud/v3/testhelper"
@@ -16,7 +16,7 @@ func TestListDevices(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/ecl-api/devices", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/ecl-api/v4/devices", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 
 		w.Header().Add("Content-Type", "application/json")
@@ -40,7 +40,7 @@ func TestListDeviceAllPages(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	th.Mux.HandleFunc("/ecl-api/devices", func(w http.ResponseWriter, r *http.Request) {
+	th.Mux.HandleFunc("/ecl-api/v4/devices", func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "GET")
 
 		w.Header().Add("Content-Type", "application/json")
