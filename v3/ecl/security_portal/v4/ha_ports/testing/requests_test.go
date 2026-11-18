@@ -5,17 +5,17 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v4/ports"
+	"github.com/nttcom/eclcloud/v3/ecl/security_portal/v4/ha_ports"
 
 	th "github.com/nttcom/eclcloud/v3/testhelper"
 	fakeclient "github.com/nttcom/eclcloud/v3/testhelper/client"
 )
 
-func TestUpdatePort(t *testing.T) {
+func TestUpdateHAPort(t *testing.T) {
 	th.SetupHTTP()
 	defer th.TeardownHTTP()
 
-	url := "/ecl-api/v4/ports/utm/CES11995"
+	url := "/ecl-api/v4/ports/utm/ha/CES11995"
 	th.Mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		th.TestMethod(t, r, "PUT")
 		th.TestJSONRequest(t, r, updateRequest)
@@ -25,12 +25,12 @@ func TestUpdatePort(t *testing.T) {
 		fmt.Fprint(w, updateResponse)
 	})
 
-	updateOpts := ports.UpdateOpts{
-		Port: []ports.SinglePort{
+	updateOpts := ha_ports.UpdateOpts{
+		Port: []ha_ports.SinglePort{
 			{
 				Comment:    "port 0 comment",
 				EnablePort: "true",
-				IPAddress:  "192.168.1.50/24",
+				IPAddress:  []string{"192.168.1.50/24"},
 				MTU:        "1500",
 				NetworkID:  "32314bd2-3583-4fb9-b622-9b121e04e007",
 				SubnetID:   "7fd77711-abae-4828-93f1-f3d682a8771f",
@@ -38,9 +38,8 @@ func TestUpdatePort(t *testing.T) {
 		},
 	}
 
-	actual, err := ports.Update(
+	actual, err := ha_ports.Update(
 		fakeclient.ServiceClient(),
-		"utm",
 		"CES11995",
 		updateOpts,
 		nil).Extract()

@@ -115,7 +115,7 @@ func Delete(client *eclcloud.ServiceClient, deviceType string, opts DeleteOptsBu
 		r.Err = err
 		return
 	}
-	_, r.Err = client.Post(createURL(client), &b, &r.Body, &eclcloud.RequestOpts{
+	_, r.Err = client.Post(deleteURL(client), &b, &r.Body, &eclcloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 	return
