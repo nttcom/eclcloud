@@ -344,6 +344,9 @@ func TestExportConfigAppliance(t *testing.T) {
 }
 
 func TestExportConfigApplianceWithoutFormat(t *testing.T) {
+	th.SetupHTTP()
+	defer th.TeardownHTTP()
+
 	res := appliances.ExportConfig(ServiceClient(), idAppliance1, appliances.ExportConfigOpts{})
 	if res.Err == nil {
 		t.Fatal("expected error when format is not specified")
