@@ -1063,3 +1063,23 @@ var updateAllowedAddressPairsResponse = fmt.Sprintf(`
 	idAppliance1,
 	idVirtualNetworkAppliancePlan,
 )
+
+var exportConfigRequest = `
+{
+	"format": "set"
+}
+`
+
+var exportConfigResponse = `
+{
+	"configuration": {
+		"format": "set",
+		"data": "c2V0IHN5c3RlbSBob3N0LW5hbWUgdnNyeAo="
+	}
+}
+`
+
+var expectedExportConfig = appliances.Configuration{
+	Format: "set",
+	Data:   "c2V0IHN5c3RlbSBob3N0LW5hbWUgdnNyeAo=",
+}
