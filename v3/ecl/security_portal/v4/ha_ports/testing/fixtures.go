@@ -19,11 +19,11 @@ const updateRequest = `{
 
 const updateResponse = `{
     "message": "The process launch request has been accepted",
-	"processId": 85385
+	"processId": "13c683cb-be44-4e38-b67c-666d532b1a06"
 }`
 
 var expectedResult = ha_ports.UpdateProcess{
 	Message:   "The process launch request has been accepted",
-	ProcessID: 85385,
-	ID:        "85385",
+	ProcessID: "13c683cb-be44-4e38-b67c-666d532b1a06",
+	ID:        "13c683cb-be44-4e38-b67c-666d532b1a06",
 }

@@ -12,6 +12,7 @@ const updateRequest = `{
 			"ip_address": "192.168.1.50/24",
 			"mtu":"1500",
 			"network_id": "32314bd2-3583-4fb9-b622-9b121e04e007",
+			"port_status": "up",
 			"subnet_id": "7fd77711-abae-4828-93f1-f3d682a8771f"
 		}
 	]
@@ -19,11 +20,11 @@ const updateRequest = `{
 
 const updateResponse = `{
     "message": "The process launch request has been accepted",
-	"processId": 85385
+	"processId": "13c683cb-be44-4e38-b67c-666d532b1a06"
 }`
 
 var expectedResult = ports.UpdateProcess{
 	Message:   "The process launch request has been accepted",
-	ProcessID: 85385,
-	ID:        "85385",
+	ProcessID: "13c683cb-be44-4e38-b67c-666d532b1a06",
+	ID:        "13c683cb-be44-4e38-b67c-666d532b1a06",
 }

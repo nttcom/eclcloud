@@ -14,6 +14,7 @@ type UpdateOptsBuilder interface {
 type SinglePort struct {
 	EnablePort string `json:"enable_port" required:"true"`
 	IPAddress  string `json:"ip_address,omitempty"`
+	PortStatus string `json:"port_status,omitempty"`
 	NetworkID  string `json:"network_id,omitempty"`
 	SubnetID   string `json:"subnet_id,omitempty"`
 	MTU        string `json:"mtu,omitempty"`
