@@ -2,7 +2,6 @@ package ports
 
 import (
 	"encoding/json"
-	"strconv"
 
 	"github.com/nttcom/eclcloud/v3"
 	"github.com/nttcom/eclcloud/v3/pagination"
@@ -35,7 +34,7 @@ type UpdateResult struct {
 // response of port api result.
 type UpdateProcess struct {
 	Message   string `json:"message"`
-	ProcessID int    `json:"processId"`
+	ProcessID string `json:"processId"`
 	ID        string `json:"-"`
 }
 
@@ -48,10 +47,9 @@ type ProcessPage struct {
 // UnmarshalJSON function overrides original functionality,
 // to parse processId as unique identifier of process.
 // Note:
-// ID parameter in each struct must be string,
-// but in api result of process polling API,
-// processId is returned as integer value.
-// This function solves this problem.
+// ID parameter in each struct must be string.
+// As of MSS v4, processId is returned as a UUID string (previously numeric),
+// so ID is simply copied from ProcessID.
 func (r *UpdateProcess) UnmarshalJSON(b []byte) error {
 	type tmp UpdateProcess
 	var s struct {
@@ -63,7 +61,7 @@ func (r *UpdateProcess) UnmarshalJSON(b []byte) error {
 	}
 	*r = UpdateProcess(s.tmp)
 
-	r.ID = strconv.Itoa(r.ProcessID)
+	r.ID = r.ProcessID
 
 	return err
 }

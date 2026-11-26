@@ -19,7 +19,6 @@ type SinglePort struct {
 	MTU        string   `json:"mtu,omitempty"`
 	Comment    string   `json:"comment,omitempty"`
 
-	EnablePing    string `json:"enable_ping,omitempty"`
 	VRRPGroupID   string `json:"vrrp_grp_id,omitempty"`
 	VRRPID        string `json:"vrrp_id,omitempty"`
 	VRRPIPAddress string `json:"vrrp_ip,omitempty"`

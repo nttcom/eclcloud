@@ -33,6 +33,7 @@ func TestUpdatePort(t *testing.T) {
 				IPAddress:  "192.168.1.50/24",
 				MTU:        "1500",
 				NetworkID:  "32314bd2-3583-4fb9-b622-9b121e04e007",
+				PortStatus: "up",
 				SubnetID:   "7fd77711-abae-4828-93f1-f3d682a8771f",
 			},
 		},
